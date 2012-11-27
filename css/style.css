@@ -1,25 +1,23 @@
 html, body {
 	font-family: Calibri, Arial, Verdana, sans-serif;
 	margin: 0px;
-	padding: 0px;
-	height: 100%;
+	background-image: url(../img/body_background.png);
+	font-size: 17px;
+}
+
+#page {
+	min-width: 800px;
+	max-width: 1000px;
+	margin: 30px auto;
+	-moz-box-shadow: 0px 0px 15px #AAAAAA;
+	-webkit-box-shadow: 0px 0px 15px #AAAAAA;
+	box-shadow: 0px 0px 15px #AAAAAA;
 }
 
 header {
-	background-color: #9B9C9E;
-	height: 82px;
-	padding: 9px;
-}
-
-header img {
-	margin-right: 40px;
-}
-
-header h1 {
-	font-size: 70px;
-	margin: 0px;
-	display: inline-block;
-	vertical-align: top;
+	background-color: #61A0D4;
+	color: #FEFEFE;
+	height: 99px;
 }
 
 header nav {
@@ -44,25 +42,48 @@ header nav ul li img {
 
 #content {
     min-height: 500px;
-	background-color: #F5F5F6;
+	background-color: #FFFFFF;
 	padding: 25px;
 	text-align: justify;
+	line-height: 23px;
 }
 
 #content #map {
 	width: 600px;
 	height: 350px;
 	margin-right: 25px;
-	margin-bottom: 25px;
+	margin-bottom: 10px;
     float: left;
 }
 
 footer {
-	background-color: #9B9C9E;
+	background-color: #61A0D4;
 	height: 82px;
 	padding: 9px;
 }
 
 footer p {
 	margin: 7px;
+}
+
+footer p a {
+	text-decoration: none;
+	color: #FEFEFE;
+}
+
+footer p a {
+	text-decoration: none;
+}
+
+footer p a:hover {
+	text-decoration: underline;
+}
+
+a {
+	text-decoration: underline;
+	color: #000000;
+}
+
+a:hover {
+	text-decoration: none;
 }
