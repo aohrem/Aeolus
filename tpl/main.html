@@ -16,20 +16,20 @@
 				<img src="img/header.png" alt="Aeolus Logo" width="285" height="99">
 				<nav>
 					<ul>
-						<li><a href="#" onmouseover="home.src='img/home_over.png'; document.getElementById('home_over').style.visibility = 'visible';" onmouseout="home.src='img/home.png'; document.getElementById('home_over').style.visibility = 'hidden';"><img src="img/home.png" alt="Startseite" width="78" height="78" name="home"></a><div id="home_over">Startseite</div></li>
-						<li><a href="#" onmouseover="map.src='img/map_over.png'; document.getElementById('map_over').style.visibility = 'visible';" onmouseout="map.src='img/map.png'; document.getElementById('map_over').style.visibility = 'hidden';"><img src="img/map.png" alt="Karte" width="78" height="78" name="map"></a><div id="map_over">Karte</div></li>
+						<li><a href="index.php" onmouseover="home.src='img/home_over.png'; document.getElementById('home_over').style.visibility = 'visible';" onmouseout="home.src='img/home.png'; document.getElementById('home_over').style.visibility = 'hidden';"><img src="img/home.png" alt="Startseite" width="78" height="78" name="home"></a><div id="home_over">Startseite</div></li>
+						<li><a href="index.php?s=map" onmouseover="map.src='img/map_over.png'; document.getElementById('map_over').style.visibility = 'visible';" onmouseout="map.src='img/map.png'; document.getElementById('map_over').style.visibility = 'hidden';"><img src="img/map.png" alt="Karte" width="78" height="78" name="map"></a><div id="map_over">Karte</div></li>
 						<li><a href="#" onmouseover="register.src='img/register_over.png'; document.getElementById('register_over').style.visibility = 'visible';" onmouseout="register.src='img/register.png'; document.getElementById('register_over').style.visibility = 'hidden';"><img src="img/register.png" alt="Registrierung" width="78" height="78" name="register"></a><div id="register_over">Registrierung</div></li>
 					</ul>
 				</nav>
 			</header>
 			
 			<div id="content">
-				[content]
+{content}
 			</div>
 			<footer>
-				<p><a href="#">Air Quality Egg entfernen</a></p>
-				<p><a href="#">N&uuml;tzliche Links</a></p>
-				<p><a href="#">Impressum</a></p>
+				<p><a href="index.php?s=delete">Air Quality Egg entfernen</a></p>
+				<p><a href="index.php?s=links">N&uuml;tzliche Links</a></p>
+				<p><a href="index.php?s=impress">Impressum</a></p>
 			</footer>
 		</div>
 	</body>
