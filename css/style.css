@@ -21,6 +21,7 @@ header {
 }
 
 header nav {
+	position: relative;
 	display: inline-block;
 	float: right;
 }
@@ -48,6 +49,44 @@ header nav ul li div {
 	top: 0px;
 	background-color: #a0c6e5;
 	visibility: hidden;
+}
+
+header nav ul li #register_click {
+	width: 300px;
+	text-align: right;
+	position: absolute;
+	top: 110px;
+	left: -20px;
+	background-color: #a0c6e5;
+	display:none;
+	visibility: visible;
+	font-size:10.5pt;
+	padding: 0px 5px;
+}
+
+header nav ul li #register_click #register_close {
+	position:relative;
+	top:2px;
+	left:288;
+	border-width:0px;
+}
+
+header nav ul li #register_click input {
+	width: 140px;
+	text-align: right;
+	background-color: #add0ea;
+	border: 1px inset #a0c6e5;
+	font-size:9pt;
+	color:#FFFFFF;
+}
+
+header nav ul li #register_click input.button {
+	width: 100px;
+	text-align: center;
+	background-color: #61A0D4;
+	border: 1px outset #61A0D4;
+	font-size:9pt;
+	color:#FFFFFF;
 }
 
 #content {
