@@ -1,6 +1,7 @@
 <?php
 	class Aeolus {
 		private $mainTemplate;
+		private $contentTemplate;
 		private $site;
 		private $page;
 		
@@ -34,9 +35,9 @@
 				$this->page = '';
 			}
 			
-			$contentTemplate = new Template();
-			$contentTemplate->readTpl($this->site.$this->page);
-			$this->mainTemplate->tplReplace('content', $contentTemplate->getTpl());
+			$this->contentTemplate = new Template();
+			$this->contentTemplate->readTpl($this->site.$this->page);
+			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 		}
 		
 		private function switchSite() {
