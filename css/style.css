@@ -132,6 +132,30 @@ header nav ul li #register_click input.button {
 #content #searchbar {
 	position: absolute;
 	right: 10px;
+	top: 10px;
+	z-index: 2;
+	background-color: #a0c6e5;
+}
+
+#content #co_button {
+	top: 50px;
+}
+
+#content #no2_button {
+	top: 110px;
+}
+
+#content #temp_button {
+	top: 170px;
+}
+
+#content #hum_button {
+	top: 230px;
+}
+
+#content .map_buttons {
+	position: absolute;
+	right: 10px;
 	z-index: 2;
 }
 

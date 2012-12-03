@@ -2,8 +2,30 @@
 <p>
 <div id="mapdiv">
 	<div id="searchbar">
-		<input type="text" name="searchtext" value="Ortssuche">
-		<input type="submit" value="Suchen" class="button">
+		<form action="#" method="post">
+			<input type="text" name="searchtext" value="Ortssuche" onFocus="if(this.value=='Ortssuche') this.value=''">
+			<input type="submit" value="Suchen" class="button">
+		</form>
+	</div>
+	<div class="map_buttons" id="co_button">
+		<a href="#">
+			<img src="img/co.png" alt="CO" width="50" height="50" id="map_co_button">
+		</a>
+	</div>
+	<div class="map_buttons" id="no2_button">
+		<a href="#">
+			<img src="img/no2.png" alt="NO2" width="50" height="50" id="map_no2_button">
+		</a>
+	</div>
+	<div class="map_buttons" id="temp_button">
+		<a href="#">
+			<img src="img/temp.png" alt="TEMPERATURE" width="50" height="50" id="map_temp_button">
+		</a>
+	</div>
+	<div class="map_buttons" id="hum_button">
+		<a href="#">
+			<img src="img/hum.png" alt="HUMIDITY" width="50" height="50" id="map_hum_button">
+		</a>
 	</div>
 	<div id="map_big"></div>
 </div>
