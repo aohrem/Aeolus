@@ -133,8 +133,38 @@ header nav ul li #register_click input.button {
 	position: absolute;
 	right: 10px;
 	top: 10px;
+	height:21px;
+	padding:0px 0px 0px 10px;
 	z-index: 2;
 	background-color: #a0c6e5;
+	-moz-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+}
+
+#content #searchbar input {
+	background-color:#A0C6E5;
+	border-width:0px;
+	font-size:9pt;
+	width:100px;
+	position:relative;
+	top:-2px;
+	color:#ffffff;
+}
+
+#content #searchbar input.button {
+	position:relative;
+	top:-2px;
+	height:21px;
+	width:100px;
+	-moz-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+	background-color:#5b8eb8;
+	color:#ffffff;
+	margin:0px;
+	padding-left:0px;
+	font-weight:bold;
 }
 
 #content #co_button {
