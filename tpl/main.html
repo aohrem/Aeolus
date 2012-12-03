@@ -11,7 +11,6 @@
 		 
 		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
 		<script src="js/navi_over.js"></script>
-		
 		<meta charset="utf-8" />
 	</head>
 	<body>
@@ -33,22 +32,22 @@
 							<div id="map_over">Karte</div>
 						</li>
 						<li>
-							<a href="#" onmouseover="mouseOver('register');" onmouseout="mouseOut('register');" onclick="document.getElementById('register_over').style.visibility = 'hidden'; document.getElementById('register_click').style.display = 'block';">
+							<a href="#" onmouseover="mouseOver('register');" onmouseout="mouseOut('register');" onclick="registerClick()">
 								<img src="img/register.png" alt="Registrierung" width="78" height="78" id="register">
 							</a>
 							<div id="register_over">Registrierung</div>
 							<div id="register_click">
-								<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="document.getElementById('register_click').style.display = 'none';" id="register_close">
+								<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="registerClose()" id="register_close">
 								<p style="text-align:justify">Um Ihr Air Quality Egg zu registrieren, geben Sie bitte Ihre cosm-feed ID und ein L&ouml;schpasswort ein.</p>
 								<form action="#" method="POST">
 									<table width="300">
 										<tr>
 											<td width="50%" valign="top">
-												<input type="text" name="feedid" value="feed ID">
+												<input type="text" name="feedid" value="feed ID" onFocus="javascript:if(this.value=='feed ID') this.value='';" onBlur="javascript:if(this.value=='') this.value='feed ID';">
 											</td>
 											<td width="50%">
-												<input type="text" name="password" value="Passwort"><br>
-												<input type="text" name="password_verify" value="Passwort wiederholen">
+												<input type="text" name="password" value="Passwort" onFocus="javascript:if(this.value=='Passwort' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='Passwort'; this.type='text';}"><br>
+												<input type="text" name="password_verify" value="Passwort wiederholen" onFocus="javascript:if(this.value=='Passwort wiederholen' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='Passwort wiederholen'; this.type='text';}">
 											</td>
 										</tr>
 										<tr>
