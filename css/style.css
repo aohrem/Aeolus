@@ -67,8 +67,7 @@ header nav ul li #register_click {
 
 header nav ul li #register_click #register_close {
 	position: relative;
-	top: 2px;
-	left: 288px;
+	top:3px;
 	border-width: 0px;
 }
 
