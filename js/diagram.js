@@ -60,7 +60,7 @@ ctx.lineTo(180 * f,210 * f);
 ctx.stroke();
 
 // axis labeling
-ctx.font = '10pt Verdana';
+ctx.font = f * 9 + 'pt Verdana';
 
 // x-axis
 var x_text = 'Zeit';

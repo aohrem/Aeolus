@@ -37,7 +37,6 @@
 			
 			$this->contentTemplate = new Template();
 			$this->contentTemplate->readTpl($this->site.$this->page);
-			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 		}
 		
 		private function switchSite() {
@@ -45,10 +44,16 @@
 				// home page
 				case '':
 				break;
+				
+				// table view
+				case 'table':
+					include('table.inc.php');
+				break;
 			}
 		}
 		
 		private function __destruct() {
+			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 			$this->mainTemplate->printTemplate();
 		}
 	}
