@@ -3,6 +3,7 @@
 		private $template;
 		private $folder = 'tpl/';
 		private $fileExtension = '.html';
+		private $copiedCode;
 		
 		public function getTpl() {
 			return $this->template;
@@ -19,6 +20,15 @@
 		
 		public function tplReplace($tag, $replace) {
 			$this->template = str_replace('{'.$tag.'}', $replace, $this->template);
+		}
+		
+		public function copyCode($tag) {
+			preg_match('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $this->template, $subpattern);
+			$this->template = preg_replace('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $subpattern[1].$subpattern[0], $this->template);
+		}
+		
+		public function cleanCode($tag) {
+			$this->template = preg_replace('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', '', $this->template);
 		}
 		
 		public function printTemplate() {

@@ -5,22 +5,22 @@
 		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}"><img src="img/table.png" width="50" height="50" alt="Tabellenansicht" class="last"></a>
 	</div>
 	<div>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co"><img src="img/co.png" width="50" height="50" alt="CO"></a>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=no2"><img src="img/no2.png" width="50" height="50" alt="NO2" class="active"></a>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=temp"><img src="img/temp.png" width="50" height="50" alt="Temperatur"></a>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=hum"><img src="img/hum.png" width="50" height="50" alt="Luftfeuchtigkeit" class="last"></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co"><img src="img/co.png" width="50" height="50" alt="CO"{co_active}></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=no2"><img src="img/no2.png" width="50" height="50" alt="NO2"{no2_active}></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=temp"><img src="img/temp.png" width="50" height="50" alt="Temperatur"{temp_active}></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=hum"><img src="img/hum.png" width="50" height="50" alt="Luftfeuchtigkeit" class="{hum_active}last"></a>
 	</div>
 	<div>
 		<a href="index.php?s=download&amp;fid={feedId}"><img src="img/download.png" width="50" height="50" alt="Daten Download" class="last"></a>
 	</div>
 </div>
 <div id="time_picker">
-	<div><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=6h&amp;sensor={sensor}">6 Stunden</a></div>
-	<div><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=24h&amp;sensor={sensor}">24 Stunden</a></div>
-	<div><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=48h&amp;sensor={sensor}">48 Stunden</a></div>
-	<div class="active"><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=1w&amp;sensor={sensor}">eine Woche</a></div>
-	<div><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=1m&amp;sensor={sensor}">ein Monat</a></div>
-	<div><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=3m&amp;sensor={sensor}">3 Monate</a></div>
+	<div{6h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=6h&amp;sensor={sensor}">6 Stunden</a></div>
+	<div{24h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=24h&amp;sensor={sensor}">24 Stunden</a></div>
+	<div{48h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=48h&amp;sensor={sensor}">48 Stunden</a></div>
+	<div{1w_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=1w&amp;sensor={sensor}">eine Woche</a></div>
+	<div{1m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=1m&amp;sensor={sensor}">ein Monat</a></div>
+	<div{3m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe=3m&amp;sensor={sensor}">3 Monate</a></div>
 </div>
 <div id="data_content">
 	<canvas id="diagram" width="730" height="365"></canvas>
