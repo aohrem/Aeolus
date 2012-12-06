@@ -49,6 +49,11 @@
 				case 'table':
 					include('table.inc.php');
 				break;
+				
+				// diagram view
+				case 'diagram':
+					include('diagram.inc.php');
+				break;
 			}
 		}
 		

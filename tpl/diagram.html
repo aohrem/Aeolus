@@ -24,7 +24,79 @@
 </div>
 <div id="data_content">
 	<canvas id="diagram" width="730" height="365"></canvas>
-	<script src="js/diagram.js"></script>
+	<script>
+		// scale factor
+		var f = 1.08;
+
+		// get diagram canvas
+		var diagram = document.getElementById("diagram");
+		var ctx = diagram.getContext("2d");
+
+		// color and style settings
+		ctx.strokeStyle = 'black';
+		ctx.lineCap = 'round';
+		ctx.fillStyle = 'black';
+
+		// y-axis arrow
+		ctx.beginPath();
+		ctx.moveTo(20 * f,10 * f);
+		ctx.lineTo(15 * f,25 * f);
+		ctx.lineTo(25 * f,25 * f);
+		ctx.lineTo(20 * f,10 * f);
+		ctx.closePath();
+		ctx.stroke();
+		ctx.fill();
+
+		// x and y-axis
+		ctx.moveTo(20 * f,10 * f);
+		ctx.lineTo(20 * f,325 * f);
+		ctx.moveTo(10 * f,315 * f);
+		ctx.lineTo(660 * f,315 * f);
+		ctx.stroke();
+
+		// x-axis arrow
+		ctx.beginPath();
+		ctx.moveTo(660 * f,315 * f);
+		ctx.lineTo(645 * f,310 * f);
+		ctx.lineTo(645 * f,320 * f);
+		ctx.lineTo(660 * f,315 * f);
+		ctx.closePath();
+		ctx.stroke();
+		ctx.fill();
+
+		// interval lines on y-axis
+		for ( var i = 275 * f; i >= (30 * f); i -= (40 * f) ) {
+			ctx.moveTo(20 * f,i);
+			ctx.lineTo(23 * f,i);
+		}
+		ctx.stroke();
+
+		// interval lines on x-axis
+		for ( var j = 60 * f; j <= (630 * f); j += (40 * f) ) {
+			ctx.moveTo(j,315 * f);
+			ctx.lineTo(j,312 * f);
+		}
+		ctx.stroke();
+
+		// draw graph
+		ctx.moveTo(30 * f, 50 * f);
+		{+diagramData}
+		ctx.lineTo({x} * f,{y} * f);
+		{-diagramData}
+		ctx.stroke();
+
+		// axis labeling
+		ctx.font = f * 9 + 'pt Verdana';
+
+		// x-axis
+		var x_text = 'Zeit';
+		ctx.fillText(x_text, (640 - x_text.length * 6) * f, 330 * f);
+
+		// y-axis
+		var y_text = 'NO2 Konzentration';
+		ctx.rotate((Math.PI / 180) * 270);
+		ctx.fillText(y_text, (-30 - y_text.length * 7) * f, 16 * f);
+	</script>
 	<h2>Details zur Messung</h2>
 	<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
 </div>

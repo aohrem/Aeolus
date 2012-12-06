@@ -11,6 +11,7 @@
 		
 		$this->contentTemplate->tplReplace('feedId', $feedId);
 		
+		// set standard sensor if no sensor given
 		if ( ! isset($_GET['sensor']) ) {
 			$sensor = $standardSensor;
 		}
@@ -20,6 +21,7 @@
 		
 		$this->contentTemplate->tplReplace('sensor', $sensor);
 		
+		// mark active sensor
 		$cssActive = ' class="active"';
 		$sensors = array('co', 'no2', 'temp');
 		foreach ( $sensors as $val ) {
@@ -30,13 +32,22 @@
 				$this->contentTemplate->tplReplace($val.'_active', '');
 			}
 		}
-		
 		if ( $sensor == 'hum' ) {
 			$this->contentTemplate->tplReplace('hum_active', 'active ');
 		}
 		else {
 			$this->contentTemplate->tplReplace('hum_active', '');
 		}
+		
+		// get data ... cosm api
+		
+		// Diagram Test
+		for ( $i = 0; $i < 5; $i++ ) {
+			$this->contentTemplate->copyCode('diagramData');
+			$this->contentTemplate->tplReplace('x', 111);
+			$this->contentTemplate->tplReplace('y', 10);
+		}
+		$this->contentTemplate->cleanCode('diagramData');
 	}
 	else {
 		$this->contentTemplate->readTpl('error_feedid');
