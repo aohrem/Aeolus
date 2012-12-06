@@ -17,7 +17,7 @@ var items = [];
 $.each(data, function(key, val) {
   items.push(
     "<li><a href='#' onclick='choose_location(" + // by clicking on a result the map pans to the desired location
-    val.lat + ", " + val.lon + ");return false;'>" + val.display_name +
+    val.lat + ", " + val.lon + ");setResultsHidden();return false;'>" + val.display_name +
     '</a></li>'
   );
 });
@@ -36,6 +36,7 @@ $('#results').empty();
 		$('<p>', { html: "Keine &Uuml;bereinstimmung: bitte pr&auml;zisieren Sie ihre Anfrage!" })
 		.appendTo('#results'); //prompt to asks the user to specify his search
     }
+    setResultsVisible();
   });
 }
 
@@ -45,4 +46,12 @@ Help function to pan to a location
 function choose_location(lat, lng){
 var location = new L.LatLng(lat, lng);
 map.panTo(location);
+}
+
+function setResultsVisible(){
+	document.getElementById("results").style.visibility = "visible";
+}
+
+function setResultsHidden(){
+	document.getElementById("results").style.visibility = "hidden";
 }
