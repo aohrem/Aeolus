@@ -20,6 +20,10 @@ class Sql {
 		return mysql_fetch_object(mysql_query($query));
 	}
 	
+	public function num_rows($query) {
+		return mysql_num_rows(mysql_query($query));
+	}
+	
 	public function query($query) {
 		return mysql_query($query);
 	}

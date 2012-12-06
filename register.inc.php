@@ -22,9 +22,14 @@
 						$password = sha1($_POST['password']);
 						
 						$db = new Sql();
-						$db->query("INSERT INTO `aeolus`.`egg` (`feed_id`,`password`) VALUES (".$fid.",'".$password."')");
-						
-						$successmessage = "<span class=\"success\">Ihr Air Quality Egg wurde erfolgreich registriert!</span>";
+						$num_rows = $db->num_rows("SELECT `feed_id` FROM `aeolus`.`egg` WHERE `feed_id`=".$fid);
+						if ($num_rows != 0) {
+							$errormessage = "<span class=\"error\">Ihr Air Quality Egg ist bereits bei uns registriert!</span>";
+						}
+						else {
+							$db->query("INSERT INTO `aeolus`.`egg` (`feed_id`,`password`) VALUES (".$fid.",'".$password."')");
+							$successmessage = "<span class=\"success\">Ihr Air Quality Egg wurde erfolgreich registriert!</span>";
+						}
 					}
 					else {
 						$errormessage = "<span class=\"error\">Die angegebenen Passw&ouml;rter stimmen nicht &uuml;berein!</span>";
