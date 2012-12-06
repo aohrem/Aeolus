@@ -2,8 +2,10 @@
 	class Aeolus {
 		private $mainTemplate;
 		private $contentTemplate;
+		private $registerTemplate;
 		private $site;
 		private $page;
+		private $reg;
 		
 		public function __construct() {
 			$this->loadTemplate();
@@ -37,12 +39,18 @@
 			
 			$this->contentTemplate = new Template();
 			$this->contentTemplate->readTpl($this->site.$this->page);
+			$this->registerTemplate = new Template();
+			$this->registerTemplate->readTpl('register');
+			$this->registerTemplate->tplReplace('site', $this->site);
+
+			// handle register popup
+			include('register.inc.php');
 		}
 		
 		private function switchSite() {
 			switch ( $this->site ) {
-				// home page
 				case '':
+				// home page
 				break;
 				
 				// table view
@@ -59,6 +67,7 @@
 		
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
+			$this->mainTemplate->tplReplace('register', $this->registerTemplate->getTpl());
 			$this->mainTemplate->printTemplate();
 		}
 	}

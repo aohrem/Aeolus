@@ -65,6 +65,10 @@ header nav ul li #register_click {
 	z-index:10;
 }
 
+header nav ul li #register_click.true {
+	display: block;
+}
+
 header nav ul li #register_click #register_close {
 	position: relative;
 	top:3px;
@@ -78,6 +82,18 @@ header nav ul li #register_click input {
 	border: 1px inset #a0c6e5;
 	font-size:9pt;
 	color: #FFFFFF;
+}
+
+header nav ul li #register_click span.error {
+	color: #d80000;
+	font-size:90%;
+	font-weight:bold;
+}
+
+header nav ul li #register_click span.success {
+	color: #00aa00;
+	font-size:90%;
+	font-weight:bold;
 }
 
 header nav ul li #register_click input.button {

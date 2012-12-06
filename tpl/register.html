@@ -1,0 +1,22 @@
+<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="registerClose()" id="register_close">
+<p style="text-align:justify">Um Ihr Air Quality Egg zu registrieren, geben Sie bitte Ihre cosm-feed ID und ein L&ouml;schpasswort ein.</p>
+{errormessage}
+<form action="?s={site}&amp;reg=true" method="POST">
+	<table width="300">
+		<tr>
+			<td width="50%" valign="top">
+				<input type="text" name="feedid" value="feed ID" onFocus="javascript:if(this.value=='feed ID') this.value='';" onBlur="javascript:if(this.value=='') this.value='feed ID';">
+			</td>
+			<td width="50%">
+				<input type="text" name="password" value="Passwort" onFocus="javascript:if(this.value=='Passwort' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='Passwort'; this.type='text';}"><br>
+				<input type="text" name="password_verify" value="Passwort wiederholen" onFocus="javascript:if(this.value=='Passwort wiederholen' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='Passwort wiederholen'; this.type='text';}">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				<input type="submit" value="Registrieren" class="button">
+			</td>
+		</tr>
+	</table>
+</form>
+{successmessage}
