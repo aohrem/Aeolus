@@ -171,6 +171,17 @@ header nav ul li #register_click input.button {
 	font-weight:bold;
 }
 
+#content #results {
+	position: relative;
+	
+	background-color: #A0C6E5;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	padding: 2px;
+	padding-left: 5px;
+}
+
 #content #co_button {
 	top: 50px;
 }
