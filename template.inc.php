@@ -22,9 +22,18 @@
 			$this->template = str_replace('{'.$tag.'}', $replace, $this->template);
 		}
 		
+		public function tplReplaceOnce($tag, $replace) {
+			$this->template = preg_replace('/\{'.$tag.'\}/', $replace, $this->template, 1);
+		}
+		
 		public function copyCode($tag) {
 			preg_match('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $this->template, $subpattern);
-			$this->template = preg_replace('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $subpattern[1].$subpattern[0], $this->template);
+			if ( isset($subpattern[1]) && isset($subpattern[0]) ) {
+				$this->template = preg_replace('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $subpattern[1].$subpattern[0], $this->template);
+			}
+			else {
+				return false;
+			}
 		}
 		
 		public function cleanCode($tag) {

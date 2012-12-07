@@ -4,7 +4,7 @@ class CosmAPI {
 	private $api_key = 'S_fFBZ0WcgkikDf29YcwEnVtLmiSAKx1RmgvUFQ0bndFZz0g';
 	private $request_url;
 	
-	public function readFeed($feedid, $start, $end, $interval) {
+	public function readFeed($feedid, $start, $end, $interval, $duration) {
 		// set stream options
 		$opts = array(
 		  'http' => array('ignore_errors' => true)
@@ -22,9 +22,12 @@ class CosmAPI {
 		if ( $interval != '' ) {
 			$interval = '&interval='.$interval;
 		}
+		if ( $duration != '' ) {
+			$duration = '&duration='.$duration;
+		}
 		
 		// open the file using the defined context
-		return file_get_contents($this->url.'/'.$feedid.'.xml?key='.$this->api_key.$start.$end.$interval, false, $context);
+		return file_get_contents($this->url.'/'.$feedid.'.xml?key='.$this->api_key.$start.$end.$interval.$duration, false, $context);
 	}
 }
 ?>
