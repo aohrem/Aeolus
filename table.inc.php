@@ -9,7 +9,10 @@
 		
 		$this->contentTemplate->tplReplace('feedId', $feedId);
 		
-		// get data ... cosm api
+		// get data from cosm api
+		include('cosmapi.inc.php');
+		$cosm = new CosmAPI();
+		print $cosm->readFeed($feedId, '', '', '');
 		
 		// Template Test
 		for ( $i = 0; $i < 5; $i++ ) {
