@@ -1,13 +1,4 @@
 <?php
-	class simple_xml_extended extends SimpleXMLElement {
-		public function Attribute($name) {
-			foreach($this->Attributes() as $key=>$val) {
-				if ($key == $name)
-					return (string) $val;
-			}
-		}
-	}
-	
 	// get the feed id and show error if not available
 	if ( isset($_GET['fid']) ) {
 		$feedId = htmlentities(mysql_real_escape_string($_GET['fid']));
@@ -16,80 +7,77 @@
 		
 		// mark active timeframe
 		include('functions.inc.php');
-		$this->contentTemplate = timeframe($this->contentTemplate);
-		
+		$timeframe = timeframe();
+		$this->contentTemplate = tplTimeframe($this->contentTemplate, $timeframe);
 		$this->contentTemplate->tplReplace('feedId', $feedId);
 		
-		// get data from cosm api
+		// cosm-API integration
 		include('cosmapi.inc.php');
 		$cosmAPI = new CosmAPI();
-		if ( ! $xml = $cosmAPI->readFeed($feedId, date('Y-m-d\TH:i:s\Z', time()-21600), date('Y-m-d\TH:i:s\Z', time()), '0', '') ) {
-			$errormessage = 'cosm-API konnte nicht gelesen werden.';
+		
+		// set parameters for the cosm-API request
+		$seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
+		$start = date('Y-m-d\TH:i:s\Z', time() - $seconds[$timeframe]);
+		$end = date('Y-m-d\TH:i:s\Z', time());
+		$interval = array('6h' => 0, '24h' => 120, '48h' => 240, '1w' => 420, '1m' => 3600, '3m' => 10800);
+		$perPage = 500;
+		
+		// fill in the parameters to read the cosm-API
+		if ( ! $xml = $cosmAPI->readFeed($feedId, $start, $end, $perPage, $interval[$timeframe], '') ) {
+			$this->contentTemplate->cleanCode('tableRow');
+			$errormessage = '<h2>cosm-API konnte nicht gelesen werden.</h2>';
 		}
 		else {
+			// parse xml string
+			$dataArray = $cosmAPI->parseXML($xml);
+			
+			// replace debugxml in template
 			$this->contentTemplate->tplReplace('debugxml', htmlentities($xml));
-			// parse xml document given by the cosm API
-			$xml = simplexml_load_string($xml, 'simple_xml_extended');
-			$xml = $xml->environment;
 			
-			if ( isset($xml->data) ) {
-				foreach ( $xml->data as $data ) {
-					$rawData = false;
-					
-					if ( isset($data->tag) ) {
-						foreach ( $data->tag as $aqeData ) {
-							if ( strpos($aqeData, 'data_origin=raw') ) {
-								$rawData = true;
-							}
-							
-							if ( strpos($aqeData, 'sensor_type') ) {
-								$sensor = strtolower(str_replace('aqe:sensor_type=', '', $aqeData));
-							}
-						}
-					}
-					
-					if ( ! $rawData ) {
-						if ( isset($data->datapoints->value) && isset($sensor) ) {
-							$i = 0;
-							foreach ( $data->datapoints->value as $value ) {
-								$at = strtotime(substr($value->Attribute('at'), 0, -11));
-								$dataArray[$at][$sensor] = $value->__toString();
-								$i++;
-							}
-						}
-						
-						if ( ! isset($sensor) ) {
-							$this->contentTemplate->cleanCode('tableRow');
-							$errormessage = '<h2>Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.</h2>';
-						}
-					}
-				}
-				
+			// check if parsing the xml was successfull
+			if ( is_array($dataArray) ) {
+				// sort sensor data by timestamp (keys of the data array)
 				ksort($dataArray, SORT_NUMERIC);
-			
-				if ( isset($dataArray) ) {
-					foreach ( $dataArray as $time => $val ) {
-						if ( ! isset($val['co']) ) { $val['co'] = '-'; }
-						if ( ! isset($val['no2']) ) { $val['no2'] = '-'; }
-						if ( ! isset($val['humidity']) ) { $val['humidity'] = '-'; }
-						if ( ! isset($val['temperature']) ) { $val['temperature'] = '-'; }
+				
+				// iterate sensor data
+				foreach ( $dataArray as $time => $val ) {
+					// if there is no data, show a -
+					if ( ! isset($val['co']) ) { $val['co'] = '-'; }
+					if ( ! isset($val['no2']) ) { $val['no2'] = '-'; }
+					if ( ! isset($val['humidity']) ) { $val['humidity'] = '-'; }
+					if ( ! isset($val['temperature']) ) { $val['temperature'] = '-'; }
 					
-						$this->contentTemplate->copyCode('tableRow');
-						$this->contentTemplate->tplReplaceOnce('t', date('d.m.Y H:i', $time));
-						$this->contentTemplate->tplReplaceOnce('co', $val['co']);
-						$this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
-						$this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
-						$this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
-					}
-					$this->contentTemplate->cleanCode('tableRow');
+					// copy table row and fill in sensor data for one timestamp
+					$this->contentTemplate->copyCode('tableRow');
+					$this->contentTemplate->tplReplaceOnce('t', date('d.m.Y H:i', $time));
+					$this->contentTemplate->tplReplaceOnce('co', $val['co']);
+					$this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
+					$this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
+					$this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
 				}
-				else {
-					$this->contentTemplate->cleanCode('tableRow');
-					if ( $errormessage == '' ) { $errormessage = '<h2>F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</h2>'; }
-				}
+				// delete the last row
+				$this->contentTemplate->cleanCode('tableRow');
 				
 			}
+			// handle errors if parsing the xml was not successfull
+			else {
+				$this->contentTemplate->cleanCode('tableRow');
+				
+				switch ( $dataArray ) {
+					case 1:
+						$errormessage = '<h2>Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.</h2>';
+					break;
+					case 2:
+						$errormessage = '<h2>F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</h2>';
+					break;
+					case 3:
+						$errormessage = '<h2>Es wurden nicht alle erforderlichen Sensortypen gefunden.</h2>';
+					break;
+				}
+			}
 		}
+		
+		// replace error message in template
 		$this->contentTemplate->tplReplace('errormessage', $errormessage);
 	}
 	else {
