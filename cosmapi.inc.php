@@ -48,6 +48,15 @@
 			// load xml string as object
 			$xml = simplexml_load_string($xml, 'simple_xml_extended');
 			
+			$dataArray['title'] = isset($xml->environment->title) ? htmlentities($xml->environment->title).' - ' : '';
+			$dataArray['description'] = isset($xml->environment->description) ? htmlentities($xml->environment->description) : 'Keine Beschreibung verf&uuml;gbar.';
+			$dataArray['locationName'] = isset($xml->environment->location->name) ? htmlentities($xml->environment->location->name) : 'nicht angegeben';
+			$dataArray['lat'] = isset($xml->environment->location->lat) ? $xml->environment->location->lat.'&deg;' : 'nicht angegeben';
+			$dataArray['lon'] = isset($xml->environment->location->lon) ? $xml->environment->location->lon.'&deg;' : 'nicht angegeben';
+			$dataArray['ele'] = isset($xml->environment->location->ele) ? $xml->environment->location->ele.'&deg;' : 'nicht angegeben';
+			$dataArray['status'] = isset($xml->environment->status) ? $xml->environment->status->__toString() : 'unbekannt';
+			$dataArray['exposure'] = isset($xml->environment->exposure) ? $xml->environment->exposure : 'unbekannt';
+			
 			if ( isset($xml->environment->data) ) {
 				$aqe = false;
 				$aqeTags = array('airqualityegg', 'air quality egg', 'aqe');
@@ -69,16 +78,16 @@
 						// iterate tags of the datastream
 						foreach ( $data->tag as $aqeData ) {
 							// check if its the raw data
-							if ( strpos($aqeData, 'data_origin=raw') ) {
+							if ( strstr($aqeData, 'data_origin=raw') ) {
 								$dataType = RAW;
 							}
 							// check if its computed
-							else if ( strpos($aqeData, 'data_origin=computed') ) {
+							else if ( strstr($aqeData, 'data_origin=computed') ) {
 								$dataType = COMPUTED;
 							}
 							
 							// look for the sensor type
-							if ( strpos($aqeData, 'sensor_type') ) {
+							if ( strstr($aqeData, 'sensor_type') ) {
 								$sensor = strtolower(str_replace('aqe:sensor_type=', '', $aqeData));
 							}
 						}
@@ -89,7 +98,7 @@
 						// ... if not, check the datafeed id for a given sensor type
 						$sensorTypes = array('co' => 'co', 'no2' => 'no2', 'temp' => 'temperature', 'hum' => 'humidity');
 						foreach ( $sensorTypes as $type => $longType ) {
-							$dataFeedId = strtolower($data->attribute('id'));
+							$dataFeedId = strtolower($data->attribute('id')).' ';
 							if ( strstr($dataFeedId, $type) ) { $sensor = $longType; }
 						}
 					}
@@ -104,7 +113,6 @@
 					}
 					// check if data is given for this timeframe
 					else if ( ! isset($data->datapoints->value) ) {
-						break;
 					}
 					// fill data array
 					else if ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED ) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) {
@@ -117,13 +125,13 @@
 						}	
 					}
 				}
-				
-				return $dataArray;
 			}
 			// no supported sensor type found
 			else {
 				return 3;
 			}
+			
+			return $dataArray;
 		}
 	}
 

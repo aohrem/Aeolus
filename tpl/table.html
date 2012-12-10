@@ -1,4 +1,4 @@
-<h1>Tabellenansicht</h1>
+<h1>{title}Tabellenansicht</h1>
 <div id="navi_left">
 	<div>
 		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co"><img src="img/diagram.png" width="50" height="50" alt="Diagrammansicht"></a>
@@ -36,8 +36,50 @@
 		{-tableRow}
 	</table>
 	{errormessage}
+	<div{hidden}>
+		<h2>Details zu den Messungen</h2>
+		<div class="details">
+			<h4>Beschreibung</h4>
+			<p>{description}</p>
+			<div class="left">
+				<h4>Position und Lage</h4>
+				<table class="metadata">
+					<tr>
+						<td>Ortsname:</td>
+						<td>{locationName}</td>
+					</tr>
+					<tr>
+						<td>Breitengrad:</td>
+						<td>{lat}</td>
+					</tr>
+					<tr>
+						<td>L&auml;ngengrad:</td>
+						<td>{lon}</td>
+					</tr>
+					<tr>
+						<td>H&ouml;he:</td>
+						<td>{ele}</td>
+					</tr>
+				</table>
+			</div>
+			<h4>Weitere Informationen</h4>
+			<table class="metadata">
+				<tr>
+					<td>Status:</td>
+					<td>{status}</td>
+				</tr>
+				<tr>
+					<td>Feed ID:</td>
+					<td>{feedId}</td>
+				</tr>
+				<tr>
+					<td>Bedingungen:</td>
+					<td>{exposure}</td>
+				</tr>
+			</table>
+			<br>
+		</div>
+	</div>
 	<h2>Debug-XML</h2>
 	<pre style="width: 900px; word-wrap: break-word;">{debugxml}</pre>
-	<h2>Details zur Messung</h2>
-	<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
 </div>

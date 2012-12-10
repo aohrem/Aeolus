@@ -19,20 +19,29 @@
 		$seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
 		$start = date('Y-m-d\TH:i:s\Z', time() - $seconds[$timeframe]);
 		$end = date('Y-m-d\TH:i:s\Z', time());
-		$interval = array('6h' => 0, '24h' => 120, '48h' => 900, '1w' => 420, '1m' => 3600, '3m' => 10800);
+		$interval = array('6h' => '', '24h' => '', '48h' => '', '1w' => 3600, '1m' => 10800, '3m' => 43200);
 		$perPage = 1000;
 		
 		// fill in the parameters to read the cosm-API
 		if ( ! $xml = $cosmAPI->readFeed($feedId, $start, $end, $perPage, $interval[$timeframe], '') ) {
 			$this->contentTemplate->cleanCode('tableRow');
-			$errormessage = '<h2>cosm-API konnte nicht gelesen werden.</h2>';
+			$errormessage = '<div class="details errormessage">cosm-API konnte nicht gelesen werden.</div>';
 		}
 		else {
 			// parse xml string
 			$dataArray = $cosmAPI->parseXML($xml);
 			
+			// replace metadata in template
+			$metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
+			foreach ( $metadata as $mdata ) {
+				$this->contentTemplate->tplReplace($mdata, $dataArray[$mdata]);
+				unset($dataArray[$mdata]);
+			}
+			
 			// replace debugxml in template
 			$this->contentTemplate->tplReplace('debugxml', htmlentities($xml));
+			
+			$hidden = '';
 			
 			// check if parsing the xml was successfull
 			if ( is_array($dataArray) ) {
@@ -63,22 +72,25 @@
 			else {
 				$this->contentTemplate->cleanCode('tableRow');
 				
+				$hidden = ' class="hidden"';
+				
 				switch ( $dataArray ) {
 					case 1:
-						$errormessage = '<h2>Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.</h2>';
+						$errormessage = '<div class="details errormessage">Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.</div>';
 					break;
 					case 2:
-						$errormessage = '<h2>F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</h2>';
+						$errormessage = '<div class="details errormessage">F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</div>';
 					break;
 					case 3:
-						$errormessage = '<h2>Es wurde keiner der unterst&uuml;tzten Sensortypen gefunden.</h2>';
+						$errormessage = '<div class="details errormessage">Es wurde keiner der unterst&uuml;tzten Sensortypen gefunden.</div>';
 					break;
 				}
 			}
 		}
 		
-		// replace error message in template
+		// replace error message in template and hide details
 		$this->contentTemplate->tplReplace('errormessage', $errormessage);
+		$this->contentTemplate->tplReplace('hidden', $hidden);
 	}
 	else {
 		$this->contentTemplate->readTpl('error_feedid');

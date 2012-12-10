@@ -225,12 +225,54 @@ header nav ul li #register_click input.button {
 	z-index: 2;
 }
 
+#content .errormessage {
+	text-align: center;
+	font-weight: bold;
+}
+
+#content .details {
+	width: 710px;
+	background-color: #E9F2F9;
+	padding: 10px;
+	display: block;
+}
+
+#content .details .left {
+	float: left;
+	margin-right: 30px;
+}
+
+#content .details h4 {
+	color: #000000;
+	font-size: 100%;
+	font-weight: bold;
+	display: inline-block;
+	padding: 0px 10px;
+	width: 200px;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+	line-height: 20px;
+}
+
+#content .details p {
+	padding: 0px 20px;
+}
+
+#content .details table.metadata {
+	width: 320px;
+	padding: 0px;
+}
+
+#content  .hidden {
+	display: none;
+}
+
 #content h1 {
 	color: #1F3F59;
 	font-size: 200%;
 	font-weight: bold;
 	letter-spacing: 2px;
-	text-indent:10px;
+	text-indent: 10px;
 	line-height: 150%;
 }
 
@@ -239,7 +281,7 @@ header nav ul li #register_click input.button {
 	font-size: 150%;
 	font-weight: bold;
 	letter-spacing: 2px;
-	text-indent:20px;
+	text-indent: 20px;
 	line-height: 130%;
 }
 
@@ -247,7 +289,7 @@ header nav ul li #register_click input.button {
 	color: #61A0D4;
 	font-size: 110%;
 	font-weight: bold;
-	text-indent:30px;
+	text-indent: 30px;
 	line-height: 100%;
 }
 
