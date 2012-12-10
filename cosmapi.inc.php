@@ -43,17 +43,20 @@
 		}
 		
 		// parses cosm feed given in xml format and returns data as an array
-		// error-codes: 1 - feed is no air quality egg, 2 - no data for this timeframe, 3 - no sensor types given
+		// error-codes: 1 - feed is no air quality egg, 2 - no data for this timeframe, 3 - no supported sensor type found
 		public function parseXML($xml) {
 			// load xml string as object
 			$xml = simplexml_load_string($xml, 'simple_xml_extended');
 			
 			if ( isset($xml->environment->data) ) {
 				$aqe = false;
+				$aqeTags = array('airqualityegg', 'air quality egg', 'aqe');
 				// iterate feed tags
 				foreach ( $xml->environment->tag as $tag ) {
-					if ( strpos($tag, 'airqualityegg') || strpos($tag, 'Air Quality Egg') ) {
-						$aqe = true;
+					foreach ( $aqeTags as $tagVal ) {
+						if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
+							$aqe = true;
+						}
 					}
 				}
 				
@@ -84,40 +87,42 @@
 					// check if no sensor type was found in the datastream tags ...
 					if ( $sensor == '' ) {
 						// ... if not, check the datafeed id for a given sensor type
-						$sensorTypes = array('co', 'no2', 'temp', 'hum');
-						foreach ( $sensorTypes as $type ) {
+						$sensorTypes = array('co' => 'co', 'no2' => 'no2', 'temp' => 'temperature', 'hum' => 'humidity');
+						foreach ( $sensorTypes as $type => $longType ) {
 							$dataFeedId = strtolower($data->attribute('id'));
-							if ( strstr($dataFeedId, $type) ) { $sensor = $dataFeedId; }
+							if ( strstr($dataFeedId, $type) ) { $sensor = $longType; }
 						}
 					}
 					
-					// check if feed delivers AQE data
+					// check if its an air quality egg
 					if ( ! $aqe ) {
 						return 1;
 					}
-					// check if data is given for this timeframe
-					else if ( ! isset($data->datapoints->value) ) {
+					// check if no sensor and no data are given for this timeframe
+					else if ( $sensor != '' && ! isset($data->datapoints->value) ) {
 						return 2;
 					}
-					// check if its a air quality egg
-					else if ( $sensor == '' ) {
-						return 3;
+					// check if data is given for this timeframe
+					else if ( ! isset($data->datapoints->value) ) {
+						break;
 					}
 					// fill data array
-					else {
-						if ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED ) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) {
-							foreach ( $data->datapoints->value as $value ) {
-								// cut seconds from the time-string and convert it to a php-timestamp
-								$at = strtotime(substr($value->attribute('at'), 0, -11));
-								
-								// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
-								$dataArray[$at][$sensor] = $value->__toString();
-							}
-						}
+					else if ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED ) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) {
+						foreach ( $data->datapoints->value as $value ) {
+							// cut seconds from the time-string and convert it to a php-timestamp
+							$at = strtotime(substr($value->attribute('at'), 0, -11));
+							
+							// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
+							$dataArray[$at][$sensor] = $value->__toString();
+						}	
 					}
 				}
 				
 				return $dataArray;
+			}
+			// no supported sensor type found
+			else {
+				return 3;
 			}
 		}
 	}

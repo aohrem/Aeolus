@@ -19,8 +19,8 @@
 		$seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
 		$start = date('Y-m-d\TH:i:s\Z', time() - $seconds[$timeframe]);
 		$end = date('Y-m-d\TH:i:s\Z', time());
-		$interval = array('6h' => 0, '24h' => 120, '48h' => 240, '1w' => 420, '1m' => 3600, '3m' => 10800);
-		$perPage = 500;
+		$interval = array('6h' => 0, '24h' => 120, '48h' => 900, '1w' => 420, '1m' => 3600, '3m' => 10800);
+		$perPage = 1000;
 		
 		// fill in the parameters to read the cosm-API
 		if ( ! $xml = $cosmAPI->readFeed($feedId, $start, $end, $perPage, $interval[$timeframe], '') ) {
@@ -71,7 +71,7 @@
 						$errormessage = '<h2>F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</h2>';
 					break;
 					case 3:
-						$errormessage = '<h2>Es wurden nicht alle erforderlichen Sensortypen gefunden.</h2>';
+						$errormessage = '<h2>Es wurde keiner der unterst&uuml;tzten Sensortypen gefunden.</h2>';
 					break;
 				}
 			}
