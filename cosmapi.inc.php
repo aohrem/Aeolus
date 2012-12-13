@@ -9,8 +9,7 @@
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $request_url;
 		
-		// sends HTTP GET request to the cosm API and returns the answered xml with the feed data
-		public function readFeed($feedid, $start, $end, $perPage, $interval, $duration) {
+		private function readFeed($url) {
 			// set stream options
 			$opts = array(
 			  'http' => array('ignore_errors' => true)
@@ -19,6 +18,12 @@
 			// create the stream context
 			$context = stream_context_create($opts);
 			
+			return file_get_contents($url, false, $context);
+		}
+		
+		// sends HTTP GET request to the cosm API, parses the returned XML and returns an array with the data of the feed
+		// error-codes: 1 - feed is no air quality egg, 2 - no data for this timeframe, 3 - no supported sensor type found, 4 - cosm error
+		public function parseFeed($feedid, $start, $end, $limit, $interval, $duration) {
 			// set parameters if they are not empty
 			if ( $start != '' ) {
 				$start = '&start='.$start;
@@ -26,8 +31,8 @@
 			if ( $end != '' ) {
 				$end = '&end='.$end;
 			}
-			if ( $perPage != '' ) {
-				$perPage = '&per_page='.$perPage;
+			if ( $limit != '' ) {
+				$limit = '&limit='.$limit;
 			}			
 			if ( $interval != '' ) {
 				$interval = '&interval='.$interval;
@@ -36,41 +41,43 @@
 				$duration = '&duration='.$duration;
 			}
 			
-			$requestUrl = $this->url.'/'.$feedid.'.xml?key='.$this->api_key.$start.$end.$perPage.$interval.$duration;
+			$requestUrl = $this->url.'/'.$feedid.'.xml?key='.$this->api_key;
 			
-			// open the file using the defined context
-			return file_get_contents($requestUrl, false, $context);
-		}
-		
-		// parses cosm feed given in xml format and returns data as an array
-		// error-codes: 1 - feed is no air quality egg, 2 - no data for this timeframe, 3 - no supported sensor type found
-		public function parseXML($xml) {
+			$feedXml = $this->readFeed($requestUrl); 
+			
+			// print '<pre>'.htmlentities($feedXml).'</pre>';
+			
 			// load xml string as object
-			$xml = simplexml_load_string($xml, 'simple_xml_extended');
+			$feedXml = simplexml_load_string($feedXml, 'simple_xml_extended');
 			
-			$dataArray['title'] = isset($xml->environment->title) ? htmlentities($xml->environment->title).' - ' : '';
-			$dataArray['description'] = isset($xml->environment->description) ? htmlentities($xml->environment->description) : 'Keine Beschreibung verf&uuml;gbar.';
-			$dataArray['locationName'] = isset($xml->environment->location->name) ? htmlentities($xml->environment->location->name) : 'nicht angegeben';
-			$dataArray['lat'] = isset($xml->environment->location->lat) ? $xml->environment->location->lat.'&deg;' : 'nicht angegeben';
-			$dataArray['lon'] = isset($xml->environment->location->lon) ? $xml->environment->location->lon.'&deg;' : 'nicht angegeben';
-			$dataArray['ele'] = isset($xml->environment->location->ele) ? $xml->environment->location->ele.'&deg;' : 'nicht angegeben';
-			$dataArray['status'] = isset($xml->environment->status) ? $xml->environment->status->__toString() : 'unbekannt';
-			$dataArray['exposure'] = isset($xml->environment->exposure) ? $xml->environment->exposure : 'unbekannt';
-			
-			if ( isset($xml->environment->data) ) {
-				$aqe = false;
-				$aqeTags = array('airqualityegg', 'air quality egg', 'aqe');
-				// iterate feed tags
-				foreach ( $xml->environment->tag as $tag ) {
-					foreach ( $aqeTags as $tagVal ) {
-						if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
-							$aqe = true;
-						}
+			// check if its an air quality egg
+			$aqe = false;
+			$aqeTags = array('airqualityegg', 'air quality egg', 'aqe');
+			// iterate feed tags
+			foreach ( $feedXml->environment->tag as $tag ) {
+				foreach ( $aqeTags as $tagVal ) {
+					if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
+						$aqe = true;
 					}
 				}
-				
+			}
+			if ( ! $aqe ) {
+				return 1;
+			}
+			
+			$dataArray['title'] = isset($feedXml->environment->title) ? htmlentities($feedXml->environment->title).' - ' : '';
+			$dataArray['description'] = isset($feedXml->environment->description) ? htmlentities($feedXml->environment->description) : 'Keine Beschreibung verf&uuml;gbar.';
+			$dataArray['locationName'] = isset($feedXml->environment->location->name) ? htmlentities($feedXml->environment->location->name) : 'nicht angegeben';
+			$dataArray['lat'] = isset($feedXml->environment->location->lat) ? $feedXml->environment->location->lat.'&deg;' : 'nicht angegeben';
+			$dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon.'&deg;' : 'nicht angegeben';
+			$dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele : 'nicht angegeben';
+			$dataArray['status'] = isset($feedXml->environment->status) ? $feedXml->environment->status->__toString() : 'unbekannt';
+			$dataArray['exposure'] = isset($feedXml->environment->exposure) ? $feedXml->environment->exposure : 'unbekannt';
+			
+			if ( isset($feedXml->environment->data) ) {
 				// iterate datastreams
-				foreach ( $xml->environment->data as $data ) {
+				foreach ( $feedXml->environment->data as $data ) {
+					$dataFeedId = $data->attribute('id');
 					$dataType = UNSPECIFIED;
 					$sensor = '';
 					
@@ -98,31 +105,38 @@
 						// ... if not, check the datafeed id for a given sensor type
 						$sensorTypes = array('co' => 'co', 'no2' => 'no2', 'temp' => 'temperature', 'hum' => 'humidity');
 						foreach ( $sensorTypes as $type => $longType ) {
-							$dataFeedId = strtolower($data->attribute('id')).' ';
-							if ( strstr($dataFeedId, $type) ) { $sensor = $longType; }
+							if ( strstr(strtolower($dataFeedId), $type) ) { $sensor = $longType; }
 						}
 					}
 					
-					// check if its an air quality egg
-					if ( ! $aqe ) {
-						return 1;
-					}
-					// check if no sensor and no data are given for this timeframe
-					else if ( $sensor != '' && ! isset($data->datapoints->value) ) {
-						return 2;
-					}
-					// check if data is given for this timeframe
-					else if ( ! isset($data->datapoints->value) ) {
-					}
-					// fill data array
-					else if ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED ) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) {
-						foreach ( $data->datapoints->value as $value ) {
-							// cut seconds from the time-string and convert it to a php-timestamp
-							$at = strtotime(substr($value->attribute('at'), 0, -11));
-							
-							// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
-							$dataArray[$at][$sensor] = $value->__toString();
-						}	
+					if ( $sensor != '' && ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
+						// .$start.$end.$limit.$interval.$duration
+						$datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
+						
+						$datastreamXml = $this->readFeed($datastreamRequestUrl); 
+						
+						// print '<br><br><pre>'.htmlentities($datastreamXml).'</pre>';
+						
+						// load datastream xml string as object
+						$datastreamXml = simplexml_load_string($datastreamXml, 'simple_xml_extended');
+						
+						if ( isset($datastreamXml->environment->data->datapoints->value) ) {
+							$values = $datastreamXml->environment->data->datapoints->value;
+						
+							foreach ( $values as $value ) {
+								// cut seconds from the time-string and convert it to a php-timestamp
+								$at = strtotime(substr($value->attribute('at'), 0, -11));
+								
+								// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
+								$dataArray[$at][$sensor] = $value->__toString();
+							}
+						}
+						else if ( isset($datastreamXml->title) ) {
+							return 4;
+						}
+						else {
+							return 2;
+						}
 					}
 				}
 			}
