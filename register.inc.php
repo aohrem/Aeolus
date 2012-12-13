@@ -4,7 +4,6 @@
 	$feedid = "feed ID";
 	$pw = "Passwort";
 	$pw_ver = "Passwort wiederholen";
-	include('sql.inc.php');
 	if ( isset($_GET['reg']) ) {
 		$this->reg = mysql_real_escape_string($_GET['reg']);
 		$this->mainTemplate->tplReplace('reg_handle', ' class="'.$this->reg.'"');

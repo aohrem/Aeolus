@@ -1,1 +1,29 @@
- 
+<h1>Air Quality Egg entfernen</h1>
+<p>Platzhaltertext, Gr&uuml;nde ein AQE zu l&ouml;schen und wie das dann gemacht wird.</p>
+{del_error}
+<form method="POST" action="index.php?s=delete&amp;send=one">
+	<table>
+		<tr>
+			<td>
+				feedID
+			</td>
+			<td>
+				<input type="text" value="" name="feedid">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				L&ouml;schpasswort
+			</td>
+			<td>
+				<input type="password" value="" name="pw">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Mein AQE l&ouml;schen" class='delete_form_button'>
+			</td>
+		</tr>
+	</table>
+</form>
+{del_success}

@@ -7,6 +7,7 @@
 		private $page;
 		private $reg;
 		
+		
 		public function __construct() {
 			$this->loadTemplate();
 			$this->readCurrentSite();
@@ -61,6 +62,11 @@
 				// diagram view
 				case 'diagram':
 					include('diagram.inc.php');
+				break;
+				
+				// "delete AQE"-page
+				case 'delete':
+					include('delete.inc.php');
 				break;
 			}
 		}

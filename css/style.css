@@ -293,6 +293,35 @@ header nav ul li #register_click input.button {
 	line-height: 100%;
 }
 
+#content span.error {
+	color: #d80000;
+	font-size:90%;
+	font-weight:bold;
+}
+
+#content span.success {
+	color: #00aa00;
+	font-size:90%;
+	font-weight:bold;
+}
+
+#content #del_true_button, #content .delete_form_button {
+	padding:2px 5px;
+	margin-top:5px;
+	border:1px outset #619FD3;
+	background-color:#619FD3;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+#content #del_true_button:hover, #content .delete_form_button:hover {
+	padding:2px 5px;
+	margin-top:5px;
+	border:1px outset #9FC0DF;
+	background-color:#9FC0DF;
+	color:#FFFFFF;
+}
+
 footer {
 	background-color: #61A0D4;
 	padding: 9px;
