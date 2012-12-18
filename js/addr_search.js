@@ -16,8 +16,8 @@ $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=6&q=' + i
 var items = [];
 $.each(data, function(key, val) {
   items.push(
-    "<li><a href='#' onclick='choose_location(" + // by clicking on a result the map pans to the desired location
-    val.lat + ", " + val.lon + ");setResultsHidden();return false;'>" + val.display_name +
+    "<li><a href='#' onclick='choose_location(" + // by clicking on a result the map pans to the desired location with an adjusted zoom level
+    val.boundingbox[0] + ", " + val.boundingbox[1] + " , " + val.boundingbox[2] + " , " + val.boundingbox[3] + ");setResultsHidden();return false;'>" + val.display_name +
     '</a></li>'
   );
 });
@@ -41,11 +41,19 @@ $('#results').empty();
 }
 
 /*
-Help function to pan to a location
+function to pan to the boundingbox that fits to the chosen result and adjusting the best fitting zoomlevel
 */
-function choose_location(lat, lng){
-var location = new L.LatLng(lat, lng);
-map.panTo(location);
+function choose_location(swLat, neLat, swLon, neLon){
+/*
+creating a new boundingbox for leaflet from json output
+*/
+var southWest = new L.latLng(swLat, swLon);
+var northEast = new L.LatLng(neLat, neLon);
+var bounds 	  = new L.LatLngBounds(southWest, northEast);
+map.fitBounds(bounds); //Sets a map view that contains the given geographical bounds with the maximum zoom level possible.
+//map.setZoom(map.getBoundsZoom(bounds));
+// var i = (map.getBoundsZoom(bounds));
+// alert(i); 
 }
 
 function setResultsVisible(){
