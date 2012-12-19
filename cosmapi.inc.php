@@ -48,7 +48,7 @@
 			// print '<pre>'.htmlentities($feedXml).'</pre>';
 			
 			// load xml string as object
-			$feedXml = simplexml_load_string($feedXml, 'simple_xml_extended');
+			$feedXml = simplexml_load_string($feedXml, 'SimpleXMLExtended');
 			
 			// check if its an air quality egg
 			$aqe = false;
@@ -58,6 +58,7 @@
 				foreach ( $aqeTags as $tagVal ) {
 					if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
 						$aqe = true;
+						break;
 					}
 				}
 			}
@@ -109,16 +110,17 @@
 						}
 					}
 					
-					if ( $sensor != '' && ( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED) ) || ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
-						// .$start.$end.$limit.$interval.$duration
-						$datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
+					if ( $sensor != '' &&
+						( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED) ) ||
+						  ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
 						
+						$datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
 						$datastreamXml = $this->readFeed($datastreamRequestUrl); 
 						
 						// print '<br><br><pre>'.htmlentities($datastreamXml).'</pre>';
 						
 						// load datastream xml string as object
-						$datastreamXml = simplexml_load_string($datastreamXml, 'simple_xml_extended');
+						$datastreamXml = simplexml_load_string($datastreamXml, 'SimpleXMLExtended');
 						
 						if ( isset($datastreamXml->environment->data->datapoints->value) ) {
 							$values = $datastreamXml->environment->data->datapoints->value;
@@ -150,7 +152,7 @@
 	}
 
 	// child class of SimpleXMLElement with method to get attributes of xml tags by their name
-	class simple_xml_extended extends SimpleXMLElement {
+	class SimpleXMLExtended extends SimpleXMLElement {
 		public function attribute($name) {
 			foreach($this->Attributes() as $key=>$val) {
 				if ($key == $name)
