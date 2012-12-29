@@ -7,7 +7,8 @@
 		
 		// mark active timeframe
 		include('functions.inc.php');
-		$this->contentTemplate = timeframe($this->contentTemplate);
+		$timeframe = timeframe();
+		$this->contentTemplate = tplTimeframe($this->contentTemplate, $timeframe);
 		
 		$this->contentTemplate->tplReplace('feedId', $feedId);
 		
@@ -44,8 +45,8 @@
 		// Diagram Test
 		for ( $i = 0; $i < 5; $i++ ) {
 			$this->contentTemplate->copyCode('diagramData');
-			$this->contentTemplate->tplReplace('x', 111);
-			$this->contentTemplate->tplReplace('y', 10);
+			$this->contentTemplate->tplReplace('x', 570);
+			$this->contentTemplate->tplReplace('y', 200);
 		}
 		$this->contentTemplate->cleanCode('diagramData');
 	}
