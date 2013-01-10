@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eeml xmlns="http://www.eeml.org/xsd/0.5.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="0.5.1" xsi:schemaLocation="http://www.eeml.org/xsd/0.5.1 http://www.eeml.org/xsd/0.5.1/0.5.1.xsd">
+  <environment updated="2013-01-10T12:47:10.505936Z" created="2013-01-03T04:32:54.919161Z" id="95748" creator="https://cosm.com/users/airqualityegg">
+    <title>Air Quality Egg</title>
+    <feed>https://api.cosm.com/v2/feeds/95748.xml</feed>
+    <status>live</status>
+    <private>false</private>
+    <tag>device:type=Air Quality Egg</tag>
+    <tag>device:type=airqualityegg</tag>
+    <location domain="physical" exposure="outdoor" disposition="">
+      <lat>42.7953848581294</lat>
+      <lon>-73.822108090332</lon>
+      <ele>215'</ele>
+    </location>
+    <data id="CO_00-04-a3-27-c4-6a_1">
+      <tag>aqe:data_origin=computed</tag>
+      <tag>aqe:firmware_version=16</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:c4:6a</tag>
+      <tag>aqe:sensor_index=1</tag>
+      <tag>aqe:sensor_type=CO</tag>
+      <current_value at="2013-01-10T12:47:10.453723Z">304147</current_value>
+      <max_value>316743.0</max_value>
+      <min_value>232761.0</min_value>
+      <unit type="" symbol="ppb">ppb</unit>
+    </data>
+    <data id="CO_raw_00-04-a3-27-c4-6a_1">
+      <tag>aqe:data_origin=raw</tag>
+      <tag>aqe:firmware_version=16</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:c4:6a</tag>
+      <tag>aqe:sensor_index=1</tag>
+      <tag>aqe:sensor_type=CO</tag>
+      <current_value at="2013-01-10T12:47:05.346450Z">237754</current_value>
+      <max_value>501534.0</max_value>
+      <min_value>165614.0</min_value>
+      <unit type="" symbol="ohms">ohms</unit>
+    </data>
+    <data id="Humidity_00-04-a3-27-cc-83_1">
+      <tag>aqe:data_origin=computed</tag>
+      <tag>aqe:firmware_version=0</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:cc:83</tag>
+      <tag>aqe:sensor_index=1</tag>
+      <tag>aqe:sensor_type=Humidity</tag>
+      <current_value at="2013-01-10T12:46:50.046805Z">35</current_value>
+      <max_value>45.0</max_value>
+      <min_value>31.0</min_value>
+      <unit type="" symbol="%">%</unit>
+    </data>
+    <data id="NO2_00-04-a3-27-c4-6a_0">
+      <tag>aqe:data_origin=computed</tag>
+      <tag>aqe:firmware_version=16</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:c4:6a</tag>
+      <tag>aqe:sensor_index=0</tag>
+      <tag>aqe:sensor_type=NO2</tag>
+      <current_value at="2013-01-10T12:47:00.258350Z">574</current_value>
+      <max_value>625.0</max_value>
+      <min_value>127.0</min_value>
+      <unit type="" symbol="ppb">ppb</unit>
+    </data>
+    <data id="NO2_raw_00-04-a3-27-c4-6a_0">
+      <tag>aqe:data_origin=raw</tag>
+      <tag>aqe:firmware_version=16</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:c4:6a</tag>
+      <tag>aqe:sensor_index=0</tag>
+      <tag>aqe:sensor_type=NO2</tag>
+      <current_value at="2013-01-10T12:46:55.134851Z">544343</current_value>
+      <max_value>641416.0</max_value>
+      <min_value>1521.0</min_value>
+      <unit type="" symbol="ohms">ohms</unit>
+    </data>
+    <data id="Temperature_00-04-a3-27-cc-83_0">
+      <tag>aqe:data_origin=computed</tag>
+      <tag>aqe:firmware_version=0</tag>
+      <tag>aqe:sensor_address=00:04:a3:27:cc:83</tag>
+      <tag>aqe:sensor_index=0</tag>
+      <tag>aqe:sensor_type=Temperature</tag>
+      <current_value at="2013-01-10T12:46:44.768143Z">21</current_value>
+      <max_value>25.0</max_value>
+      <min_value>17.0</min_value>
+      <unit type="" symbol="deg C">deg C</unit>
+    </data>
+  </environment>
+</eeml>

@@ -8,6 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $request_url;
+		private $debug_mode = true;
 		
 		private function readFeed($url) {
 			// set stream options
@@ -19,6 +20,16 @@
 			$context = stream_context_create($opts);
 			
 			return file_get_contents($url, false, $context);
+		}
+		
+		private function readXml($filename) {
+			if ( file_exists('xml/'.$filename.'.xml') ) {
+				$f = fopen('xml/'.$filename.'.xml', 'r');
+				return fread($f, filesize('xml/'.$filename.'.xml'));
+			}
+			else {
+				return false;
+			}
 		}
 		
 		// sends HTTP GET request to the cosm API, parses the returned XML and returns an array with the data of the feed
@@ -43,7 +54,12 @@
 			
 			$requestUrl = $this->url.'/'.$feedid.'.xml?key='.$this->api_key;
 			
-			$feedXml = $this->readFeed($requestUrl); 
+			if ( ! $this->debug_mode ) {
+				$feedXml = $this->readFeed($requestUrl);
+			}
+			else {
+				$feedXml = $this->readXml('test_feed');
+			}
 			
 			// print '<pre>'.htmlentities($feedXml).'</pre>';
 			
@@ -73,7 +89,7 @@
 			$dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon.'&deg;' : 'nicht angegeben';
 			$dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele : 'nicht angegeben';
 			$dataArray['status'] = isset($feedXml->environment->status) ? $feedXml->environment->status->__toString() : 'unbekannt';
-			$dataArray['exposure'] = isset($feedXml->environment->exposure) ? $feedXml->environment->exposure : 'unbekannt';
+			$dataArray['exposure'] = $feedXml->environment->location->attribute('exposure') != '' ? $feedXml->environment->location->attribute('exposure') : 'unbekannt';
 			
 			if ( isset($feedXml->environment->data) ) {
 				// iterate datastreams
@@ -115,7 +131,12 @@
 						  ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
 						
 						$datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
-						$datastreamXml = $this->readFeed($datastreamRequestUrl); 
+						if ( ! $this->debug_mode ) {
+							$datastreamXml = $this->readFeed($datastreamRequestUrl); 
+						}
+						else {
+							$datastreamXml = $this->readXml('test_feed_'.$sensor);
+						}
 						
 						// print '<br><br><pre>'.htmlentities($datastreamXml).'</pre>';
 						
