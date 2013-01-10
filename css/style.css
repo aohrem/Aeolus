@@ -203,7 +203,7 @@ header nav ul li #register_click input.button {
 	word-wrap: break-word;
 }
 
-#content #results_close {
+#content #results_frame #results_close {
 	position: absolute;
 	top: 15px;
 	right: 15px;
