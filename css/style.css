@@ -187,7 +187,7 @@ header nav ul li #register_click input.button {
 	font-weight:bold;
 }
 
-#content #results {
+#content #results_frame {
 	position: absolute;
 	top:50px;
 	right: 90px;
@@ -201,6 +201,12 @@ header nav ul li #register_click input.button {
 	z-index: 2;
 	visibility: hidden;
 	word-wrap: break-word;
+}
+
+#content #results_close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
 }
 
 #content #co_button {

@@ -57,9 +57,9 @@ map.fitBounds(bounds); //Sets a map view that contains the given geographical bo
 }
 
 function setResultsVisible(){
-	document.getElementById("results").style.visibility = "visible";
+	document.getElementById("results_frame").style.visibility = "visible";
 }
 
 function setResultsHidden(){
-	document.getElementById("results").style.visibility = "hidden";
+	document.getElementById("results_frame").style.visibility = "hidden";
 }

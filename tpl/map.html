@@ -9,7 +9,10 @@
 			<input type="submit" value="Suchen" class="button" onclick="location_search()">
 		</form>
 	</div>
-	<div id="results">Suchergebnisse</div>
+	<div id="results_frame">
+		<div id="results">Suchergebnisse</div>
+		<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="setResultsHidden()" id="results_close">
+	</div>
 	<div class="map_buttons" id="co_button">
 		<a href="#">
 			<img src="img/co.png" alt="CO" width="50" height="50" id="map_co_button">
