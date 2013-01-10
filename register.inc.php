@@ -4,6 +4,13 @@
 	$feedid = "feed ID";
 	$pw = "Passwort";
 	$pw_ver = "Passwort wiederholen";
+	
+	// Find URL of the current page
+	$url = $_SERVER['REQUEST_URI'];
+	$url_parts = explode("/", $url);
+	$this->registerTemplate->tplReplace('url', $url_parts[sizeof($url_parts)-1]);
+	
+	
 	if ( isset($_GET['reg']) ) {
 		$this->reg = mysql_real_escape_string($_GET['reg']);
 		$this->mainTemplate->tplReplace('reg_handle', ' class="'.$this->reg.'"');
