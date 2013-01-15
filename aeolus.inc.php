@@ -64,6 +64,11 @@
 					include('diagram.inc.php');
 				break;
 				
+				// map view
+				case 'map':
+					include('map.inc.php');
+				break;
+				
 				// "delete AQE"-page
 				case 'delete':
 					include('delete.inc.php');

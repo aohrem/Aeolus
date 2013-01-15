@@ -15,4 +15,4 @@ function addEgg(lat, lon, feedID){
 		});
 }
 
-addEgg(51.962944, 7.628694, 1337);
+/* addEgg(51.962944, 7.628694, 1337); */
