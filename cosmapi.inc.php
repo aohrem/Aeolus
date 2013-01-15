@@ -170,14 +170,32 @@
 			
 			return $dataArray;
 		}
+	
+		// returns geo coordinates of an air quality egg
+		public function getEggCoordinates($feedid) {
+			$requestUrl = $this->url.'/'.$feedid.'.xml?key='.$this->api_key;
+			$xml = $this->readFeed($requestUrl);
+			$xml = simplexml_load_string($xml);
+			
+			if ( isset($xml->environment->location->lat) && isset($xml->environment->location->lon) ) {
+				return array('lat' => $xml->environment->location->lat, 'lon' => $xml->environment->location->lon);
+			}
+			else if ( isset($xml->environment->location->name) ) {
+				return $name = $xml->environment->location->name;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
 	// child class of SimpleXMLElement with method to get attributes of xml tags by their name
 	class SimpleXMLExtended extends SimpleXMLElement {
 		public function attribute($name) {
-			foreach($this->Attributes() as $key=>$val) {
-				if ($key == $name)
+			foreach( $this->Attributes() as $key => $val ) {
+				if ( $key == $name ) {
 					return (string) $val;
+				}
 			}
 		}
 	}

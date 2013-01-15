@@ -12,7 +12,6 @@
 		$this->contentTemplate->tplReplace('feedId', $feedId);
 		
 		// cosm-API integration
-		include('cosmapi.inc.php');
 		$cosmAPI = new CosmAPI();
 		
 		// set parameters for the cosm-API request
