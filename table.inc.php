@@ -24,7 +24,7 @@
 		// fill in the parameters to read the cosm-API
 		if ( ! $dataArray = $cosmAPI->parseFeed($feedId, $start, $end, $limit, $interval[$timeframe], '') ) {
 			$this->contentTemplate->cleanCode('tableRow');
-			$errormessage = '<div class="details errormessage">cosm-API konnte nicht gelesen werden.</div>';
+			$errormessage = '<div class="details errormessage">'.$GLOBALS['translation']['cosm_api_could_not_be_read'].'</div>';
 		}
 		// check if parsing the xml was successfull
 		else if ( is_array($dataArray) ) {
@@ -65,21 +65,8 @@
 			$this->contentTemplate->tplReplace('title', '');
 			
 			$hidden = ' class="hidden"';
-			
-			switch ( $dataArray ) {
-				case 1:
-					$errormessage = '<div class="details errormessage">Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.</div>';
-				break;
-				case 2:
-					$errormessage = '<div class="details errormessage">F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.</div>';
-				break;
-				case 3:
-					$errormessage = '<div class="details errormessage">Es wurde keiner der unterst&uuml;tzten Sensortypen gefunden.</div>';
-				break;
-				case 4:
-					$errormessage = '<div class="details errormessage">Es gab ein Problem mit der cosm API.</div>';
-				break;
-			}
+            
+			$errormessage = '<div class="details errormessage">'.$GLOBALS['translation'][$dataArray].'</div>';
 		}
 		
 		// replace error message in template and hide details

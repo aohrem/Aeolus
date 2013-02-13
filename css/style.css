@@ -331,6 +331,7 @@ header nav ul li #register_click input.button {
 footer {
 	background-color: #61A0D4;
 	padding: 9px;
+    min-height: 85px;
 }
 
 footer p {
@@ -345,6 +346,19 @@ footer p a {
 
 footer p a:hover, a:active {
 	background-color: #80B8E5;
+}
+
+footer #footer_left {
+    float: left;
+}
+
+footer #footer_right {
+    float: right;
+    padding: 5px;
+}
+
+footer img.language {
+    padding: 5px;
 }
 
 a {

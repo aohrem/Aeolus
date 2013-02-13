@@ -6,7 +6,7 @@
 		private $site;
 		private $page;
 		private $reg;
-		private $language;
+        private $language;
 		private $standardLanguage = 'de';
 		private $languages = array('en', 'de');
 		
@@ -14,11 +14,12 @@
 			$this->loadTemplate();
 			$this->setLanguage();
 			$this->readCurrentSite();
+            $this->replaceCurrentSite();
 			$this->switchSite();
 		}
 		
 		private function loadTemplate() {
-			// Load Template class and get contents of main template
+			// load Template class and get contents of main template
 			include('template.inc.php');
 			$this->mainTemplate = new Template();
 			$this->mainTemplate->readTpl('main');
@@ -27,24 +28,28 @@
 		private function setLanguage() {
 			// get current language
 			if ( isset($_GET['lang']) ) {
-				$this->language = $_GET['lang'];
+				$language = $_GET['lang'];
 				
 				// iterate available languages to check if we have got a correct language abbreviation
 				$langCorrect = false;
-				foreach ( $this->languages as $lang ) {
-					if ( $this->language == $lang ) {
+				foreach ( $this->languages as $itlang ) {
+					if ( $language == $itlang ) {
 						$langCorrect = true;
 					}
 				}
 				
 				// set standard language if the given language is not supported
 				if ( ! $langCorrect ) {
-					$this->language = $this->standardLanguage;
+					$language = $this->standardLanguage;
 				}
 			}
 			else {
-				$this->language = $this->standardLanguage;
+				$language = $this->standardLanguage;
 			}
+            
+            $this->language = $language;
+            
+			include('lang/'.$language.'.lang.php');
 		}
 		
 		private function readCurrentSite() {
@@ -73,6 +78,26 @@
 			// handle register popup
 			include('register.inc.php');
 		}
+        
+        private function replaceCurrentSite() {
+            $url = $_SERVER['REQUEST_URI'];
+            $url_parts = explode('/', $url);
+            $url = $url_parts[sizeof($url_parts) - 1];
+            
+            foreach ( $this->languages as $itlang ) {
+                $url = str_replace('&lang='.$itlang, '', $url);
+                $url = str_replace('?lang='.$itlang, '', $url);
+            }
+            
+            if ( strstr($url, '?') ) {
+                $url .= '&amp;';
+            }
+            else {
+                $url .= '?';
+            }
+            
+            $this->mainTemplate->tplReplace('site', $url);
+        }
 		
 		private function switchSite() {
 			switch ( $this->site ) {
@@ -105,7 +130,8 @@
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 			$this->mainTemplate->tplReplace('register', $this->registerTemplate->getTpl());
-			$this->mainTemplate->setLanguage($this->language);
+            $this->mainTemplate->tplReplace('language', $this->language);
+			$this->mainTemplate->translateTemplate();
 			$this->mainTemplate->printTemplate();
 		}
 	}

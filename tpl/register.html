@@ -1,7 +1,8 @@
 <img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="registerClose()" id="register_close">
 <p style="text-align:justify">[[register_text]]</p>
 {errormessage}
-<form action="{url}&amp;reg=true" method="POST">
+<form action="{url}" method="POST">
+    <input type="hidden" name="reg" value="true">
 	<table width="300">
 		<tr>
 			<td width="50%" valign="top">

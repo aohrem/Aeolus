@@ -40,16 +40,15 @@
 			$this->template = preg_replace('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', '', $this->template);
 		}
 		
-		public function setLanguage($lang) {
-			include('lang/'.$lang.'.lang.php');
+		public function translateTemplate() {
 			while ( $start = strpos( $this->template, '[[') ) {
 				$length = strpos($this->template, ']]') - $start;
 				$search = substr($this->template, $start + 2, $length - 2);
-				if ( isset($translation[$search]) ) {
-					$this->template = str_replace('[['.$search.']]', htmlentities($translation[$search]), $this->template);
+				if ( isset($GLOBALS['translation'][$search]) ) {
+					$this->template = str_replace('[['.$search.']]', $GLOBALS['translation'][$search], $this->template);
 				}
 				else {
-					$this->template = str_replace('[['.$search.']]', htmlentities($translation['translation_not_found'].' ('.$search.')'), $this->template);
+					$this->template = str_replace('[['.$search.']]', $search.' ('.$GLOBALS['translation']['translation_not_found'].')', $this->template);
 				}
 			}
 		}

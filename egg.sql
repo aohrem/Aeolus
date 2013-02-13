@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `egg`
+-- Tabellenstruktur f&uuml;r Tabelle `egg`
 --
 
 CREATE TABLE IF NOT EXISTS `egg` (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `egg` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12346 ;
 
 --
--- Daten für Tabelle `egg`
+-- Daten f&uuml;r Tabelle `egg`
 --
 
 INSERT INTO `egg` (`feed_id`, `password`, `lat`, `lon`) VALUES

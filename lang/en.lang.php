@@ -1,7 +1,7 @@
 <?php
 	// english translation
-	$translation = array(
+    $GLOBALS['translation'] = array(
 		'title' => 'Aeolus',
-		'translation_not_found' => 'Translation not found'
+		'translation_not_found' => 'english translation not found'
 	);
 ?>
