@@ -6,10 +6,13 @@
 		private $site;
 		private $page;
 		private $reg;
-		
+		private $language;
+		private $standardLanguage = 'de';
+		private $languages = array('en', 'de');
 		
 		public function __construct() {
 			$this->loadTemplate();
+			$this->setLanguage();
 			$this->readCurrentSite();
 			$this->switchSite();
 		}
@@ -19,6 +22,29 @@
 			include('template.inc.php');
 			$this->mainTemplate = new Template();
 			$this->mainTemplate->readTpl('main');
+		}
+		
+		private function setLanguage() {
+			// get current language
+			if ( isset($_GET['lang']) ) {
+				$this->language = $_GET['lang'];
+				
+				// iterate available languages to check if we have got a correct language abbreviation
+				$langCorrect = false;
+				foreach ( $this->languages as $lang ) {
+					if ( $this->language == $lang ) {
+						$langCorrect = true;
+					}
+				}
+				
+				// set standard language if the given language is not supported
+				if ( ! $langCorrect ) {
+					$this->language = $this->standardLanguage;
+				}
+			}
+			else {
+				$this->language = $this->standardLanguage;
+			}
 		}
 		
 		private function readCurrentSite() {
@@ -79,6 +105,7 @@
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 			$this->mainTemplate->tplReplace('register', $this->registerTemplate->getTpl());
+			$this->mainTemplate->setLanguage($this->language);
 			$this->mainTemplate->printTemplate();
 		}
 	}

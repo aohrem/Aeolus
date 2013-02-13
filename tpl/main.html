@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Aeolus</title>
+		<title>[[title]]</title>
 		
 		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css">
 		 <!--[if lte IE 8]>
-			 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css" />
+			 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css">
 		 <![endif]-->
 		 
 		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
@@ -26,19 +26,19 @@
 							<a href="index.php" onmouseover="mouseOver('home');" onmouseout="mouseOut('home');">
 								<img src="img/home.png" alt="Startseite" width="78" height="78" id="home">
 							</a>
-							<div id="home_over">Startseite</div>
+							<div id="home_over">[[home]]</div>
 						</li>
 						<li>
 							<a href="index.php?s=map" onmouseover="mouseOver('map');" onmouseout="mouseOut('map');">
 								<img src="img/map.png" alt="Karte" width="78" height="78" id="map">
 							</a>
-							<div id="map_over">Karte</div>
+							<div id="map_over">[[map]]</div>
 						</li>
 						<li>
 							<a href="#" onmouseover="mouseOver('register');" onmouseout="mouseOut('register');" onclick="registerClick()">
 								<img src="img/register.png" alt="Registrierung" width="78" height="78" id="register">
 							</a>
-							<div id="register_over">Registrierung</div>
+							<div id="register_over">[[register]]</div>
 							<div id="register_click"{reg_handle}>
 								{register}
 							</div>
@@ -51,9 +51,9 @@
 {content}
 			</div>
 			<footer>
-				<p><a href="index.php?s=delete">Air Quality Egg entfernen</a></p>
-				<p><a href="index.php?s=links">N&uuml;tzliche Links</a></p>
-				<p><a href="index.php?s=impress">Impressum</a></p>
+				<p><a href="index.php?s=delete">[[delete_aqe]]</a></p>
+				<p><a href="index.php?s=links">[[useful_links]]</a></p>
+				<p><a href="index.php?s=impress">[[credits]]</a></p>
 			</footer>
 		</div>
 	</body>

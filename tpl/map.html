@@ -1,41 +1,39 @@
-<h1>Kartenansicht</h1>
-<p>
+<h1>[[map_view]]</h1>
 <script src ="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/addr_search.js"></script>
 <div id="mapdiv">
 	<div id="searchbar">
 		<form action="" method="post" onsubmit="return false;">
-			<input type="text" name="searchtext" value="Ort eingeben" onFocus="if(this.value=='Ort eingeben') this.value='';" onBlur="if(this.value=='') this.value='Ort eingeben';" id='location'>
-			<input type="submit" value="Suchen" class="button" onclick="location_search()">
+			<input type="text" name="searchtext" value="[[enter_location]]" onFocus="if(this.value=='[[enter_location]]') this.value='';" onBlur="if(this.value=='') this.value='[[enter_location]]';" id='location'>
+			<input type="submit" value="[[search]]" class="button" onclick="location_search()">
 		</form>
 	</div>
 	<div id="results_frame">
-		<div id="results">Suchergebnisse</div>
-		<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="setResultsHidden()" id="results_close">
+		<div id="results">[[search_results]]</div>
+		<img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
 	</div>
 	<div class="map_buttons" id="co_button">
 		<a href="#">
-			<img src="img/co.png" alt="CO" width="50" height="50" id="map_co_button">
+			<img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="no2_button">
 		<a href="#">
-			<img src="img/no2.png" alt="NO2" width="50" height="50" id="map_no2_button">
+			<img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="temp_button">
 		<a href="#">
-			<img src="img/temp.png" alt="TEMPERATURE" width="50" height="50" id="map_temp_button">
+			<img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="hum_button">
 		<a href="#">
-			<img src="img/hum.png" alt="HUMIDITY" width="50" height="50" id="map_hum_button">
+			<img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button">
 		</a>
 	</div>
 	<div id="map_big"></div>
 </div>
-</p>
 <script src="js/map_big.js"></script>
 <script>
 	{+Egg}
