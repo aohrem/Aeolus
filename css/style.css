@@ -52,17 +52,18 @@ header nav ul li div {
 }
 
 header nav ul li #register_click {
-	width: 300px;
+	font-family: Calibri, Arial, Verdana, sans-serif;
+	width: 330px;
 	text-align: right;
 	position: absolute;
 	top: 110px;
-	left: -20px;
+	left: -60px;
 	background-color: #a0c6e5;
 	display: none;
 	visibility: visible;
-	font-size: 10.5pt;
-	padding: 0px 5px;
-	z-index:10;
+	font-size: 11pt;
+	padding: 5px 10px;
+	z-index: 10;
 }
 
 header nav ul li #register_click.true {
@@ -71,38 +72,62 @@ header nav ul li #register_click.true {
 
 header nav ul li #register_click #register_close {
 	position: relative;
-	top:3px;
+	top: 3px;
 	border-width: 0px;
+    cursor: pointer;
 }
 
 header nav ul li #register_click input {
-	width: 140px;
+	font-family: Calibri, Arial, Verdana, sans-serif;
+	width: 130px;
 	text-align: right;
 	background-color: #add0ea;
-	border: 1px inset #a0c6e5;
-	font-size:9pt;
+	border: none;
+    padding: 4px 15px;
+	font-size: 10.5pt;
 	color: #FFFFFF;
 }
 
 header nav ul li #register_click span.error {
-	color: #d80000;
-	font-size:90%;
-	font-weight:bold;
+	color: #D80000;
+	font-size: 90%;
+	font-weight: bold;
 }
 
 header nav ul li #register_click span.success {
-	color: #00aa00;
-	font-size:90%;
-	font-weight:bold;
+	color: #00AA00;
+	font-size: 90%;
+	font-weight: bold;
 }
 
 header nav ul li #register_click input.button {
-	width: 100px;
+	font-family: Calibri, Arial, Verdana, sans-serif;
+    width: 160px;
 	text-align: center;
 	background-color: #61A0D4;
-	border: 1px outset #61A0D4;
-	font-size: 9pt;
+    border: none;
+	font-size: 11pt;
 	color: #FFFFFF;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+
+header nav ul li #register_click input.button:hover {
+	background-color: #5d95c3;
+}
+
+p.register {
+    text-align: justify;
+}
+
+table.register {
+    width: 300px;
+}
+
+table.register td {
+    width: 50%;
+    vertical-align: top;
+    text-align: right;
 }
 
 #content {
@@ -311,21 +336,33 @@ header nav ul li #register_click input.button {
 	font-weight:bold;
 }
 
+
+#content table.form {
+    width: 550px;
+}
+
+#content input {
+	font-family: Calibri, Arial, Verdana, sans-serif;
+    font-size: 11pt;
+    padding: 5px 15px;
+    width: 200px;
+}
+
 #content #del_true_button, #content .delete_form_button {
-	padding:2px 5px;
-	margin-top:5px;
-	border:1px outset #619FD3;
-	background-color:#619FD3;
-	color:#FFFFFF;
-	text-decoration:none;
+	font-family: Calibri, Arial, Verdana, sans-serif;
+    font-size: 11pt;
+	padding: 5px 15px;
+    width: 234px;
+	margin-top: 5px;
+	border: none;
+	background-color: #619FD3;
+	color: #FFFFFF;
+	text-decoration: none;
+    cursor: pointer;
 }
 
 #content #del_true_button:hover, #content .delete_form_button:hover {
-	padding:2px 5px;
-	margin-top:5px;
-	border:1px outset #9FC0DF;
-	background-color:#9FC0DF;
-	color:#FFFFFF;
+	background-color: #9FC0DF;
 }
 
 footer {
