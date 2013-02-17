@@ -178,43 +178,44 @@ table.register td {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	height:21px;
-	padding:0px 0px 0px 10px;
+	height: 21px;
+	padding: 0px 0px 0px 10px;
 	z-index: 2;
 	background-color: #a0c6e5;
-	-moz-border-radius:10px;
-	-khtml-border-radius:10px;
-	border-radius:10px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #content #searchbar input {
-	background-color:#A0C6E5;
-	border-width:0px;
-	font-size:9pt;
-	width:100px;
-	position:relative;
-	top:-2px;
-	color:#ffffff;
+	background-color: #A0C6E5;
+	border-width: 0px;
+	font-size: 9pt;
+	width: 100px;
+	position: relative;
+	top: -2px;
+	color: #ffffff;
+    padding: 0px;
 }
 
 #content #searchbar input.button {
-	position:relative;
-	top:-2px;
-	height:21px;
-	width:100px;
-	-moz-border-radius:10px;
-	-khtml-border-radius:10px;
-	border-radius:10px;
-	background-color:#5b8eb8;
-	color:#ffffff;
-	margin:0px;
-	padding-left:0px;
-	font-weight:bold;
+	position: relative;
+	top: -2px;
+	height: 21px;
+	width: 100px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #5b8eb8;
+	color: #ffffff;
+	margin: 0px;
+	padding-left: 0px;
+	font-weight: bold;
 }
 
 #content #results_frame {
 	position: absolute;
-	top:50px;
+	top: 50px;
 	right: 90px;
 	background-color: #A0C6E5;
 	width: 300px;
