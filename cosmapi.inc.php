@@ -181,21 +181,15 @@
 				return array('lat' => $xml->environment->location->lat, 'lon' => $xml->environment->location->lon);
 			}
 			else if ( isset($xml->environment->location->name) ) {
-				return $name = $xml->environment->location->name;
+				$name = $xml->environment->location->name;
+				
+				include('nominatimapi.inc.php');
+				$nominatimAPI = new NominatimAPI();
+				
+				return $nominatimAPI->getCoordinates($name);
 			}
 			else {
 				return false;
-			}
-		}
-	}
-
-	// child class of SimpleXMLElement with method to get attributes of xml tags by their name
-	class SimpleXMLExtended extends SimpleXMLElement {
-		public function attribute($name) {
-			foreach( $this->Attributes() as $key => $val ) {
-				if ( $key == $name ) {
-					return (string) $val;
-				}
 			}
 		}
 	}

@@ -3,8 +3,8 @@
 		private $mainTemplate;
 		private $contentTemplate;
 		private $registerTemplate;
-		private $site;
-		private $page;
+		private $site = '';
+		private $page = '';
 		private $reg;
         private $language;
 		private $standardLanguage = 'de';

@@ -17,8 +17,14 @@
 		if ($this->reg == 'true') {
 			if (isset($_POST['feedid']) && isset($_POST['password']) && isset($_POST['password_verify'])) {
 				$fid = intval($_POST['feedid']);
-                
-				if ($fid==0) {
+				
+				$cosmAPI = new CosmAPI();
+				$coordinates = $cosmAPI->getEggCoordinates($fid);
+			
+				// no coordinates found, user has to enter an adress
+				if ( ! $coordinates || ! is_array($coordinates) ) {
+				}
+				else if ( $fid == 0 ) {
 					$errormessage = '<span class="error">'.$GLOBALS['translation']['enter_valid_feed_id'].'</span>';
 				}
 				else if (($_POST['password'] == '' || $_POST['password'] == 'Passwort') || ($_POST['password_verify'] == '' || $_POST['password_verify'] == 'Passwort wiederholen')) {
@@ -28,9 +34,6 @@
 					$errormessage = '<span class="error">'.$GLOBALS['translation']['passwords_incorrect'].'</span>';
 				}
 				else {
-					$cosmAPI = new CosmAPI();
-					$cosmAPI->getEggCoordinates($fid);
-					
 					$password = sha1($_POST['password']);
 					
 					$db = new Sql();
@@ -40,7 +43,7 @@
 						$errormessage = '<span class="error">'.$GLOBALS['translation']['aqe_already_registered'].'</span>';
 					}
 					else {
-						$db->query('INSERT INTO `aeolus`.`egg` (`feed_id`,`password`) VALUES ('.$fid.', \''.$password.'\')');
+						$db->query('INSERT INTO `aeolus`.`egg` (`feed_id`, `password`, `lat`, `lon`) VALUES ('.$fid.', \''.$password.'\', \''.$coordinates[0].'\', \''.$coordinates[1].'\')');
 						$successmessage = '<span class="success">'.$GLOBALS['translation']['aqe_registered'].'</span>';
 					}
 				}
