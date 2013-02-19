@@ -1,14 +1,15 @@
 <?php
 	$errormessage = '';
 	$successmessage = '';
-	$feedid = 'feed ID';
-	$pw = 'Passwort';
-	$pw_ver = 'Passwort wiederholen';
+    
+    $this->registerTemplate = new Template();
+    $this->registerTemplate->readTpl('register');
+    $this->registerTemplate->tplReplace('site', $this->site);
 	
 	// find URL of the current page
 	$url = $_SERVER['REQUEST_URI'];
 	$url_parts = explode('/', $url);
-	$this->registerTemplate->tplReplace('url', $url_parts[sizeof($url_parts)-1]);
+    $url = $url_parts[sizeof($url_parts)-1];
 	
 	if ( isset($_POST['reg']) ) {
 		$this->reg = mysql_real_escape_string($_POST['reg']);
@@ -18,23 +19,35 @@
 			if (isset($_POST['feedid']) && isset($_POST['password']) && isset($_POST['password_verify'])) {
 				$fid = intval($_POST['feedid']);
 				
-				$cosmAPI = new CosmAPI();
-				$coordinates = $cosmAPI->getEggCoordinates($fid);
-			
-				// no coordinates found, user has to enter an adress
-				if ( ! $coordinates || ! is_array($coordinates) ) {
-				}
-				else if ( $fid == 0 ) {
+				if ( ! isset($_POST['reg_address']) ) {
+                    $cosmAPI = new CosmAPI();
+				    $coordinates = $cosmAPI->getEggCoordinates($fid);
+                }
+                else {
+                    $nominatimAPI = new NominatimAPI();
+                    $coordinates = $nominatimAPI->getCoordinates($_POST['address']);
+                }
+                
+                // feed id is incorrect
+				if ( $fid == 0 ) {
 					$errormessage = '<span class="error">'.$GLOBALS['translation']['enter_valid_feed_id'].'</span>';
 				}
-				else if (($_POST['password'] == '' || $_POST['password'] == 'Passwort') || ($_POST['password_verify'] == '' || $_POST['password_verify'] == 'Passwort wiederholen')) {
+                // user entered no password
+                else if (($_POST['password'] == '' || $_POST['password'] == $GLOBALS['translation']['password']) || ($_POST['password_verify'] == '' || $_POST['password_verify'] == $GLOBALS['translation']['repeat_password'])) {
 					$errormessage = '<span class="error">'.$GLOBALS['translation']['fill_in_all_inputs'].'</span>';
 				}
+                // password verification incorrect
 				else if ($_POST['password'] != $_POST['password_verify']) {
 					$errormessage = '<span class="error">'.$GLOBALS['translation']['passwords_incorrect'].'</span>';
 				}
+                // no coordinates found, user has to enter an adress
+                else if ( ! $coordinates || ! is_array($coordinates) ) {
+                    if ( ! strpos($url, '?') ) { $url .= '?'; } else { $url .= '&'; }
+                    
+                    header('Location: '.$url.'regadress=true&feedid='.$fid.'&key='.sha1($_POST['password']));
+				}
 				else {
-					$password = sha1($_POST['password']);
+					if ( isset($_POST['reg_address']) ) { $password = $_POST['password']; } else { $password = sha1($_POST['password']); }
 					
 					$db = new Sql();
 					$num_rows = $db->num_rows('SELECT `feed_id` FROM `aeolus`.`egg` WHERE `feed_id`='.$fid);
@@ -52,10 +65,27 @@
 			$this->registerTemplate->tplReplace('successmessage', $successmessage);
 		}
 	}
+    else if ( isset($_GET['regadress']) ) {
+        $this->reg = $_GET['regadress'];
+		$this->mainTemplate->tplReplace('reg_handle', ' class="'.$this->reg.'"');
+        
+        $feedid = $_GET['feedid'];
+        $password = $_GET['key'];
+        
+        $url = str_replace('regadress=true&feedid='.$feedid.'&key='.$password, '', $url);
+        
+        $this->registerTemplate->readTpl('register_position');
+        $this->registerTemplate->tplReplace('reg_feedid', $feedid);
+        $this->registerTemplate->tplReplace('reg_password', $password);
+        $this->registerTemplate->tplReplace('reg_password_verify', $password);
+    }
 	else {
-		$this->reg = '';
+		$this->reg = false;
 		$this->registerTemplate->tplReplace('errormessage', $errormessage);
 		$this->registerTemplate->tplReplace('successmessage', $successmessage);
-		$this->registerTemplate->tplReplace('reg_handle', '');
+		$this->mainTemplate->tplReplace('reg_handle', '');
 	}
+    
+	$this->registerTemplate->tplReplace('url', $url);
+    $this->mainTemplate->tplReplace('register', $this->registerTemplate->getTpl());
 ?>

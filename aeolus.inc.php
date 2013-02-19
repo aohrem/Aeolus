@@ -15,6 +15,7 @@
 			$this->setLanguage();
 			$this->readCurrentSite();
             $this->replaceCurrentSite();
+            $this->handleRegisterPopup();
 			$this->switchSite();
 		}
 		
@@ -71,12 +72,6 @@
 			
 			$this->contentTemplate = new Template();
 			$this->contentTemplate->readTpl($this->site.$this->page);
-			$this->registerTemplate = new Template();
-			$this->registerTemplate->readTpl('register');
-			$this->registerTemplate->tplReplace('site', $this->site);
-
-			// handle register popup
-			include('register.inc.php');
 		}
         
         private function replaceCurrentSite() {
@@ -97,6 +92,10 @@
             }
             
             $this->mainTemplate->tplReplace('site', $url);
+        }
+        
+        private function handleRegisterPopup() {
+			include('register.inc.php');
         }
 		
 		private function switchSite() {
@@ -129,7 +128,6 @@
 		
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
-			$this->mainTemplate->tplReplace('register', $this->registerTemplate->getTpl());
             $this->mainTemplate->tplReplace('language', $this->language);
 			$this->mainTemplate->translateTemplate();
 			$this->mainTemplate->printTemplate();

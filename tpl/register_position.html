@@ -1,0 +1,11 @@
+<img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="registerClose()" id="register_close">
+<p style="text-align:justify">[[enter_address]]</p>
+<form action="{url}" method="post">
+    <input type="hidden" name="reg" value="true">
+    <input type="hidden" name="reg_address" value="true">
+    <input type="hidden" name="feedid" value="{reg_feedid}">
+    <input type="hidden" name="password" value="{reg_password}">
+    <input type="hidden" name="password_verify" value="{reg_password_verify}">
+	<input type="text" name="address" value="[[address]]" onFocus="javascript:if(this.value=='[[address]]') this.value='';" onBlur="javascript:if(this.value=='') this.value='[[address]]';"><br>
+	<input type="submit" value="[[register]]" class="button">
+</form>
