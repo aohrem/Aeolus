@@ -1,20 +1,20 @@
 <img src="img/close.png" alt="Schlie&szlig;en" width="10" height="10" onclick="registerClose()" id="register_close">
-<p style="text-align:justify">[[register_text]]</p>
+<p class="register">[[register_text]]</p>
 {errormessage}
-<form action="{url}" method="POST">
+<form action="{url}" method="post">
     <input type="hidden" name="reg" value="true">
-	<table width="300">
+	<table class="register">
 		<tr>
-			<td width="50%" valign="top">
-				<input type="text" name="feedid" value="feed ID" onFocus="javascript:if(this.value=='feed ID') this.value='';" onBlur="javascript:if(this.value=='') this.value='feed ID';">
+			<td>
+				<input type="text" name="feedid" value="[[feed_id]]" onFocus="javascript:if(this.value=='[[feed_id]]') this.value='';" onBlur="javascript:if(this.value=='') this.value='[[feed_id]]';">
 			</td>
-			<td width="50%">
+			<td>
 				<input type="text" name="password" value="[[password]]" onFocus="javascript:if(this.value=='[[password]]' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='[[password]]'; this.type='text';}"><br>
 				<input type="text" name="password_verify" value="[[repeat_password]]" onFocus="javascript:if(this.value=='[[repeat_password]]' && this.type=='text') {this.value=''; this.type='password';}" onBlur="javascript:if(this.value=='' && this.type=='password') {this.value='[[repeat_password]]'; this.type='text';}">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align:center;">
+			<td colspan="2">
 				<input type="submit" value="[[register]]" class="button">
 			</td>
 		</tr>

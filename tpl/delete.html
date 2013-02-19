@@ -1,18 +1,19 @@
 <h1>[[delete_aqe]]</h1>
 <p>[[delete_aqe_explanation]]</p>
 {del_error}
-<form method="POST" action="index.php?s=delete&amp;send=one&amp;lang={language}">
-	<table>
+<form method="post" action="index.php?s=delete&amp;send=one&amp;lang={language}">
+	<table class="form">
 		<tr>
-			<td>[[feed_id]]</td>
+			<td>[[feed_id]]:</td>
 			<td><input type="text" value="" name="feedid"></td>
 		</tr>
 		<tr>
-			<td>[[delete_password]]</td>
+			<td>[[delete_password]]:</td>
 			<td><input type="password" value="" name="pw"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="[[delete_my_aqe]]" class='delete_form_button'></td>
+            <td></td>
+			<td><input type="submit" value="[[delete_my_aqe]]" class='delete_form_button'></td>
 		</tr>
 	</table>
 </form>
