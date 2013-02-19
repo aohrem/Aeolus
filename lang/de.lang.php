@@ -51,7 +51,7 @@
 		'close' => 'Schlie&szlig;en',
 		'register_text' => 'Um Ihr Air Quality Egg zu registrieren, geben Sie bitte Ihre cosm-feed ID und ein L&ouml;schpasswort ein.',
         'enter_address' => 'Wir konnten die Position Ihres Air Quality Eggs leider nicht ermitteln. Bitte geben Sie eine Adresse zur Positionsbestimmung ein.',
-        'address' => 'Addresse',
+        'address' => 'Adresse',
 		'password' => 'Passwort',
 		'repeat_password' => 'Passwort wiederholen',
         'enter_valid_feed_id' => 'Bitte eine g&uuml;ltige Feed ID eingeben!',

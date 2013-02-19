@@ -88,6 +88,10 @@ header nav ul li #register_click input {
 	color: #FFFFFF;
 }
 
+header nav ul li #register_click input.long {
+	width: 300px;
+}
+
 header nav ul li #register_click span.error {
 	color: #D80000;
 	font-size: 90%;
