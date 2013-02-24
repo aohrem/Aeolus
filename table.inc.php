@@ -6,7 +6,6 @@
 		$errormessage = '';
 		
 		// mark active timeframe
-		include('functions.inc.php');
 		$timeframe = timeframe();
 		$this->contentTemplate = tplTimeframe($this->contentTemplate, $timeframe);
 		$this->contentTemplate->tplReplace('feedId', $feedId);
@@ -24,7 +23,7 @@
 		// fill in the parameters to read the cosm-API
 		if ( ! $dataArray = $cosmAPI->parseFeed($feedId, $start, $end, $limit, $interval[$timeframe], '') ) {
 			$this->contentTemplate->cleanCode('tableRow');
-			$errormessage = '<div class="details errormessage">'.$GLOBALS['translation']['cosm_api_could_not_be_read'].'</div>';
+			$errormessage = '<div class="details errormessage">'.translate('cosm_api_could_not_be_read').'</div>';
 		}
 		// check if parsing the xml was successfull
 		else if ( is_array($dataArray) ) {
@@ -66,7 +65,7 @@
 			
 			$hidden = ' class="hidden"';
             
-			$errormessage = '<div class="details errormessage">'.$GLOBALS['translation'][$dataArray].'</div>';
+			$errormessage = '<div class="details errormessage">'.translate($dataArray).'</div>';
 		}
 		
 		// replace error message in template and hide details

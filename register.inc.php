@@ -30,15 +30,15 @@
                 
                 // feed id is incorrect
 				if ( $fid == 0 ) {
-					$errormessage = '<span class="error">'.$GLOBALS['translation']['enter_valid_feed_id'].'</span>';
+					$errormessage = '<span class="error">'.translate('enter_valid_feed_id').'</span>';
 				}
                 // user entered no password
                 else if (($_POST['password'] == '' || $_POST['password'] == $GLOBALS['translation']['password']) || ($_POST['password_verify'] == '' || $_POST['password_verify'] == $GLOBALS['translation']['repeat_password'])) {
-					$errormessage = '<span class="error">'.$GLOBALS['translation']['fill_in_all_inputs'].'</span>';
+					$errormessage = '<span class="error">'.translate('fill_in_all_inputs').'</span>';
 				}
                 // password verification incorrect
 				else if ($_POST['password'] != $_POST['password_verify']) {
-					$errormessage = '<span class="error">'.$GLOBALS['translation']['passwords_incorrect'].'</span>';
+					$errormessage = '<span class="error">'.translate('passwords_incorrect').'</span>';
 				}
                 // no coordinates found, user has to enter an adress
                 else if ( ! $coordinates || ! is_array($coordinates) ) {
@@ -53,11 +53,11 @@
 					$num_rows = $db->num_rows('SELECT `feed_id` FROM `aeolus`.`egg` WHERE `feed_id`='.$fid);
                     
 					if ($num_rows != 0) {
-						$errormessage = '<span class="error">'.$GLOBALS['translation']['aqe_already_registered'].'</span>';
+						$errormessage = '<span class="error">'.translate('aqe_already_registered').'</span>';
 					}
 					else {
 						$db->query('INSERT INTO `aeolus`.`egg` (`feed_id`, `password`, `lat`, `lon`) VALUES ('.$fid.', \''.$password.'\', \''.$coordinates[0].'\', \''.$coordinates[1].'\')');
-						$successmessage = '<span class="success">'.$GLOBALS['translation']['aqe_registered'].'</span>';
+						$successmessage = '<span class="success">'.translate('aqe_registered').'</span>';
 					}
 				}
 			}

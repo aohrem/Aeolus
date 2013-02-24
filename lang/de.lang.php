@@ -25,7 +25,7 @@
 		'co' => 'CO',
 		'no2' => 'NO<sub>2</sub>',
 		'temperature' => 'Temperatur',
-		'humidity' => 'Luftfeuchtigkeit',
+		'humidity' => 'Luftfeuchte',
 		'data_download' => 'Datendownload',
 		'6_hours' => '6 Stunden',
 		'24_hours' => '24 Stunden',

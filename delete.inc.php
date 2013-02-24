@@ -14,24 +14,24 @@
 				$fid = intval($_POST['feedid']);
 				// check if the feed ID is valid
 				if ( $fid == 0 ) {
-					$errormessage = '<span class="error">'.$GLOBALS['translation']['enter_valid_feed_id'].'</span>';
+					$errormessage = '<span class="error">'.translate('enter_valid_feed_id').'</span>';
 				}
 				else {
 					$num_rows = $db->num_rows('SELECT * FROM `aeolus`.`egg` WHERE `feed_id`='.$fid);
 					// check if the given AQE is registered
 					if ( $num_rows == 0 ) {
-						$errormessage = '<span class="error">'.$GLOBALS['translation']['aqe_not_registered'].'</span>';
+						$errormessage = '<span class="error">'.translate('aqe_not_registered').'</span>';
 					}
 					else {
 						$pw = sha1($_POST['pw']);
 						$num_rows2 = $db->num_rows('SELECT * FROM `aeolus`.`egg` WHERE `feed_id`='.$fid.' AND `password`=\''.$pw.'\'');
 						// check if password is valid
 						if ( $num_rows2 == 0 ) {
-							$errormessage = '<span class="error">'.$GLOBALS['translation']['wrong_delete_password'].'</span>';
+							$errormessage = '<span class="error">'.translate('wrong_delete_password').'</span>';
 						}
 						else {
-							$successmessage = '<p><span class="success">'.$GLOBALS['translation']['aqe_delete_data_correct'].'</span><br>
-												<a href="index.php?s=delete&amp;send=two&amp;fid='.$fid.'" id="del_true_button">'.$GLOBALS['translation']['yes_please'].'</a></p>';
+							$successmessage = '<p><span class="success">'.translate('aqe_delete_data_correct').'</span><br>
+												<a href="index.php?s=delete&amp;send=two&amp;fid='.$fid.'" id="del_true_button">'.translate('yes_please').'</a></p>';
 						}
 					}
 				}
@@ -42,16 +42,16 @@
 			if ( isset($_GET['fid']) ) {
 				$fid = intval($_GET['fid']);
 				if ($fid == 0) {
-					$errormessage = '<span class="error">'.$GLOBALS['translation']['dont_play_with_links'].'</span>';
+					$errormessage = '<span class="error">'.translate('dont_play_with_links').'</span>';
 				}
 				else {
 					$db->query('DELETE FROM `aeolus`.`egg` WHERE `feed_id`='.$fid);
-					$successmessage = '<span class="success">'.$GLOBALS['translation']['aqe_deleted'].'</span>';
+					$successmessage = '<span class="success">'.translate('aqe_deleted').'</span>';
 				}
 			}
 		}
 		else {
-			$errormessage = '<span class="error">'.$GLOBALS['translation']['dont_play_with_links'].'</span>';
+			$errormessage = '<span class="error">'.translate('dont_play_with_links').'</span>';
 		}
 	}
     

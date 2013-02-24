@@ -6,7 +6,6 @@
 		$feedId = htmlentities(mysql_real_escape_string($_GET['fid']));
 		
 		// mark active timeframe
-		include('functions.inc.php');
 		$timeframe = timeframe();
 		$this->contentTemplate = tplTimeframe($this->contentTemplate, $timeframe);
 		
