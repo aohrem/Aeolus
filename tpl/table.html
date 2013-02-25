@@ -1,3 +1,4 @@
+<script src="js/outlierhints.js"></script>
 <h1>{title}[[table_view]]</h1>
 <div id="navi_left">
 	<div>
@@ -28,10 +29,10 @@
 		{+tableRow}
 		<tr>
 			<td>{t}</td>
-			<td>{co}</td>
-			<td>{no2}</td>
-			<td>{temp}</td>
-			<td>{hum}</td>
+			<td>{co}{co_outlier}</td>
+			<td>{no2}{no2_outlier}</td>
+			<td>{temp}{temp_outlier}</td>
+			<td>{hum}{hum_outlier}</td>
 		</tr>
 		{-tableRow}
 	</table>

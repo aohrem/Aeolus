@@ -332,18 +332,45 @@ table.register td {
 	line-height: 100%;
 }
 
+#content .outlier {
+    font-size: 130%;
+    font-family: 'Times New Roman';
+    cursor: pointer;
+    background-color: #fbe39d;
+    padding: 0px 8px;
+    margin-left: 40px;
+    height: 94%;
+    position: absolute;
+}
+
+#content .outlier:hover {
+    background-color: #ffdd78;
+}
+
+#content .outlierhint {
+    visibility: hidden;
+    position: absolute;
+    background-color: #FFFFFF;
+    color: #424242;
+    min-width: 390px;
+    cursor: pointer;
+    text-align: justify;
+    z-index: 1;
+    margin-top: -30px;
+    margin-left: 107px;
+    padding: 10px;
+    border: 4px solid #ffdd78;
+}
+
 #content span.error {
 	color: #d80000;
-	font-size:90%;
-	font-weight:bold;
+	font-weight: bold;
 }
 
 #content span.success {
 	color: #00aa00;
-	font-size:90%;
 	font-weight:bold;
 }
-
 
 #content table.form {
     width: 550px;
@@ -498,6 +525,7 @@ a:hover, a:active {
 #data_content table tr td {
 	padding: 0px 13px;
 	border-bottom: 1px solid #d1d9e0;
+    position: relative;
 }
 
 #diagram {

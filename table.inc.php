@@ -38,6 +38,10 @@
 			
 			// sort sensor data by timestamp (keys of the data array)
 			ksort($dataArray, SORT_NUMERIC);
+            
+            include('datavalidation.inc.php');
+            $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'));
+            $outliers = $dataValidation->getOutliers();
 			
 			// iterate sensor data
 			foreach ( $dataArray as $time => $val ) {
@@ -46,6 +50,35 @@
 				if ( ! isset($val['no2']) ) { $val['no2'] = '-'; }
 				if ( ! isset($val['humidity']) ) { $val['humidity'] = '-'; }
 				if ( ! isset($val['temperature']) ) { $val['temperature'] = '-'; }
+                
+                // mark outliers
+                if ( $outliers['co'][$time] ) {
+                    $outlier_text['co'] = '<span class="outlier error" onMouseOver="outlierNote(\'co_outlier_'.$time.'\');" onMouseOut="outlierNote(\'co_outlier_'.$time.'\');">!</span><div id="co_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+                }
+                else {
+                    $outlier_text['co'] = '';
+                }
+                
+                if ( $outliers['no2'][$time] ) {
+                    $outlier_text['no2'] = '<span class="outlier error" onMouseOver="outlierNote(\'no2_outlier_'.$time.'\');" onMouseOut="outlierNote(\'no2_outlier_'.$time.'\');">!</span><div id="no2_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+                }
+                else {
+                    $outlier_text['no2'] = '';
+                }
+                
+                if ( $outliers['temperature'][$time] ) {
+                    $outlier_text['temp'] = '<span class="outlier error" onMouseOver="outlierNote(\'temp_outlier_'.$time.'\');" onMouseOut="outlierNote(\'temp_outlier_'.$time.'\');">!</span><div id="temp_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+                }
+                else {
+                    $outlier_text['temp'] = '';
+                }
+                
+                if ( $outliers['humidity'][$time] ) {
+                    $outlier_text['hum'] = '<span class="outlier error" onMouseOver="outlierNote(\'hum_outlier_'.$time.'\');" onMouseOut="outlierNote(\'hum_outlier_'.$time.'\');">!</span><div id="hum_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+                }
+                else {
+                    $outlier_text['hum'] = '';
+                }
 				
 				// copy table row and fill in sensor data for one timestamp
 				$this->contentTemplate->copyCode('tableRow');
@@ -54,6 +87,11 @@
 				$this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
 				$this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
 				$this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
+                
+				$this->contentTemplate->tplReplaceOnce('co_outlier', $outlier_text['co']);
+				$this->contentTemplate->tplReplaceOnce('no2_outlier', $outlier_text['no2']);
+				$this->contentTemplate->tplReplaceOnce('temp_outlier', $outlier_text['temp']);
+				$this->contentTemplate->tplReplaceOnce('hum_outlier', $outlier_text['hum']);
 			}
 			// delete the last row
 			$this->contentTemplate->cleanCode('tableRow');

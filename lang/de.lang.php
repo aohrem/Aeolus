@@ -84,6 +84,7 @@
 		'uni_ms' => '',
 		'muenster' => '48151 M&uuml;nster<br>Deutschland',
 		'lecturers' => 'Dozenten',
-		'participants' => 'Teilnehmende Studenten'
+		'participants' => 'Teilnehmende Studenten',
+        'value_could_be_an_outlier' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen durch Mess- oder &Uuml;bertragungsfehler bedingten Ausrei&szlig;er.'
 	);
 ?>
