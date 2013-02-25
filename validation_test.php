@@ -176,7 +176,7 @@
 		$j = 0;
 		
 		foreach ( $dataArray as $val ) {
-			if ( $j >= $start && $j <= $end ) {
+			if ( $j >= $start - 1 && $j < $end ) {
 				$sensorArray[$i] = $val[$sensor];
 				$i++;
 			}
@@ -209,21 +209,21 @@
 	
 	function rep($value, $size) {
 		$array = array();
-		for ( $i = 0; $i <= $size; $i++ ) {
+		for ( $i = 0; $i < $size; $i++ ) {
 			$array[$i] = $value;
 		}
 		return $array;
 	}
 	
-	function getArrayWindow($array, $start, $end) {
+	function getArrayWindow($array, $start, $end, $sensor) {
 		$arrayWindow = array();
 		
 		$i = 0;
 		$j = 0;
 		
 		foreach ( $array as $key => $val ) {
-			if ( $j >= $start && $j <= $end ) {
-				$arrayWindow[$key] = $val;
+			if ( $j >= $start - 1 && $j < $end ) {
+				$arrayWindow[$i] = $val[$sensor];
 				$i++;
 			}
 			$j++;
@@ -231,29 +231,51 @@
 		
 		return $arrayWindow;
 	}
+    
+    function quantile($array, $p) {
+        $n = sizeof($array);
+        sort($array);
+        
+        $np = $n * $p;
+        $m = 1 - $p;
+        $j = floor($np + $m);
+        $g = $np + $m - $j;
+        
+        return (1 - $g) * $array[$j - 1] + $g * $array[$j];
+    }
 	
 	function lableOutliers($dataArray, $windowSize, $sensors) {
 		$ytmed = runmed($dataArray, $windowSize, $sensors);
 		$k = floor($windowSize / 2);
 		$n = sizeof($dataArray);
-		$index = $k + 1;
-		$index0 = $k + 1;
-		$outlier = rep(false, $n);
-		
-		while ( $index < ( $n - $k ) ) {
-			$window = getArrayWindow($dataArray, $index - $k, $index + $k);
-			$ir = abs();
-			
-			//ir = abs(quantile(window, 0.75)-quantile(window, 0.25))
-			$med = $ytmed[$index];
-			if ( $dataArray[$index] < ( $med - 1.5 * $ir) || $dataArray[$index] > ($med + 1.5 * $ir) ) {
-				$outlier[$index] = true;
-			}
-			$index++;
-		}
+        
+        $i = 0;
+        foreach ( $dataArray as $key => $val ) {
+            $transArray[$i] = $key;
+            $i++;
+        }
+        
+        foreach ( $sensors as $sensor ) {
+            $index = $k;
+            $outlier[$sensor] = rep(false, $n);
+            
+		    while ( $index < ( $n - $k ) ) {
+			    $window = getArrayWindow($dataArray, $index - $k, $index + $k, $sensor);
+			    $interQuartileRange = abs(quantile($window, 0.75) - quantile($window, 0.25));
+			    $median = $ytmed[$transArray[$index]][$sensor];
+                
+			    if ( $dataArray[$transArray[$index - 1]][$sensor] < ($median - 1.5 * $interQuartileRange) || $dataArray[$transArray[$index - 1]][$sensor] > ($median + 1.5 * $interQuartileRange) ) {
+				    $outlier[$sensor][$index - 1] = true;
+			    }
+                
+			    $index++;
+		    }
+        }
+        
+        return $outlier;
 	}
 	
-	$windowSize = 3;
+	$windowSize = 5;
 	$sensors = array('co', 'humidity', 'no2', 'temperature');
-	lableOutliers($dataArray, $windowSize, $sensors);
+	print_r(lableOutliers($dataArray, $windowSize, $sensors));
 ?>
