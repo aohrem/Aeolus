@@ -338,9 +338,11 @@ table.register td {
     cursor: pointer;
     background-color: #fbe39d;
     padding: 0px 8px;
-    margin-left: 40px;
+    margin-right: 6px;
+    margin-bottom: 2px;
+    float: right;
+    position: relative;
     height: 94%;
-    position: absolute;
 }
 
 #content .outlier:hover {
@@ -356,7 +358,7 @@ table.register td {
     cursor: pointer;
     text-align: justify;
     z-index: 1;
-    margin-top: -30px;
+    margin-top: -33px;
     margin-left: 107px;
     padding: 10px;
     border: 4px solid #ffdd78;

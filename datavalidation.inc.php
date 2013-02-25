@@ -42,6 +42,9 @@
 				            $outliers[$sensor][$transArray[$index - 1]] = true;
 			            }
                     }
+                    else {
+                        $outliers[$sensor][$transArray[$index - 1]] = true;
+                    }
                     
 			        $index++;
 		        }
