@@ -64,6 +64,9 @@ header nav ul li #register_click {
 	font-size: 11pt;
 	padding: 5px 10px;
 	z-index: 10;
+	-moz-box-shadow: 0px 0px 7px #AAAAAA;
+	-webkit-box-shadow: 0px 0px 7px #AAAAAA;
+	box-shadow: 0px 0px 7px #AAAAAA;
 }
 
 header nav ul li #register_click.true {

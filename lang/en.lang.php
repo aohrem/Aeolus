@@ -84,6 +84,6 @@
 		'uni_ms' => ' (Univesity of M&uuml;nster)',
 		'muenster' => 'D-48151 M&uuml;nster',
 		'lecturers' => 'Lecturers',
-		'participants' => 'Participants'
+		'participants' => 'Participating students'
 	);
 ?>
