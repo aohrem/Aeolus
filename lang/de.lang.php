@@ -78,6 +78,12 @@
 		'error_404' => 'Fehler 404 - Seite nicht gefunden',
 		'error_404_text' => 'Die von Ihnen aufgerufene Seite wurde leider nicht gefunden.',
 		'error_feed_id_not_found' => 'Fehler - Feed ID nicht gefunden',
-		'error_feed_id_not_found_text' => 'Es wurde keine cosm Feed ID angegeben oder die angegebene Feed ID wurde nicht gefunden.'
+		'error_feed_id_not_found_text' => 'Es wurde keine cosm Feed ID angegeben oder die angegebene Feed ID wurde nicht gefunden.',
+		'aeolus_project' => 'Aeolus ist ein Projekt im Rahmen des "Geosoftware 2"-Kurses des Institutes f&uuml;r Geoinformatik der Universit&auml;t M&uuml;nster',
+		'ifgi' => 'Institut f&uuml;r Geoinformatik',
+		'uni_ms' => '',
+		'muenster' => '48151 M&uuml;nster<br>Deutschland',
+		'lecturers' => 'Dozenten',
+		'participants' => 'Teilnehmende Studenten'
 	);
 ?>
