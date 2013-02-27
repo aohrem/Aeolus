@@ -14,3 +14,15 @@ function addEgg(lat, lon, feedID, color){
 			alert(feedID);
 		});
 }
+<<<<<<< HEAD
+=======
+
+function addPopup(lat, lon, type){
+	var popup = L.popup()
+		.setLatLng([lat, lon])
+		//.setContent(type)
+		.openOn(map);
+}
+
+//addPopup(51.962944, 7.628694, "Hallo");
+>>>>>>> Vorbereitungen Kreismenu
