@@ -84,13 +84,10 @@
 		'lecturers' => 'Dozenten',
 		'participants' => 'Teilnehmende Studenten',
         'value_could_be_an_outlier' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch Mess- oder &Uuml;bertragungsfehler bedingt wurde.',
-<<<<<<< HEAD
 		'view_english' => 'View this page in English',
-		'view_german' => 'Diese Seite auf deutsch betrachten'
-=======
+		'view_german' => 'Diese Seite auf deutsch betrachten',
 		'outliers_found' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit diesem roten Ausrufezeichen markiert. Falls Ausrei&szlig;erwerte linear interpoliert werden sollen, klicken Sie bitte hier.',
-		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Ausrufezeichen markiert. Falls Ausrei&szlig;erwerte nicht weiter interpoliert werden sollen, klicken Sie bitte hier.',
-		'value_is_interpolated' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher linear interpoliert wurde.'
->>>>>>> Ausreißerinterpolation eingebaut
+		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Informationssymbol markiert. Falls Ausrei&szlig;erwerte nicht weiter interpoliert werden sollen, klicken Sie bitte hier.',
+		'value_is_interpolated' => 'Bei diesem Wert handelte es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch lineare Interpolation entfernt wurde.'
 	);
 ?>
