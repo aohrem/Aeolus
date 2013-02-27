@@ -14,8 +14,6 @@ function addEgg(lat, lon, feedID, color){
 			alert(feedID);
 		});
 }
-<<<<<<< HEAD
-=======
 
 function addPopup(lat, lon, type){
 	var popup = L.popup()
@@ -25,4 +23,3 @@ function addPopup(lat, lon, type){
 }
 
 //addPopup(51.962944, 7.628694, "Hallo");
->>>>>>> Vorbereitungen Kreismenu
