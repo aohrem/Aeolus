@@ -258,10 +258,6 @@ table.register td {
 	top: 230px;
 }
 
-#content #lanuv_button {
-	top: 290px;
-}
-
 #content .map_buttons {
 	position: absolute;
 	right: 10px;
@@ -339,9 +335,9 @@ table.register td {
 #content .outlier {
     font-size: 130%;
     font-family: 'Times New Roman';
-    cursor: pointer;
     background-color: #fbe39d;
     padding: 0px 8px;
+    cursor: default;
     margin-right: 6px;
     margin-bottom: 2px;
     float: right;
@@ -349,8 +345,39 @@ table.register td {
     height: 94%;
 }
 
+#content .outlier.interpolated {
+    background-color: #75fc84;
+}
+
 #content .outlier:hover {
     background-color: #ffdd78;
+}
+#content .outlier.interpolated:hover {
+    background-color: #6de67b;
+}
+
+#content .bigoutlier {
+    font-size: 180%;
+    font-family: 'Times New Roman';
+    cursor: pointer;
+    background-color: #fbe39d;
+    padding: 5px 12px;
+    margin-right: 6px;
+    margin-bottom: 2px;
+    float: right;
+    position: relative;
+    height: 94%;
+}
+
+#content .bigoutlier:hover {
+    background-color: #ffdd78;
+}
+#content .bigoutlier.interpolated {
+    background-color: #75fc84;
+}
+
+#content .bigoutlier.interpolated:hover {
+    background-color: #6de67b;
 }
 
 #content .outlierhint {
@@ -358,14 +385,37 @@ table.register td {
     position: absolute;
     background-color: #FFFFFF;
     color: #424242;
-    min-width: 390px;
-    cursor: pointer;
+    width: 380px;
     text-align: justify;
     z-index: 1;
     margin-top: -33px;
     margin-left: 107px;
     padding: 10px;
     border: 4px solid #ffdd78;
+}
+
+#content .outlierhint.interpolated {
+    border: 4px solid #6de67b;
+}
+
+#content .bigoutlierhint {
+    visibility: hidden;
+    position: absolute;
+    background-color: #FFFFFF;
+    color: #424242;
+    width: 470px;
+    text-align: justify;
+    z-index: 1;
+    margin-top: -20px;
+    margin-left: 173px;
+    padding: 10px;
+    border: 4px solid #ffdd78;
+}
+
+#content .bigoutlierhint.interpolated {
+    width: 500px;
+    margin-left: 144px;
+    border: 4px solid #6de67b;
 }
 
 #content span.error {

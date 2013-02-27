@@ -42,42 +42,87 @@
             include('datavalidation.inc.php');
             $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'));
             $outliers = $dataValidation->getOutliers();
+			$outlierCheck = $dataValidation->outliersFound($outliers);
+			$tplOutliers = '';
+			
+			// check if outliers shall be interpolated
+			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' ) {
+				$interpolateOutliers = true;
+				$this->contentTemplate->tplReplace('interpolateOutliers', '&amp;interpolateoutliers=true');
+				$dataArray = $dataValidation->interpolateOutliers($outliers);
+				
+				$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=false&amp;lang='.$this->language.'"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
+			}
+			else {
+				$interpolateOutliers = false;
+				$this->contentTemplate->tplReplace('interpolateOutliers', '');
+				
+				// check if dataset contains outliers
+				if ( $outlierCheck ) {
+					$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=true&amp;lang='.$this->language.'"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found').'</div>';
+				}
+			}
+			
+			$this->contentTemplate->tplReplace('outliers', $tplOutliers);
+			
+			function outlierReplace($template, $sensor, $text, $css_color, $css_style, $time, $hint) {
+				$template->tplReplace('sensor', $sensor);
+				$template->tplReplace('text', $text);
+				$template->tplReplace('css_color', $css_color);
+				$template->tplReplace('css_style', $css_style);
+				$template->tplReplace('time', $time);
+				$template->tplReplace('hint', $hint);
+				return $template;
+			}
 			
 			// iterate sensor data
-			foreach ( $dataArray as $time => $val ) {
+			foreach ( $dataArray as $time => $val ) {				
 				// if there is no data, show a -
 				if ( ! isset($val['co']) ) { $val['co'] = '-'; }
 				if ( ! isset($val['no2']) ) { $val['no2'] = '-'; }
 				if ( ! isset($val['humidity']) ) { $val['humidity'] = '-'; }
 				if ( ! isset($val['temperature']) ) { $val['temperature'] = '-'; }
-                
+				
                 // mark outliers
-                if ( $outliers['co'][$time] ) {
-                    $outlier_text['co'] = '<span class="outlier error" onMouseOver="outlierNote(\'co_outlier_'.$time.'\');" onMouseOut="outlierNote(\'co_outlier_'.$time.'\');">!</span><div id="co_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+				$outlierTemplateCo = new Template();
+				if ( $outliers['co'][$time] && $interpolateOutliers ) {
+					$outlierTemplateCo->readTpl('table_outlier_box');
+					$outlierTemplateCo = outlierReplace($outlierTemplateCo, 'co', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
+				}
+                else if ( $outliers['co'][$time] && ! $interpolateOutliers ) {
+					$outlierTemplateCo->readTpl('table_outlier_box');
+					$outlierTemplateCo = outlierReplace($outlierTemplateCo, 'co', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
-                else {
-                    $outlier_text['co'] = '';
+				
+				$outlierTemplateNo2 = new Template();
+				if ( $outliers['no2'][$time] && $interpolateOutliers ) {
+					$outlierTemplateNo2->readTpl('table_outlier_box');
+					$outlierTemplateNo2 = outlierReplace($outlierTemplateNo2, 'no2', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
+				}
+                else if ( $outliers['no2'][$time] && ! $interpolateOutliers ) {
+					$outlierTemplateNo2->readTpl('table_outlier_box');
+					$outlierTemplateNo2 = outlierReplace($outlierTemplateNo2, 'no2', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
-                
-                if ( $outliers['no2'][$time] ) {
-                    $outlier_text['no2'] = '<span class="outlier error" onMouseOver="outlierNote(\'no2_outlier_'.$time.'\');" onMouseOut="outlierNote(\'no2_outlier_'.$time.'\');">!</span><div id="no2_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
+				
+				$outlierTemplateTemp = new Template();
+				if ( $outliers['temperature'][$time] && $interpolateOutliers ) {
+					$outlierTemplateTemp->readTpl('table_outlier_box');
+					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
+				}
+                else if ( $outliers['temperature'][$time] && ! $interpolateOutliers ) {
+					$outlierTemplateTemp->readTpl('table_outlier_box');
+					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
-                else {
-                    $outlier_text['no2'] = '';
-                }
-                
-                if ( $outliers['temperature'][$time] ) {
-                    $outlier_text['temp'] = '<span class="outlier error" onMouseOver="outlierNote(\'temp_outlier_'.$time.'\');" onMouseOut="outlierNote(\'temp_outlier_'.$time.'\');">!</span><div id="temp_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
-                }
-                else {
-                    $outlier_text['temp'] = '';
-                }
-                
-                if ( $outliers['humidity'][$time] ) {
-                    $outlier_text['hum'] = '<span class="outlier error" onMouseOver="outlierNote(\'hum_outlier_'.$time.'\');" onMouseOut="outlierNote(\'hum_outlier_'.$time.'\');">!</span><div id="hum_outlier_'.$time.'" class="outlierhint">'.translate('value_could_be_an_outlier').'</div>';
-                }
-                else {
-                    $outlier_text['hum'] = '';
+				
+				$outlierTemplateHum = new Template();
+                // mark outliers
+				if ( $outliers['humidity'][$time] && $interpolateOutliers ) {
+					$outlierTemplateHum->readTpl('table_outlier_box');
+					$outlierTemplateHum = outlierReplace($outlierTemplateHum, 'hum', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
+				}
+                else if ( $outliers['humidity'][$time] && ! $interpolateOutliers ) {
+					$outlierTemplateHum->readTpl('table_outlier_box');
+					$outlierTemplateHum = outlierReplace($outlierTemplateHum, 'hum', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
 				
 				// copy table row and fill in sensor data for one timestamp
@@ -88,10 +133,10 @@
 				$this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
 				$this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
                 
-				$this->contentTemplate->tplReplaceOnce('co_outlier', $outlier_text['co']);
-				$this->contentTemplate->tplReplaceOnce('no2_outlier', $outlier_text['no2']);
-				$this->contentTemplate->tplReplaceOnce('temp_outlier', $outlier_text['temp']);
-				$this->contentTemplate->tplReplaceOnce('hum_outlier', $outlier_text['hum']);
+				$this->contentTemplate->tplReplaceOnce('co_outlier', $outlierTemplateCo->getTpl());
+				$this->contentTemplate->tplReplaceOnce('no2_outlier', $outlierTemplateNo2->getTpl());
+				$this->contentTemplate->tplReplaceOnce('temp_outlier', $outlierTemplateTemp->getTpl());
+				$this->contentTemplate->tplReplaceOnce('hum_outlier', $outlierTemplateHum->getTpl());
 			}
 			// delete the last row
 			$this->contentTemplate->cleanCode('tableRow');

@@ -33,8 +33,6 @@
 		'one_week' => 'one week',
 		'one_month' => 'one month',
 		'3_month' => '3 months',
-		/*'measure_details' => 'Details zur Messung',*/
-		'aqe_details' => 'This Air Quality Egg in detail',
 		'date_time' => 'date, time',
 		'description' => 'description',
 		'pos_and_ele' => 'position and elevation',

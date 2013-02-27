@@ -2,44 +2,25 @@
 <h1>{title}[[table_view]]</h1>
 <div id="navi_left">
 	<div>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]"></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co{interpolateOutliers}&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]"></a>
 		<a href="#"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="active last"></a>
 	</div>
 	<div>
-		<a href="index.php?s=download&amp;fid={feedId}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
+		<a href="index.php?s=download&amp;fid={feedId}{interpolateOutliers}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
 	</div>
 </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=6h&amp;lang={language}">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=24h&amp;lang={language}">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=48h&amp;lang={language}">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1w&amp;lang={language}">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1m&amp;lang={language}">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=3m&amp;lang={language}">[[3_month]]</a></div>
+	<div{6h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=6h{interpolateOutliers}&amp;lang={language}">[[6_hours]]</a></div>
+	<div{24h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=24h{interpolateOutliers}&amp;lang={language}">[[24_hours]]</a></div>
+	<div{48h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=48h{interpolateOutliers}&amp;lang={language}">[[48_hours]]</a></div>
+	<div{1w_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1w{interpolateOutliers}&amp;lang={language}">[[one_week]]</a></div>
+	<div{1m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1m{interpolateOutliers}&amp;lang={language}">[[one_month]]</a></div>
+	<div{3m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=3m{interpolateOutliers}&amp;lang={language}">[[3_month]]</a></div>
 </div>
 <div id="data_content">
-	<table>
-		<tr>
-			<th>[[date_time]]</th>
-			<th>[[co]] (ppm)</th>
-			<th>[[no2]] (ppm)</th>
-			<th>[[temperature]] (&deg;C)</th>
-			<th>[[humidity]] (%)</th>
-		</tr>
-		{+tableRow}
-		<tr>
-			<td>{t}</td>
-			<td>{co}{co_outlier}</td>
-			<td>{no2}{no2_outlier}</td>
-			<td>{temp}{temp_outlier}</td>
-			<td>{hum}{hum_outlier}</td>
-		</tr>
-		{-tableRow}
-	</table>
-	{errormessage}
 	<div{hidden}>
-		<h2>[[aqe_details]]</h2>
 		<div class="details">
+            {outliers}
 			<h4>[[description]]</h4>
 			<p>{description}</p>
 			<div class="left">
@@ -80,5 +61,24 @@
 			</table>
 			<br>
 		</div>
-	</div>
+	</div><br>
+    <table>
+		<tr>
+			<th>[[date_time]]</th>
+			<th>[[co]] (ppm)</th>
+			<th>[[no2]] (ppm)</th>
+			<th>[[temperature]] (&deg;C)</th>
+			<th>[[humidity]] (%)</th>
+		</tr>
+		{+tableRow}
+		<tr>
+			<td>{t}</td>
+			<td>{co}{co_outlier}</td>
+			<td>{no2}{no2_outlier}</td>
+			<td>{temp}{temp_outlier}</td>
+			<td>{hum}{hum_outlier}</td>
+		</tr>
+		{-tableRow}
+	</table>
+	{errormessage}
 </div>

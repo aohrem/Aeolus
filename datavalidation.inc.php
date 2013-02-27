@@ -1,6 +1,7 @@
 <?php
     class DataValidation {
         private $dataArray;
+		private $transArray;
 	    private $windowSize = 31;
         private $factor = 1.5;
 	    private $sensors;
@@ -17,15 +18,15 @@
             
             $i = 0;
             foreach ( $this->dataArray as $key => $val ) {
-                $transArray[$i] = $key;
+                $this->transArray[$i] = $key;
                 $i++;
             }
             
             foreach ( $this->sensors as $sensor ) {
                 $i = 0;
                 foreach ( $this->dataArray as $key => $val ) {
-                    $transArray[$i] = $key;
-                    $outliers[$sensor][$transArray[$i]] = false;
+                    $this->transArray[$i] = $key;
+                    $outliers[$sensor][$this->transArray[$i]] = false;
                     $i++;
                 }
                 
@@ -34,16 +35,16 @@
 		        while ( $index < ( $n - $k ) ) {
 			        $window = $this->getArrayWindow($this->dataArray, $index - $k, $index + $k, $sensor);
 			        $interQuartileRange = abs($this->quantile($window, 0.75) - $this->quantile($window, 0.25));
-			        $median = $ytmed[$transArray[$index]][$sensor];
+			        $median = $ytmed[$this->transArray[$index]][$sensor];
                     
-                    if ( isset($this->dataArray[$transArray[$index - 1]][$sensor]) ) {
-			            if ( $this->dataArray[$transArray[$index - 1]][$sensor] < ($median - $this->factor * $interQuartileRange) ||
-                                $this->dataArray[$transArray[$index - 1]][$sensor] > ($median + $this->factor * $interQuartileRange) ) {
-				            $outliers[$sensor][$transArray[$index - 1]] = true;
+                    if ( isset($this->dataArray[$this->transArray[$index - 1]][$sensor]) ) {
+			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor * $interQuartileRange) ||
+                                $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor * $interQuartileRange) ) {
+				            $outliers[$sensor][$this->transArray[$index - 1]] = true;
 			            }
                     }
                     else {
-                        $outliers[$sensor][$transArray[$index - 1]] = true;
+                        $outliers[$sensor][$this->transArray[$index - 1]] = true;
                     }
                     
 			        $index++;
@@ -52,6 +53,42 @@
             
             return $outliers;
 	    }
+		
+		public function outliersFound($outliers) {
+			foreach ( $outliers as $sensor => $val ) {
+				foreach ( $outliers[$sensor] as $time => $outlier ) {
+					if ( $outlier ) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		public function interpolateOutliers($outliers) {
+			foreach ( $outliers as $sensor => $val ) {
+				$i = 0;
+				foreach ( $outliers[$sensor] as $time => $outlier ) {
+					if ( $outlier ) {
+						$pred = 1;
+						while ( $outliers[$sensor][$this->transArray[$i - $pred]] ) {
+							$pred++;
+						}
+						
+						$succ = 1;
+						while ( $outliers[$sensor][$this->transArray[$i + $succ]] ) {
+							$succ++;
+						}
+						
+						$interpolatedValue = round(( $this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2);
+						
+						$this->dataArray[$time][$sensor] = $interpolatedValue;
+					}
+					$i++;
+				}
+			}
+			return $this->dataArray;
+		}
         
 	    private function median($dataArray, $sensor, $start, $end) {
 		    $sensorArray = array();
