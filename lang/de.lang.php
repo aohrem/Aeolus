@@ -44,7 +44,7 @@
 		'ele' => 'H&ouml;he',
 		'more_info' => 'Weitere Informationen',
 		'state' => 'Status',
-		'exposure' => 'Bedingungen',
+		'exposure' => 'Standort',
 		'enter_location' => 'Ort eingeben',
 		'search' => 'Suchen',
 		'search_results' => 'Suchergebnisse',

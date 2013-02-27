@@ -10,6 +10,7 @@
 			$this->contentTemplate->tplReplaceOnce('egg_lat', $row->lat);
 			$this->contentTemplate->tplReplaceOnce('egg_lon', $row->lon);
 			$this->contentTemplate->tplReplaceOnce('egg_fid', $row->feed_id);
+			$this->contentTemplate->tplReplaceOnce('egg_color', "'noval'");
 		}
 		$this->contentTemplate->cleanCode('Egg');
 	}
