@@ -11,9 +11,16 @@
             $this->sensors = $sensors;
         }
 	
+        // function calculates outliers in the data array and returns an array with the estimated outliers
+        // based on "Outliers and robust methods" slides of Katharina Henneböhl
 	    public function getOutliers() {
+            // apply the running medians algorithm and save returned array
 		    $ytmed = $this->runmed($this->dataArray, $this->windowSize, $this->sensors);
+            
+            // k is half of the window size
 		    $k = floor($this->windowSize / 2);
+            
+            // n is the size of the data array
 		    $n = sizeof($this->dataArray);
             
             $i = 0;
@@ -23,6 +30,7 @@
             }
             
             foreach ( $this->sensors as $sensor ) {
+                // calculate trans array by iterating the data array and assign an index to each value
                 $i = 0;
                 foreach ( $this->dataArray as $key => $val ) {
                     $this->transArray[$i] = $key;
@@ -33,16 +41,23 @@
                 $index = $k;
                 
 		        while ( $index < ( $n - $k ) ) {
+                    // get the array window with length of the given window size
 			        $window = $this->getArrayWindow($this->dataArray, $index - $k, $index + $k, $sensor);
+                    
+                    // calculate inter quartile range of current window (absolute value of the difference between 75% and 25% quantile)
 			        $interQuartileRange = abs($this->quantile($window, 0.75) - $this->quantile($window, 0.25));
+                    
 			        $median = $ytmed[$this->transArray[$index]][$sensor];
                     
                     if ( isset($this->dataArray[$this->transArray[$index - 1]][$sensor]) ) {
+                    
+                        // if current value is less than (median - factor * inter quartile range) or greater than (median - factor * inter quartile range), it is classified as an outlier
 			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor * $interQuartileRange) ||
                                 $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor * $interQuartileRange) ) {
 				            $outliers[$sensor][$this->transArray[$index - 1]] = true;
 			            }
                     }
+                    // if there is no value, it is also classified as an outlier
                     else {
                         $outliers[$sensor][$this->transArray[$index - 1]] = true;
                     }
@@ -53,8 +68,12 @@
             
             return $outliers;
 	    }
+        
+        // calculates the trans array
 		
-		public function outliersFound($outliers) {
+        // checks if outliers in the data array were found
+		public function containsOutliers($outliers) {
+            // iterate outlier array and return true if there is at least one outlier
 			foreach ( $outliers as $sensor => $val ) {
 				foreach ( $outliers[$sensor] as $time => $outlier ) {
 					if ( $outlier ) {
@@ -62,42 +81,58 @@
 					}
 				}
 			}
+            
+            // if there was no outlier in the array, return false
 			return false;
 		}
 		
+        // returns data array with linear interpolated outliers
 		public function interpolateOutliers($outliers) {
+            // iterate sensors
 			foreach ( $outliers as $sensor => $val ) {
+            
+                // i is the index of the current outlier dataset, used by the trans array
 				$i = 0;
 				foreach ( $outliers[$sensor] as $time => $outlier ) {
 					if ( $outlier ) {
+                        // get next predecessor which is not an outlier
 						$pred = 1;
 						while ( $outliers[$sensor][$this->transArray[$i - $pred]] ) {
 							$pred++;
 						}
 						
+                        // get next successor which is not an outlier
 						$succ = 1;
 						while ( $outliers[$sensor][$this->transArray[$i + $succ]] ) {
 							$succ++;
 						}
 						
+                        // linear interpolation (mean)
 						$interpolatedValue = round(( $this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2);
 						
+                        // save interpolated value in the data array
 						$this->dataArray[$time][$sensor] = $interpolatedValue;
 					}
+                    
 					$i++;
 				}
 			}
+            
 			return $this->dataArray;
 		}
         
+        // calculates the median of $dataArray on column $sensor from index $start to index $end
 	    private function median($dataArray, $sensor, $start, $end) {
 		    $sensorArray = array();
 		
 		    $i = 0;
 		    $j = 0;
 		
+            // iterate values of the data array
 		    foreach ( $dataArray as $val ) {
+                // check if value is within the given interval
 			    if ( $j >= $start - 1 && $j < $end ) {
+                    // if there is a value for the given sensor, save the value in another array
                     if ( isset($val[$sensor]) ) {
 				        $sensorArray[$i] = $val[$sensor];
                     }
@@ -109,30 +144,38 @@
 			    $j++;
 		    }
 		
+            // sort the sensor array
 		    sort($sensorArray);
 		
+            // median is mid value in this array
 		    $median = $sensorArray[floor(sizeof($sensorArray) / 2)];
 		
 		    return $median;
 	    }
 	
+        // running medians function, smoothes the data array
 	    private function runmed($dataArray, $windowSize, $sensors) {
 		    $runmedArray = array();
 		
-		    $i = 0;
+            // i is the index of the dataset, used by the trans array
 		    foreach ( $sensors as $sensor ) {
+                $i = 0;
+                
+                // apply the running median algorithm as described in R library documentation for each value of the data array
+                // running median in R library documentation: http://rss.acs.unt.edu/Rdoc/library/stats/html/runmed.html
 			    foreach ( $dataArray as $key => $val ) {
 				    $start = $i - floor($windowSize / 2);
 				    $end = $i + floor($windowSize / 2);
 				    $runmedArray[$key][$sensor] = $this->median($dataArray, $sensor, $start, $end);
 				    $i++;
 			    }
-			    $i = 0;
 		    }
-		
+		    
+            // return smoothed data array
 		    return $runmedArray;
 	    }
 	
+        // function replicates an array of $size with $value for each element
 	    private function rep($value, $size) {
 		    $array = array();
 		    for ( $i = 0; $i < $size; $i++ ) {
@@ -141,14 +184,17 @@
 		    return $array;
 	    }
 	
+        // function gives back the subarray from $start to $end, but just for $sensor
 	    private function getArrayWindow($array, $start, $end, $sensor) {
 		    $arrayWindow = array();
 		
-		    $i = 0;
-		    $j = 0;
-		
+            // i is the index of the new array where the next value of the subarray will be saved
+            // j is the index of the current value of the array
+		    $i = 0;	$j = 0;
 		    foreach ( $array as $key => $val ) {
+                // check if value is within the given interval
 			    if ( $j >= $start - 1 && $j < $end ) {
+                    // if there is a value, save it to our new subarray
                     if ( isset($val[$sensor]) ) {
 				        $arrayWindow[$i] = $val[$sensor];
                     }
@@ -163,6 +209,8 @@
 		    return $arrayWindow;
 	    }
     
+        // returns the $p-quantile of $array
+        // applied algorithm (like in R library: type 7): http://stat.ethz.ch/R-manual/R-patched/library/stats/html/quantile.html
         private function quantile($array, $p) {
             $n = sizeof($array);
             sort($array);

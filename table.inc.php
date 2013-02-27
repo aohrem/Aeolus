@@ -42,7 +42,7 @@
             include('datavalidation.inc.php');
             $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'));
             $outliers = $dataValidation->getOutliers();
-			$outlierCheck = $dataValidation->outliersFound($outliers);
+			$containsOutliers = $dataValidation->containsOutliers($outliers);
 			$tplOutliers = '';
 			
 			// check if outliers shall be interpolated
@@ -58,7 +58,7 @@
 				$this->contentTemplate->tplReplace('interpolateOutliers', '');
 				
 				// check if dataset contains outliers
-				if ( $outlierCheck ) {
+				if ( $containsOutliers ) {
 					$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=true&amp;lang='.$this->language.'"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found').'</div>';
 				}
 			}
