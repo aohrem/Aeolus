@@ -7,7 +7,7 @@ L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/
 
 function addEgg(lat, lon, feedID){
 	var eggIcon = L.icon({
-		iconUrl: 'img/eggicon.png'
+		iconUrl: 'img/eggicon_noval.png'
 	});
 	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){

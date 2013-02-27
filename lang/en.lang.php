@@ -9,7 +9,7 @@
 		/*'delete_aqe_explanation' => 'Platzhaltertext, Gr&uuml;nde ein AQE zu l&ouml;schen und wie das dann gemacht wird.',*/
 		'feed_id' => 'feed ID',
 		'platform_for_aq_vis' => 'Plattform for visualisation of air quality data',
-		/*'delete_password' => 'L&ouml;schpasswort',*/
+		'delete_password' => 'deletion password',
 		'delete_my_aqe' => 'Delete my AQE',
 		'useful_links' => 'Useful pages',
 		/*'aqe_links_description' => 'Air Quality Egg ist das community-basierte Sensornetzwerk zur Luftqualit&auml;t. Jedes einzelne Air Quality Egg stellt ein Sensorsystem dar, welches die M&ouml;glichkeit bietet, NO<sub>2</sub>- und CO-Konzentrationen zu ermitteln.',
@@ -49,7 +49,7 @@
 		'search' => 'search',
 		'search_results' => 'results',
 		'close' => 'close',
-		'register_text' => 'Please enter your cosm-feed ID and a [L&ouml;schpasswort] to register your Air Quality Egg',
+		'register_text' => 'Please enter your cosm-feed ID and a deletion password to register your Air Quality Egg',
         'enter_address' => 'We were not able to determine you Air Quality Egg\'s position. Please enter an address.',
         'address' => 'address',
 		'password' => 'password',
