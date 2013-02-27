@@ -427,8 +427,32 @@ footer #footer_left {
 }
 
 footer #footer_right {
+	position:relative;
     float: right;
     padding: 5px;
+}
+
+footer #footer_right div {
+	position:absolute;
+	right: 60px;
+	visibility: hidden;
+	width:400px;
+	text-align:right;
+}
+
+footer #footer_right div span {
+	font-size:80%;
+	background-color: #a0c6e5;
+	color: #FFFFFF;
+	padding:2px 4px;
+}
+
+footer #footer_right #english_over {
+	top: 12px;
+}
+
+footer #footer_right #german_over {
+	top: 52px;
 }
 
 footer img.language {

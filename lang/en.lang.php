@@ -84,6 +84,9 @@
 		'uni_ms' => ' (Univesity of M&uuml;nster)',
 		'muenster' => 'D-48151 M&uuml;nster',
 		'lecturers' => 'Lecturers',
-		'participants' => 'Participating students'
+		'participants' => 'Participating students',
+        /* 'value_could_be_an_outlier' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch Mess- oder &Uuml;bertragungsfehler bedingt wurde.', */
+		'view_english' => 'View this page in English',
+		'view_german' => 'Diese Seite auf deutsch betrachten'
 	);
 ?>

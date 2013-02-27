@@ -13,6 +13,7 @@
 		 
 		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
 		<script src="js/navi_over.js"></script>
+		<script src="js/footer_over.js"></script>
 		<script src ="http://code.jquery.com/jquery-latest.js"></script>
 		
 		<meta charset="utf-8" />
@@ -59,8 +60,10 @@
 				    <p><a href="index.php?s=impress&amp;lang={language}">[[credits]]</a></p>
                 </div>
                 <div id="footer_right">
-                    <a href="{site}lang=en"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
-                    <a href="{site}lang=de"><img src="img/de.png" width="40" height="26" alt="Deutsch" class="language"></a>
+                    <a href="{site}lang=en" onmouseover="mouseOverFooter('english');" onmouseout="mouseOutFooter('english');"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
+					<div id="english_over"><span>[[view_english]]</span></div>
+                    <a href="{site}lang=de" onmouseover="mouseOverFooter('german');" onmouseout="mouseOutFooter('german');"><img src="img/de.png" width="40" height="26" alt="Deutsch" class="language"></a>
+					<div id="german_over"><span>[[view_german]]</span></div>
                 </div>
 			</footer>
 		</div>
