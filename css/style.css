@@ -264,6 +264,32 @@ table.register td {
 	z-index: 2;
 }
 
+#content #legend {
+	position:absolute;
+	right:5px;
+	bottom:22px;
+	width:200px;
+	height:270px;
+	background-color:#A0C5E4;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	z-index:2;
+	color:#FFFFFF;
+	font-size:80%;
+	text-align:center;
+	visibility:hidden;
+}
+
+#content #legend h1 {
+	font-size:100%;
+	color:#FFFFFF;
+}
+
+#content #legend.show {
+	visibility:visible;
+}
+
 #content .errormessage {
 	text-align: center;
 	font-weight: bold;
