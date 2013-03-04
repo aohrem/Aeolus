@@ -88,6 +88,12 @@
 		'view_german' => 'Diese Seite auf deutsch betrachten',
 		'outliers_found' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit diesem roten Ausrufezeichen markiert. Falls Ausrei&szlig;erwerte linear interpoliert werden sollen, klicken Sie bitte hier.',
 		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Informationssymbol markiert. Falls Ausrei&szlig;erwerte nicht weiter interpoliert werden sollen, klicken Sie bitte hier.',
-		'value_is_interpolated' => 'Bei diesem Wert handelte es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch lineare Interpolation entfernt wurde.'
+		'value_is_interpolated' => 'Bei diesem Wert handelte es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch lineare Interpolation entfernt wurde.',
+		'outlier_detection' => 'Ausrei&szlig;ererkennung',
+		'sensitivity' => 'Empfindlichkeit',
+		'no_outlier_detection' => 'keine Ausrei&szlig;ererkennung',
+		'low' => 'niedrig',
+		'medium' => 'mittel',
+		'high' => 'hoch'
 	);
 ?>

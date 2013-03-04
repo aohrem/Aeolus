@@ -2,25 +2,24 @@
 <h1>{title}[[table_view]]</h1>
 <div id="navi_left">
 	<div>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co{interpolateOutliers}&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]"></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;sensor=co&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]"></a>
 		<a href="#"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="active last"></a>
 	</div>
 	<div>
-		<a href="index.php?s=download&amp;fid={feedId}{interpolateOutliers}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
+		<a href="index.php?s=download&amp;fid={feedId}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
 	</div>
 </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=6h{interpolateOutliers}&amp;lang={language}">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=24h{interpolateOutliers}&amp;lang={language}">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=48h{interpolateOutliers}&amp;lang={language}">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1w{interpolateOutliers}&amp;lang={language}">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1m{interpolateOutliers}&amp;lang={language}">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=3m{interpolateOutliers}&amp;lang={language}">[[3_month]]</a></div>
+	<div{6h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[6_hours]]</a></div>
+	<div{24h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[24_hours]]</a></div>
+	<div{48h_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[48_hours]]</a></div>
+	<div{1w_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_week]]</a></div>
+	<div{1m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_month]]</a></div>
+	<div{3m_active}><a href="index.php?s=table&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[3_month]]</a></div>
 </div>
 <div id="data_content">
 	<div{hidden}>
 		<div class="details">
-            {outliers}
 			<h4>[[description]]</h4>
 			<p>{description}</p>
 			<div class="left">
@@ -59,7 +58,29 @@
 					<td>{exposure}</td>
 				</tr>
 			</table>
-			<br>
+			<br><br>
+            <h4>[[outlier_detection]]</h4>
+            {outliers}
+            <table class="metadata">
+                <tr>
+                    <td>[[sensitivity]]:</td>
+                    <td>
+                        <form action="index.php" method="get">
+                            <input type="hidden" name="s" value="table">
+                            <input type="hidden" name="fid" value="{feedId}">
+                            <input type="hidden" name="timeframe" value="{time}">
+                            <input type="hidden" name="interpolateoutliers" value="{interpolateOutliers}">
+                            <select name="sensitivity" onChange="this.form.submit()">
+                                <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
+                                <option value="1"{sensitivity_1_selected}>[[low]]</option>
+                                <option value="2"{sensitivity_2_selected}>[[medium]]</option>
+                                <option value="3"{sensitivity_3_selected}>[[high]]</option>
+                            </select>
+                            <input type="hidden" name="lang" value="{language}">
+                        </form>
+                    </td>
+                </tr>
+            </table>
 		</div>
 	</div><br>
     <table>

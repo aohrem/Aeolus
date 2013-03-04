@@ -2,14 +2,27 @@
     class DataValidation {
         private $dataArray;
 		private $transArray;
-	    private $windowSize = 31;
-        private $factor = 1.5;
+		private $sensitivity;
+		private $defaultSensitivity = 2;
+	    private $windowSize = 30;
+        private $factor = array(1.0, 2.0, 1.5, 1.0);
 	    private $sensors;
         
-        public function __construct($dataArray, $sensors) {
+        public function __construct($dataArray, $sensors, $sensitivity) {
             $this->dataArray = $dataArray;
             $this->sensors = $sensors;
+			
+			if ( $sensitivity == 'default' ) {
+				$this->sensitivity = $this->defaultSensitivity;
+			}
+			else {
+				$this->sensitivity = $sensitivity;
+			}
         }
+		
+		public function getDefaultSensitivity() {
+			return $this->defaultSensitivity;
+		}
 	
         // function calculates outliers in the data array and returns an array with the estimated outliers
         // based on "Outliers and robust methods" slides of Katharina Henneböhl
@@ -51,9 +64,9 @@
                     
                     if ( isset($this->dataArray[$this->transArray[$index - 1]][$sensor]) ) {
                     
-                        // if current value is less than (median - factor * inter quartile range) or greater than (median - factor * inter quartile range), it is classified as an outlier
-			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor * $interQuartileRange) ||
-                                $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor * $interQuartileRange) ) {
+                        // if current value is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
+			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor[$this->sensitivity] * $interQuartileRange) ||
+                                $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor[$this->sensitivity] * $interQuartileRange) ) {
 				            $outliers[$sensor][$this->transArray[$index - 1]] = true;
 			            }
                     }

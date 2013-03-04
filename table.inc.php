@@ -38,27 +38,53 @@
 			
 			// sort sensor data by timestamp (keys of the data array)
 			ksort($dataArray, SORT_NUMERIC);
+			
+			if ( isset($_GET['sensitivity']) && is_numeric($_GET['sensitivity']) ) {
+				$sensitivity = $_GET['sensitivity'];
+				if ( $sensitivity < 0 || $sensitivity > 3 ) {
+					$sensitivity = 'default';
+				}
+			}
+			else {
+				$sensitivity = 'default';
+			}
             
             include('datavalidation.inc.php');
-            $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'));
+            $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'), $sensitivity);
             $outliers = $dataValidation->getOutliers();
 			$containsOutliers = $dataValidation->containsOutliers($outliers);
 			$tplOutliers = '';
 			
+			if ( $sensitivity == 'default' ) {
+				$sensitivity = $dataValidation->getDefaultSensitivity();
+			}
+			
+			// mark active outlier detection sensitivity as selected
+			for ( $i = 0; $i < 4; $i++ ) {
+				if ( $sensitivity == $i ) {
+					$sel = ' selected="selected"';
+				}
+				else {
+					$sel = '';
+				}
+				$this->contentTemplate->tplReplace('sensitivity_'.$i.'_selected', $sel);
+			}
+			$this->contentTemplate->tplReplace('sensitivity', $sensitivity);
+			
 			// check if outliers shall be interpolated
-			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' ) {
+			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' && $sensitivity != 0 ) {
 				$interpolateOutliers = true;
-				$this->contentTemplate->tplReplace('interpolateOutliers', '&amp;interpolateoutliers=true');
+				$this->contentTemplate->tplReplace('interpolateOutliers', 'true');
 				$dataArray = $dataValidation->interpolateOutliers($outliers);
 				
 				$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=false&amp;lang='.$this->language.'"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
 			}
 			else {
 				$interpolateOutliers = false;
-				$this->contentTemplate->tplReplace('interpolateOutliers', '');
+				$this->contentTemplate->tplReplace('interpolateOutliers', 'false');
 				
 				// check if dataset contains outliers
-				if ( $containsOutliers ) {
+				if ( $containsOutliers && $sensitivity != 0 ) {
 					$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=true&amp;lang='.$this->language.'"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found').'</div>';
 				}
 			}
@@ -85,42 +111,42 @@
 				
                 // mark outliers
 				$outlierTemplateCo = new Template();
-				if ( $outliers['co'][$time] && $interpolateOutliers ) {
+				if ( $outliers['co'][$time] && $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateCo->readTpl('table_outlier_box');
 					$outlierTemplateCo = outlierReplace($outlierTemplateCo, 'co', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
 				}
-                else if ( $outliers['co'][$time] && ! $interpolateOutliers ) {
+                else if ( $outliers['co'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateCo->readTpl('table_outlier_box');
 					$outlierTemplateCo = outlierReplace($outlierTemplateCo, 'co', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
 				
 				$outlierTemplateNo2 = new Template();
-				if ( $outliers['no2'][$time] && $interpolateOutliers ) {
+				if ( $outliers['no2'][$time] && $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateNo2->readTpl('table_outlier_box');
 					$outlierTemplateNo2 = outlierReplace($outlierTemplateNo2, 'no2', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
 				}
-                else if ( $outliers['no2'][$time] && ! $interpolateOutliers ) {
+                else if ( $outliers['no2'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateNo2->readTpl('table_outlier_box');
 					$outlierTemplateNo2 = outlierReplace($outlierTemplateNo2, 'no2', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
 				
 				$outlierTemplateTemp = new Template();
-				if ( $outliers['temperature'][$time] && $interpolateOutliers ) {
+				if ( $outliers['temperature'][$time] && $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateTemp->readTpl('table_outlier_box');
 					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
 				}
-                else if ( $outliers['temperature'][$time] && ! $interpolateOutliers ) {
+                else if ( $outliers['temperature'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateTemp->readTpl('table_outlier_box');
 					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
 				
 				$outlierTemplateHum = new Template();
                 // mark outliers
-				if ( $outliers['humidity'][$time] && $interpolateOutliers ) {
+				if ( $outliers['humidity'][$time] && $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateHum->readTpl('table_outlier_box');
 					$outlierTemplateHum = outlierReplace($outlierTemplateHum, 'hum', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
 				}
-                else if ( $outliers['humidity'][$time] && ! $interpolateOutliers ) {
+                else if ( $outliers['humidity'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateHum->readTpl('table_outlier_box');
 					$outlierTemplateHum = outlierReplace($outlierTemplateHum, 'hum', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }

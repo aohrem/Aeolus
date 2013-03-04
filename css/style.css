@@ -363,7 +363,7 @@ table.register td {
     background-color: #fbe39d;
     padding: 5px 12px;
     margin-right: 6px;
-    margin-bottom: 2px;
+    top: 27px;
     float: right;
     position: relative;
     height: 94%;
@@ -406,7 +406,7 @@ table.register td {
     width: 470px;
     text-align: justify;
     z-index: 1;
-    margin-top: -20px;
+    margin-top: -10px;
     margin-left: 173px;
     padding: 10px;
     border: 4px solid #ffdd78;
@@ -437,6 +437,17 @@ table.register td {
     font-size: 11pt;
     padding: 5px 15px;
     width: 200px;
+}
+
+#content select {
+	font-family: Calibri, Arial, Verdana, sans-serif;
+    font-size: 11pt;
+    margin: 8px;
+    padding: 3px 8px;
+    border: none;
+    background-color: #80B8E5;
+    color: #FFFFFF;
+    cursor: pointer;
 }
 
 #content #del_true_button, #content .delete_form_button {
