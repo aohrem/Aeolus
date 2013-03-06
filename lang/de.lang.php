@@ -97,6 +97,9 @@
 		'no_outlier_detection' => 'keine Ausrei&szlig;ererkennung',
 		'low' => 'niedrig',
 		'medium' => 'mittel',
-		'high' => 'hoch'
+		'high' => 'hoch',
+        'outlier_state_interpolated' => 'Ausrei&szlig;er werden linear interpoliert und mit Hinweisen versehen.',
+        'outlier_state_marked' => 'Ausrei&szlig;er werden ermittelt und mit Warnhinweisen versehen.',
+        'outlier_state_off' => 'Ausrei&szlig;er werden nicht ermittelt.'
 	);
 ?>

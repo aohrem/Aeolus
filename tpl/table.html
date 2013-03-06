@@ -58,13 +58,19 @@
 					<td>{exposure}</td>
 				</tr>
 			</table>
-			<br><br>
-            <h4>[[outlier_detection]]</h4>
+            <br>
+		</div>
+	</div><br>
+    <div class="details">
+        <h4>[[outlier_detection]]</h4>
             {outliers}
-            <table class="metadata">
+            <table class="outliers">
+                <tr>
+                    <td colspan="2">{outlierState}</td>
+                </tr>
                 <tr>
                     <td>[[sensitivity]]:</td>
-                    <td>
+                    <td class="outlierselect">
                         <form action="index.php" method="get">
                             <input type="hidden" name="s" value="table">
                             <input type="hidden" name="fid" value="{feedId}">
@@ -81,8 +87,7 @@
                     </td>
                 </tr>
             </table>
-		</div>
-	</div><br>
+    </div><br>
     <table>
 		<tr>
 			<th>[[date_time]]</th>

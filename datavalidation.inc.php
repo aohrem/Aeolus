@@ -4,13 +4,15 @@
 		private $transArray;
 		private $sensitivity;
 		private $defaultSensitivity = 2;
-	    private $windowSize = 30;
+        private $windowSize;
+	    private $windowSizes = array('6h' => 60, '24h' => 40, '48h' => 40, '1w' => 24, '1m' => 7, '3m' => 7);
         private $factor = array(1.0, 2.0, 1.5, 1.0);
 	    private $sensors;
         
-        public function __construct($dataArray, $sensors, $sensitivity) {
+        public function __construct($dataArray, $sensors, $sensitivity, $time) {
             $this->dataArray = $dataArray;
             $this->sensors = $sensors;
+            $this->windowSize = $this->windowSizes[$time];
 			
 			if ( $sensitivity == 'default' ) {
 				$this->sensitivity = $this->defaultSensitivity;
@@ -47,7 +49,16 @@
                 $i = 0;
                 foreach ( $this->dataArray as $key => $val ) {
                     $this->transArray[$i] = $key;
-                    $outliers[$sensor][$this->transArray[$i]] = false;
+                    
+                    // if there is no value, it is marked classified as an outlier
+                    if ( ! isset($val[$sensor]) ) {
+                        $outliers[$sensor][$key] = true;
+                    }
+                    // fill in outlier array with default (false) values
+                    else {
+                        $outliers[$sensor][$key] = false;
+                    }
+                    
                     $i++;
                 }
                 
@@ -60,19 +71,14 @@
                     // calculate inter quartile range of current window (absolute value of the difference between 75% and 25% quantile)
 			        $interQuartileRange = abs($this->quantile($window, 0.75) - $this->quantile($window, 0.25));
                     
-			        $median = $ytmed[$this->transArray[$index]][$sensor];
+			        $median = $ytmed[$this->transArray[$index - 1]][$sensor];
                     
                     if ( isset($this->dataArray[$this->transArray[$index - 1]][$sensor]) ) {
-                    
                         // if current value is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
 			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor[$this->sensitivity] * $interQuartileRange) ||
                                 $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor[$this->sensitivity] * $interQuartileRange) ) {
 				            $outliers[$sensor][$this->transArray[$index - 1]] = true;
 			            }
-                    }
-                    // if there is no value, it is also classified as an outlier
-                    else {
-                        $outliers[$sensor][$this->transArray[$index - 1]] = true;
                     }
                     
 			        $index++;
@@ -110,18 +116,28 @@
 					if ( $outlier ) {
                         // get next predecessor which is not an outlier
 						$pred = 1;
-						while ( $outliers[$sensor][$this->transArray[$i - $pred]] ) {
+						while ( isset($this->transArray[$i - $pred]) && isset($outliers[$sensor][$this->transArray[$i - $pred]]) && $outliers[$sensor][$this->transArray[$i - $pred]] ) {
 							$pred++;
 						}
 						
                         // get next successor which is not an outlier
 						$succ = 1;
-						while ( $outliers[$sensor][$this->transArray[$i + $succ]] ) {
+						while ( isset($this->transArray[$i + $succ]) && isset($outliers[$sensor][$this->transArray[$i + $succ]]) && $outliers[$sensor][$this->transArray[$i + $succ]] ) {
 							$succ++;
 						}
 						
-                        // linear interpolation (mean)
-						$interpolatedValue = round(( $this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2);
+                        // if a predecessor and a successor were found: linear interpolation (mean)
+                        if ( isset($this->transArray[$i - $pred]) && isset($this->transArray[$i + $succ]) ) {
+                            $interpolatedValue = round(( $this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2);
+                        }
+                        // if just a successor was found: take successor's value as interpolated value
+                        else if ( ! isset($this->transArray[$i - $pred]) && isset($this->transArray[$i + $succ]) ) {
+                            $interpolatedValue = $this->dataArray[$this->transArray[$i + $succ]][$sensor];
+                        }
+                        // if just a predecessor was found: take predecessors's value as interpolated value
+                        else if ( isset($this->transArray[$i - $pred]) && ! isset($this->transArray[$i + $succ]) ) {
+                            $interpolatedValue = $this->dataArray[$this->transArray[$i - $pred]][$sensor];
+                        }
 						
                         // save interpolated value in the data array
 						$this->dataArray[$time][$sensor] = $interpolatedValue;

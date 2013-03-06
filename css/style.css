@@ -328,7 +328,20 @@ table.register td {
 	padding: 0px;
 }
 
-#content  .hidden {
+#content .details table.outliers {
+	width: 480px;
+	padding: 0px;
+}
+
+#content .details table.outliers td {
+	padding: 4px;
+}
+
+#content .details table.outliers td.outlierselect {
+	text-align: right;
+}
+
+#content .hidden {
 	display: none;
 }
 
@@ -468,7 +481,6 @@ table.register td {
 #content select {
 	font-family: Calibri, Arial, Verdana, sans-serif;
     font-size: 11pt;
-    margin: 8px;
     padding: 3px 8px;
     border: none;
     background-color: #80B8E5;

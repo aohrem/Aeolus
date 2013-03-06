@@ -50,7 +50,7 @@
 			}
             
             include('datavalidation.inc.php');
-            $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'), $sensitivity);
+            $dataValidation = new DataValidation($dataArray, array('co', 'humidity', 'no2', 'temperature'), $sensitivity, $timeframe);
             $outliers = $dataValidation->getOutliers();
 			$containsOutliers = $dataValidation->containsOutliers($outliers);
 			$tplOutliers = '';
@@ -71,10 +71,15 @@
 			}
 			$this->contentTemplate->tplReplace('sensitivity', $sensitivity);
 			
+            if ( $sensitivity == 0 ) {
+                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_off'));
+            }
+            
 			// check if outliers shall be interpolated
 			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' && $sensitivity != 0 ) {
 				$interpolateOutliers = true;
 				$this->contentTemplate->tplReplace('interpolateOutliers', 'true');
+                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_interpolated'));
 				$dataArray = $dataValidation->interpolateOutliers($outliers);
 				
 				$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=false&amp;lang='.$this->language.'"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
@@ -82,6 +87,7 @@
 			else {
 				$interpolateOutliers = false;
 				$this->contentTemplate->tplReplace('interpolateOutliers', 'false');
+                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_marked'));
 				
 				// check if dataset contains outliers
 				if ( $containsOutliers && $sensitivity != 0 ) {
