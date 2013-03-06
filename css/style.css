@@ -592,6 +592,9 @@ a:hover, a:active {
 	border-right: 10px solid #BCD7ED;
 }
 
+#navi_left div img.sensor {
+	cursor: pointer;
+}
 #navi_left div img.last {
 	margin-bottom: 0px;
 }
@@ -658,7 +661,12 @@ a:hover, a:active {
 }
 
 #diagram {
-	background-color: #E9F2F9;
+	margin-left: 20px;
+}
+
+.tooltip {
+	margin: 10px;
+	font-size: 16px;
 }
 
 img {
@@ -671,8 +679,6 @@ img {
     background-repeat: no-repeat;
     min-height: 436px;
 }
-
-/* Eigenschaften für die map_big: */
 
 .leaflet-popup{
 }

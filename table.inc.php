@@ -180,7 +180,7 @@
 			
 			$hidden = ' class="hidden"';
             
-			$errormessage = '<div class="details errormessage">'.translate($dataArray).'</div>';
+			$errormessage = '<div class="details errormessage">'.translate('cosm_no_supported_sensor').'</div>';
 		}
 		
 		// replace error message in template and hide details
