@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $request_url;
-		private $debug_mode = true;
+		private $debug_mode = false;
 		
 		private function readFeed($url) {
 			// set stream options
@@ -22,7 +22,7 @@
 			return file_get_contents($url, false, $context);
 		}
 		
-		private function readXml($filename) {
+		private function readLocalXml($filename) {
 			if ( file_exists('xml/'.$filename.'.xml') ) {
 				$f = fopen('xml/'.$filename.'.xml', 'r');
 				return fread($f, filesize('xml/'.$filename.'.xml'));
@@ -33,8 +33,15 @@
 		}
 		
 		// sends HTTP GET request to the cosm API, parses the returned XML and returns an array with the data of the feed
-        // error-codes: 'cosm_feed_is_not_an_aqe': feed is no air quality egg, 'cosm_no_data_found': no data for this timeframe, 'cosm_no_supported_sensor': no supported sensor type found, 'cosm_error'
-		public function parseFeed($feedid, $start, $end, $limit, $interval, $duration) {
+        // supported values for $values:
+        //  'all_values': returns all values of the given timeframe
+        //  'current_value': returns only the current value
+        // error codes:
+        //  'cosm_feed_is_not_an_aqe': feed is no air quality egg
+        //  'cosm_no_data_found': no data for this timeframe
+        //  'cosm_no_supported_sensor': no supported sensor type found
+        //  'cosm_error'
+		public function parseFeed($feedid, $values, $start, $end, $limit, $interval, $duration) {
 			// set parameters if they are not empty
 			if ( $start != '' ) {
 				$start = '&start='.$start;
@@ -58,10 +65,8 @@
 				$feedXml = $this->readFeed($requestUrl);
 			}
 			else {
-				$feedXml = $this->readXml('test_feed');
+				$feedXml = $this->readLocalXml('test_feed');
 			}
-			
-			// print '<pre>'.htmlentities($feedXml).'</pre>';
 			
 			// load xml string as object
 			$feedXml = simplexml_load_string($feedXml, 'SimpleXMLExtended');
@@ -82,6 +87,7 @@
 				return 'cosm_feed_is_not_an_aqe';
 			}
             
+            // if there is feed meta data fill it into the data array
 			$dataArray['title'] = isset($feedXml->environment->title) ? htmlentities($feedXml->environment->title).' - ' : '';
 			$dataArray['description'] = isset($feedXml->environment->description) ? htmlentities($feedXml->environment->description) : $GLOBALS['translation']['no_description_available'];
 			$dataArray['locationName'] = isset($feedXml->environment->location->name) ? htmlentities($feedXml->environment->location->name) : $GLOBALS['translation']['not_available'];
@@ -130,36 +136,41 @@
 						( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED) ) ||
 						  ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
 						
-						$datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
-						if ( ! $this->debug_mode ) {
-							$datastreamXml = $this->readFeed($datastreamRequestUrl); 
-						}
-						else {
-							$datastreamXml = $this->readXml('test_feed_'.$sensor);
-						}
-						
-						// print '<br><br><pre>'.htmlentities($datastreamXml).'</pre>';
-						
-						// load datastream xml string as object
-						$datastreamXml = simplexml_load_string($datastreamXml, 'SimpleXMLExtended');
-						
-						if ( isset($datastreamXml->environment->data->datapoints->value) ) {
-							$values = $datastreamXml->environment->data->datapoints->value;
-						
-							foreach ( $values as $value ) {
-								// cut seconds from the time-string and convert it to a php-timestamp
-								$at = strtotime(substr($value->attribute('at'), 0, -11));
-								
-								// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
-								$dataArray[$at][$sensor] = $value->__toString();
-							}
-						}
-						else if ( isset($datastreamXml->title) ) {
-							return 'cosm_error';
-						}
-						else {
-							return 'cosm_no_data_found';
-						}
+						if ( $values == 'all_values' ) {
+                            $datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
+						    if ( ! $this->debug_mode ) {
+							    $datastreamXml = $this->readFeed($datastreamRequestUrl); 
+						    }
+						    else {
+							    $datastreamXml = $this->readLocalXml('test_feed_'.$sensor);
+						    }
+                            
+						    // print '<br><br><pre>'.htmlentities($datastreamXml).'</pre>';
+                            
+						    // load datastream xml string as object
+						    $datastreamXml = simplexml_load_string($datastreamXml, 'SimpleXMLExtended');
+                            
+						    if ( isset($datastreamXml->environment->data->datapoints->value) ) {
+							    $values = $datastreamXml->environment->data->datapoints->value;
+                                
+							    foreach ( $values as $value ) {
+								    // cut seconds from the time-string and convert it to a php-timestamp
+								    $at = strtotime(substr($value->attribute('at'), 0, -11));
+                                    
+								    // save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
+								    $dataArray[$at][$sensor] = $value->__toString();
+							    }
+						    }
+						    else if ( isset($datastreamXml->title) ) {
+							    return 'cosm_error';
+						    }
+						    else {
+							    return 'cosm_no_data_found';
+						    }
+                        }
+                        else if ( $values == 'current_value' )  {
+                            $dataArray['current_value'][$sensor] = $data->current_value->__toString();
+                        }
 					}
 				}
 			}

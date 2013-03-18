@@ -21,7 +21,7 @@
 		$limit = 1000;
 		
 		// fill in the parameters to read the cosm-API
-		if ( ! $dataArray = $cosmAPI->parseFeed($feedId, $start, $end, $limit, $interval[$timeframe], '') ) {
+		if ( ! $dataArray = $cosmAPI->parseFeed($feedId, 'all_values', $start, $end, $limit, $interval[$timeframe], '') ) {
 			$this->contentTemplate->cleanCode('tableRow');
 			$errormessage = '<div class="details errormessage">'.translate('cosm_api_could_not_be_read').'</div>';
 		}

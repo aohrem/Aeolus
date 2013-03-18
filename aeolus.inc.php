@@ -100,8 +100,8 @@
 		
 		private function switchSite() {
 			switch ( $this->site ) {
-				case '':
 				// home page
+				case '':
 				break;
 				
 				// table view
