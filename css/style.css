@@ -667,6 +667,8 @@ a:hover, a:active {
 .tooltip {
 	margin: 10px;
 	font-size: 16px;
+    min-width: 150px;
+    max-width: 300px;
 }
 
 img {

@@ -33,9 +33,11 @@
 	    google.setOnLoadCallback(drawChart);
 
 	    var columns = [0,1,2];
+	    var selection = [{coOutlierTable}];
 		
 	    var options = {
 	        height: 400,
+	        chm: 'o,FF0000,1,-1,5,1',
 	        colors: ['#000000'],
 	        legend: {position: 'none'},
 	        backgroundColor: '#E9F2F9',
@@ -45,6 +47,8 @@
 	        tooltip: {isHtml: true},
 	        interpolateNulls: true
 	    };
+
+	    var chart;
 		
 	    // Callback that creates and populates a data table, 
 	    // instantiates the pie chart, passes in the data and
@@ -52,41 +56,50 @@
 	    function drawChart() {		
 	        var dataTable = new google.visualization.DataTable();
 	        dataTable.addColumn('datetime', 'Date / Time');
+
 	        dataTable.addColumn('number', 'CO');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+
 	        dataTable.addColumn('number', 'NO2');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+
 	        dataTable.addColumn('number', 'Temperature');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+
 	        dataTable.addColumn('number', 'Humidity');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+
 	        dataTable.addColumn('number', 'timestamp');
 			
 	        dataTable.addRows([
 				{+diagramData}
 				[new Date({t}),
-				{co}, '<div class="tooltip"><b>{lt}</b><br>[[co]]: {co} ppm</div>',
-				{no2}, '<div class="tooltip"><b>{lt}</b><br>[[no2]]: {no2} ppm</div>',
-				{temp}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temp} &deg;C</div>',
-				{hum}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {hum} %</div>',
+				{co}, '<div class="tooltip"><b>{lt}</b><br>[[co]]: {co} ppm{co_outlier_text}</div>',
+				{no2}, '<div class="tooltip"><b>{lt}</b><br>[[no2]]: {no2} ppm{no2_outlier_text}</div>',
+				{temp}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temp} &deg;C{temp_outlier_text}</div>',
+				{hum}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {hum} %{hum_outlier_text}</div>',
 				{timestamp}]{,}
-	    {-diagramData}
-	    ]);
+	        {-diagramData}
+	        ]);
 			
-	    var view = new google.visualization.DataView(dataTable);
-	    view.setColumns(columns);
+	        var view = new google.visualization.DataView(dataTable);
+	        view.setColumns(columns);
+            
+	        chart = new google.visualization.LineChart(document.getElementById('diagram'));
+	        chart.draw(view, options);
+	        chart.setSelection(selection);
 
-	    var chart = new google.visualization.LineChart(document.getElementById('diagram'));
-			 
-	    chart.draw(view, options);
+	        google.visualization.events.addListener(chart, 'select', selectHandler);
 	    }
-		
-	    window.onresize = function(event) {
+
+	    function selectHandler(e) {
 	        drawChart();
 	    }
 		
 	    function co() {
 	        columns = [0,1,2];
+	        selection = [{coOutlierTable}];
+
 	        options['vAxis'] = {title: '[[co]] (ppm)'};
 	        options['colors'] = ['#000000'];
 
@@ -100,6 +113,8 @@
 		
 	    function no2() {
 	        columns = [0,3,4];
+	        selection = [{no2OutlierTable}];
+
 	        options['vAxis'] = {title: '[[no_2]] (ppm)'};
 	        options['colors'] = ['#A04801'];
 			
@@ -113,6 +128,8 @@
 		
 	    function temp() {
 	        columns = [0,5,6];
+	        selection = [{temperatureOutlierTable}];
+
 	        options['vAxis'] = {title: '[[temperature]] ([[degrees_celsius]])'};
 	        options['colors'] = ['#D62A1E'];
 			
@@ -126,6 +143,8 @@
 		
 	    function hum() {
 	        columns = [0,7,8];
+	        selection = [{humidityOutlierTable}];
+
 	        options['vAxis'] = {title: '[[humidity]] (%)'};
 	        options['colors'] = ['#7AA1EB'];
 			
