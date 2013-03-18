@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $request_url;
-		private $debug_mode = false;
+		private $debug_mode = true;
 		
 		private function readFeed($url) {
 			// set stream options
@@ -41,7 +41,7 @@
         //  'cosm_no_data_found': no data for this timeframe
         //  'cosm_no_supported_sensor': no supported sensor type found
         //  'cosm_error'
-		public function parseFeed($feedid, $values, $start, $end, $limit, $interval, $duration) {
+		public function parseFeed($feedid, $returnedValues, $start, $end, $limit, $interval, $duration) {
 			// set parameters if they are not empty
 			if ( $start != '' ) {
 				$start = '&start='.$start;
@@ -136,7 +136,7 @@
 						( ( $sensor != 'no2' && ($dataType == UNSPECIFIED || $dataType == COMPUTED) ) ||
 						  ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
 						
-						if ( $values == 'all_values' ) {
+						if ( $returnedValues == 'all_values' ) {
                             $datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
 						    if ( ! $this->debug_mode ) {
 							    $datastreamXml = $this->readFeed($datastreamRequestUrl); 
@@ -168,7 +168,7 @@
 							    return 'cosm_no_data_found';
 						    }
                         }
-                        else if ( $values == 'current_value' )  {
+                        else if ( $returnedValues == 'current_value' )  {
                             $dataArray['current_value'][$sensor] = $data->current_value->__toString();
                         }
 					}
