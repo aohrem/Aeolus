@@ -98,15 +98,17 @@
 		'outlier_detection' => 'Ausrei&szlig;ererkennung',
 		'sensitivity' => 'Empfindlichkeit',
 		'no_outlier_detection' => 'keine Ausrei&szlig;ererkennung',
+        'outlier_interpolation' => 'Ausrei&szlig;erinterpolation',
+        'on' => 'an',
+        'off' => 'aus',
+        'submit_settings' => 'Einstellungen &uuml;bernehmen',
 		'low' => 'niedrig',
 		'medium' => 'mittel',
 		'high' => 'hoch',
-        'outlier_state_interpolated_diagram' => 'Ausrei&szlig;er werden linear interpoliert und mit Hinweisen versehen.',
-        'outlier_state_marked_diagram' => 'Ausrei&szlig;er werden ermittelt und mit Warnhinweisen versehen.',
-        'outlier_state_interpolated_diagram' => 'Ausrei&szlig;er werden linear interpoliert.',
-        'outlier_state_marked_diagram' => 'Ausrei&szlig;er werden ermittelt und mit Kreisen markiert.',
         'outlier_state_off' => 'Ausrei&szlig;er werden nicht ermittelt.',
         'degrees_celsius' => 'Grad Celsius',
-        'date_time' => 'Datum / Uhrzeit'
+        'date_time' => 'Datum / Uhrzeit',
+        'js_time_format' => 'dd.MM.y HH:mm',
+        'php_time_format' => 'd.m.Y H:i'
 	);
 ?>

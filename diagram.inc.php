@@ -82,8 +82,8 @@
 			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' && $sensitivity != 0 ) {
                 
 				$interpolateOutliers = true;
-				$this->contentTemplate->tplReplace('interpolateOutliers', 'true');
-                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_interpolated_diagram'));
+				$this->contentTemplate->tplReplace('io_checked', ' checked="checked"');
+				$this->contentTemplate->tplReplace('dio_checked', '');
                 $this->contentTemplate->tplReplace('coOutlierTable', '');
                 $this->contentTemplate->tplReplace('no2OutlierTable', '');
                 $this->contentTemplate->tplReplace('temperatureOutlierTable', '');
@@ -95,8 +95,8 @@
 			}
 			else {
 				$interpolateOutliers = false;
-				$this->contentTemplate->tplReplace('interpolateOutliers', 'false');
-                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_marked_diagram'));
+				$this->contentTemplate->tplReplace('io_checked', '');
+				$this->contentTemplate->tplReplace('dio_checked', ' checked="checked"');
                 
                 if ( $sensitivity != 0 ) {
                     foreach ( $outliers as $sensor => $val ) {
@@ -141,50 +141,50 @@
                 $this->contentTemplate->tplReplaceOnce('t', date('Y, m-1, d, H, i', $time));
                 
                 $this->contentTemplate->tplReplaceOnce('co', $val['co']);
-                $this->contentTemplate->tplReplaceOnce('lt', date('d.m.Y, g:i a', $time));
+                $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce('co', $val['co']);
                 
                 if ( $outliers['co'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
-                    $coOutlierText = '<br><br>'.translate('value_could_be_an_outlier');
+                    $coOutlierText = 'outlierText';
                 }
                 else {
-                    $coOutlierText = '';
+                    $coOutlierText = 'noText';
                 }
                 $this->contentTemplate->tplReplaceOnce('co_outlier_text', $coOutlierText);
                 
                 $this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
-                $this->contentTemplate->tplReplaceOnce('lt', date('d.m.Y, g:i a', $time));
+                $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
                 
                 if ( $outliers['no2'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
-                    $no2OutlierText = '<br>'.translate('value_could_be_an_outlier');
+                    $no2OutlierText = 'outlierText';
                 }
                 else {
-                    $no2OutlierText = '';
+                    $no2OutlierText = 'noText';
                 }
                 $this->contentTemplate->tplReplaceOnce('no2_outlier_text', $no2OutlierText);
                 
                 $this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
-                $this->contentTemplate->tplReplaceOnce('lt', date('d.m.Y, g:i a', $time));
+                $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);
                 
                 if ( $outliers['temperature'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
-                    $tempOutlierText = '<br>'.translate('value_could_be_an_outlier');
+                    $tempOutlierText = 'outlierText';
                 }
                 else {
-                    $tempOutlierText = '';
+                    $tempOutlierText = 'noText';
                 }
                 $this->contentTemplate->tplReplaceOnce('temp_outlier_text', $tempOutlierText);
                 
                 $this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
-                $this->contentTemplate->tplReplaceOnce('lt', date('d.m.Y, g:i a', $time));
+                $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce('hum', $val['humidity']);
                 
                 if ( $outliers['humidity'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
-                    $humOutlierText = '<br>'.translate('value_could_be_an_outlier');
+                    $humOutlierText = 'outlierText';
                 }
                 else {
-                    $humOutlierText = '';
+                    $humOutlierText = 'noText';
                 }
                 $this->contentTemplate->tplReplaceOnce('hum_outlier_text', $humOutlierText);
                 

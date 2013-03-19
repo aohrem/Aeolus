@@ -78,16 +78,18 @@
 			// check if outliers shall be interpolated
 			if ( isset($_GET['interpolateoutliers']) && $_GET['interpolateoutliers'] == 'true' && $sensitivity != 0 ) {
 				$interpolateOutliers = true;
+				$this->contentTemplate->tplReplace('io_checked', ' checked="checked"');
+				$this->contentTemplate->tplReplace('dio_checked', '');
 				$this->contentTemplate->tplReplace('interpolateOutliers', 'true');
-                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_interpolated'));
 				$dataArray = $dataValidation->interpolateOutliers($outliers);
 				
 				$tplOutliers = '<a href="index.php?s=table&amp;fid='.$feedId.'&amp;timeframe='.$timeframe.'&amp;interpolateoutliers=false&amp;lang='.$this->language.'"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
 			}
 			else {
 				$interpolateOutliers = false;
+				$this->contentTemplate->tplReplace('io_checked', '');
+				$this->contentTemplate->tplReplace('dio_checked', ' checked="checked"');
 				$this->contentTemplate->tplReplace('interpolateOutliers', 'false');
-                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_marked'));
 				
 				// check if dataset contains outliers
 				if ( $containsOutliers && $sensitivity != 0 ) {
@@ -159,7 +161,7 @@
 				
 				// copy table row and fill in sensor data for one timestamp
 				$this->contentTemplate->copyCode('tableRow');
-				$this->contentTemplate->tplReplaceOnce('t', date('d.m.Y H:i', $time));
+				$this->contentTemplate->tplReplaceOnce('t', date(translate('php_time_format'), $time));
 				$this->contentTemplate->tplReplaceOnce('co', $val['co']);
 				$this->contentTemplate->tplReplaceOnce('no2', $val['no2']);
 				$this->contentTemplate->tplReplaceOnce('temp', $val['temperature']);

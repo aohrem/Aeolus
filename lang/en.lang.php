@@ -88,6 +88,8 @@
 		'participants' => 'Participating students',
         /* 'value_could_be_an_outlier' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch Mess- oder &Uuml;bertragungsfehler bedingt wurde.', */
 		'view_english' => 'View this page in English.',
-		'view_german' => 'Diese Seite auf Deutsch betrachten.'
+		'view_german' => 'Diese Seite auf Deutsch betrachten.',
+        'js_time_format' => 'MMM d y HH:mm',
+        'php_time_format' => 'M d Y, h:i'
 	);
 ?>
