@@ -27,6 +27,23 @@
 			$this->contentTemplate->tplReplaceOnce('egg_fid', $row->feed_id);
 			// Check if classification shoud be shown
 			if (isset($_GET['classify'])) {
+				$cosmAPI = new cosmAPI();
+				$start = date('Y-m-d\TH:i:s\Z', time() - 1);
+				$end = date('Y-m-d\TH:i:s\Z', time());
+				if( ! $data_array = $cosmAPI->parseFeed($row->feed_id, '', $end, 1, 86400, '1minutes') ) {
+					print $row->feed_id." cosmAPI nicht gelesen!<br>";
+				}
+				// check if parsing the xml was successfull
+				else if ( is_array($data_array) ) {
+					print "<p><b>".$row->feed_id."</b><br>";
+					var_dump(end($data_array));
+					/* print "<br>".
+					var_dump(end($data_array)); */
+					print "</p>";
+				}
+				else {
+					print $row->feed_id." fail!!!<br>";
+				}
 				// distinction of classes for classifying
 				$this->contentTemplate->tplReplaceOnce('egg_color', "'class1'");
 			}
