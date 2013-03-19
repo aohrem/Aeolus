@@ -5,13 +5,13 @@ L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/
 	maxZoom: 18
 }).addTo(map);
 
-function addEgg(lat, lon, feedID, type, color){
+function addEgg(lat, lon, feedID, type, color, value){
 	var eggIcon = L.icon({
 				iconUrl: 'img/' + type + '_' + color + '.png'
 			});
 	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){
-			alert(feedID);
+			alert("feedID: " + feedID + " | Wert: " + value);
 		});
 }
 
