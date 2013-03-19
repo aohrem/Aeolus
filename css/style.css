@@ -87,6 +87,7 @@ header nav ul li #register_click input {
 	background-color: #add0ea;
 	border: none;
     padding: 4px 15px;
+    margin-bottom: 4px;
 	font-size: 10.5pt;
 	color: #FFFFFF;
 }
@@ -140,7 +141,7 @@ table.register td {
 #content {
 	min-height: 500px;
 	background-color: #FFFFFF;
-	padding: 25px;
+	padding: 1px 25px 25px 25px;
 	line-height: 23px;
 }
 
@@ -651,7 +652,7 @@ a:hover, a:active {
 	display: inline-block;
 	margin: 12px 20px;
 	min-height: 500px;
-	min-width: 670px;
+	width: 670px;
 }
 
 #data_content p {

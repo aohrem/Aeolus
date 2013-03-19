@@ -141,11 +141,11 @@
 				$outlierTemplateTemp = new Template();
 				if ( $outliers['temperature'][$time] && $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateTemp->readTpl('table_outlier_box');
-					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
+					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'temp', 'i', 'success', 'interpolated', $time, translate('value_is_interpolated'));
 				}
                 else if ( $outliers['temperature'][$time] && ! $interpolateOutliers && $sensitivity != 0 ) {
 					$outlierTemplateTemp->readTpl('table_outlier_box');
-					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'no2', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
+					$outlierTemplateTemp = outlierReplace($outlierTemplateTemp, 'temp', '!', 'error', '', $time, translate('value_could_be_an_outlier'));
                 }
 				
 				$outlierTemplateHum = new Template();

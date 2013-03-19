@@ -62,6 +62,18 @@
                     $i++;
                 }
                 
+                // get the array window with length of the given window size at the start of the array
+                $frontWindow = $this->getArrayWindow($this->dataArray, 0, $this->windowSize, $sensor);
+                // calculate the IQR ...
+                $frontInterQuartileRange = abs($this->quantile($frontWindow, 0.75) - $this->quantile($frontWindow, 0.25));
+                // ... and the median of that window
+                $frontMedian = $this->median($this->dataArray, $sensor, 0, $this->windowSize);
+                
+                // check first $windowSize values for outliers
+                for ( $j = 0; $j < $this->windowSize; $j++ ) {
+                    $outliers = $this->checkValue($j, $frontMedian, $frontInterQuartileRange, $outliers, $sensor);
+                }
+                
                 $index = $k;
                 
 		        while ( $index < ( $n - $k ) ) {
@@ -73,16 +85,24 @@
                     
 			        $median = $ytmed[$this->transArray[$index - 1]][$sensor];
                     
-                    if ( isset($this->dataArray[$this->transArray[$index - 1]][$sensor]) ) {
-                        // if current value is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
-			            if ( $this->dataArray[$this->transArray[$index - 1]][$sensor] < ($median - $this->factor[$this->sensitivity] * $interQuartileRange) ||
-                                $this->dataArray[$this->transArray[$index - 1]][$sensor] > ($median + $this->factor[$this->sensitivity] * $interQuartileRange) ) {
-				            $outliers[$sensor][$this->transArray[$index - 1]] = true;
-			            }
-                    }
+                    // if current value is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
+                    $outliers = $this->checkValue($index - 1, $median, $interQuartileRange, $outliers, $sensor);
                     
 			        $index++;
 		        }
+                
+                // get the array window with length of the given window size at the start of the array
+                $backStart = sizeof($this->dataArray) - $this->windowSize;
+                $backWindow = $this->getArrayWindow($this->dataArray, $backStart, sizeof($this->dataArray), $sensor);
+                // calculate the IQR ...
+                $backInterQuartileRange = abs($this->quantile($backWindow, 0.75) - $this->quantile($backWindow, 0.25));
+                // ... and the median of that window
+                $backMedian = $this->median($this->dataArray, $sensor, $backStart, sizeof($this->dataArray));
+                
+                // check first $windowSize values for outliers
+                for ( $j = $backStart; $j < sizeof($this->dataArray); $j++ ) {
+                    $outliers = $this->checkValue($j, $backMedian, $backInterQuartileRange, $outliers, $sensor);
+                }
             }
             
             return $outliers;
@@ -149,6 +169,17 @@
             
 			return $this->dataArray;
 		}
+        
+        // if value at $index is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
+        private function checkValue($index, $median, $iqr, $outliers, $sensor) {
+            if ( isset($this->dataArray[$this->transArray[$index]][$sensor]) ) {
+                if ( $this->dataArray[$this->transArray[$index]][$sensor] < ($median - $this->factor[$this->sensitivity] * $iqr) ||
+                        $this->dataArray[$this->transArray[$index]][$sensor] > ($median + $this->factor[$this->sensitivity] * $iqr) ) {
+                    $outliers[$sensor][$this->transArray[$index]] = true;
+                }
+            }
+            return $outliers;
+        }
         
         // calculates the median of $dataArray on column $sensor from index $start to index $end
 	    private function median($dataArray, $sensor, $start, $end) {

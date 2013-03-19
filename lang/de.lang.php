@@ -13,7 +13,7 @@
 		'delete_my_aqe' => 'Mein AQE entfernen',
 		'useful_links' => 'N&uuml;tzliche Links',
 		'aqe_links_description' => 'Air Quality Egg ist das community-basierte Sensornetzwerk zur Luftqualit&auml;t. Jedes einzelne Air Quality Egg stellt ein Sensorsystem dar, welches die M&ouml;glichkeit bietet, NO<sub>2</sub>- und CO-Konzentrationen zu ermitteln.',
-		'cosm_links_description' => 'Cosm ist die Plattform, API und Community welche Ger&auml;te und Anwendungen zwecks Echtzeitkontrolle und Datenspeicherung verbindet. Cosm bietet im Kontext des Internet of Things die n&ouml;tige Infrastruktur um internetf&auml;hige Ger&auml;te vom Prototypen bis zur Marktreife zu betreiben und fortzuentwickeln. So werden auch die Air Quality Eggs samt Sensordaten auf Cosm gehostet.',
+		'cosm_links_description' => 'Cosm ist die Plattform, API und Community, welche Ger&auml;te und Anwendungen zwecks Echtzeitkontrolle und Datenspeicherung verbindet. Cosm bietet im Kontext des Internet of Things die n&ouml;tige Infrastruktur um internetf&auml;hige Ger&auml;te vom Prototypen bis zur Marktreife zu betreiben und fortzuentwickeln. So werden auch die Air Quality Eggs samt Sensordaten auf Cosm gehostet.',
 		'ifgi_links_description' => 'Das Institut f&uuml;r Geoinformatik der Universit&uuml;t M&uuml;nster ist eine der weltweit f&uuml;hrenden Forschungsst&auml;tten auf dem Gebiet der Geoinformatik. Zu seinen speziellen Forschungsfeldern z&auml;hlen Raum-Zeitliche Modellierung und Messung von Umweltfaktoren, R&auml;umliche Intelligenz, Semantische Interoperabilit&auml;t, Sensor Web, Geoprocessing und Situierte Interaktion.',
 		'air_quality_egg' => 'Air Quality Egg',
 		'cosm' => 'Cosm',

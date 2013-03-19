@@ -84,6 +84,7 @@
 				$interpolateOutliers = true;
 				$this->contentTemplate->tplReplace('io_checked', ' checked="checked"');
 				$this->contentTemplate->tplReplace('dio_checked', '');
+				$this->contentTemplate->tplReplace('interpolateOutliers', 'true');
                 $this->contentTemplate->tplReplace('coOutlierTable', '');
                 $this->contentTemplate->tplReplace('no2OutlierTable', '');
                 $this->contentTemplate->tplReplace('temperatureOutlierTable', '');
@@ -97,6 +98,7 @@
 				$interpolateOutliers = false;
 				$this->contentTemplate->tplReplace('io_checked', '');
 				$this->contentTemplate->tplReplace('dio_checked', ' checked="checked"');
+				$this->contentTemplate->tplReplace('interpolateOutliers', 'false');
                 
                 if ( $sensitivity != 0 ) {
                     foreach ( $outliers as $sensor => $val ) {

@@ -55,18 +55,18 @@
 	    // draws it.
 	    function drawChart() {		
 	        var dataTable = new google.visualization.DataTable();
-	        dataTable.addColumn('datetime', 'Date / Time');
+	        dataTable.addColumn('datetime', '[[date_time]]');
 
-	        dataTable.addColumn('number', 'CO');
+	        dataTable.addColumn('number', '[[co]]');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', 'NO2');
+	        dataTable.addColumn('number', '[[no2]]');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', 'Temperature');
+	        dataTable.addColumn('number', '[[temperature]]');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', 'Humidity');
+	        dataTable.addColumn('number', '[[humidity]]');
 	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
 	        dataTable.addColumn('number', 'timestamp');
