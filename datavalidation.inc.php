@@ -99,7 +99,7 @@
                 // ... and the median of that window
                 $backMedian = $this->median($this->dataArray, $sensor, $backStart, sizeof($this->dataArray));
                 
-                // check first $windowSize values for outliers
+                // check last $windowSize values for outliers
                 for ( $j = $backStart; $j < sizeof($this->dataArray); $j++ ) {
                     $outliers = $this->checkValue($j, $backMedian, $backInterQuartileRange, $outliers, $sensor);
                 }
@@ -172,6 +172,7 @@
         
         // if value at $index is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
         private function checkValue($index, $median, $iqr, $outliers, $sensor) {
+            if ( $iqr == 0 ) { $iqr++; }
             if ( isset($this->dataArray[$this->transArray[$index]][$sensor]) ) {
                 if ( $this->dataArray[$this->transArray[$index]][$sensor] < ($median - $this->factor[$this->sensitivity] * $iqr) ||
                         $this->dataArray[$this->transArray[$index]][$sensor] > ($median + $this->factor[$this->sensitivity] * $iqr) ) {
