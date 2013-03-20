@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $request_url;
-		private $debug_mode = true;
+		private $debug_mode = false;
 		
 		private function readFeed($url) {
 			// set stream options
@@ -75,28 +75,31 @@
 			$aqe = false;
 			$aqeTags = array('airqualityegg', 'air quality egg', 'aqe');
 			// iterate feed tags
-			foreach ( $feedXml->environment->tag as $tag ) {
-				foreach ( $aqeTags as $tagVal ) {
-					if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
-						$aqe = true;
-						break;
-					}
-				}
-			}
-			if ( ! $aqe ) {
-				return 'cosm_feed_is_not_an_aqe';
-			}
+            if ( isset($feedXml->environment->tag) ) {
+                foreach ( $feedXml->environment->tag as $tag ) {
+                    foreach ( $aqeTags as $tagVal ) {
+                        if ( strstr(strtolower($tag), strtolower($tagVal)) ) {
+                            $aqe = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // if there is feed meta data fill it into the data array
+			    $dataArray['title'] = isset($feedXml->environment->title) ? htmlentities($feedXml->environment->title).' - ' : '';
+			    $dataArray['description'] = isset($feedXml->environment->description) ? htmlentities($feedXml->environment->description) : $GLOBALS['translation']['no_description_available'];
+			    $dataArray['locationName'] = isset($feedXml->environment->location->name) ? htmlentities($feedXml->environment->location->name) : $GLOBALS['translation']['not_available'];
+			    $dataArray['lat'] = isset($feedXml->environment->location->lat) ? $feedXml->environment->location->lat.'&deg;' : $GLOBALS['translation']['not_available'];
+			    $dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon.'&deg;' : $GLOBALS['translation']['not_available'];
+			    $dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele : $GLOBALS['translation']['not_available'];
+			    $dataArray['status'] = isset($feedXml->environment->status) ? $feedXml->environment->status->__toString() : $GLOBALS['translation']['unknown'];
+			    $dataArray['exposure'] = $feedXml->environment->location->attribute('exposure') != '' ? $feedXml->environment->location->attribute('exposure') : $GLOBALS['translation']['unknown'];
+            }
             
-            // if there is feed meta data fill it into the data array
-			$dataArray['title'] = isset($feedXml->environment->title) ? htmlentities($feedXml->environment->title).' - ' : '';
-			$dataArray['description'] = isset($feedXml->environment->description) ? htmlentities($feedXml->environment->description) : $GLOBALS['translation']['no_description_available'];
-			$dataArray['locationName'] = isset($feedXml->environment->location->name) ? htmlentities($feedXml->environment->location->name) : $GLOBALS['translation']['not_available'];
-			$dataArray['lat'] = isset($feedXml->environment->location->lat) ? $feedXml->environment->location->lat.'&deg;' : $GLOBALS['translation']['not_available'];
-			$dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon.'&deg;' : $GLOBALS['translation']['not_available'];
-			$dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele : $GLOBALS['translation']['not_available'];
-			$dataArray['status'] = isset($feedXml->environment->status) ? $feedXml->environment->status->__toString() : $GLOBALS['translation']['unknown'];
-			$dataArray['exposure'] = $feedXml->environment->location->attribute('exposure') != '' ? $feedXml->environment->location->attribute('exposure') : $GLOBALS['translation']['unknown'];
-			
+            if ( ! $aqe ) {
+                return 'cosm_feed_is_not_an_aqe';
+            }
+            
 			if ( isset($feedXml->environment->data) ) {
 				// iterate datastreams
 				foreach ( $feedXml->environment->data as $data ) {

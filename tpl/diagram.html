@@ -1,5 +1,5 @@
 <script src="js/outlierhints.js"></script>
-<h1>[[diagram_view]]</h1>
+<h1>{title}[[diagram_view]]</h1>
 <div id="navi_left">
 	<div>
 		<a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active"></a>
@@ -79,8 +79,8 @@
 				[new Date({t}),
 				{co}, '<div class="tooltip"><b>{lt}</b><br>[[co]]: {co} ppm' + {co_outlier_text} + '</div>',
 				{no2}, '<div class="tooltip"><b>{lt}</b><br>[[no2]]: {no2} ppm' + {no2_outlier_text} + '</div>',
-				{temp}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temp} &deg;C' + {temp_outlier_text} + '</div>',
-				{hum}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {hum} %' + {hum_outlier_text} + '</div>',
+				{temperature}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temperature} &deg;C' + {temperature_outlier_text} + '</div>',
+				{humidity}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {humidity} %' + {humidity_outlier_text} + '</div>',
 				{timestamp}]{,}
 	        {-diagramData}
 	        ]);
@@ -159,46 +159,45 @@
 	        drawChart();
 	    }
 	</script>
-    <div class="details">
-        <div id="diagram"></div>
-    </div>
-    {errormessage}<br>
-    <script src="js/radio_switch.js"></script>
-    <div class="details">
-        <h4>[[outlier_detection]]</h4>
-        {outliers}
-        <form action="index.php" method="get">
-            <input type="hidden" name="s" value="diagram">
-            <input type="hidden" name="fid" value="{feedId}">
-            <input type="hidden" name="timeframe" value="{time}">
-            <input type="hidden" name="lang" value="{language}">
-            <table class="outliers">
-                <tr>
-                    <td>[[sensitivity]]:</td>
-                    <td class="center">
-                        <select name="sensitivity">
-                            <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
-                            <option value="1"{sensitivity_1_selected}>[[low]]</option>
-                            <option value="2"{sensitivity_2_selected}>[[medium]]</option>
-                            <option value="3"{sensitivity_3_selected}>[[high]]</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>[[outlier_interpolation]]:</td>
-                    <td class="center">
-                        <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
-                        <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer">  [[off]]</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="center"><input type="submit" value="[[submit_settings]]"class="form_button outlier"></td>
-                </tr>
-            </table>
-        </form>
-    </div><br>
     <div{hidden}>
+        <div class="details">
+            <div id="diagram"></div>
+        </div><br>
+        <script src="js/radio_switch.js"></script>
+        <div class="details">
+            <h4>[[outlier_detection]]</h4>
+            {outliers}
+            <form action="index.php" method="get">
+                <input type="hidden" name="s" value="diagram">
+                <input type="hidden" name="fid" value="{feedId}">
+                <input type="hidden" name="timeframe" value="{time}">
+                <input type="hidden" name="lang" value="{language}">
+                <table class="outliers">
+                    <tr>
+                        <td>[[sensitivity]]:</td>
+                        <td class="center">
+                            <select name="sensitivity">
+                                <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
+                                <option value="1"{sensitivity_1_selected}>[[low]]</option>
+                                <option value="2"{sensitivity_2_selected}>[[medium]]</option>
+                                <option value="3"{sensitivity_3_selected}>[[high]]</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[outlier_interpolation]]:</td>
+                        <td class="center">
+                            <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
+                            <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center"><input type="submit" value="[[submit_settings]]"class="form_button outlier"></td>
+                    </tr>
+                </table>
+            </form>
+        </div><br>
 		<div class="details">
 			<h4>[[description]]</h4>
 			<p>{description}</p>
@@ -241,4 +240,5 @@
             <br>
 		</div>
 	</div>
+    {errormessage}
 </div>

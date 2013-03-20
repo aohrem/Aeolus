@@ -25,7 +25,18 @@
 		public function tplReplaceOnce($tag, $replace) {
 			$this->template = preg_replace('/\{'.$tag.'\}/', $replace, $this->template, 1);
 		}
-		
+        
+        public function tplMultipleReplace($replaceArray) {
+            foreach ( $replaceArray as $tag => $replace ) {
+                $this->tplReplace($tag, $replace);
+            }
+        }
+        
+        public function tplMultipleReplaceOnce($replaceArray) {
+            foreach ( $replaceArray as $tag => $replace ) {
+                $this->tplReplaceOnce($tag, $replace);
+            }
+        }
 		public function copyCode($tag) {
 			preg_match('@\{\+'.$tag.'\}(.*)\{\-'.$tag.'\}@s', $this->template, $subpattern);
 			if ( isset($subpattern[1]) && isset($subpattern[0]) ) {

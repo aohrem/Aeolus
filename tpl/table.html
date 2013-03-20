@@ -59,43 +59,43 @@
 				</tr>
 			</table>
             <br>
-		</div>
+		</div><br>
+        <script src="js/radio_switch.js"></script>
+        <div class="details">
+            <h4>[[outlier_detection]]</h4>
+            {outliers}
+            <form action="index.php" method="get">
+                <input type="hidden" name="s" value="table">
+                <input type="hidden" name="fid" value="{feedId}">
+                <input type="hidden" name="timeframe" value="{time}">
+                <input type="hidden" name="lang" value="{language}">
+                <table class="outliers">
+                    <tr>
+                        <td>[[sensitivity]]:</td>
+                        <td class="center">
+                            <select name="sensitivity">
+                                <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
+                                <option value="1"{sensitivity_1_selected}>[[low]]</option>
+                                <option value="2"{sensitivity_2_selected}>[[medium]]</option>
+                                <option value="3"{sensitivity_3_selected}>[[high]]</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[outlier_interpolation]]:</td>
+                        <td class="center">
+                            <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
+                            <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center"><input type="submit" value="[[submit_settings]]"class="form_button outlier"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
 	</div><br>
-    <script src="js/radio_switch.js"></script>
-    <div class="details">
-        <h4>[[outlier_detection]]</h4>
-        {outliers}
-        <form action="index.php" method="get">
-            <input type="hidden" name="s" value="table">
-            <input type="hidden" name="fid" value="{feedId}">
-            <input type="hidden" name="timeframe" value="{time}">
-            <input type="hidden" name="lang" value="{language}">
-            <table class="outliers">
-                <tr>
-                    <td>[[sensitivity]]:</td>
-                    <td class="center">
-                        <select name="sensitivity">
-                            <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
-                            <option value="1"{sensitivity_1_selected}>[[low]]</option>
-                            <option value="2"{sensitivity_2_selected}>[[medium]]</option>
-                            <option value="3"{sensitivity_3_selected}>[[high]]</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>[[outlier_interpolation]]:</td>
-                    <td class="center">
-                        <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
-                        <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer">  [[off]]</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="center"><input type="submit" value="[[submit_settings]]"class="form_button outlier"></td>
-                </tr>
-            </table>
-        </form>
-    </div><br>
     <table>
 		<tr>
 			<th>[[date_time]]</th>
@@ -107,10 +107,10 @@
 		{+tableRow}
 		<tr>
 			<td class="time">{t}</td>
-			<td>{co}{co_outlier}</td>
-			<td>{no2}{no2_outlier}</td>
-			<td>{temp}{temp_outlier}</td>
-			<td>{hum}{hum_outlier}</td>
+			<td>{co}{coOutlier}</td>
+			<td>{no2}{no2Outlier}</td>
+			<td>{temperature}{temperatureOutlier}</td>
+			<td>{humidity}{humidityOutlier}</td>
 		</tr>
 		{-tableRow}
 	</table>

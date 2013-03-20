@@ -1,11 +1,13 @@
 <?php
 	class Aeolus {
-		private $mainTemplate;
-		private $contentTemplate;
-		private $registerTemplate;
 		private $site = '';
 		private $page = '';
 		private $reg;
+        
+		private $mainTemplate;
+		private $registerTemplate;
+		private $contentTemplate;
+        
         private $language;
 		private $standardLanguage = 'de';
 		private $languages = array('en', 'de');
@@ -36,6 +38,7 @@
 				foreach ( $this->languages as $itlang ) {
 					if ( $language == $itlang ) {
 						$langCorrect = true;
+                        break;
 					}
 				}
 				
@@ -106,12 +109,16 @@
 				
 				// table view
 				case 'table':
+                    include('datavisualisation.inc.php');
 					include('table.inc.php');
+                    new Table($this->contentTemplate, $this->language);
 				break;
 				
 				// diagram view
 				case 'diagram':
+                    include('datavisualisation.inc.php');
 					include('diagram.inc.php');
+                    new Diagram($this->contentTemplate, $this->language);
 				break;
 				
 				// map view

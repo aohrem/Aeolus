@@ -21,10 +21,10 @@
 				$this->sensitivity = $sensitivity;
 			}
         }
-		
-		public function getDefaultSensitivity() {
-			return $this->defaultSensitivity;
-		}
+        
+        public function getDefaultSensitivity() {
+            return $this->defaultSensitivity;
+        }
 	
         // function calculates outliers in the data array and returns an array with the estimated outliers
         // based on "Outliers and robust methods" slides of Katharina Henneböhl
