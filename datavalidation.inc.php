@@ -107,8 +107,6 @@
             
             return $outliers;
 	    }
-        
-        // calculates the trans array
 		
         // checks if outliers in the data array were found
 		public function containsOutliers($outliers) {

@@ -19,21 +19,18 @@
         private $cosmTimeFormat = 'Y-m-d\TH:i:s\Z';
         private $limit = 1000;
         
-        private $tplErrormessage = '';
+        private $tplErrorMessage = '';
         private $tplHidden = '';
         
         protected $contentTemplate;
-        protected $language;
         protected $dataArray;
         
         protected $cosmSuccess = false;
         
-        public function __construct($contentTemplate, $language) {
+        public function __construct($contentTemplate) {
             $this->contentTemplate = $contentTemplate;
-            $this->language = $language;
             
             if ( $this->checkFeedId() ) {
-                $this->timeframe = $this->determineTimeframe();
                 $this->replaceTimeframe();
                 $this->getCosmData();
                 if ( $this->cosmSuccess ) {
@@ -63,34 +60,15 @@
             }   
         }
         
-		private function determineTimeframe() {
-            // get the timeframe to show and set a default value if not available
-            if ( isset($_GET['timeframe']) ) {
-                $timeframe = htmlentities(mysql_real_escape_string($_GET['timeframe']));
-                
-                // iterate timeframes to check if given timeframe is valid
-                $timeframeValid = false;
-                foreach ( $this->timeframes as $val ) {
-                    if ( $timeframe == $val ) {
-                        $timeframeValid = true;
-                        break;
-                    }
-                }
-                
-                // set default timeframe if given timeframe is not valid
-                if ( ! $timeframeValid ) {
-                    $timeframe = $this->defaultTimeframe;
-                }
-            }
-            else {
-                $timeframe = $this->defaultTimeframe;
-            }
-            
-            return $timeframe;		
-        }
-        
         private function replaceTimeframe() {
-            $timeframe = $this->determineTimeframe();
+            // get the timeframe to show and check if it is valid
+            if ( isset($_GET['timeframe']) && in_array($_GET['timeframe'], $this->timeframes) ) {
+                $this->timeframe = htmlentities(mysql_real_escape_string($_GET['timeframe']));
+            }
+            // use the default timeframe if no timeframe was given or the given timeframe is not valid
+            else {
+                $this->timeframe = $this->defaultTimeframe;
+            }
             
             // replace timeframe
             $this->contentTemplate->tplReplace('time', $this->timeframe);
@@ -128,7 +106,7 @@
                 $this->contentTemplate->tplReplace('title', '');
                 
                 $this->tplHidden = ' class="hidden"';
-                $this->tplErrormessage = '<div class="errormessage details">'.translate($errorCode).'</div>';
+                $this->tplErrorMessage = '<div class="errormessage details">'.translate($errorCode).'</div>';
                 
                 $this->cosmSuccess = false;
             }
@@ -173,7 +151,7 @@
             }
             
             // mark active outlier detection sensitivity as selected
-            for ( $i = 0; $i < 4; $i++ ) {
+            for ( $i = 0; $i <= 3; $i++ ) {
                 $sel = '';
                 
                 if ( $this->sensitivity == $i ) {
@@ -190,8 +168,8 @@
         }
         
         private function __destruct() {
-            // replace error message in template and hide details
-            $this->contentTemplate->tplReplace('errormessage', $this->tplErrormessage);
+            // replace error message in template and hide description and outlier detection boxes if not needed
+            $this->contentTemplate->tplReplace('errormessage', $this->tplErrorMessage);
             $this->contentTemplate->tplReplace('hidden', $this->tplHidden);
         }
     }

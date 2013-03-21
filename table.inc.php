@@ -2,8 +2,8 @@
 class Table extends DataVisualisation {
     private $interpolateOutliers;
     
-    public function __construct($contentTemplate, $language) {
-        parent::__construct($contentTemplate, $language);
+    public function __construct($contentTemplate) {
+        parent::__construct($contentTemplate);
         
         $this->outlierInterpolation();
         if ( $this->cosmSuccess ) {
@@ -23,7 +23,7 @@ class Table extends DataVisualisation {
             $this->contentTemplate->tplReplace('interpolateOutliers', 'true');
             
             if ( $this->cosmSuccess && $this->dataValidation->containsOutliers($this->outliers) && $this->sensitivity != 0 ) {
-                $tplOutliers = '<a href="index.php?s=table&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=false&amp;sensitivity='.$this->sensitivity.'&amp;lang='.$this->language.'"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
+                $tplOutliers = '<a href="index.php?s=table&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=false&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated').'</div>';
                 
                 // interpolate outliers
                 $this->dataArray = $this->dataValidation->interpolateOutliers($this->outliers);
@@ -37,7 +37,7 @@ class Table extends DataVisualisation {
             
             // check if dataset contains outliers and outlier detection is on
             if ( $this->cosmSuccess && $this->dataValidation->containsOutliers($this->outliers) && $this->sensitivity != 0 ) {
-                $tplOutliers = '<a href="index.php?s=table&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=true&amp;sensitivity='.$this->sensitivity.'&amp;lang='.$this->language.'"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found').'</div>';
+                $tplOutliers = '<a href="index.php?s=table&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=true&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found').'</div>';
             }
         }
         $this->contentTemplate->tplReplace('outliers', $tplOutliers);

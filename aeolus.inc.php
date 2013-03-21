@@ -111,14 +111,14 @@
 				case 'table':
                     include('datavisualisation.inc.php');
 					include('table.inc.php');
-                    new Table($this->contentTemplate, $this->language);
+                    new Table($this->contentTemplate);
 				break;
 				
 				// diagram view
 				case 'diagram':
                     include('datavisualisation.inc.php');
 					include('diagram.inc.php');
-                    new Diagram($this->contentTemplate, $this->language);
+                    new Diagram($this->contentTemplate);
 				break;
 				
 				// map view
