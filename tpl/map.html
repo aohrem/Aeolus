@@ -37,7 +37,7 @@
 		<table cellpadding="3" cellspacing="0" border="0" width="100%">
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_class1.png" alt="class1">
+					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class1.png" alt="class1">
 				</td>
 				<td width="66%" align="left">
 					{class1_interval}
@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_class2.png" alt="class2">
+					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class2.png" alt="class2">
 				</td>
 				<td width="66%" align="left">
 					{class2_interval}
@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_class3.png" alt="class3">
+					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class3.png" alt="class3">
 				</td>
 				<td width="66%" align="left">
 					{class3_interval}
@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_class4.png" alt="class4">
+					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class4.png" alt="class4">
 				</td>
 				<td width="66%" align="left">
 					{class4_interval}
@@ -69,7 +69,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_class5.png" alt="class5">
+					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class5.png" alt="class5">
 				</td>
 				<td width="66%" align="left">
 					{class5_interval}
@@ -77,7 +77,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/eggicon_small_noval.png" alt="no_value">
+					<img src="img/map_eggs/eggicon_small_noval.png" alt="no_value">
 				</td>
 				<td width="66%" align="left">
 					[[no_value]]
@@ -91,6 +91,6 @@
 <script src="js/map_big.js"></script>
 <script>
 	{+Egg}
-	addEgg({egg_lat}, {egg_lon}, {egg_fid}, 'eggicon', {egg_color}, {egg_value});
+	addEgg({egg_lat}, {egg_lon}, {egg_fid}, 'eggicon', {egg_color}, {egg_value}, '{egg_sensor}');
 	{-Egg}
 </script>
