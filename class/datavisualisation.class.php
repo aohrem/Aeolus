@@ -127,7 +127,7 @@
         }
         
         private function applyDataValidation() {
-            include('datavalidation.inc.php');
+            include('datavalidation.class.php');
             $this->dataValidation = new DataValidation($this->dataArray, $this->sensors, $this->sensitivity, $this->timeframe);
             $this->outliers = $this->dataValidation->getOutliers();
         }

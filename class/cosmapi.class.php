@@ -197,7 +197,7 @@
 			else if ( isset($xml->environment->location->name) ) {
 				$name = $xml->environment->location->name;
 				
-				include('nominatimapi.inc.php');
+				include('nominatimapi.class.php');
 				$nominatimAPI = new NominatimAPI();
 				
 				return $nominatimAPI->getCoordinates($name);

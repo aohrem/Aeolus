@@ -23,7 +23,7 @@
 		
 		private function loadTemplate() {
 			// load Template class and get contents of main template
-			include('template.inc.php');
+			include('template.class.php');
 			$this->mainTemplate = new Template();
 			$this->mainTemplate->readTpl('main');
 		}
@@ -109,15 +109,15 @@
 				
 				// table view
 				case 'table':
-                    include('datavisualisation.inc.php');
-					include('table.inc.php');
+                    include('datavisualisation.class.php');
+					include('table.class.php');
                     new Table($this->contentTemplate);
 				break;
 				
 				// diagram view
 				case 'diagram':
-                    include('datavisualisation.inc.php');
-					include('diagram.inc.php');
+                    include('datavisualisation.class.php');
+					include('diagram.class.php');
                     new Diagram($this->contentTemplate);
 				break;
 				

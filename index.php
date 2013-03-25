@@ -1,10 +1,10 @@
 <?php
 	include('functions.inc.php');
-	include('simplexmlextended.inc.php');
-	include('nominatimapi.inc.php');
-	include('cosmapi.inc.php');
-	include('sql.inc.php');
+	include('class/simplexmlextended.class.php');
+	include('class/nominatimapi.class.php');
+	include('class/cosmapi.class.php');
+	include('class/sql.class.php');
 	
-	include('aeolus.inc.php');
+	include('class/aeolus.class.php');
 	new Aeolus();
 ?>

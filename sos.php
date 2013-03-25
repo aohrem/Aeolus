@@ -1,9 +1,9 @@
 <?php
-	include('lang/en.lang.php');
-	include('template.inc.php');
-	include('functions.inc.php');
-	include('simplexmlextended.inc.php');
-	include('cosmapi.inc.php');
+    include('lang/en.lang.php');
+    include('functions.inc.php');
+	include('class/template.class.php');
+	include('class/simplexmlextended.class.php');
+	include('class/cosmapi.class.php');
 	
 	class SOS {
 		private $siteUrl;
