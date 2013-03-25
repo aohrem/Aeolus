@@ -54,7 +54,7 @@ class Table extends DataVisualisation {
                 // replace date and time
                 $this->contentTemplate->tplReplaceOnce('t', date(translate('php_time_format'), $time));
                 
-                // if there is no data, show a -
+                // if there is no data, show a "-"
                 if ( ! isset($val[$sensor]) ) { $val[$sensor] = '-'; }
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);
                 

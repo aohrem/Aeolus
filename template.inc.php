@@ -9,6 +9,14 @@
 			return $this->template;
 		}
 		
+		public function setFolder($folder) {
+			$this->folder = $folder;
+		}
+		
+		public function setFileExtension($fileExtension) {
+			$this->fileExtension = $fileExtension;
+		}
+		
 		public function readTpl($filename) {
 			$file = $this->folder.$filename.$this->fileExtension;
 			if ( ! file_exists($file) ) {
