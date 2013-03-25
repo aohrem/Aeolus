@@ -17,7 +17,7 @@ class LanuvParser {
     
     // function for parsing Lanuv HTML Code and removing unnecessary space characters
     // returns an array which contains all values stored between "<td class"mw_%"></td>"-tags of the Lanuv HTML Code 
-    public function parseLanuv() {
+    private function parseLanuv() {
         $html = file_get_contents($this->lanuvUrl.$this->stationCode.$this->fileExtension);
         
         // replace empty value tags by #s to simplify further processing
@@ -43,7 +43,7 @@ class LanuvParser {
 
 
     // returns grouped values of a concret sensor in an associative array combined with the corresponding time
-    public function getValueGroup($dataArray) {
+    private function getValueGroup($dataArray) {
         $i = 0;
         
         // current index of the array

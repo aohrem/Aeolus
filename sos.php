@@ -8,7 +8,7 @@
 	class SOS {
 		private $siteUrl;
 		
-		private $supportedOperations = array('getObservation');
+		private $supportedOperations = array('getObservation', 'getCapabilities', 'describeSensor');
 		private $operation;
 		private $feedId;
 		private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
@@ -28,7 +28,9 @@
 		private $dataArray;
 	
 		public function __construct() {
+            header('Content-type: application/xml');
 			$this->getParameters();
+            
 			switch ( $this->operation ) {
 				case 'getObservation':
 					$this->getCosmData();
@@ -44,23 +46,26 @@
 				$this->operation = $_GET['operation'];
 			}
 			else {
-				die('Error - No operation given. Please set the operation parameter.');
+				die('<error>Error - No operation given. Please set the operation parameter.</error>');
 			}
 			
 			if ( ! in_array($this->operation, $this->supportedOperations) ) {
-				die('Error - Operation not supported');
+				die('<error>Error - Operation not supported.</error>');
 			}
 			
 			if ( isset($_GET['fid']) && is_numeric($_GET['fid']) ) {
 				$this->feedId = $_GET['fid'];
 			}
-			else {
-				die('Error - Feed ID incorrect');
-			}
+            else if ( $this->operation != 'getCapabilities' ) {
+				die('<error>Error - Feed ID incorrect.</error>');
+            }
 			
 			if ( isset($_GET['sensor']) ) {
 				$this->sensor = $_GET['sensor'];
 			}
+            else if ( $this->operation == 'describeSensor' ) {
+				die('<error>Error - No sensor given.</error>');
+            }
 			
 			if ( ! in_array($this->sensor, $this->sensors) ) {
 				$this->sensor = 'all';

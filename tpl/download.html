@@ -1,0 +1,121 @@
+﻿<script src="js/outlierhints.js"></script>
+<h1>{title}[[data_download]]</h1>
+<div id="navi_left">
+	<div>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]"></a>
+		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="last"></a>
+	</div>
+	<div>
+		<a href="#"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="active last"></a>
+	</div>
+</div>
+<div id="time_picker">
+	<div{6h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[6_hours]]</a></div>
+	<div{24h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[24_hours]]</a></div>
+	<div{48h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[48_hours]]</a></div>
+	<div{1w_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_week]]</a></div>
+	<div{1m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_month]]</a></div>
+	<div{3m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[3_month]]</a></div>
+</div>
+<div id="data_content">
+	<div class="details">
+		<h4>[[description]]</h4>
+		<p>{description}</p>
+		<div class="left">
+			<h4>[[pos_and_ele]]</h4>
+			<table class="metadata">
+				<tr>
+					<td>[[location_name]]:</td>
+					<td>{locationName}</td>
+				</tr>
+				<tr>
+					<td>[[latitude]]:</td>
+					<td>{lat}</td>
+				</tr>
+				<tr>
+					<td>[[longitude]]:</td>
+					<td>{lon}</td>
+				</tr>
+				<tr>
+					<td>[[ele]]:</td>
+					<td>{ele}</td>
+				</tr>
+			</table>
+		</div>
+		<h4>[[more_info]]</h4>
+		<table class="metadata">
+			<tr>
+				<td>[[feed_id]]:</td>
+				<td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
+			</tr>
+			<tr>
+				<td>[[website]]:</td>
+				<td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
+			</tr>
+			<tr>
+				<td>[[state]]:</td>
+				<td>{status}</td>
+			</tr>
+			<tr>
+				<td>[[exposure]]:</td>
+				<td>{exposure}</td>
+			</tr>
+		</table>
+        <br>
+	</div><br>
+    <div class="details">
+        <h4>[[raw_sensor_data_from_cosm]]</h4><br>
+        <div class="download"><a href="{cosm_link_xml}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]"> <span class="text">[[download]] (.xml)</span></a></div>
+        <div class="download"><a href="{cosm_link_json}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]"> <span class="text">[[download]] (.json)</span></a></div>
+        <div class="download"><a href="{cosm_link_csv}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]"> <span class="text">[[download]] (.csv)</span></a></div>
+        <br><br><br><br>
+    </div><br>
+    <script src="js/radio_switch.js"></script>
+    <div class="details">
+        <h4>[[title]] [[sensor_observation_service]]</h4><br>
+        <div class="download">
+            <a href="sos.php?operation=getObservation&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" target="_blank">
+                <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]"> <span class="text">getObservation (.xml)</span>
+            </a>
+            <a href="sos.php?operation=getCapabilities" target="_blank">
+                <span class="text">getCapabilities (.xml)</span>
+            </a>
+            <a href="sos.php?operation=describeSensor&amp;sensor=co" target="_blank">
+                <span class="text">describeSensor (.xml)</span>
+            </a>
+        </div>
+        <br><br><br><br><br>
+        <h4>[[outlier_detection]]</h4>
+        <form action="index.php" method="get">
+            <input type="hidden" name="s" value="download">
+            <input type="hidden" name="fid" value="{feedId}">
+            <input type="hidden" name="timeframe" value="{time}">
+            <table class="outliers">
+                <tr>
+                    <td>[[sensitivity]]:</td>
+                    <td class="center">
+                        <select name="sensitivity">
+                            <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
+                            <option value="1"{sensitivity_1_selected}>[[low]]</option>
+                            <option value="2"{sensitivity_2_selected}>[[medium]]</option>
+                            <option value="3"{sensitivity_3_selected}>[[high]]</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>[[outlier_interpolation]]:</td>
+                    <td class="center">
+                        <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
+                        <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="center"><input type="submit" value="[[submit_settings]]"class="form_button outlier"></td>
+                </tr>
+            </table>
+            <input type="hidden" name="lang" value="{language}">
+        </form>
+    </div>
+    {errormessage}
+</div>

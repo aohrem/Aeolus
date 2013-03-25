@@ -120,6 +120,13 @@
 					include('diagram.class.php');
                     new Diagram($this->contentTemplate);
 				break;
+                
+                // data download
+                case 'download':
+                    include('datavisualisation.class.php');
+					include('download.class.php');
+                    new Download($this->contentTemplate);
+                break;
 				
 				// map view
 				case 'map':

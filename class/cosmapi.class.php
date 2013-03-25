@@ -7,7 +7,7 @@
 	class CosmAPI {
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
-		private $request_url;
+		private $requestUrl;
 		private $debug_mode = true;
 		
 		private function readFeed($url) {
@@ -31,18 +31,9 @@
 				return false;
 			}
 		}
-		
-		// sends HTTP GET request to the cosm API, parses the returned XML and returns an array with the data of the feed
-        // supported values for $values:
-        //  'all_values': returns all values of the given timeframe
-        //  'current_value': returns only the current value
-        // error codes:
-        //  'cosm_feed_is_not_an_aqe': feed is no air quality egg
-        //  'cosm_no_data_found': no data for this timeframe
-        //  'cosm_no_supported_sensor': no supported sensor type found
-        //  'cosm_error'
-		public function parseFeed($feedid, $returnedValues, $start, $end, $limit, $interval, $duration) {
-			// set parameters if they are not empty
+        
+        // set parameters if they are not empty
+        public function setRequestUrl($feedid, $start, $end, $limit, $interval, $duration, $fileExtension) {
 			if ( $start != '' ) {
 				$start = '&start='.$start;
 			}
@@ -59,10 +50,27 @@
 				$duration = '&duration='.$duration;
 			}
 			
-			$requestUrl = $this->url.'/'.$feedid.'.xml?key='.$this->api_key;
+			$this->requestUrl = $this->url.'/'.$feedid.'.'.$fileExtension.'?key='.$this->api_key.$start.$end.$limit.$interval.$duration;;
+        }
+        
+        public function getRequestUrl() {
+            return $this->requestUrl;
+        }
+        
+		// sends HTTP GET request to the cosm API, parses the returned XML and returns an array with the data of the feed
+        // supported values for $values:
+        //  'all_values': returns all values of the given timeframe
+        //  'current_value': returns only the current value
+        // error codes:
+        //  'cosm_feed_is_not_an_aqe': feed is no air quality egg
+        //  'cosm_no_data_found': no data for this timeframe
+        //  'cosm_no_supported_sensor': no supported sensor type found
+        //  'cosm_error'
+		public function parseFeed($feedid, $returnedValues, $start, $end, $limit, $interval, $duration) {
+			$this->setRequestUrl($feedid, '', '', '', '', '', 'xml');
 			
 			if ( ! $this->debug_mode ) {
-				$feedXml = $this->readFeed($requestUrl);
+				$feedXml = $this->readFeed($this->requestUrl);
 			}
 			else {
 				$feedXml = $this->readLocalXml('test_feed');

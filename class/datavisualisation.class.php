@@ -14,10 +14,10 @@
         protected $sensors = array('co', 'no2', 'humidity', 'temperature');
         
         // constants used to determine parameters for the cosm-API request
-        private $seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
-        private $interval = array('6h' => 60, '24h' => 300, '48h' => 600, '1w' => 10800, '1m' => 604800, '3m' => 2678400);
-        private $cosmTimeFormat = 'Y-m-d\TH:i:s\Z';
-        private $limit = 1000;
+        protected $seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
+        protected $interval = array('6h' => 60, '24h' => 300, '48h' => 600, '1w' => 10800, '1m' => 604800, '3m' => 2678400);
+        protected $cosmTimeFormat = 'Y-m-d\TH:i:s\Z';
+        protected $limit = 1000;
         
         private $tplErrorMessage = '';
         private $tplHidden = '';

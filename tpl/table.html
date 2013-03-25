@@ -6,7 +6,7 @@
 		<a href="#"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="active last"></a>
 	</div>
 	<div>
-		<a href="index.php?s=download&amp;fid={feedId}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
+		<a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
 	</div>
 </div>
 <div id="time_picker">
@@ -46,12 +46,16 @@
 			<h4>[[more_info]]</h4>
 			<table class="metadata">
 				<tr>
-					<td>[[state]]:</td>
-					<td>{status}</td>
-				</tr>
-				<tr>
 					<td>[[feed_id]]:</td>
 					<td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
+				</tr>
+				<tr>
+					<td>[[website]]:</td>
+					<td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
+				</tr>
+				<tr>
+					<td>[[state]]:</td>
+					<td>{status}</td>
 				</tr>
 				<tr>
 					<td>[[exposure]]:</td>

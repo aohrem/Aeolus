@@ -314,7 +314,7 @@ table.register td {
 	font-weight: bold;
 	display: inline-block;
 	padding: 0px 10px;
-	width: 200px;
+	width: 240px;
 	border-bottom: 1px solid #000000;
 	margin: 0px;
 	line-height: 20px;
@@ -322,6 +322,35 @@ table.register td {
 
 #content .details p {
 	padding: 0px 20px;
+}
+
+#content .details .download {
+    padding: 20px;
+    text-decoration: none;
+    display: inline;
+    float: left;
+}
+
+#content .details .download .text {
+    position: relative;
+    bottom: 19px;
+    left: 5px;
+    font-size: 110%;
+    padding: 3px 10px;
+}
+
+#content .details .download .text:hover {
+    background-color: #80B8E5;
+    color: #FFFFFF;
+}
+
+
+#content .details .download a {
+    text-decoration: none;
+}
+
+#content .details .download a:hover {
+    text-decoration: none;
 }
 
 #content .details table.metadata {

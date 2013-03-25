@@ -5,6 +5,7 @@
 		'home' => 'Startseite',
 		'map' => 'Karte',
 		'register' => 'Registrierung',
+        'aqe' => 'Air Quality Egg',
 		'delete_aqe' => 'Air Quality Egg entfernen',
 		'delete_aqe_explanation' => 'Platzhaltertext, Gr&uuml;nde ein AQE zu l&ouml;schen und wie das dann gemacht wird.',
 		'feed_id' => 'Feed ID',
@@ -109,6 +110,10 @@
         'degrees_celsius' => 'Grad Celsius',
         'date_time' => 'Datum / Uhrzeit',
         'js_time_format' => 'dd.MM.y HH:mm',
-        'php_time_format' => 'd.m.Y H:i'
+        'php_time_format' => 'd.m.Y H:i',
+        'website' => 'Website',
+        'raw_sensor_data_from_cosm' => 'Unverarbeitete Sensordaten',
+        'download' => 'Download',
+        'sensor_observation_service' => 'Sensor Observation Service'
 	);
 ?>
