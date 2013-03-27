@@ -227,7 +227,6 @@ table.register td {
 	right: 90px;
 	background-color: #A0C6E5;
 	width: 300px;
-	max-height: 226px;
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px;
@@ -235,13 +234,16 @@ table.register td {
 	padding-left: 5px;
 	z-index: 3;
 	visibility: hidden;
-	word-wrap: break-word;
-	overflow: auto;
+	color: white;
 }
 
 #content #results_frame #results {
 	font-size: 80%;
 	color: #FFFFFF;
+	max-height: 200px;
+	word-wrap: break-word;
+	overflow: auto;
+	margin: 5px;
 }
 
 #content #results_frame #results a:link, #content #results_frame #results a:visited {
@@ -256,8 +258,8 @@ table.register td {
 
 #content #results_frame #results_close {
 	position: absolute;
-	top: 15px;
-	right: 15px;
+	top: 10px;
+	right: 10px;
 }
 
 #content #co_button {
@@ -759,36 +761,4 @@ img {
     background-position: right top;
     background-repeat: no-repeat;
     min-height: 436px;
-}
-
-.leaflet-popup{
-}
-
-.leaflet-popup-tip{
-	background: transparent !important;
-	box-shadow: 0 0px 0px transparent !important;
-	-moz-box-shadow: 0 0px 0px transparent !important;
-	-webkit-box-shadow: 0 0px 0px transparent !important;
-}
-
-.leaflet-popup-content-wrapper {
-	height: 80px;
-	width: 80px;
-	/*background: transparent !important;*/
-	-webkit-border-radius: 0px !important;
-	border-radius: 0px !important;
-	box-shadow: 0 0px 0px transparent !important;
-	-moz-box-shadow: 0 0px 0px transparent !important;
-	-webkit-box-shadow: 0 0px 0px transparent !important;
-}
-
-.leaflet-popup-content-wrapper .leaflet-popup-content {
-	background-image: url(../img/home.png);
-}
-
-.leaflet-popup-tip-container {
-}
-
-.leaflet-popup-close-button {
-	visibility: hidden;
 }

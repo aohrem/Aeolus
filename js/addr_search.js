@@ -26,7 +26,7 @@ $('#results').empty();
 	Adding results to a list that suggests possible matches
 	*/
 	if (items.length != 0) {
-      $('<p>', { html: "Suchergebnisse:" }).appendTo('#results');
+      //$('<p>', { html: "Suchergebnisse:" }).appendTo('#results');
       $('<ul/>', {
         'class': 'result-list',
         html: items.join('')
