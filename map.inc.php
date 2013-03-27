@@ -67,7 +67,7 @@
 				header("Location:index.php?s=map&lang=".$this->language);
 			break;
 		}
-		$this->contentTemplate->tplReplace('egg_sensor', $classify);
+		$this->contentTemplate->tplReplace('egg_sensor', "_".$classify);
 		$this->contentTemplate->tplReplace('class1_interval', $classes["class1"]);
 		$this->contentTemplate->tplReplace('class2_interval', $classes["class2"]);
 		$this->contentTemplate->tplReplace('class3_interval', $classes["class3"]);
@@ -77,6 +77,7 @@
 	}
 	else {
 		$this->contentTemplate->tplReplace('show', '');
+		$this->contentTemplate->tplReplace('egg_sensor', "");
 	}
 	
 	$db = new Sql();

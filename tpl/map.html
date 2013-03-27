@@ -1,3 +1,4 @@
+<a name="mapview"></a>
 <h1>[[map_view]]</h1>
 <script src ="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/addr_search.js"></script>
@@ -13,22 +14,22 @@
 		<img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
 	</div>
 	<div class="map_buttons" id="co_button">
-		<a href="{url}&classify=co">
+		<a href="{url}&classify=co#mapview">
 			<img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="no2_button">
-		<a href="{url}&classify=no2">
+		<a href="{url}&classify=no2#mapview">
 			<img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="temp_button">
-		<a href="{url}&classify=temperature">
+		<a href="{url}&classify=temperature#mapview">
 			<img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button">
 		</a>
 	</div>
 	<div class="map_buttons" id="hum_button">
-		<a href="{url}&classify=humidity">
+		<a href="{url}&classify=humidity#mapview">
 			<img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button">
 		</a>
 	</div>
@@ -37,7 +38,7 @@
 		<table cellpadding="3" cellspacing="0" border="0" width="100%">
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class1.png" alt="class1">
+					<img src="img/map_eggs/eggicon_small{egg_sensor}_class1.png" alt="class1">
 				</td>
 				<td width="66%" align="left">
 					{class1_interval}
@@ -45,7 +46,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class2.png" alt="class2">
+					<img src="img/map_eggs/eggicon_small{egg_sensor}_class2.png" alt="class2">
 				</td>
 				<td width="66%" align="left">
 					{class2_interval}
@@ -53,7 +54,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class3.png" alt="class3">
+					<img src="img/map_eggs/eggicon_small{egg_sensor}_class3.png" alt="class3">
 				</td>
 				<td width="66%" align="left">
 					{class3_interval}
@@ -61,7 +62,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class4.png" alt="class4">
+					<img src="img/map_eggs/eggicon_small{egg_sensor}_class4.png" alt="class4">
 				</td>
 				<td width="66%" align="left">
 					{class4_interval}
@@ -69,7 +70,7 @@
 			</tr>
 			<tr>
 				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_{egg_sensor}_class5.png" alt="class5">
+					<img src="img/map_eggs/eggicon_small{egg_sensor}_class5.png" alt="class5">
 				</td>
 				<td width="66%" align="left">
 					{class5_interval}
@@ -84,7 +85,7 @@
 				</td>
 			</tr>
 		</table>
-		<a href="{url}">[[blank_classification_out]]</a>
+		<a href="{url}#mapview">[[blank_classification_out]]</a>
 	</div>
 	<div id="map_big"></div>
 </div>
