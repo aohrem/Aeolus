@@ -27,11 +27,11 @@ class LanuvParser {
         // regular expression for parsing the html code
         $regexp = '/<tdclass="[_a-z0-1]*">(.*?)<\/td>/';
         
-        //preg_match_all() returns an associative array in $array containing all values that are stored within the regular expression
+        // preg_match_all() returns an associative array in $array[1] containing all values that are stored within the regular expression
         preg_match_all($regexp, $html, $array);
         
         // since both dimensions of the array are identical only the first dimension is further needed
-        $dataArray = $array[0];
+        $dataArray = $array[1];
         
 		// removing non-values at the end of the array
 		for ( $i = 0; $i <= 10; $i++ ) {
@@ -55,11 +55,6 @@ class LanuvParser {
             
             // index of demanded sensortype
             $value = $i + $this->sensorId;
-			
-			// ignore XX:30h values
-			if ( strpos($dataArray[$time],'/[0-9]^:30') ) {
-                goto ignore_value;
-			}
             
 			// ignore empty measurements
 			if ( strpos($dataArray[$value],'#') ) {
@@ -102,7 +97,7 @@ class LanuvParser {
 }
 
 // test
-$stationCode = 'BOTT';
+$stationCode = 'VMS2';
 $sensor = 'pm10';
 $lanuvParser = new LanuvParser($stationCode, $sensor);
 print $lanuvParser->getLastValue();
