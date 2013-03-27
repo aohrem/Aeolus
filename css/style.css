@@ -227,14 +227,31 @@ table.register td {
 	right: 90px;
 	background-color: #A0C6E5;
 	width: 300px;
+	max-height: 226px;
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px;
 	padding: 2px;
 	padding-left: 5px;
-	z-index: 2;
+	z-index: 3;
 	visibility: hidden;
 	word-wrap: break-word;
+	overflow: auto;
+}
+
+#content #results_frame #results {
+	font-size: 80%;
+	color: #FFFFFF;
+}
+
+#content #results_frame #results a:link, #content #results_frame #results a:visited {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+
+#content #results_frame #results a:hover, #content #results_frame #results a:active {
+	color: #FFFFFF;
+	text-decoration:underline;
 }
 
 #content #results_frame #results_close {
@@ -269,7 +286,7 @@ table.register td {
 	position: absolute;
 	right: 5px;
 	bottom: 22px;
-	width: 200px;
+	width: 180px;
 	height: 270px;
 	background-color: #A0C5E4;
 	-moz-border-radius: 10px;
@@ -285,6 +302,16 @@ table.register td {
 #content #legend h1 {
 	font-size: 100%;
 	color: #FFFFFF;
+}
+
+#content #legend a:link, #content #legend a:visited {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+
+#content #legend a:hover, #content #legend a:active {
+	color: #FFFFFF;
+	text-decoration:underline;
 }
 
 #content #legend.show {
