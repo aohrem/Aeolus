@@ -102,7 +102,6 @@
 				}
 				// check if parsing the xml was successfull
 				else if ( is_array($dataArray) ) {
-					$this->contentTemplate->tplReplaceOnce('egg_value', $dataArray['current_value'][$classify]);
 					switch ($classify) {
 						case "co":
 							$class = "class".classifier($dataArray['current_value'][$classify], $min, $max, "class");
@@ -120,9 +119,6 @@
 						break;
 					}
 				}
-			}
-			else {
-				$this->contentTemplate->tplReplaceOnce('egg_value', 0);
 			}
 			$this->contentTemplate->tplReplaceOnce('egg_color', "'".$class."'");
 		}
