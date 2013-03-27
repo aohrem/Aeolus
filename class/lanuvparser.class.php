@@ -9,9 +9,8 @@ class LanuvParser {
     
     private $dataArray;
     
-    public function __construct($stationCode, $sensor) {
+    public function __construct($stationCode) {
         $this->stationCode = $stationCode;
-        $this->sensorId = $this->sensors[$sensor];
         $this->getValueGroup($this->parseLanuv());
     }
     
@@ -21,7 +20,7 @@ class LanuvParser {
         $html = file_get_contents($this->lanuvUrl.$this->stationCode.$this->fileExtension);
         
         // replace empty value tags by #s to simplify further processing
-        $html = str_replace('     ', '#', $html);
+        $html = str_replace('     ', 'null', $html);
         $html = str_replace(' ', '', $html);
         
         // regular expression for parsing the html code
@@ -44,53 +43,53 @@ class LanuvParser {
 
     // returns grouped values of a concret sensor in an associative array combined with the corresponding time
     private function getValueGroup($dataArray) {
-        $i = 0;
         
-        // current index of the array
-        $r = 0;
+		foreach ( $this->sensors as $sensorString => $sensorId ) {
+			$i = 0;
         
-        while ( $i < sizeof($dataArray) ) {
-            // index of the time at each measuring block
-            $time = $i;
+			// current index of the array
+			$r = 0;
+			while ( $i < sizeof($dataArray) ) {
+				// index of the time at each measuring block
+				$time = $i;
             
-            // index of demanded sensortype
-            $value = $i + $this->sensorId;
-            
-			// ignore empty measurements
-			if ( strpos($dataArray[$value],'#') ) {
-                goto ignore_value;
+				// index of demanded sensortype
+				$value = $i + $sensorId;
+				
+				// increase the index for starting at the next measurement block in each loop
+				$i += 11;
+				
+				// ignore empty measurements
+				if ( $dataArray[$value] != 'null' ) {
+					// fill the data array
+					$this->dataArray[$sensorString]['time'][$r] = $dataArray[$time];
+					$this->dataArray[$sensorString]['value'][$r] = $dataArray[$value];
+					$r++;
+				}
 			}
-            
-            // fill the data array
-            $this->dataArray['time'][$r] = $dataArray[$time];
-            $this->dataArray['value'][$r] = $dataArray[$value];
-            $r++;
-            
-            // increase the index for starting at the next measurement block in each loop
-            ignore_value:
-            $i += 11;
-        }
+		}
+		print_r($this->dataArray);
     }
 
     // returns the the latest measurement
-    public function getLastValue() {
+    public function getLastValue($sensorString) {
         // return '-' if station does not provide this sensor or any value at the current time
-        if ( end($this->dataArray['value']) == '' ) {
+        if ( end($this->dataArray[$sensorString]['value']) == '' ) {
             return '-';
         }
         else {
-            return end($this->dataArray['value']);
+            return end($this->dataArray[$sensorString]['value']);
         }
     }
 
     // returns the timeof latest measurement
-    public function updatedOn() {
+    public function updatedOn($sensorString) {
         // return '-' if station does not provide this sensor or any value at the current time
-        if ( end($this->dataArray['time']) == '' ) {
+        if ( end($this->dataArray[$sensorString]['time']) == '' ) {
             return '-';
         }
         else {
-            return end($this->dataArray['time']);
+            return end($this->dataArray[$sensorString]['time']);
         }
     }
 
@@ -98,7 +97,6 @@ class LanuvParser {
 
 // test
 $stationCode = 'VMS2';
-$sensor = 'pm10';
-$lanuvParser = new LanuvParser($stationCode, $sensor);
-print $lanuvParser->getLastValue();
+$lanuvParser = new LanuvParser($stationCode);
+print $lanuvParser->getLastValue('pm10');
 ?>
