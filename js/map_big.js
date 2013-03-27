@@ -43,30 +43,30 @@ function openCircleMenu(lat, lon, feedID){
 			iconSize:	[10, 10],
 			iconAnchor:	[5, 5]
 		});
-		var bgMarker = new L.Marker(
-				[lat, lon], 
-				{icon: bgIcon}
-			).addTo(map);
-		var checkMarker = new L.Marker(
-				[lat, lon], 
-				{icon: checkIcon}
-			).addTo(map);
-		var tableMarker = new L.Marker(
-				[lat, lon],
-				{icon: tableIcon}
-			).addTo(map);
-		var diagMarker = new L.Marker(
-				[lat, lon],
-				{icon: diagIcon}
-			).addTo(map);
-		var closeMarker = new L.Marker(
-				[lat, lon],
-				{icon: closeIcon}
-			).addTo(map);
+		var bgMarker = new L.Marker([lat, lon], {
+				icon: bgIcon,
+				zIndexOffset: 200
+			}).addTo(map);
+		var checkMarker = new L.Marker([lat, lon], {
+				icon: checkIcon,
+				zIndexOffset: 200
+			}).addTo(map);
+		var tableMarker = new L.Marker([lat, lon], {
+				icon: tableIcon,
+				zIndexOffset: 200
+			}).addTo(map);
+		var diagMarker = new L.Marker([lat, lon], {
+				icon: diagIcon,
+				zIndexOffset: 200
+			}).addTo(map);
+		var closeMarker = new L.Marker([lat, lon], {
+				icon: closeIcon,
+				zIndexOffset: 200
+			}).addTo(map);
 		
 		checkMarker.on('click', function(e){ alert("check" + feedID) });
-		tableMarker.on('click', function(e){ location.href='index.php?s=diagram&fid=' + feedID + '&lang=de';   });
-		diagMarker.on('click', function(e){ location.href='index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; });
+		diagMarker.on('click', function(e){ location.href='index.php?s=diagram&fid=' + feedID + '&lang=de';   });
+		tableMarker.on('click', function(e){ location.href='index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; });
 		closeMarker.on('click', function(e){
 				map.removeLayer(bgMarker);
 				map.removeLayer(checkMarker);
