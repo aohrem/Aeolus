@@ -19,26 +19,35 @@ function addEgg(lat, lon, feedID, type, color, value, sensor){
 }
 
 function openCircleMenu(lat, lon, feedID){
-	var checkIcon = L.icon({
-			iconUrl:	'img/kreismenu_check.png',
+		var bgIcon = L.icon({
+			iconUrl:	'img/kreismenu_hintergrund.png',
 			iconAnchor:	[75, 75],
-			iconSize:	[150, 52]
+			iconSize:	[150, 150]
+		});
+		var checkIcon = L.icon({
+			iconUrl:	'img/kreismenu_check.png',
+			iconAnchor:	[35, 75],
+			iconSize:	[70, 55]
 		});
 		var tableIcon = L.icon({
 			iconUrl:	'img/kreismenu_tabelle.png',
-			iconAnchor:	[0, 21],
-			iconSize:	[75, 96]
+			iconAnchor:	[-3, 15],
+			iconSize:	[72, 90]
 		});
 		var diagIcon = L.icon({
 			iconUrl:	'img/kreismenu_diagramm.png',
-			iconAnchor:	[75, 21],
-			iconSize:	[75, 96]
+			iconAnchor:	[75, 15],
+			iconSize:	[72, 90]
 		});
 		var closeIcon = L.icon({
 			iconUrl:	'img/close.png',
 			iconSize:	[10, 10],
 			iconAnchor:	[5, 5]
 		});
+		var bgMarker = new L.Marker(
+				[lat, lon], 
+				{icon: bgIcon}
+			).addTo(map);
 		var checkMarker = new L.Marker(
 				[lat, lon], 
 				{icon: checkIcon}
@@ -57,9 +66,10 @@ function openCircleMenu(lat, lon, feedID){
 			).addTo(map);
 		
 		checkMarker.on('click', function(e){ alert("check" + feedID) });
-		tableMarker.on('click', function(e){ alert("table" + feedID) });
-		diagMarker.on('click', function(e){ alert("diag" + feedID) });
+		tableMarker.on('click', function(e){ location.href='index.php?s=diagram&fid=' + feedID + '&lang=de';   });
+		diagMarker.on('click', function(e){ location.href='index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; });
 		closeMarker.on('click', function(e){
+				map.removeLayer(bgMarker);
 				map.removeLayer(checkMarker);
 				map.removeLayer(diagMarker);
 				map.removeLayer(tableMarker);
