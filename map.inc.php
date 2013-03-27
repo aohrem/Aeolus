@@ -6,11 +6,17 @@
 			if ($value <= $min) {
 				return 1;
 			}
+			else if ( $value > $min && $value <= ($min+$step) ) {
+				return 2;
+			}
+			else if ( $value > ($min+$step) && $value <= ($min+2*$step) ) {
+				return 3;
+			}
+			else if ( $value > ($min+2*$step) && $value <= ($min+3*$step) ) {
+				return 4;
+			}
 			else if ($value > $max) {
 				return 5;
-			}
-			else {
-				return ceil($value / $step);
 			}
 		}
 		else if ($return == "classes") {
@@ -45,8 +51,8 @@
 			break;
 			case "no2":
 				// TODO: min und max anpassen
-				$min = 0;
-				$max = 0;
+				$min = 230000;
+				$max = 270000;
 				$unit = "ppm";
 				$classes = classifier(0, $min, $max, "classes");
 			break;

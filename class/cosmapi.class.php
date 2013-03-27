@@ -83,7 +83,7 @@
 			}
             
 			$this->setRequestUrl($feedid, $start, $end, $limit, $interval, $duration, 'xml');
-			
+
 			if ( strpos($feedXml, '<error>') ) {
 				return 'cosm_error';
 			}
