@@ -8,7 +8,13 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $requestUrl;
-		private $debug_mode = true;
+		private $debug_mode = false;
+        
+        private $start;
+        private $end;
+        private $limit;
+        private $interval;
+        private $duration;
 		
 		private function readFeed($url) {
 			// set stream options
@@ -35,22 +41,22 @@
         // set parameters if they are not empty
         public function setRequestUrl($feedid, $start, $end, $limit, $interval, $duration, $fileExtension) {
 			if ( $start != '' ) {
-				$start = '&start='.$start;
+				$this->start = '&start='.$start;
 			}
 			if ( $end != '' ) {
-				$end = '&end='.$end;
+				$this->end = '&end='.$end;
 			}
 			if ( $limit != '' ) {
-				$limit = '&limit='.$limit;
+				$this->limit = '&limit='.$limit;
 			}			
 			if ( $interval != '' ) {
-				$interval = '&interval='.$interval;
+				$this->interval = '&interval='.$interval;
 			}
 			if ( $duration != '' ) {
-				$duration = '&duration='.$duration;
+				$this->duration = '&duration='.$duration;
 			}
 			
-			$this->requestUrl = $this->url.'/'.$feedid.'.'.$fileExtension.'?key='.$this->api_key.$start.$end.$limit.$interval.$duration;;
+			$this->requestUrl = $this->url.'/'.$feedid.'.'.$fileExtension.'?key='.$this->api_key.$this->start.$this->end.$this->limit.$this->interval.$this->duration;
         }
         
         public function getRequestUrl() {
@@ -75,6 +81,8 @@
 			else {
 				$feedXml = $this->readLocalXml('test_feed');
 			}
+            
+			$this->setRequestUrl($feedid, $start, $end, $limit, $interval, $duration, 'xml');
 			
 			// load xml string as object
 			$feedXml = simplexml_load_string($feedXml, 'SimpleXMLExtended');
@@ -148,7 +156,7 @@
 						  ( $sensor == 'no2' && ($dataType == UNSPECIFIED || $dataType == RAW) ) ) ) {
 						
 						if ( $returnedValues == 'all_values' ) {
-                            $datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$start.$end.$limit.$interval.$duration;
+                            $datastreamRequestUrl = $this->url.'/'.$feedid.'/datastreams/'.$dataFeedId.'.xml?key='.$this->api_key.$this->start.$this->end.$this->limit.$this->interval.$this->duration;
 						    if ( ! $this->debug_mode ) {
 							    $datastreamXml = $this->readFeed($datastreamRequestUrl); 
 						    }

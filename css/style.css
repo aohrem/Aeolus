@@ -46,7 +46,7 @@ header nav ul li div {
 	text-align: center;
 	position: relative;
 	left: -11px;
-	top: 0px;
+	top: 5px;
 	background-color: #a0c6e5;
 	visibility: hidden;
 }
@@ -82,9 +82,9 @@ header nav ul li #register_click #register_close {
 
 header nav ul li #register_click input {
 	font-family: Calibri, Arial, Verdana, sans-serif;
-	width: 130px;
+	width: 160px;
 	text-align: right;
-	background-color: #add0ea;
+	background-color: #ADD0EA;
 	border: none;
     padding: 4px 15px;
     margin-bottom: 4px;
@@ -129,7 +129,7 @@ p.register {
 }
 
 table.register {
-    width: 300px;
+    width: 100%;
 }
 
 table.register td {

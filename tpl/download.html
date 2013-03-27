@@ -74,13 +74,13 @@
     <div class="details">
         <h4>[[title]] [[sensor_observation_service]]</h4><br>
         <div class="download">
-            <a href="sos.php?operation=getObservation&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" target="_blank">
+            <a href="sos.php?request=getObservation&amp;service=sos&amp;version=1.0.0&amp;responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;&amp;observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" target="_blank">
                 <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]"> <span class="text">getObservation (.xml)</span>
             </a>
-            <a href="sos.php?operation=getCapabilities" target="_blank">
+            <a href="sos.php?request=getCapabilities&amp;service=sos&amp;version=1.0.0" target="_blank">
                 <span class="text">getCapabilities (.xml)</span>
             </a>
-            <a href="sos.php?operation=describeSensor&amp;sensor=co" target="_blank">
+            <a href="sos.php?request=describeSensor&amp;service=sos&amp;version=1.0.0" target="_blank">
                 <span class="text">describeSensor (.xml)</span>
             </a>
         </div>

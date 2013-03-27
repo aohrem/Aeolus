@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd
- http://www.opengis.net/sos/2.0
-http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:ogc="http://www.opengis.net/ogc" xmlns:om="http://www.opengis.net/om/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:om="http://www.opengis.net/om/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<soap12:Header>
 		<wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
 		<wsa:Action>http://www.opengis.net/def/serviceOperation/sos/core/2.0/GetObservationResponse</wsa:Action>
@@ -18,8 +16,8 @@ http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:xsi="http://www.w3.org/2001/XM
 						</gml:TimeInstant>
 					</om:phenomenonTime>
 					<om:resultTime xlink:href="#p{id}"/>
-					<om:observedProperty>urn:ogc:object:feature:sensor:aqe:{sensor}</om:observedProperty>
-					<om:featureOfInterest xlink:href="http://airqualityegg.com/egg/{feedId}"/>
+					<om:observedProperty>urn:ogc:def:phenomenon:{sensor}</om:observedProperty>
+					<om:featureOfInterest xlink:href="http://airqualityegg.com/egg/{feedId}">urn:ogc:object:feature:sensor:airqualityegg-{feedId}</om:featureOfInterest>
 					<om:result xsi:type="gml:MeasureType" uom="{unit}">{value}</om:result>
 				</om:OM_Observation>
 			</observationData>
