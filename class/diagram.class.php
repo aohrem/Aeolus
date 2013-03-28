@@ -41,7 +41,7 @@ class Diagram extends DataVisualisation {
                 'dio_checked' => $css_checked,
                 'interpolateOutliers' => 'false');
             
-            if ( $this->sensitivity != 0 ) {
+            if ( $this->sensitivity != 0 && $this->cosmSuccess ) {
                 foreach ( $this->outliers as $sensor => $val ) {
                     $i = 0;
                     $outlierTable[$sensor] = '';

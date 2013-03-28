@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class Download extends DataVisualisation {
     public function __construct($contentTemplate) {
         parent::__construct($contentTemplate);
@@ -37,11 +37,11 @@ class Download extends DataVisualisation {
         
         // fill in the parameters to read the cosm-API
         $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'xml');
-        $this->contentTemplate->tplReplace('cosm_link_xml', $cosmAPI->getRequestUrl());
+        $this->contentTemplate->tplReplace('cosm_link_xml', htmlentities($cosmAPI->getRequestUrl()));
         $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'json');
-        $this->contentTemplate->tplReplace('cosm_link_json', $cosmAPI->getRequestUrl());
+        $this->contentTemplate->tplReplace('cosm_link_json', htmlentities($cosmAPI->getRequestUrl()));
         $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'csv');
-        $this->contentTemplate->tplReplace('cosm_link_csv', $cosmAPI->getRequestUrl());
+        $this->contentTemplate->tplReplace('cosm_link_csv', htmlentities($cosmAPI->getRequestUrl()));
     }
 }
 ?>

@@ -49,10 +49,11 @@ class Table extends DataVisualisation {
             // copy table row and fill in sensor data for one timestamp
             $this->contentTemplate->copyCode('tableRow');
             
+            // replace date and time
+            $this->contentTemplate->tplReplaceOnce('t', date(translate('php_time_format'), $time));
+            
             // iterate sensors
             foreach ( $this->sensors as $sensor ) {
-                // replace date and time
-                $this->contentTemplate->tplReplaceOnce('t', date(translate('php_time_format'), $time));
                 
                 // if there is no data, show a "-"
                 if ( ! isset($val[$sensor]) ) { $val[$sensor] = '-'; }

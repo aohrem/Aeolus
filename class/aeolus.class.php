@@ -80,7 +80,7 @@
         private function replaceCurrentSite() {
             $url = $_SERVER['REQUEST_URI'];
             $url_parts = explode('/', $url);
-            $url = $url_parts[sizeof($url_parts) - 1];
+            $url = htmlentities($url_parts[sizeof($url_parts) - 1]);
             
             foreach ( $this->languages as $itlang ) {
                 $url = str_replace('&lang='.$itlang, '', $url);

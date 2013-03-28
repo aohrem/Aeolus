@@ -33,7 +33,7 @@ $('#results').empty();
       }).appendTo('#results');
     } 
 		else {
-		$('<p>', { html: "Keine &Uuml;bereinstimmung: bitte pr&auml;zisieren Sie ihre Anfrage!" })
+		$('<p>', { html: "Keine &Uuml;bereinstimmung. Bitte pr&auml;zisieren Sie ihre Anfrage!" })
 		.appendTo('#results'); //prompt to asks the user to specify his search
     }
     setResultsVisible();

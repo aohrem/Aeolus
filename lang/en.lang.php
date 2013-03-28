@@ -90,6 +90,10 @@
 		'view_english' => 'View this page in English.',
 		'view_german' => 'Diese Seite auf Deutsch betrachten.',
         'js_time_format' => 'MMM d y HH:mm',
-        'php_time_format' => 'M d Y, h:i'
+        'php_time_format' => 'M d Y, h:i',
+        'download' => 'Download',
+        'sensor_observation_service' => 'Sensor Observation Service',
+        'measured_phenomena' => 'Measured Phenomena',
+        'contact' => 'Contact'
 	);
 ?>

@@ -1,18 +1,19 @@
+<script src="js/button_over.js"></script>
 <script src="js/outlierhints.js"></script>
 <h1>{title}[[diagram_view]]</h1>
 <div id="navi_left">
 	<div>
-		<a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="last"></a>
+		<a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
+		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="last" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
 	</div>
 	<div>
-		<img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onClick="co();">
-		<img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onClick="no2();">
-		<img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onClick="temp();">
-		<img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onClick="hum();">
+		<img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onClick="co();" onmouseover="buttonOver('sensor_co', 'co_hover');" onmouseout="buttonOver('sensor_co', 'co');">
+		<img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onClick="no2();" onmouseover="buttonOver('sensor_no2', 'no2_hover');" onmouseout="buttonOver('sensor_no2', 'no2');">
+		<img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onClick="temp();" onmouseover="buttonOver('sensor_temperature', 'temp_hover');" onmouseout="buttonOver('sensor_temperature', 'temp');">
+		<img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onClick="hum();" onmouseover="buttonOver('sensor_humidity', 'hum_hover');" onmouseout="buttonOver('sensor_humidity', 'hum');">
 	</div>
 	<div>
-		<a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last"></a>
+		<a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
 	</div>
 </div>
 <div id="time_picker">

@@ -1,4 +1,4 @@
-﻿function radioSwitch(radio) {
+function radioSwitch(radio) {
     var radioButton = document.getElementById(radio);
 
     if (radioButton.checked) {

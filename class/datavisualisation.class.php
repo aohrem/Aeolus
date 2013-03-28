@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	class DataVisualisation {
         protected $feedId;
         
@@ -39,10 +39,7 @@
                 
                 $this->determineSensitivity();
                 
-                if ( $this->cosmSuccess ) {
-                    $this->applyDataValidation();
-                }
-                
+                $this->applyDataValidation();
                 $this->replaceSensitivity();
             }
         }
@@ -129,7 +126,9 @@
         private function applyDataValidation() {
             include('datavalidation.class.php');
             $this->dataValidation = new DataValidation($this->dataArray, $this->sensors, $this->sensitivity, $this->timeframe);
-            $this->outliers = $this->dataValidation->getOutliers();
+            if ( $this->cosmSuccess ) {
+                $this->outliers = $this->dataValidation->getOutliers();
+            }
         }
         
         private function determineSensitivity() {

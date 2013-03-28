@@ -21,11 +21,11 @@
 		}
 		else if ($return == "classes") {
 			$classes = array();
-			$classes["class1"] = "< ". $min ."{unit}";
-			$classes["class2"] = $min ."{unit} - ". ($min + $step) ."{unit}";
-			$classes["class3"] = ($min + $step) ."{unit} - ". ($min + 2 * $step) ."{unit}";
-			$classes["class4"] = ($min + 2 * $step) ."{unit} - ". ($min + 3 * $step) ."{unit}";
-			$classes["class5"] =  "> ". $max ."{unit}";
+			$classes["class1"] = "< ". $min ." {unit}";
+			$classes["class2"] = $min ." {unit} - ". ($min + $step) ." {unit}";
+			$classes["class3"] = ($min + $step) ." {unit} - ". ($min + 2 * $step) ." {unit}";
+			$classes["class4"] = ($min + 2 * $step) ." {unit} - ". ($min + 3 * $step) ." {unit}";
+			$classes["class5"] =  "> ". $max ." {unit}";
 			return $classes;
 		}
 	}
@@ -38,9 +38,9 @@
 	
 	if (isset($_GET['classify'])){
 		$classify = htmlentities(mysql_real_escape_string($_GET['classify']));
-		$this->contentTemplate->tplReplace('show', 'class="show"');
+		$this->contentTemplate->tplReplace('show', ' class="show"');
 		$this->contentTemplate->tplReplace('classify', $classify);
-		$url = str_replace('&classify='.$classify,'',$url);
+		$url = str_replace('&classify='.$classify, '', $url);
 		switch ( $classify ) {
 			case "co":
 				// TODO: min und max anpassen

@@ -75,7 +75,7 @@
         'cosm_feed_is_not_an_aqe' => 'Beim angegebenen cosm-Feed handelt es sich nicht um ein Air Quality Egg.',
         'cosm_no_data_found' => 'F&uuml;r den angegebenen Zeitraum liegen keine Messungen vor.',
         'cosm_no_supported_sensor' => 'Es wurde keiner der unterst&uuml;tzten Sensortypen gefunden.',
-        'cosm_error' => 'Es gab ein Problem mit der cosm API.',
+        'cosm_error' => 'Es gab ein Problem mit der cosm API. M&ouml;glicherweise ist der angeforderte Feed nicht mehr vorhanden oder es handelt sich um einen privaten Feed.',
 		'blind_text' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.',
 		'translation_not_found' => 'Deutsche &uuml;bersetzung nicht gefunden',
 		'error_404' => 'Fehler 404 - Seite nicht gefunden',
@@ -114,6 +114,8 @@
         'website' => 'Website',
         'raw_sensor_data_from_cosm' => 'Unverarbeitete Sensordaten',
         'download' => 'Download',
-        'sensor_observation_service' => 'Sensor Observation Service'
+        'sensor_observation_service' => 'Sensor Observation Service',
+        'measured_phenomena' => 'Gemessene Ph&auml;nomene',
+        'contact' => 'Kontaktformular'
 	);
 ?>

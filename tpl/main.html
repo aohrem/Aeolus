@@ -1,24 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>[[title]]</title>
-
-        <link rel="shortcut icon" href="img/eggicon.ico" type="image/x-icon">
-
-		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css">
-		 <!--[if lte IE 8]>
-			 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css">
-		 <![endif]-->
-		 
-		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
-		<script src="js/navi_over.js"></script>
-		<script src="js/footer_over.js"></script>
-		<script src ="http://code.jquery.com/jquery-latest.js"></script>
-		
-		<meta charset="utf-8" />
-	</head>
-	
+    <head>
+        <title>[[title]]</title>
+        <link rel="shortcut icon" href="img/eggicon.ico" type="image/x-icon" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+        <!--[if lte IE 8]>
+	        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css" />
+        <[endif]-->
+        <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+        <script src="js/navi_over.js"></script>
+        <script src="js/footer_over.js"></script>
+        <script src ="http://code.jquery.com/jquery-latest.js"></script>
+        <meta charset="utf-8" />
+    </head>
 	<body>
 		<div id="page">
 			<header>
@@ -54,11 +49,20 @@
 {content}
 			</div>
 			<footer>
-                <div id="footer_left">
-				    <p><a href="index.php?s=delete&amp;lang={language}">[[delete_aqe]]</a></p>
-				    <p><a href="index.php?s=links&amp;lang={language}">[[useful_links]]</a></p>
-				    <p><a href="index.php?s=impress&amp;lang={language}">[[credits]]</a></p>
-                </div>
+                <table id="footer_left">
+                    <tr>
+                        <td><a href="index.php?s=delete&amp;lang={language}">[[delete_aqe]]</a></td>
+                        <td><a href="index.php?s=links&amp;lang={language}">[[useful_links]]</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="index.php?s=sos&amp;lang={language}">[[sensor_observation_service]]</a></td>
+                        <td><a href="index.php?s=contact&amp;lang={language}">[[contact]]</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="index.php?s=phenomena&amp;lang={language}">[[measured_phenomena]]</a></td>
+                        <td><a href="index.php?s=impress&amp;lang={language}">[[credits]]</a></td>
+                    </tr>
+                </table>
                 <div id="footer_right">
                     <a href="{site}lang=en" onmouseover="mouseOverFooter('english');" onmouseout="mouseOutFooter('english');"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
 					<div id="english_over"><span>[[view_english]]</span></div>

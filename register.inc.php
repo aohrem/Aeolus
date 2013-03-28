@@ -10,6 +10,7 @@
 	$url = $_SERVER['REQUEST_URI'];
 	$url_parts = explode('/', $url);
     $url = $url_parts[sizeof($url_parts)-1];
+    $url = htmlentities($url);
 	
 	if ( isset($_POST['reg']) ) {
 		$this->reg = mysql_real_escape_string($_POST['reg']);
@@ -72,7 +73,7 @@
         $feedid = $_GET['feedid'];
         $password = $_GET['key'];
         
-        $url = str_replace('regadress=true&feedid='.$feedid.'&key='.$password, '', $url);
+        $url = str_replace('regadress=true&amp;feedid='.$feedid.'&amp;key='.$password, '', $url);
         
         $this->registerTemplate->readTpl('register_position');
         $this->registerTemplate->tplReplace('reg_feedid', $feedid);

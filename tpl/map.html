@@ -1,12 +1,12 @@
-<a name="mapview"></a>
+<a id="mapview"></a>
 <h1>[[map_view]]</h1>
 <script src ="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/addr_search.js"></script>
+<script src="js/button_over.js"></script>
 <div id="mapdiv">
 	<div id="searchbar">
 		<form action="#" method="post" onsubmit="return false;">
-			<input type="text" name="searchtext" value="[[enter_location]]" onFocus="if(this.value=='[[enter_location]]') this.value='';" onBlur="if(this.value=='') this.value='[[enter_location]]';" id="location">
-			<input type="submit" value="[[search]]" class="button" onclick="location_search()">
+			<input type="text" name="searchtext" value="[[enter_location]]" onFocus="if(this.value=='[[enter_location]]') this.value='';" onBlur="if(this.value=='') this.value='[[enter_location]]';" id="location"><input type="submit" value="[[search]]" class="button" onclick="location_search()">
 		</form>
 	</div>
 	<div id="results_frame">
@@ -15,75 +15,43 @@
 		<img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
 	</div>
 	<div class="map_buttons" id="co_button">
-		<a href="{url}&classify=co#mapview">
-			<img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button">
-		</a>
+		<a href="{url}&amp;classify=co#mapview"><img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button" onmouseover="buttonOver('map_co_button', 'co_hover');" onmouseout="buttonOver('map_co_button', 'co');"></a>
 	</div>
 	<div class="map_buttons" id="no2_button">
-		<a href="{url}&classify=no2#mapview">
-			<img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button">
-		</a>
+		<a href="{url}&amp;classify=no2#mapview"><img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button" onmouseover="buttonOver('map_no2_button', 'no2_hover');" onmouseout="buttonOver('map_no2_button', 'no2');"></a>
 	</div>
 	<div class="map_buttons" id="temp_button">
-		<a href="{url}&classify=temperature#mapview">
-			<img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button">
-		</a>
+		<a href="{url}&amp;classify=temperature#mapview"><img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button" onmouseover="buttonOver('map_temp_button', 'temp_hover');" onmouseout="buttonOver('map_temp_button', 'temp');"></a>
 	</div>
 	<div class="map_buttons" id="hum_button">
-		<a href="{url}&classify=humidity#mapview">
-			<img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button">
-		</a>
+		<a href="{url}&amp;classify=humidity#mapview"><img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button" onmouseover="buttonOver('map_hum_button', 'hum_hover');" onmouseout="buttonOver('map_hum_button', 'hum');"></a>
 	</div>
-	<div id="legend" {show}>
-		<h1>[[classification]]<br>[[{classify}]]</h1>
-		<table cellpadding="3" cellspacing="0" border="0" width="100%">
+	<div id="legend"{show}>
+		<h1>[[{classify}]]</h1>
+		<table>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small{egg_sensor}_class1.png" alt="class1">
-				</td>
-				<td width="66%" align="left">
-					{class1_interval}
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class1.png" alt="{class1_interval}"></td>
+				<td class="left">{class1_interval}</td>
 			</tr>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small{egg_sensor}_class2.png" alt="class2">
-				</td>
-				<td width="66%" align="left">
-					{class2_interval}
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class2.png" alt="{class2_interval}"></td>
+				<td class="left">{class2_interval}</td>
 			</tr>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small{egg_sensor}_class3.png" alt="class3">
-				</td>
-				<td width="66%" align="left">
-					{class3_interval}
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class3.png" alt="{class3_interval}"></td>
+				<td class="left">{class3_interval}</td>
 			</tr>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small{egg_sensor}_class4.png" alt="class4">
-				</td>
-				<td width="66%" align="left">
-					{class4_interval}
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class4.png" alt="{class4_interval}"></td>
+				<td class="left">{class4_interval}</td>
 			</tr>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small{egg_sensor}_class5.png" alt="class5">
-				</td>
-				<td width="66%" align="left">
-					{class5_interval}
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class5.png" alt="{class5_interval}"></td>
+				<td class="left">{class5_interval}</td>
 			</tr>
 			<tr>
-				<td width="33%" align="right">
-					<img src="img/map_eggs/eggicon_small_noval.png" alt="no_value">
-				</td>
-				<td width="66%" align="left">
-					[[no_value]]
-				</td>
+				<td class="center"><img src="img/map_eggs/eggicon_small_noval.png" alt="[[no_value]]"></td>
+				<td class="left">[[no_value]]</td>
 			</tr>
 		</table>
 		<a href="{url}#mapview">[[blank_classification_out]]</a>

@@ -6,8 +6,7 @@ html, body {
 }
 
 #page {
-	min-width: 820px;
-	max-width: 1100px;
+    width: 950px;
 	margin: 30px auto;
 	-moz-box-shadow: 0px 0px 15px #AAAAAA;
 	-webkit-box-shadow: 0px 0px 15px #AAAAAA;
@@ -46,7 +45,6 @@ header nav ul li div {
 	text-align: center;
 	position: relative;
 	left: -11px;
-	top: 5px;
 	background-color: #a0c6e5;
 	visibility: hidden;
 }
@@ -82,12 +80,12 @@ header nav ul li #register_click #register_close {
 
 header nav ul li #register_click input {
 	font-family: Calibri, Arial, Verdana, sans-serif;
-	width: 160px;
+	width: 130px;
 	text-align: right;
 	background-color: #ADD0EA;
 	border: none;
     padding: 4px 15px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 	font-size: 10.5pt;
 	color: #FFFFFF;
 }
@@ -186,45 +184,41 @@ table.register td {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	height: 21px;
-	padding: 0px 0px 0px 5px;
+	padding: 0px;
 	z-index: 2;
-	background-color: #a0c6e5;
 }
 
 #content #searchbar input {
 	background-color: #A0C6E5;
-	border-width: 0px;
-	font-size: 9pt;
-	width: 100px;
+	border: none;
+	font-size: 10.5pt;
+	width: 238px;
+    margin: 0px;
+    height: 23px;
 	position: relative;
-	top: -2px;
 	color: #ffffff;
-    padding: 0px;
+    padding: 2px 10px;
 }
 
 #content #searchbar input.button {
-	position: relative;
-	top: -2px;
-	height: 21px;
-	width: 100px;
+    cursor: pointer;
+    height: 27px;
+	width: 110px;
 	background-color: #5b8eb8;
-	color: #ffffff;
-	margin: 0px;
-	padding-left: 0px;
 	font-weight: bold;
+}
+
+#content #searchbar input.button:hover {
+    background-color: #61A0D4;
 }
 
 #content #results_frame {
 	position: absolute;
 	top: 50px;
-	right: 90px;
+	right: 70px;
 	background-color: #A0C6E5;
 	width: 300px;
-	-moz-border-radius: 10px;
-	-khtml-border-radius: 10px;
-	border-radius: 10px;
-	padding: 2px;
+	padding: 3px;
 	padding-left: 5px;
 	z-index: 3;
 	visibility: hidden;
@@ -234,23 +228,29 @@ table.register td {
 #content #results_frame #results {
 	font-size: 80%;
 	color: #FFFFFF;
-	max-height: 200px;
+	height: 191px;
 	word-wrap: break-word;
 	overflow: auto;
 	margin: 5px;
 }
 
+#content #results_frame #results ul {
+    margin-left: -20px;
+    margin-top: 0px;
+}
+
 #content #results_frame #results a:link, #content #results_frame #results a:visited {
 	color: #FFFFFF;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 #content #results_frame #results a:hover, #content #results_frame #results a:active {
 	color: #FFFFFF;
-	text-decoration:underline;
+	text-decoration: underline;
 }
 
 #content #results_frame #results_close {
+    cursor: pointer;
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -280,19 +280,17 @@ table.register td {
 
 #content #legend {
 	position: absolute;
-	right: 5px;
+	right: 10px;
 	bottom: 22px;
-	width: 180px;
-	height: 270px;
+	width: 210px;
+	height: 230px;
 	background-color: #A0C5E4;
-	-moz-border-radius: 10px;
-	-khtml-border-radius: 10px;
-	border-radius: 10px;
 	z-index: 2;
 	color: #FFFFFF;
 	font-size: 80%;
 	text-align: center;
 	visibility: hidden;
+    line-height: 15px;
 }
 
 #content #legend h1 {
@@ -314,13 +312,31 @@ table.register td {
 	visibility:visible;
 }
 
+#content #legend table {
+    margin: 0px auto;
+}
+
+#content #legend table td {
+    padding: 2px;
+}
+
+#content #legend table td.left {
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+#content #legend table td.center {
+    width: 35px;
+    text-align: center;
+}
+
 #content .errormessage {
 	text-align: center;
 	font-weight: bold;
 }
 
 #content .details {
-	width: 710px;
+	width: 790px;
 	background-color: #E9F2F9;
 	padding: 10px;
 	display: block;
@@ -367,6 +383,10 @@ table.register td {
     color: #FFFFFF;
 }
 
+#content .details .download .texthover {
+    background-color: #80B8E5;
+    color: #FFFFFF;
+}
 
 #content .details .download a {
     text-decoration: none;
@@ -377,21 +397,23 @@ table.register td {
 }
 
 #content .details table.metadata {
-	width: 320px;
+	width: 370px;
 	padding: 0px;
 }
 
 #content .details table.outliers {
-	width: 480px;
+	width: 730px;
 	padding: 0px;
 }
 
 #content .details table.outliers td {
 	padding: 4px;
+    width: 55%;
 }
 
 #content .details table.outliers td.center {
-	text-align: center;
+    padding-left: 10px;
+    width: 45%;
 }
 
 #content .hidden {
@@ -405,6 +427,7 @@ table.register td {
 	letter-spacing: 2px;
 	text-indent: 10px;
 	line-height: 150%;
+    white-space: nowrap;
 }
 
 #content h2 {
@@ -414,6 +437,7 @@ table.register td {
 	letter-spacing: 2px;
 	text-indent: 20px;
 	line-height: 130%;
+    white-space: nowrap;
 }
 
 #content h3 {
@@ -422,6 +446,7 @@ table.register td {
 	font-weight: bold;
 	text-indent: 30px;
 	line-height: 100%;
+    white-space: nowrap;
 }
 
 #content .outlier {
@@ -481,7 +506,7 @@ table.register td {
     text-align: justify;
     z-index: 1;
     margin-top: -33px;
-    margin-left: 107px;
+    margin-left: 123px;
     padding: 10px;
     border: 4px solid #ffdd78;
 }
@@ -499,7 +524,7 @@ table.register td {
     text-align: justify;
     z-index: 1;
     margin-top: -10px;
-    margin-left: 173px;
+    margin-left: 253px;
     padding: 10px;
     border: 4px solid #ffdd78;
 }
@@ -533,7 +558,7 @@ table.register td {
 
 #content input.radio {
     width: auto;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 #content select {
@@ -542,6 +567,8 @@ table.register td {
     padding: 3px 8px;
     border: none;
     background-color: #80B8E5;
+    position: relative;
+    width: 206px;
     color: #FFFFFF;
     cursor: pointer;
 }
@@ -556,13 +583,13 @@ table.register td {
 	padding: 5px 15px;
 	margin-top: 5px;
 	border: none;
-	background-color: #619FD3;
+	background-color: #A0C6E5;
 	color: #FFFFFF;
     cursor: pointer;
 }
 
 #content #del_true_button:hover, #content .form_button:hover {
-	background-color: #9FC0DF;
+	background-color: #80B8E5;
 }
 
 #content .form_button.delete {
@@ -582,23 +609,26 @@ footer {
     min-height: 85px;
 }
 
-footer p {
-	margin: 7px;
-}
-
-footer p a {
-	text-decoration: none;
-	color: #FEFEFE;
-	padding: 1px 4px;
-}
-
-footer p a:hover, a:active {
-	background-color: #80B8E5;
-}
-
 footer #footer_left {
     float: left;
 }
+
+footer #footer_left td {
+    padding: 3px;
+    padding-right: 30px;
+}
+
+footer #footer_left a {
+	text-decoration: none;
+	color: #FEFEFE;
+	padding: 1px 4px;
+
+}
+
+footer #footer_left a:hover, a:active {
+	background-color: #80B8E5;
+}
+
 
 footer #footer_right {
 	position:relative;
@@ -615,10 +645,10 @@ footer #footer_right div {
 }
 
 footer #footer_right div span {
-	font-size:80%;
+	font-size: 80%;
 	background-color: #80B8E5;
 	color: #FFFFFF;
-	padding:2px 4px;
+	padding: 2px 4px;
 }
 
 footer #footer_right #english_over {
@@ -682,15 +712,19 @@ a:hover, a:active {
 
 #time_picker div {
 	float: left;
+    width: 123px;
 	background-color: #A0C6E5;
 	margin-right: 10px;
-	width: 110px;
 	text-align: center;
 }
 
 #time_picker div.active {
 	background-color: #A0C6E5;
 	border-bottom: 10px solid #BCD7ED;
+}
+
+#time_picker div:hover {
+	background-color: #bcd7ed;
 }
 
 #time_picker div a {
@@ -704,7 +738,7 @@ a:hover, a:active {
 	display: inline-block;
 	margin: 12px 20px;
 	min-height: 500px;
-	width: 670px;
+	width: 610px;
 }
 
 #data_content p {
@@ -712,7 +746,7 @@ a:hover, a:active {
 }
 
 #data_content table {
-	width: 730px;
+	width: 810px;
 	background-color: #E9F2F9;
 	padding: 10px;
 	padding-top: 0px;
