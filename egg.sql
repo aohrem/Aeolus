@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 13. Jan 2013 um 19:34
+-- Erstellungszeit: 27. Mrz 2013 um 12:40
 -- Server Version: 5.5.27
 -- PHP-Version: 5.4.7
 
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur f&uuml;r Tabelle `egg`
+-- Tabellenstruktur für Tabelle `egg`
 --
 
 CREATE TABLE IF NOT EXISTS `egg` (
@@ -32,18 +32,18 @@ CREATE TABLE IF NOT EXISTS `egg` (
   `lat` double(10,8) NOT NULL,
   `lon` double(10,8) NOT NULL,
   PRIMARY KEY (`feed_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12346 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=115610 ;
 
 --
--- Daten f&uuml;r Tabelle `egg`
+-- Daten für Tabelle `egg`
 --
 
 INSERT INTO `egg` (`feed_id`, `password`, `lat`, `lon`) VALUES
-(12345, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96294400, 7.62499400),
-(56789, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.97294400, 7.62569400),
-(23456, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96998500, 7.62639400),
-(45678, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.92440000, 7.62779400),
-(98765, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96244000, 7.62800000);
+(95748, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96294400, 7.62869400),
+(97742, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96998500, 7.62639400),
+(115602, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96244000, 7.62800000),
+(115603, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.97294400, 7.62569400),
+(115609, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.92440000, 7.62779400);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
