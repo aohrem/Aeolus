@@ -3,7 +3,7 @@ class LanuvParser {
     private $lanuvUrl = 'http://www.lanuv.nrw.de/luft/temes/heut/';
     private $fileExtension = '.htm';
     
-    private $sensors = array('time' => 0, 'ozone' => 2, 'n' => 3, 'no2' => 4, 'ltem' => 5, 'wri' => 6, 'wges' => 7, 'rfue' => 8, 'so2' => 9,'pm10' => 10);
+    private $sensors = array('ozone' => 2, 'n' => 3, 'no2' => 4, 'ltem' => 5, 'wri' => 6, 'wges' => 7, 'rfue' => 8, 'so2' => 9,'pm10' => 10);
     private $stationCode;
     private $sensorId;
     
@@ -68,7 +68,6 @@ class LanuvParser {
 				}
 			}
 		}
-		print_r($this->dataArray);
     }
 
     // returns the the latest measurement
@@ -92,11 +91,6 @@ class LanuvParser {
             return end($this->dataArray[$sensorString]['time']);
         }
     }
-
+	
 }
-
-// test
-$stationCode = 'VMS2';
-$lanuvParser = new LanuvParser($stationCode);
-print $lanuvParser->getLastValue('pm10');
-?>
+?>   
