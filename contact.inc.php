@@ -1,75 +1,60 @@
 <?php
-if(isset($_POST['email'])) {
-     
-    // EDIT THE 2 LINES BELOW AS REQUIRED
-    $email_to = "s_elka01@uni-muenster.de";
-    $email_subject = "Your email subject line";
-     
-     
-    function died($error) {
-        // your error code can go here
-        echo "Die Mitteilung konnte nicht verschickt werden, weil Sie das Kontaktformular nicht vollst&auml;ndig oder nicht korrekt ausgef&uuml;llt haben. ";
-        echo "Folgende Eingaben enthielten Fehler:<br /><br />";
-        echo $error."<br /><br />";
-        echo "Bitte gehen Sie zur&uuml;ck und f&uuml;llen Sie diese Felder aus.<br /><br />";
-        die();
+    $to = 'a_ohre01@uni-muenster.de';
+    
+    $errormessage = '';
+    $successmessage = '';
+    $name = '';
+    $mail = '';
+    $message = '';
+
+	if ( isset($_GET['send']) ) {
+        // validation expected data exists
+        if ( ! isset($_POST['name']) || ! isset($_POST['email']) || ! isset($_POST['message']) ) {
+            $errormessage = '<span class="error">'.translate('dont_play_with_links').'</span>';
+        }
+        else {
+            $name = $_POST['name'];
+            $mail = $_POST['email'];
+            $message = $_POST['message'];
+            
+            if ( strlen($message) < 1 ) {
+                $errormessage .= '<span class="error">'.translate('contact_error_message').'</span><br>';
+            }
+            
+            $mailRegExp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+            if ( ! preg_match($mailRegExp, $mail) ) {
+                $errormessage .= '<span class="error">'.translate('contact_error_mail').'</span><br>';
+            }
+            
+            $nameRegExp = '/^[A-Za-z .\'-]+$/';
+            if ( ! preg_match($nameRegExp, $name) ) {
+                $errormessage .= '<span class="error">'.translate('contact_error_name').'</span><br>';
+            }
+            
+            if ( $errormessage == '' ) {
+                function clean_string($string) {
+                    $bad = array('content-type', 'bcc:', 'to:', 'cc:', 'href');
+                    return str_replace($bad, '', $string);
+                }
+                
+                $subject = translate('title'). ' '.translate('contact').' '.translate('message_from').' '.clean_string($name);
+                
+                $emailText = translate('name').' '.clean_string($name).'\n';
+                $emailText .= translate('email').' '.clean_string($mail).'\n';
+                $emailText .= translate('message').' '.clean_string($message).'\n';
+                
+                // create email header
+                $header = 'From: '.clean_string($mail).'\r\n'.
+                'Reply-To: '.clean_string($mail).'\r\n'.
+                'X-Mailer: PHP/' . phpversion();
+                mail($to, $subject, $emailText, $header);
+            }
+        }
     }
-     
-    // validation expected data exists
-    if(!isset($_POST['first_name']) ||
-        !isset($_POST['last_name']) ||
-        !isset($_POST['email']) ||
-        !isset($_POST['message'])) {
-        died('Die Mitteilung konnte nicht verschickt werden, weil Sie das Kontaktformular nicht vollst&auml;ndig oder korrekt ausgef&uuml;llt haben.');      
-    }
-     
-    $first_name = $_POST['first_name']; // required
-    $last_name = $_POST['last_name']; // required
-    $email_from = $_POST['email']; // required
-    $message = $_POST['message']; // required
-     
-    $error_message = "";
-    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
-  if(!preg_match($email_exp,$email_from)) {
-    $error_message .= 'Die von Ihnen eingegebene Email-Adresse ist nicht g&uuml;ltig.<br />';
-  }
-    $string_exp = "/^[A-Za-z .'-]+$/";
-  if(!preg_match($string_exp,$first_name)) {
-    $error_message .= 'Der von Ihnen eingegebene Vorname ist nicht g&uuml;ltig.<br />';
-  }
-  if(!preg_match($string_exp,$last_name)) {
-    $error_message .= 'Der von Ihnen eingegebene Nachname ist nicht g&uuml;ltig.<br />';
-  }
-  if(strlen($message) < 1) {
-    $error_message .= 'Sie m&uuml;ssen Ihre Mittteilung eingeben.<br />';
-  }
-  if(strlen($error_message) > 0) {
-    died($error_message);
-  }
-    $email_message = "Form details below.\n\n";
-     
-    function clean_string($string) {
-      $bad = array("content-type","bcc:","to:","cc:","href");
-      return str_replace($bad,"",$string);
-    }
-     
-    $email_message .= "Vorname: ".clean_string($first_name)."\n";
-    $email_message .= "Nachname: ".clean_string($last_name)."\n";
-    $email_message .= "E-Mail-Adresse: ".clean_string($email_from)."\n";
-    $email_message .= "Mitteilung: ".clean_string($message)."\n";
-     
-     
-// create email headers
-$headers = 'From: '.$email_from."\r\n".
-'Reply-To: '.$email_from."\r\n" .
-'X-Mailer: PHP/' . phpversion();
-@mail($email_to, $email_subject, $email_message, $headers); 
-?>
- 
-<!-- include your own success html here -->
- 
-Vielen Dank f&uuml;r Ihre Mitteilung! Wir werden uns baldm&ouml;glichst bei Ihnen melden.
- 
-<?php
-}
+    
+	$this->contentTemplate->tplReplace('name_value', $name);
+	$this->contentTemplate->tplReplace('email_value', $mail);
+	$this->contentTemplate->tplReplace('message_value', $message);
+	$this->contentTemplate->tplReplace('contact_error', $errormessage);
+	$this->contentTemplate->tplReplace('contact_success', $successmessage);
 ?>

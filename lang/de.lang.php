@@ -91,10 +91,10 @@
         'value_could_be_an_outlier' => 'Bei diesem Wert handelt es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch Mess- oder &Uuml;bertragungsfehler bedingt wurde.',
 		'view_english' => 'View this page in English.',
 		'view_german' => 'Diese Seite auf Deutsch betrachten.',
-		'outliers_found' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit diesem roten Ausrufezeichen markiert. Falls Ausrei&szlig;erwerte linear interpoliert werden sollen, klicken Sie bitte hier.',
-		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Informationssymbol markiert. Falls Ausrei&szlig;erwerte nicht weiter interpoliert werden sollen, klicken Sie bitte hier.',
-        'outliers_found_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit einem Kreis markiert. Falls Ausrei&szlig;erwerte linear interpoliert werden sollen, klicken Sie bitte hier.',
-		'outliers_interpolated_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert. Falls Ausrei&szlig;erwerte nicht weiter interpoliert werden sollen, klicken Sie bitte hier.',
+		'outliers_found' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit diesem roten Ausrufezeichen markiert.',
+		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Informationssymbol markiert.',
+        'outliers_found_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit einem Kreis markiert.',
+		'outliers_interpolated_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert.',
 		'value_is_interpolated' => 'Bei diesem Wert handelte es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch lineare Interpolation entfernt wurde.',
 		'outlier_detection' => 'Ausrei&szlig;ererkennung',
 		'sensitivity' => 'Empfindlichkeit',
@@ -116,6 +116,14 @@
         'download' => 'Download',
         'sensor_observation_service' => 'Sensor Observation Service',
         'measured_phenomena' => 'Gemessene Ph&auml;nomene',
-        'contact' => 'Kontaktformular'
+        'contact' => 'Kontaktformular',
+        'name' => 'Name',
+        'email' => 'E-Mail Adresse',
+        'message' => 'Nachricht',
+        'send' => 'Absenden',
+        'message_from' => 'Nachricht von',
+        'contact_error_mail' => 'Bitte geben Sie eine g&uuml;ltige E-Mail Adresse ein.',
+        'contact_error_name' => 'Bitte geben Sie einen g&uuml;ltigen Namen ein.',
+        'contact_error_message' => 'Bitte geben Sie eine Nachricht ein.'
 	);
 ?>

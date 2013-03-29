@@ -3,10 +3,11 @@
 <div id="navi_left">
 	<div>
 		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" class="last" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+        <a href="#"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="active last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
 	</div>
 	<div>
-		<a href="#"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="active last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
+        <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
 	</div>
  </div>
 <div id="time_picker">

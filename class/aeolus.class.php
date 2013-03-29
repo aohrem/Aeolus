@@ -137,6 +137,11 @@
 				case 'delete':
 					include('delete.inc.php');
 				break;
+                
+                // contact page
+                case 'contact':
+                    include('contact.inc.php');
+                break;
 			}
 		}
 		
