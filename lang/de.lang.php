@@ -124,6 +124,9 @@
         'message_from' => 'Nachricht von',
         'contact_error_mail' => 'Bitte geben Sie eine g&uuml;ltige E-Mail Adresse ein.',
         'contact_error_name' => 'Bitte geben Sie einen g&uuml;ltigen Namen ein.',
-        'contact_error_message' => 'Bitte geben Sie eine Nachricht ein.'
+        'contact_error_message' => 'Bitte geben Sie eine Nachricht ein.',
+        'mail_has_been_send' => 'Ihre Anfrage wurde abgesendet. Wir werden uns so bald wie m&ouml;glich bei Ihnen melden.',
+        'sos_further_information' => 'Weitere Informationen zu unserem Sensor Observation Service finden Sie auf der entsprechenden <a href="index.php?s=sos&amp;lang={language}">&Uuml;bersichtsseite</a>.',
+        'data_interpolation_hint' => 'Je nach Konfiguration (siehe unten) werden Ausrei&szlig;er in den SOS XML Dateien interpoliert.'
 	);
 ?>

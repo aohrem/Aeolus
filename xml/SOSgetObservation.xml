@@ -16,7 +16,7 @@
 						</gml:TimeInstant>
 					</om:phenomenonTime>
 					<om:resultTime xlink:href="#p{id}"/>
-					<om:observedProperty>urn:ogc:def:phenomenon:{sensor}</om:observedProperty>
+					<om:observedProperty>urn:ogc:def:phenomenon:airquality:{sensor}</om:observedProperty>
 					<om:featureOfInterest xlink:href="http://airqualityegg.com/egg/{feedId}">urn:ogc:object:feature:sensor:airqualityegg-{feedId}</om:featureOfInterest>
 					<om:result xsi:type="gml:MeasureType" uom="{unit}">{value}</om:result>
 				</om:OM_Observation>

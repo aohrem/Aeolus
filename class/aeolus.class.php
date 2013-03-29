@@ -147,8 +147,8 @@
 		
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
-            $this->mainTemplate->tplReplace('language', $this->language);
 			$this->mainTemplate->translateTemplate();
+            $this->mainTemplate->tplReplace('language', $this->language);
 			$this->mainTemplate->printTemplate();
 		}
 	}

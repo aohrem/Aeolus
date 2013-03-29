@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd
+ http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<soap12:Header>
+		<wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+		<wsa:Action>http://www.opengis.net/def/serviceOperation/sos/core/2.0/GetCapabilitiesResponse</wsa:Action>
+	</soap12:Header>
+	<soap12:Body>
+		<sos:Capabilities version="2.0.0">
+			<ows:ServiceIdentification>
+				<ows:Title>Aeolus Sensor Observation Service</ows:Title>
+				<ows:Abstract>SOS serving sensor data of Air Quality Eggs</ows:Abstract>
+				<ows:ServiceType codeSpace="http://opengeospatial.net">OGC:SOS</ows:ServiceType>
+				<ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/gfoi</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsByIdRetrieval</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorInsertion</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorDeletion</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsInsertion</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultInsertion</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultRetrieval</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/spatialFilteringProfile</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/soap</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-block-components</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-record-components</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-record-components</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-block-components</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingPoint</ows:Profile>
+				<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/observation</ows:Profile>
+				<ows:Fees>NONE</ows:Fees>
+				<ows:AccessConstraints>NONE</ows:AccessConstraints>
+			</ows:ServiceIdentification>
+			<sos:extension>
+				<sos:InsertionCapabilities>
+					<sos:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</sos:procedureDescriptionFormat>
+					<sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+					<sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+					<sos:supportedEncoding>http://www.opengis.net/swe/2.0/TextEncoding</sos:supportedEncoding>
+				</sos:InsertionCapabilities>
+			</sos:extension>
+			<sos:filterCapabilities>
+				<fes:Filter_Capabilities>
+					<fes:Conformance>
+						<fes:Constraint name="ImplementsQuery">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsAdHocQuery">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsFunctions">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsMinStandardFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsStandardFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsMinSpatialFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsSpatialFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsMinTemporalFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsTemporalFilter">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsVersionNav">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsSorting">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+						<fes:Constraint name="ImplementsExtendedOperators">
+							<ows:NoValues/>
+							<ows:DefaultValue>false</ows:DefaultValue>
+						</fes:Constraint>
+					</fes:Conformance>
+					<fes:Spatial_Capabilities>
+						<fes:GeometryOperands>
+							<fes:GeometryOperand name="gml:Point"/>
+						</fes:GeometryOperands>
+					</fes:Spatial_Capabilities>
+					<fes:Temporal_Capabilities>
+						<fes:TemporalOperands>
+							<fes:TemporalOperand name="gml:TimePeriod"/>
+						</fes:TemporalOperands>
+					</fes:Temporal_Capabilities>
+				</fes:Filter_Capabilities>
+			</sos:filterCapabilities>
+			<sos:contents>
+				<sos:Contents>
+			    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+			    <swes:observableProperty>urn:ogc:def:phenomenon:co</swes:observableProperty>
+			    <swes:observableProperty>urn:ogc:def:phenomenon:no2</swes:observableProperty>
+			    <swes:observableProperty>urn:ogc:def:phenomenon:temperature</swes:observableProperty>
+			    <swes:observableProperty>urn:ogc:def:phenomenon:humidity</swes:observableProperty>
+			    <swes:offering>
+				    <sos:ObservationOffering>
+				      <swes:description>Offering of observations measured by a network of Air Quality Eggs all over the world</swes:description>
+				      <swes:identifier>http://airqualityegg.com/</swes:identifier>
+				      <swes:name>Offering of Air Quality Eggs</swes:name>
+				      <swes:procedure>http://airqualityegg.wikispaces.com/Hardware-Sensors</swes:procedure>
+				    </sos:ObservationOffering>
+			    </swes:offering>
+			    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+			    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+				</sos:Contents>
+			</sos:contents>
+		</sos:Capabilities>
+	</soap12:Body>
+</soap12:Envelope>

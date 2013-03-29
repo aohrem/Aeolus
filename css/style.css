@@ -160,6 +160,7 @@ table.register td {
 	-moz-box-shadow: 0px 0px 15px #AAAAAA;
 	-webkit-box-shadow: 0px 0px 15px #AAAAAA;
 	box-shadow: 0px 0px 15px #AAAAAA;
+    cursor: pointer;
 }
 
 #content #mapdiv {
@@ -363,14 +364,19 @@ table.register td {
 	padding: 0px 20px;
 }
 
-#content .details .download {
-    padding: 20px;
+#content .details table.download {
+    padding: 15px;
+    width: 100%;
     text-decoration: none;
-    display: inline;
-    float: left;
 }
 
-#content .details .download .text {
+#content .details table.download tr td {
+    padding: 0px;
+    width: 33%;
+    border: none;
+}
+
+#content .details table.download .text {
     position: relative;
     bottom: 19px;
     left: 5px;
@@ -379,12 +385,12 @@ table.register td {
 }
 
 #content .details .download .text:hover {
-    background-color: #80B8E5;
+    background-color: #BCD7ED;
     color: #FFFFFF;
 }
 
 #content .details .download .texthover {
-    background-color: #80B8E5;
+    background-color: #BCD7ED;
     color: #FFFFFF;
 }
 
@@ -708,6 +714,7 @@ a:hover, a:active {
 #navi_left div img.sensor {
 	cursor: pointer;
 }
+
 #navi_left div img.last {
 	margin-bottom: 0px;
 }

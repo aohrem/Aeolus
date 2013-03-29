@@ -10,7 +10,7 @@
 	if ( isset($_GET['send']) ) {
         // validation expected data exists
         if ( ! isset($_POST['name']) || ! isset($_POST['email']) || ! isset($_POST['message']) ) {
-            $errormessage = '<span class="error">'.translate('dont_play_with_links').'</span>';
+            $errormessage = '<p><span class="error">'.translate('dont_play_with_links').'</span></p>';
         }
         else {
             $name = $_POST['name'];
@@ -48,6 +48,11 @@
                 'Reply-To: '.clean_string($mail).'\r\n'.
                 'X-Mailer: PHP/' . phpversion();
                 mail($to, $subject, $emailText, $header);
+                
+                $successmessage = '<p><span class="success">'.translate('mail_has_been_send').'</span></p>';
+            }
+            else {
+                $errormessage = '<p>'.$errormessage.'</p>';
             }
         }
     }

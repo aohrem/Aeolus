@@ -65,27 +65,38 @@
         <br>
 	</div><br>
     <div class="details">
-        <h4>[[raw_sensor_data_from_cosm]]</h4><br>
-        <div class="download"><a href="{cosm_link_xml}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_xml_button" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');"> <span class="text" id="cosm_xml_text" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');">[[download]] (.xml)</span></a></div>
-        <div class="download"><a href="{cosm_link_json}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_json_button" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');"> <span class="text" id="cosm_json_text" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');">[[download]] (.json)</span></a></div>
-        <div class="download"><a href="{cosm_link_csv}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_csv_button" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');"> <span class="text" id="cosm_csv_text" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');">[[download]] (.csv)</span></a></div>
-        <br><br><br><br>
+        <h4>[[raw_sensor_data_from_cosm]]</h4>
+        <table class="download">
+            <tr>
+                <td><a href="{cosm_link_xml}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_xml_button" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');"> <span class="text" id="cosm_xml_text" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');">[[download]] (.xml)</span></a></td>
+                <td><a href="{cosm_link_json}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_json_button" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');"> <span class="text" id="cosm_json_text" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');">[[download]] (.json)</span></a></td>
+                <td><a href="{cosm_link_csv}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_csv_button" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');"> <span class="text" id="cosm_csv_text" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');">[[download]] (.csv)</span></a></td>
+            </tr>
+        </table>
     </div><br>
     <script src="js/radio_switch.js"></script>
     <div class="details">
-        <h4>[[title]] [[sensor_observation_service]]</h4><br>
-        <div class="download">
-            <a href="sos.php?request=getObservation&amp;service=sos&amp;version=1.0.0&amp;responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;&amp;observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" target="_blank">
-                <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_button" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');"> <span class="text" id="sos_text" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');">getObservation (.xml)</span>
-            </a>
-            <a href="sos.php?request=getCapabilities&amp;service=sos&amp;version=1.0.0" target="_blank">
-                <span class="text">getCapabilities (.xml)</span>
-            </a>
-            <a href="sos.php?request=describeSensor&amp;service=sos&amp;version=1.0.0" target="_blank">
-                <span class="text">describeSensor (.xml)</span>
-            </a>
-        </div>
-        <br><br><br><br><br>
+        <h4>[[title]] [[sensor_observation_service]]</h4>
+        <table class="download">
+            <tr>
+                <td>
+                    <a href="sos.php?request=getObservation&amp;service=sos&amp;version=2.0.0&amp;responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;&amp;observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&amp;offering=airqualityegg&amp;featureOfInterest=urn:ogc:object:feature:sensor:airqualityegg-{feedId}&amp;eventTime={sostimes}&amp;outlierInterpolation={outlierInterpolation}" target="_blank">
+                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_button" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');"> <span class="text" id="sos_text" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');">getObservation (.xml)</span>
+                    </a>
+                </td>
+                <td>
+                    <a href="sos.php?request=getCapabilities&amp;service=sos" target="_blank">
+                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_gc_button" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');"> <span class="text" id="sos_gc_text" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');">getCapabilities (.xml)</span>
+                    </a>
+                </td>
+                <td>
+                    <a href="sos.php?request=describeSensor&amp;service=sos&amp;version=2.0.0&amp;outputFormat=text/xml;subtype=&quot;sensorML/1.0.1&quot;&amp;procedure=urn:ogc:object:feature:sensor:airqualityegg-{feedId}" target="_blank">
+                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_ds_button" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');"> <span class="text" id="sos_ds_text" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');">describeSensor (.xml)</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <p>[[data_interpolation_hint]] [[sos_further_information]]</p>
         <h4>[[outlier_detection]]</h4>
         <form action="index.php" method="get">
             <input type="hidden" name="s" value="download">

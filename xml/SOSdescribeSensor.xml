@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns="http://www.opengis.net/sensorML/1.0.1" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0.1" xsi:schemaLocation="http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd">
+  <sml:member>
+    <sml:System>
+      <sml:identification>
+        <sml:IdentifierList>
+          <sml:identifier>
+            <sml:Term definition="urn:ogc:def:identifier:OGC:uniqueID">
+              <sml:value>{procedure}</sml:value>
+            </sml:Term>
+          </sml:identifier>
+        </sml:IdentifierList>
+      </sml:identification>
+      <sml:position name="sensorPosition">
+        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">
+          <swe:location>
+            <swe:Vector gml:id="STATION_LOCATION">
+              <swe:coordinate name="easting">
+                <swe:Quantity axisID="x">
+                  <swe:uom code="degree"/>
+                  <swe:value>{lon}</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="northing">
+                <swe:Quantity axisID="y">
+                  <swe:uom code="degree"/>
+                  <swe:value>{lat}</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="altitude">
+                <swe:Quantity axisID="z">
+                  <swe:uom code="{alt_unit}"/>
+                  <swe:value>{alt}</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:location>
+        </swe:Position>
+      </sml:position>
+      <sml:inputs>
+        <sml:InputList>
+          <sml:input name="air">
+            <swe:ObservableProperty definition="urn:ogc:def:phenomenon:air"/>
+          </sml:input>
+        </sml:InputList>
+      </sml:inputs>
+      <sml:outputs>
+        <sml:OutputList>
+          <sml:output name="co">
+            <swe:Quantity definition="urn:ogc:def:phenomenon:airquality:co">
+              <gml:metaDataProperty>
+                <offering>
+                  <id>co</id>
+                  <name>air carbon monoxide concentration</name>
+                </offering>
+              </gml:metaDataProperty>
+              <swe:uom code="ppm"/>
+            </swe:Quantity>
+          </sml:output>
+          <sml:output name="no2">
+            <swe:Quantity definition="urn:ogc:def:phenomenon:airquality:no2">
+                <gml:metaDataProperty>
+                  <offering>
+                    <id>no2</id>
+                    <name>air nitrogen dioxide concentration</name>
+                  </offering>
+                </gml:metaDataProperty>
+                <swe:uom code="ppm"/>
+            </swe:Quantity>
+          </sml:output>
+          <sml:output name="temperature">
+            <swe:Quantity definition="urn:ogc:def:phenomenon:airquality:temperature">
+                <gml:metaDataProperty>
+                  <offering>
+                    <id>temperature</id>
+                    <name>air temperature</name>
+                  </offering>
+                </gml:metaDataProperty>
+                <swe:uom code="degreesCelsius"/>
+            </swe:Quantity>
+          </sml:output>
+          <sml:output name="humidity">
+            <swe:Quantity definition="urn:ogc:def:phenomenon:airquality:humidity">
+                <gml:metaDataProperty>
+                  <offering>
+                    <id>humidity</id>
+                    <name>relative humidity</name>
+                  </offering>
+                </gml:metaDataProperty>
+                <swe:uom code="%"/>
+            </swe:Quantity>
+          </sml:output>
+        </sml:OutputList>
+      </sml:outputs>
+    </sml:System>
+  </sml:member>
+</sml:SensorML>

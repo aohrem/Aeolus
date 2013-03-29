@@ -1,10 +1,13 @@
 <?php
 class Download extends DataVisualisation {
+    private $sosTimeFormat = 'Y-m-d\TH:i:s+00';
+    
     public function __construct($contentTemplate) {
         parent::__construct($contentTemplate);
         
         $this->outlierInterpolation();
         $this->replaceCosmLinks();
+        $this->replaceSosTimes();
     }
     
     private function outlierInterpolation() {
@@ -16,11 +19,13 @@ class Download extends DataVisualisation {
             $this->contentTemplate->tplReplace('io_checked', $css_checked);
             $this->contentTemplate->tplReplace('dio_checked', '');
             $this->contentTemplate->tplReplace('interpolateOutliers', 'true');
+            $this->contentTemplate->tplReplace('outlierInterpolation', $this->sensitivity);
         }
         else {
             $this->contentTemplate->tplReplace('io_checked', '');
             $this->contentTemplate->tplReplace('dio_checked', $css_checked);
             $this->contentTemplate->tplReplace('interpolateOutliers', 'false');
+            $this->contentTemplate->tplReplace('outlierInterpolation', 0);
         }
         $this->contentTemplate->tplReplace('outliers', $tplOutliers);
     }
@@ -42,6 +47,13 @@ class Download extends DataVisualisation {
         $this->contentTemplate->tplReplace('cosm_link_json', htmlentities($cosmAPI->getRequestUrl()));
         $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'csv');
         $this->contentTemplate->tplReplace('cosm_link_csv', htmlentities($cosmAPI->getRequestUrl()));
+    }
+    
+    private function replaceSosTimes() {
+        $start = date($this->sosTimeFormat, time() - $this->seconds[$this->timeframe]);
+        $end = date($this->sosTimeFormat, time());
+        $sosTimes = $start.'/'.$end;
+        $this->contentTemplate->tplReplace('sostimes', $sosTimes);
     }
 }
 ?>
