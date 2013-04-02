@@ -1,5 +1,6 @@
 <?php
 	class Aeolus {
+		private $url;
 		private $site = '';
 		private $page = '';
 		private $reg;
@@ -81,6 +82,9 @@
             $url = $_SERVER['REQUEST_URI'];
             $url_parts = explode('/', $url);
             $url = htmlentities($url_parts[sizeof($url_parts) - 1]);
+			$this->url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $url_parts = explode('/', $this->url);
+			$this->url = str_replace($url_parts[sizeof($url_parts) - 1], '', $this->url);
             
             foreach ( $this->languages as $itlang ) {
                 $url = str_replace('&lang='.$itlang, '', $url);
@@ -148,6 +152,7 @@
 		private function __destruct() {
 			$this->mainTemplate->tplReplace('content', $this->contentTemplate->getTpl());
 			$this->mainTemplate->translateTemplate();
+			$this->mainTemplate->tplReplace('url', $this->url);
             $this->mainTemplate->tplReplace('language', $this->language);
 			$this->mainTemplate->printTemplate();
 		}

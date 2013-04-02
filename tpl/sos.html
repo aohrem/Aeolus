@@ -1,9 +1,11 @@
 <h1>[[title]] [[sensor_observation_service]]</h1>
 <p>Ein Sensor Observation Service<sup><a href="#1">1</a></sup> (SOS) dient dem einheitlichen, standardisierten Angebot gemessener Sensordaten. Es handelt sich um einen Standard des Open Geospacial Consortium<sup><a href="#2">2</a></sup> (OGC), welcher zurzeit in Version 2.0<sup><a href="#3">3</a></sup> vorliegt. Weitere Informationen zum Standard entnehmen Sie bitte den weiterf&uuml;hrenden Links.</p>
+<h2>Adresse</h2>
+<p>Unseren SOS finden Sie unter folgender Adresse:<br><span class="mono"><a href="{url}sos.php">{url}sos.php</a></span></p>
 <h2>Unterst&uuml;tzte Anfragetypen des Aeolus SOS</h2>
-<p class="p2">Unser Sensor Observation Service implementiert das so genannte "Core Profile", welches neben weiteren Profilvarianten wie "Transactional Profile" oder "Enhanced Profile" den Funktionsumfang des Services angibt. S&auml;mtliche Anfragen an den Aeolus SOS laufen &uuml;ber HTTP GET. HTTP POST wird nicht unterst&uuml;tzt. Der Aeolus SOS bietet die folgenden Operationen.</p>
+<p>Unser SOS implementiert das so genannte "Core Profile", welches neben weiteren Profilvarianten wie "Transactional Profile" oder "Enhanced Profile" den Funktionsumfang des Services angibt. S&auml;mtliche Anfragen an den Aeolus SOS laufen &uuml;ber HTTP GET. HTTP POST wird nicht unterst&uuml;tzt. Der Aeolus SOS bietet die folgenden Operationen.</p>
 <h3>GetObservation</h3>
-<p class="p3">Gibt eine Sensordatenzeitreihe des &uuml;ber den featureOfInterest-Parameter angeforderten Air Quality Eggs in standardisiertem XML Format zur&uuml;ck. &Uuml;ber den observedProperty-Parameter werden (per Komma getrennt) die zur&uuml;ckgegebenen Sensoren spezifiziert. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
+<p>Gibt eine Sensordatenzeitreihe des &uuml;ber den featureOfInterest-Parameter angeforderten Air Quality Eggs in standardisiertem XML Format zur&uuml;ck. &Uuml;ber den observedProperty-Parameter werden (per Komma getrennt) die zur&uuml;ckgegebenen Sensoren spezifiziert. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
 <table class="sos">
     <tr>
         <th class="parameter">Parameter</th>
@@ -52,12 +54,12 @@
     </tr>
     <tr>
         <td class="mono">outlierInterpolation</td>
-        <td class="mono">0,1,2,3</td>
+        <td class="mono">0,1,2,3<br>Bedeutungen:<br>0 - keine Ausrei&szlig;ererkennung<br>1 - niedrig<br>2 - mittel<br>3 - hoch</td>
         <td>Nein</td>
     </tr>
 </table>
 <h3>GetCapabilities</h3>
-<p class="p3">Gibt eine Beschreibung der angebotenen Features des SOS in standardisiertem XML Format zur&uuml;ck. Liefert weiterhin Informationen &uuml;ber die verwendeten Sensoren und die Vorgehensweise bei der Messung. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
+<p>Gibt eine Beschreibung der angebotenen Features des SOS in standardisiertem XML Format zur&uuml;ck. Liefert weiterhin Informationen &uuml;ber die verwendeten Sensoren und die Vorgehensweise bei der Messung. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
 <table class="sos">
     <tr>
         <th class="parameter">Parameter</th>
@@ -76,7 +78,7 @@
     </tr>
 </table>
 <h3>DescribeSensor</h3>
-<p class="p3">Gibt Metadaten zum bei der Datenerfassung verwendeten Sensor in standardisiertem XML Format zur&uuml;ck. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
+<p>Gibt Metadaten zum bei der Datenerfassung verwendeten Sensor in standardisiertem XML Format zur&uuml;ck. Folgende Parameter sind vom Aeolus SOS implementiert.</p>
 <table class="sos">
     <tr>
         <th class="parameter">Parameter</th>
@@ -109,8 +111,14 @@
         <td>Ja</td>
     </tr>
 </table>
+<h2>Beispielaufruf</h2>
+<div class="longlink">
+    <p>Folgender Aufruf w&uuml;rde die Messdaten der Sensoren CO, NO<sub>2</sub>, Temperatur und Luftfeuchte des Air Quality Eggs mit der Feed ID 97742 vom 02.04.2013 um 07:27 Uhr bis zum 02.04.2013 um 13:27 Uhr ohne Ausrei&szlig;ererkennung zur&uuml;ckgeben.<br>
+        <span class="mono">http://localhost/aeolus/sos.php?request=getObservation&service=sos&version=2.0.0&responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;22&observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&offering=airqualityegg&featureOfInterest=urn:ogc:object:feature:sensor:airqualityegg-97742&eventTime=2013-04-02T07:27:23+00/2013-04-02T13:27:23+00&outlierInterpolation=0</span>
+    </p>
+</div>
 <h2>Weiterf&uuml;hrende Links</h2>
-<ol class="ol2">
+<ol>
     <li id="1"><a href="http://www.opengeospatial.org/standards/sos" target="_blank">Sensor Observation Service</a></li>
     <li id="2"><a href="http://www.opengeospatial.org/" target="_blank">Open Geospacial Consortium</a></li>
     <li id="3"><a href="https://portal.opengeospatial.org/files/?artifact_id=47599" target="_blank">SOS Spezifikation Version 2.0</a></li>

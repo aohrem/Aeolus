@@ -432,7 +432,6 @@ table.register td {
 	font-size: 200%;
 	font-weight: bold;
 	letter-spacing: 2px;
-	text-indent: 10px;
 	line-height: 150%;
     white-space: nowrap;
 }
@@ -442,7 +441,6 @@ table.register td {
 	font-size: 150%;
 	font-weight: bold;
 	letter-spacing: 2px;
-	text-indent: 20px;
 	line-height: 130%;
     white-space: nowrap;
 }
@@ -451,21 +449,8 @@ table.register td {
 	color: #61A0D4;
 	font-size: 110%;
 	font-weight: bold;
-	text-indent: 30px;
 	line-height: 100%;
     white-space: nowrap;
-}
-
-#content .p2 {
-    margin: 20px 20px;
-}
-
-#content .p3 {
-    margin: 20px 30px;
-}
-
-#content ol.ol2 {
-    margin: 20px 30px;
 }
 
 #content .outlier {
@@ -564,9 +549,19 @@ table.register td {
 	font-weight:bold;
 }
 
+#content span.mono {
+    font-family: 'Courier New', Courier, 'Nimbus Mono L', monospace;
+}
+
+#content .longlink {
+    width: 880px;
+    word-wrap: break-word;
+    -ms-word-wrap: break-word;
+}
+
 #content table.sos {
-    width: 840px;
-    margin: 20px 30px;
+    width: 880px;
+    margin: 20px 10px;
 }
 
 #content table.sos th {
