@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $requestUrl;
-		private $debug_mode = false;
+		private $debug_mode = true;
         
         private $start;
         private $end;
@@ -181,9 +181,15 @@
 									foreach ( $values as $value ) {
 										// cut seconds from the time-string and convert it to a php-timestamp
 										$at = strtotime(substr($value->attribute('at'), 0, -11));
-                                    
+										
+										// convert ppb to ppm
+										$value = intval($value->__toString());
+										if ( $sensor == 'co' || $sensor == 'no2' ) {
+											$value /= 1000;
+										}
+										
 										// save data in the data array, use timestamp as first key, sensor as second key and measured value as array value
-										$dataArray[$at][$sensor] = $value->__toString();
+										$dataArray[$at][$sensor] = $value;
 									}
 								}
 								else if ( isset($datastreamXml->title) ) {

@@ -145,6 +145,7 @@ table.register td {
 
 #content p {
 	text-align: justify;
+    line-height: 180%;
 }
 
 #content div.halfwidth {
@@ -455,6 +456,18 @@ table.register td {
     white-space: nowrap;
 }
 
+#content .p2 {
+    margin: 20px 20px;
+}
+
+#content .p3 {
+    margin: 20px 30px;
+}
+
+#content ol.ol2 {
+    margin: 20px 30px;
+}
+
 #content .outlier {
     font-size: 130%;
     font-family: 'Times New Roman';
@@ -549,6 +562,40 @@ table.register td {
 #content span.success {
 	color: #00aa00;
 	font-weight:bold;
+}
+
+#content table.sos {
+    width: 840px;
+    margin: 20px 30px;
+}
+
+#content table.sos th {
+    padding: 1px 12px;
+    text-align: left;
+    border-bottom: 1px solid #000000;
+}
+
+#content table.sos th.parameter {
+    width: 20%;
+}
+
+#content table.sos th.supvalues {
+    width: 60%;
+}
+
+#content table.sos th.mandatory {
+    width: 20%;
+}
+
+#content table.sos td {
+    vertical-align: top;
+    padding: 1px 12px;
+    border-bottom: 1px solid #b2b2b2;
+}
+
+#content table.sos td.mono {
+    font-family: 'Courier New', Courier, 'Nimbus Mono L', monospace;
+    font-size: smaller;
 }
 
 #content table.form {

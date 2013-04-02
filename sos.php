@@ -157,7 +157,6 @@
                 else {
                     die('<error>'.translate($this->dataArray).'</error>');
                 }
-                print 'bla';
             }
             else if ( $this->parameter['request'] == 'describeSensor' ) {
                 $cosmAPI = new CosmAPI();
