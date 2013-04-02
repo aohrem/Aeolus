@@ -74,4 +74,8 @@ function removeCircleMenu(){
 	map.removeLayer(tableMarker);
 }
 
+function centermap(lat, lon, zoom){
+	map.setView([lat, lon], zoom)
+}
+
 map.on('click', removeCircleMenu);
