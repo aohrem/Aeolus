@@ -133,7 +133,7 @@
 				$this->contentTemplate->tplReplaceOnce('egg_no2val', $dataArray['current_value']['no2']);
 				$this->contentTemplate->tplReplaceOnce('egg_tempval', $dataArray['current_value']['temperature']);
 				$this->contentTemplate->tplReplaceOnce('egg_humval', $dataArray['current_value']['humidity']);
-				$this->contentTemplate->tplReplaceOnce('egg_title', $dataArray['title']);
+				$this->contentTemplate->tplReplaceOnce('egg_title', mysql_real_escape_string(htmlentities($dataArray['title'])));
 			}
 			$this->contentTemplate->tplReplaceOnce('egg_color', "'".$class."'");
 		}

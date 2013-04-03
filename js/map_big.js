@@ -15,11 +15,11 @@ function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempVa
 	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){
 			openCircleMenu(lat, lon, feedID);
-			document.getElementById("eggValueFeedId").innerHTML = "Air Quality Egg #" + feedID;
-			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppm";
-			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppm";
+			document.getElementById("eggValueFeedId").innerHTML = title;
+			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppb";
+			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppb";
 			document.getElementById("eggValueTemp").innerHTML = "Temp: " + tempValue + "&deg;C";
-			document.getElementById("eggValueHum").innerHTML = "Hum:" + humValue + "%";
+			document.getElementById("eggValueHum").innerHTML = "Hum: " + humValue + "%";
 			document.getElementById("eggValue").style.visibility = "visible";
 		});
 }
