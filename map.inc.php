@@ -2,30 +2,34 @@
  	function classifier($value, $min, $max, $return) {
 		$deviation = $max - $min;
 		$step = floor($deviation / 4);
+		$value = intval($value);
 		if ($return == "class") {
 			if ($value <= $min) {
-				return 1;
+				return "class". 1;
 			}
 			else if ( $value > $min && $value <= ($min+$step) ) {
-				return 2;
+				return "class". 2;
 			}
 			else if ( $value > ($min+$step) && $value <= ($min+2*$step) ) {
-				return 3;
+				return "class". 3;
 			}
 			else if ( $value > ($min+2*$step) && $value <= ($min+3*$step) ) {
-				return 4;
+				return "class". 4;
 			}
 			else if ($value > $max) {
-				return 5;
+				return "class". 5;
+			}
+			else {
+				return "noval";
 			}
 		}
 		else if ($return == "classes") {
 			$classes = array();
-			$classes["class1"] = "< ". $min ." {unit}";
+			$classes["class1"] = "&le; ". $min ." {unit}";
 			$classes["class2"] = $min ." {unit} - ". ($min + $step) ." {unit}";
 			$classes["class3"] = ($min + $step) ." {unit} - ". ($min + 2 * $step) ." {unit}";
 			$classes["class4"] = ($min + 2 * $step) ." {unit} - ". ($min + 3 * $step) ." {unit}";
-			$classes["class5"] =  "> ". $max ." {unit}";
+			$classes["class5"] =  "&gt; ". $max ." {unit}";
 			return $classes;
 		}
 	}
@@ -44,8 +48,8 @@
 		switch ( $classify ) {
 			case "co":
 				// TODO: min und max anpassen
-				$min = 0;
-				$max = 0;
+				$min = 100000;
+				$max = 300000;
 				$unit = "ppm";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
@@ -65,7 +69,7 @@
 			case "humidity":
 				// TODO: min und max evtl. verfeinern
 				$min = 20;
-				$max = 80;
+				$max = 60;
 				$unit = "%";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
@@ -108,19 +112,21 @@
 				}
 				// check if parsing the xml was successfull
 				else if ( is_array($dataArray) ) {
+					var_dump($dataArray);
+					print "<p>";
 					switch ($classify) {
 						case "co":
-							$class = "class".classifier($dataArray['current_value'][$classify], $min, $max, "class");
+							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
 						break;
 						case "no2":
-							$class = "class".classifier($dataArray['current_value'][$classify], $min, $max, "class");
+							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
 							// to do: change min and max
 						break;
 						case "temperature":
-							$class = "class".classifier($dataArray['current_value'][$classify], $min, $max, "class");
+							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
 						break;
 						case "humidity":
-							$class = "class".classifier($dataArray['current_value'][$classify], $min, $max, "class");
+							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
 							// to do: evtl. prüfen
 						break;
 					}
