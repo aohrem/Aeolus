@@ -6,7 +6,11 @@ L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/
 	maxZoom: 18
 }).addTo(map);
 
-function addEgg(lat, lon, feedID, type, color, sensor){
+function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempValue, humValue, title){
+	var coValue = 123;
+	var no2Value = 1234;
+	var tempValue = 22;
+	var humValue = 54;
 	var eggIcon = L.icon({
 				iconUrl: 	'img/map_eggs/' + type + sensor + '_' + color + '.png',
 				iconSize:	[33, 35],
@@ -15,6 +19,12 @@ function addEgg(lat, lon, feedID, type, color, sensor){
 	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){
 			openCircleMenu(lat, lon, feedID);
+			document.getElementById("eggValueFeedId").innerHTML = "Air Quality Egg #" + feedID;
+			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppm";
+			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppm";
+			document.getElementById("eggValueTemp").innerHTML = "Temp: " + tempValue + "&deg;C";
+			document.getElementById("eggValueHum").innerHTML = "Hum:" + humValue + "%";
+			document.getElementById("eggValue").style.visibility = "visible";
 		});
 }
 
@@ -72,6 +82,7 @@ function removeCircleMenu(){
 	map.removeLayer(downloadMarker);
 	map.removeLayer(diagMarker);
 	map.removeLayer(tableMarker);
+	document.getElementById("eggValue").style.visibility = "hidden";
 }
 
 function centermap(lat, lon, zoom){

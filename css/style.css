@@ -332,6 +332,22 @@ table.register td {
     text-align: center;
 }
 
+#content #eggValue {
+	position: absolute;
+	left: 50px;
+	top: 11px;
+	width: auto;
+	height: auto;
+	background-color: #A0C5E4;
+	z-index: 2;
+	color: #FFFFFF;
+	font-size: 80%;
+	text-align: left;
+	visibility: hidden;
+    line-height: 15px;
+    padding: 5px;
+}
+
 #content .errormessage {
 	text-align: center;
 	font-weight: bold;
