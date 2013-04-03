@@ -108,11 +108,6 @@
 			$end = date('Y-m-d\TH:i:s\Z', time());
 			if( ! $dataArray = $cosmAPI->parseFeed($row->feed_id, 'current_value', 0, 0, 0, 0, '') ) {
 				print $row->feed_id." cosmAPI nicht gelesen!<br>";
-				$this->contentTemplate->tplReplaceOnce('egg_coval', 0);
-				$this->contentTemplate->tplReplaceOnce('egg_no2val', 0);
-				$this->contentTemplate->tplReplaceOnce('egg_tempval', 0);
-				$this->contentTemplate->tplReplaceOnce('egg_humval', 0);
-				$this->contentTemplate->tplReplaceOnce('egg_title', "-");
 			}
 			// check if parsing the xml was successfull
 			else if ( is_array($dataArray) ) {
@@ -139,6 +134,13 @@
 				$this->contentTemplate->tplReplaceOnce('egg_tempval', $dataArray['current_value']['temperature']);
 				$this->contentTemplate->tplReplaceOnce('egg_humval', $dataArray['current_value']['humidity']);
 				$this->contentTemplate->tplReplaceOnce('egg_title', mysql_real_escape_string(substr($dataArray['title'], 0, -3)));
+			}
+			else {
+				$this->contentTemplate->tplReplaceOnce('egg_coval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_no2val', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_tempval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_humval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_title', "-");
 			}
 			$this->contentTemplate->tplReplaceOnce('egg_color', "'".$class."'");
 		}
