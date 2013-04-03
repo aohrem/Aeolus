@@ -69,7 +69,7 @@
 			case "humidity":
 				// TODO: min und max evtl. verfeinern
 				$min = 20;
-				$max = 60;
+				$max = 50;
 				$unit = "%";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
@@ -108,6 +108,11 @@
 			$end = date('Y-m-d\TH:i:s\Z', time());
 			if( ! $dataArray = $cosmAPI->parseFeed($row->feed_id, 'current_value', 0, 0, 0, 0, '') ) {
 				print $row->feed_id." cosmAPI nicht gelesen!<br>";
+				$this->contentTemplate->tplReplaceOnce('egg_coval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_no2val', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_tempval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_humval', 0);
+				$this->contentTemplate->tplReplaceOnce('egg_title', "-");
 			}
 			// check if parsing the xml was successfull
 			else if ( is_array($dataArray) ) {
