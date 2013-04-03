@@ -13,7 +13,7 @@
 			else if ( $value > ($min+$step) && $value <= ($min+2*$step) ) {
 				return "class". 3;
 			}
-			else if ( $value > ($min+2*$step) && $value <= ($min+3*$step) ) {
+			else if ( $value > ($min+2*$step) && $value <= $max ) {
 				return "class". 4;
 			}
 			else if ($value > $max) {
@@ -28,7 +28,7 @@
 			$classes["class1"] = "&le; ". $min ." {unit}";
 			$classes["class2"] = "&gt; ". $min ." {unit} - ". ($min + $step) ." {unit}";
 			$classes["class3"] = "&gt; ". ($min + $step) ." {unit} - ". ($min + 2 * $step) ." {unit}";
-			$classes["class4"] = "&gt; ". ($min + 2 * $step) ." {unit} - ". ($min + 3 * $step) ." {unit}";
+			$classes["class4"] = "&gt; ". ($min + 2 * $step) ." {unit} - ". $max ." {unit}";
 			$classes["class5"] = "&gt; ". $max ." {unit}";
 			return $classes;
 		}
@@ -103,15 +103,15 @@
 			$this->contentTemplate->tplReplaceOnce('egg_fid', $row->feed_id);
 			$class = "noval";
 			// Check if classification shoud be shown
-			if ( isset($classify) ) {
-				$cosmAPI = new cosmAPI();
-				$start = date('Y-m-d\TH:i:s\Z', time() - 1);
-				$end = date('Y-m-d\TH:i:s\Z', time());
-				if( ! $dataArray = $cosmAPI->parseFeed($row->feed_id, 'current_value', 0, 0, 0, 0, '') ) {
-					print $row->feed_id." cosmAPI nicht gelesen!<br>";
-				}
-				// check if parsing the xml was successfull
-				else if ( is_array($dataArray) ) {
+			$cosmAPI = new cosmAPI();
+			$start = date('Y-m-d\TH:i:s\Z', time() - 1);
+			$end = date('Y-m-d\TH:i:s\Z', time());
+			if( ! $dataArray = $cosmAPI->parseFeed($row->feed_id, 'current_value', 0, 0, 0, 0, '') ) {
+				print $row->feed_id." cosmAPI nicht gelesen!<br>";
+			}
+			// check if parsing the xml was successfull
+			else if ( is_array($dataArray) ) {
+				if ( isset($classify) ) {
 					switch ($classify) {
 						case "co":
 							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
@@ -129,6 +129,11 @@
 						break;
 					}
 				}
+				$this->contentTemplate->tplReplaceOnce('egg_coval', $dataArray['current_value']['co']);
+				$this->contentTemplate->tplReplaceOnce('egg_no2val', $dataArray['current_value']['no2']);
+				$this->contentTemplate->tplReplaceOnce('egg_tempval', $dataArray['current_value']['temperature']);
+				$this->contentTemplate->tplReplaceOnce('egg_humval', $dataArray['current_value']['humidity']);
+				$this->contentTemplate->tplReplaceOnce('egg_title', $dataArray['title']);
 			}
 			$this->contentTemplate->tplReplaceOnce('egg_color', "'".$class."'");
 		}
