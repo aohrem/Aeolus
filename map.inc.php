@@ -1,8 +1,8 @@
 <?php
  	function classifier($value, $min, $max, $return) {
 		$deviation = $max - $min;
-		$step = floor($deviation / 4);
-		$value = intval($value);
+		$step = floor($deviation / 3);
+		$value = floatval($value);
 		if ($return == "class") {
 			if ($value <= $min) {
 				return "class". 1;
@@ -26,10 +26,10 @@
 		else if ($return == "classes") {
 			$classes = array();
 			$classes["class1"] = "&le; ". $min ." {unit}";
-			$classes["class2"] = $min ." {unit} - ". ($min + $step) ." {unit}";
-			$classes["class3"] = ($min + $step) ." {unit} - ". ($min + 2 * $step) ." {unit}";
-			$classes["class4"] = ($min + 2 * $step) ." {unit} - ". ($min + 3 * $step) ." {unit}";
-			$classes["class5"] =  "&gt; ". $max ." {unit}";
+			$classes["class2"] = "&gt; ". $min ." {unit} - ". ($min + $step) ." {unit}";
+			$classes["class3"] = "&gt; ". ($min + $step) ." {unit} - ". ($min + 2 * $step) ." {unit}";
+			$classes["class4"] = "&gt; ". ($min + 2 * $step) ." {unit} - ". ($min + 3 * $step) ." {unit}";
+			$classes["class5"] = "&gt; ". $max ." {unit}";
 			return $classes;
 		}
 	}
@@ -48,16 +48,16 @@
 		switch ( $classify ) {
 			case "co":
 				// TODO: min und max anpassen
-				$min = 100000;
-				$max = 300000;
-				$unit = "ppm";
+				$min = 100;
+				$max = 300;
+				$unit = "ppb";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
 			case "no2":
 				// TODO: min und max anpassen
-				$min = 230000;
-				$max = 270000;
-				$unit = "ppm";
+				$min = 230;
+				$max = 270;
+				$unit = "ppb";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
 			case "temperature":
@@ -112,8 +112,6 @@
 				}
 				// check if parsing the xml was successfull
 				else if ( is_array($dataArray) ) {
-					var_dump($dataArray);
-					print "<p>";
 					switch ($classify) {
 						case "co":
 							$class = classifier($dataArray['current_value'][$classify], $min, $max, "class");
