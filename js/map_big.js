@@ -16,8 +16,8 @@ function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempVa
 	eggMarker.on('click', function(e){
 			openCircleMenu(lat, lon, feedID);
 			document.getElementById("eggValueFeedId").innerHTML = title;
-			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppb";
-			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppb";
+			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppm";
+			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppm";
 			document.getElementById("eggValueTemp").innerHTML = "Temp: " + tempValue + "&deg;C";
 			document.getElementById("eggValueHum").innerHTML = "Hum: " + humValue + "%";
 			document.getElementById("eggValue").style.visibility = "visible";
@@ -31,23 +31,23 @@ function openCircleMenu(lat, lon, feedID){
 		}
 		var bgIcon = L.icon({
 			iconUrl:	'img/kreismenu.png',
-			iconAnchor:	[75, 75],
+			iconAnchor:	[75, 73],
 			iconSize:	[150, 150]
 		});
 		var downloadIcon = L.icon({
 			iconUrl:	'img/kreismenu_download.png',
-			iconAnchor:	[30, -15],
+			iconAnchor:	[30, -17],
 			iconSize:	[60, 60]
 		});
 		var tableIcon = L.icon({
 			iconUrl:	'img/kreismenu_tabelle.png',
-			iconAnchor:	[0, 75],
-			iconSize:	[75, 90]
+			iconAnchor:	[-25, 73],
+			iconSize:	[50, 90]
 		});
 		var diagIcon = L.icon({
 			iconUrl:	'img/kreismenu_diagramm.png',
-			iconAnchor:	[75, 75],
-			iconSize:	[75, 90]
+			iconAnchor:	[75, 73],
+			iconSize:	[50, 90]
 		});
 		bgMarker = new L.Marker([lat, lon], {
 				icon: bgIcon,
