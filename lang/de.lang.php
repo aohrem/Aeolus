@@ -108,7 +108,7 @@
 		'high' => 'hoch',
         'outlier_state_off' => 'Ausrei&szlig;er werden nicht ermittelt.',
         'degrees_celsius' => 'Grad Celsius',
-        'date_time' => 'Datum / Uhrzeit',
+        'date_time' => 'Datum/Uhrzeit (UTC)',
         'js_time_format' => 'dd.MM.y HH:mm',
         'php_time_format' => 'd.m.Y H:i',
         'website' => 'Website',
@@ -150,6 +150,11 @@
 		'example' => 'Beispiel',
 		'separate_with_comma' => '(mehrere Werte mit Kommata trennen)',
 		'yes' => 'Ja',
-		'no' => 'Nein'
+		'no' => 'Nein',
+		'value' => 'Wert',
+		'current' => 'Aktuell',
+		'mean' => 'Durchschnitt',
+		'maximum' => 'Maximum',
+		'minimum' => 'Minimum'
 	);
 ?>

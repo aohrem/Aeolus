@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $requestUrl;
-		private $debug_mode = false;
+		private $debug_mode = true;
         
         private $start;
         private $end;

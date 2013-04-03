@@ -41,6 +41,7 @@
                 
                 $this->applyDataValidation();
                 $this->replaceSensitivity();
+				$this->replaceStatistics();
             }
         }
         
@@ -165,6 +166,39 @@
                 $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_off'));
             }
         }
+		
+		private function replaceStatistics() {
+			$statistics = array('current' => $this->sensors, 'mean' => $this->sensors, 'maximum' => $this->sensors, 'minimum' => $this->sensors);
+			foreach ( $this->dataArray as $time => $sensors) {
+				foreach ( $sensors as $sensor => $value ) {
+					if ( $value > $statistics['maximum'][$sensor] ) {
+						$statistics['maximum'][$sensor] = $value;
+					}
+					if ( $value < $statistics['minimum'][$sensor] || $statistics['minimum'][$sensor] == null ) {
+						$statistics['minimum'][$sensor] = $value;
+					}
+					$statistics['mean'][$sensor] += $value;
+				}
+			}
+			
+			$data = $this->dataArray;
+			foreach ( $this->sensors as $sensor ) {
+				$statistics['mean'][$sensor] /= sizeof($this->dataArray);
+				$statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 3);
+				
+				while (! $statistics['current'][$sensor] ) {
+					$current = array_pop($data);
+					if ( isset($current[$sensor]) ) {
+						$statistics['current'][$sensor] = $current[$sensor];
+					}
+				}
+				
+				$this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);
+				$this->contentTemplate->tplReplace($sensor.'_mean', $statistics['mean'][$sensor]);
+				$this->contentTemplate->tplReplace($sensor.'_minimum', $statistics['minimum'][$sensor]);
+				$this->contentTemplate->tplReplace($sensor.'_maximum', $statistics['maximum'][$sensor]);
+			}
+		}
         
         private function __destruct() {
             // replace error message in template and hide description and outlier detection boxes if not needed

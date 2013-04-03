@@ -104,12 +104,49 @@
 	</div><br>
     <table>
 		<tr>
-			<th>[[date_time]]</th>
+			<th>[[value]]</th>
 			<th>[[co]] (ppm)</th>
 			<th>[[no2]] (ppm)</th>
 			<th>[[temperature]] (&deg;C)</th>
 			<th>[[humidity]] (%)</th>
 		</tr>
+        <tr>
+            <td>[[current]]:</td>
+			<td>{co_current}</td>
+			<td>{no2_current}</td>
+			<td>{temperature_current}</td>
+			<td>{humidity_current}</td>
+        </tr>
+        <tr>
+            <td>[[mean]]:</td>
+			<td>{co_mean}</td>
+			<td>{no2_mean}</td>
+			<td>{temperature_mean}</td>
+			<td>{humidity_mean}</td>
+        </tr>
+        <tr>
+            <td>[[maximum]]:</td>
+			<td>{co_maximum}</td>
+			<td>{no2_maximum}</td>
+			<td>{temperature_maximum}</td>
+			<td>{humidity_maximum}</td>
+        </tr>
+        <tr>
+            <td>[[minimum]]:</td>
+			<td>{co_minimum}</td>
+			<td>{no2_minimum}</td>
+			<td>{temperature_minimum}</td>
+			<td>{humidity_minimum}</td>
+        </tr>
+    </table><br>
+    <table>
+        <tr>
+			<th>[[date_time]]</th>
+			<th>[[co]] (ppm)</th>
+			<th>[[no2]] (ppm)</th>
+			<th>[[temperature]] (&deg;C)</th>
+			<th>[[humidity]] (%)</th>
+        </tr>
 		{+tableRow}
 		<tr>
 			<td class="time">{t}</td>
