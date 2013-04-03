@@ -8,7 +8,7 @@
 		private $url = 'http://api.cosm.com/v2/feeds';
 		private $api_key = '8XLzHihrwpa2EnIu7I3jOsPALUOSAKxmRmtXNFBBRE9FMD0g';
 		private $requestUrl;
-		private $debug_mode = true;
+		private $debug_mode = false;
         
         private $start;
         private $end;
@@ -228,7 +228,7 @@
 			$xml = simplexml_load_string($xml);
 			
 			if ( isset($xml->environment->location->lat) && isset($xml->environment->location->lon) ) {
-				return array('lat' => $xml->environment->location->lat, 'lon' => $xml->environment->location->lon);
+				return array($xml->environment->location->lat, $xml->environment->location->lon);
 			}
 			else if ( isset($xml->environment->location->name) ) {
 				$name = $xml->environment->location->name;

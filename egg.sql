@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.0-rc1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Erstellungszeit: 27. Mrz 2013 um 12:40
--- Server Version: 5.5.27
--- PHP-Version: 5.4.7
+-- Host: localhost
+-- Erstellungszeit: 03. Apr 2013 um 13:12
+-- Server Version: 5.5.29-0ubuntu0.12.04.1
+-- PHP-Version: 5.3.10-1ubuntu3.6
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `egg` (
   `feed_id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `password` varchar(40) NOT NULL,
-  `lat` double(10,8) NOT NULL,
-  `lon` double(10,8) NOT NULL,
+  `lat` double(11,8) NOT NULL,
+  `lon` double(11,8) NOT NULL,
   PRIMARY KEY (`feed_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=115610 ;
 
@@ -40,7 +40,10 @@ CREATE TABLE IF NOT EXISTS `egg` (
 
 INSERT INTO `egg` (`feed_id`, `password`, `lat`, `lon`) VALUES
 (95748, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96294400, 7.62869400),
+(97258, 'ffa6706ff2127a749973072756f83c532e43ed02', 26.13365238, -80.13238907),
 (97742, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96998500, 7.62639400),
+(101490, '9485989ff514b5106b7738850fd73c23e8c1e3f7', -37.51113420, 145.12077130),
+(107067, 'a9993e364706816aba3e25717850c26c9cd0d89d', 53.58210451, 9.95200790),
 (115602, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.96244000, 7.62800000),
 (115603, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.97294400, 7.62569400),
 (115609, 'ffa6706ff2127a749973072756f83c532e43ed02', 51.92440000, 7.62779400);

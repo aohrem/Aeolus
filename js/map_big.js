@@ -16,10 +16,10 @@ function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempVa
 	eggMarker.on('click', function(e){
 			openCircleMenu(lat, lon, feedID);
 			document.getElementById("eggValueFeedId").innerHTML = title;
-			document.getElementById("eggValueCo").innerHTML = "CO: " + coValue + " ppm";
-			document.getElementById("eggValueNo2").innerHTML = "NO<sub>2</sub>: " + no2Value + " ppm";
-			document.getElementById("eggValueTemp").innerHTML = "Temp: " + tempValue + "&deg;C";
-			document.getElementById("eggValueHum").innerHTML = "Hum: " + humValue + "%";
+			document.getElementById("eggValueCo").innerHTML = coValue + " ppm";
+			document.getElementById("eggValueNo2").innerHTML = no2Value + " ppm";
+			document.getElementById("eggValueTemp").innerHTML = tempValue + " &deg;C";
+			document.getElementById("eggValueHum").innerHTML = humValue + " %";
 			document.getElementById("eggValue").style.visibility = "visible";
 		});
 }

@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `lanuv` (
 INSERT INTO `lanuv`
 (`code`, `city`, `street`, `lat`, `lon`)
 VALUES 
-('VMS2', 'M¸nster', 'Weseler Straﬂe', 51.95325812, 7.61932603),
 ('VACW', 'Aachen', 'Wilhelmstraﬂe', 50.77310939, 6.09572768),
 ('AABU', 'Aachen-Burtscheid', 'Hein-Gˆrgen-Straﬂe', 50.75468281, 6.09387621),
 ('BIEL', 'Bielefeld-Ost', 'Hermann-Delius-Straﬂe / Bleichstraﬂe', 52.02316571, 8.54832322),

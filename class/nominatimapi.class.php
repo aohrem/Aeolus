@@ -17,11 +17,11 @@
 		public function getCoordinates($query) {
 			$requestUrl = $this->url.'?format=xml&limit=1&q='.$query;
 			
-			print $xml = $this->readFeed($requestUrl);
+			$xml = $this->readFeed($requestUrl);
 			
 			$xml = simplexml_load_string($xml, 'SimpleXMLExtended');
 			
-			if ( isset($xml->place) ) {
+			if ( isset($xml->environment->place) ) {
 				$latitude = $xml->place->attribute('lat');
 				$longitude = $xml->place->attribute('lon');
 				
