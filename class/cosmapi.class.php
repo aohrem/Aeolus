@@ -183,7 +183,7 @@
 										$at = strtotime(substr($value->attribute('at'), 0, -11));
 										
 										// convert ppb to ppm
-										$value = intval($value->__toString());
+										$value = floatval($value->__toString());
 										if ( $sensor == 'co' || $sensor == 'no2' ) {
 											$value /= 1000;
 										}
@@ -200,7 +200,14 @@
 								}
 							}
 							else if ( $returnedValues == 'current_value' )  {
-								$dataArray['current_value'][$sensor] = $data->current_value->__toString();
+								
+								// convert ppb to ppm
+								$value = floatval($data->current_value->__toString());
+								if ( $sensor == 'co' || $sensor == 'no2' ) {
+									$value /= 1000;
+								}
+								
+								$dataArray['current_value'][$sensor] = $value;
 							}
 						}
 					}
