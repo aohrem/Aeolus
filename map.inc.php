@@ -50,14 +50,14 @@
 				// TODO: min und max anpassen
 				$min = 100;
 				$max = 300;
-				$unit = "ppb";
+				$unit = "ppm";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
 			case "no2":
 				// TODO: min und max anpassen
 				$min = 230;
 				$max = 270;
-				$unit = "ppb";
+				$unit = "ppm";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
 			case "temperature":
