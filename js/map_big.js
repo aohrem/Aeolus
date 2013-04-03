@@ -7,10 +7,6 @@ L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/
 }).addTo(map);
 
 function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempValue, humValue, title){
-	var coValue = 123;
-	var no2Value = 1234;
-	var tempValue = 22;
-	var humValue = 54;
 	var eggIcon = L.icon({
 				iconUrl: 	'img/map_eggs/' + type + sensor + '_' + color + '.png',
 				iconSize:	[33, 35],
