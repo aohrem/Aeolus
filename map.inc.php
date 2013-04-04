@@ -48,8 +48,8 @@
 		switch ( $classify ) {
 			case "co":
 				// TODO: min und max anpassen
-				$min = 100;
-				$max = 300;
+				$min = 80;
+				$max = 130;
 				$unit = "ppm";
 				$classes = classifier(0, $min, $max, "classes");
 			break;
