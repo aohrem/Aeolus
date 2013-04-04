@@ -1,13 +1,14 @@
 <?php
 class Diagram extends DataVisualisation {
     private $standardSensor = 'co';
+	private $sensor;
     
     public function __construct($contentTemplate) {
         parent::__construct($contentTemplate);
-        
         $this->outlierInterpolation();
         if ( $this->cosmSuccess ) {
             $this->fillDiagram();
+			$this->callSensor();
         }
     }
     
@@ -28,7 +29,7 @@ class Diagram extends DataVisualisation {
             $this->contentTemplate->tplMultipleReplace($replaceArray);
             
             if ( $this->cosmSuccess && $this->dataValidation->containsOutliers($this->outliers) && $this->sensitivity != 0 ) {
-                $tplOutliers = '<a href="index.php?s=diagram&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=false&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated_diagram').'</div>';
+                $tplOutliers = '<a href="index.php?s=diagram&amp;fid='.$this->feedId.'&amp;sensor='.$this->sensor.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=false&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier interpolated success" onMouseOver="outlierNote(\'outliers_interpolated\');" onMouseOut="outlierNote(\'outliers_interpolated\');">i</span></a><div id="outliers_interpolated" class="bigoutlierhint interpolated">'.translate('outliers_interpolated_diagram').'</div>';
                 
                 // interpolate outliers
                 $this->dataArray = $this->dataValidation->interpolateOutliers($this->outliers);
@@ -65,7 +66,7 @@ class Diagram extends DataVisualisation {
             
             // check if dataset contains outliers and outlier detection is on
             if ( $this->cosmSuccess && $this->dataValidation->containsOutliers($this->outliers) && $this->sensitivity != 0 ) {
-                $tplOutliers = '<a href="index.php?s=diagram&amp;fid='.$this->feedId.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=true&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found_diagram').'</div>';
+                $tplOutliers = '<a href="index.php?s=diagram&amp;fid='.$this->feedId.'&amp;sensor='.$this->sensor.'&amp;timeframe='.$this->timeframe.'&amp;interpolateoutliers=true&amp;sensitivity='.$this->sensitivity.'&amp;lang={language}"><span class="bigoutlier error" onMouseOver="outlierNote(\'outliers_found\');" onMouseOut="outlierNote(\'outliers_found\');">!</span></a><div id="outliers_found" class="bigoutlierhint">'.translate('outliers_found_diagram').'</div>';
             }
         }
         $this->contentTemplate->tplReplace('outliers', $tplOutliers);
@@ -114,5 +115,35 @@ class Diagram extends DataVisualisation {
         // delete the last row
         $this->contentTemplate->cleanCode('diagramData');
     }
+	
+	private function callSensor() {
+		if ( isset($_GET['sensor']) ) {
+			$this->sensor = htmlentities($_GET['sensor']);
+			if ( $this->sensor != 'co' && $this->sensor != 'no2' && $this->sensor != 'temperature' && $this->sensor != 'humidity' ) {
+				$this->sensor = 'co';
+			}
+		}
+		else {
+			$this->sensor = 'co';
+		}
+		$this->contentTemplate->tplReplace('sensor', $this->sensor);
+		switch ($this->sensor) {
+			case 'co':
+				$this->contentTemplate->tplReplace('callSensor', 'co()');
+			break;
+			case 'no2':
+				$this->contentTemplate->tplReplace('callSensor', 'no2()');
+			break;
+			case 'temperature':
+				$this->contentTemplate->tplReplace('callSensor', 'temp()');
+			break;
+			case 'humidity':
+				$this->contentTemplate->tplReplace('callSensor', 'hum()');
+			break;
+			default:
+				$this->contentTemplate->tplReplace('callSensor', 'co()');
+			break;
+		}
+	}
 }
 ?>
