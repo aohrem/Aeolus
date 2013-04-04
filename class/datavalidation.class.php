@@ -50,7 +50,7 @@
                 foreach ( $this->dataArray as $key => $val ) {
                     $this->transArray[$i] = $key;
                     
-                    // if there is no value, it is marked classified as an outlier
+                    // if there is no value, it is classified as an outlier
                     if ( ! isset($val[$sensor]) ) {
                         $outliers[$sensor][$key] = true;
                     }
@@ -84,7 +84,7 @@
 			        $interQuartileRange = abs($this->quantile($window, 0.75) - $this->quantile($window, 0.25));
                     
 			        $median = $ytmed[$this->transArray[$index - 1]][$sensor];
-                    
+					
                     // if current value is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
                     $outliers = $this->checkValue($index - 1, $median, $interQuartileRange, $outliers, $sensor);
                     
@@ -134,19 +134,19 @@
 					if ( $outlier ) {
                         // get next predecessor which is not an outlier
 						$pred = 1;
-						while ( isset($this->transArray[$i - $pred]) && isset($outliers[$sensor][$this->transArray[$i - $pred]]) && $outliers[$sensor][$this->transArray[$i - $pred]] ) {
+						while ( isset($this->transArray[$i - $pred]) && ((! is_numeric($this->dataArray[$this->transArray[$i - $pred]][$sensor]) ) || ( isset($outliers[$sensor][$this->transArray[$i - $pred]]) && $outliers[$sensor][$this->transArray[$i - $pred]] ) ) ) {
 							$pred++;
 						}
 						
                         // get next successor which is not an outlier
 						$succ = 1;
-						while ( isset($this->transArray[$i + $succ]) && isset($outliers[$sensor][$this->transArray[$i + $succ]]) && $outliers[$sensor][$this->transArray[$i + $succ]] ) {
+						while ( isset($this->transArray[$i + $succ]) && ((! is_numeric($this->dataArray[$this->transArray[$i + $succ]][$sensor]) ) || ( isset($outliers[$sensor][$this->transArray[$i + $succ]]) && $outliers[$sensor][$this->transArray[$i + $succ]] ) ) ) {
 							$succ++;
 						}
 						
-                        // if a predecessor and a successor were found: linear interpolation (mean)
+						// if a predecessor and a successor were found: linear interpolation (mean)
                         if ( isset($this->transArray[$i - $pred]) && isset($this->transArray[$i + $succ]) ) {
-                            $interpolatedValue = round(( $this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2);
+                            $interpolatedValue = round(($this->dataArray[$this->transArray[$i - $pred]][$sensor] + $this->dataArray[$this->transArray[$i + $succ]][$sensor] ) / 2, 3);
                         }
                         // if just a successor was found: take successor's value as interpolated value
                         else if ( ! isset($this->transArray[$i - $pred]) && isset($this->transArray[$i + $succ]) ) {
@@ -177,6 +177,9 @@
                     $outliers[$sensor][$this->transArray[$index]] = true;
                 }
             }
+			else {
+				$outliers[$sensor][$this->transArray[$index]] = false;
+			}
             return $outliers;
         }
         
@@ -194,11 +197,11 @@
                     // if there is a value for the given sensor, save the value in another array
                     if ( isset($val[$sensor]) ) {
 				        $sensorArray[$i] = $val[$sensor];
+						$i++;
                     }
                     else {
-                        $sensorArray[$i] = 0;
+						$end++;
                     }
-				    $i++;
 			    }
 			    $j++;
 		    }
@@ -256,15 +259,15 @@
                     // if there is a value, save it to our new subarray
                     if ( isset($val[$sensor]) ) {
 				        $arrayWindow[$i] = $val[$sensor];
+						$i++;
                     }
                     else {
-                        $arrayWindow[$i] = 0;
+                        $end++;
                     }
-				    $i++;
 			    }
 			    $j++;
 		    }
-		
+			
 		    return $arrayWindow;
 	    }
     
