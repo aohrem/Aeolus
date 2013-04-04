@@ -1,7 +1,9 @@
 var lat, lon, zoom;
+var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed = false;
+var bgDiagMarker, coMarker, no2Marker, humMarker, tempMarker, diagMenuDisplayed = false;
+
 var map = L.map('map_big');	
 centermap();
-var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed = false;
 
 L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/256/{z}/{x}/{y}.png', {
 	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Image data &copy; <a href="http://cloudmade.com">CloudMade</a>',
@@ -72,7 +74,7 @@ function openCircleMenu(lat, lon, feedID){
 		menuDisplayed = true;
 		
 		downloadMarker.on('click', function(e){ location.href='index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de';   });
-		diagMarker.on('click', function(e){ location.href='index.php?s=diagram&fid=' + feedID + '&lang=de';   });
+		diagMarker.on('click', function(e){ openDiagMenu(lat, lon, feedID) });
 		tableMarker.on('click', function(e){ location.href='index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; });
 }
 
@@ -82,6 +84,79 @@ function removeCircleMenu(){
 	map.removeLayer(diagMarker);
 	map.removeLayer(tableMarker);
 	document.getElementById("eggValue").style.visibility = "hidden";
+	if (diagMenuDisplayed == true){
+		removeDiagMenu();
+		diagMenuDisplayed = false;
+	}
+}
+
+function openDiagMenu(lat, lon, feedID){
+		if (diagMenuDisplayed == true){
+			removeDiagMenu();
+			diagMenuDisplayed = false;
+		}
+		else{
+			var bgDiagIcon = L.icon({
+				iconUrl:	'img/kreismenu_diagramm_aussen.png',
+				iconAnchor:	[150, 150],
+				iconSize:	[147, 223]
+			});
+			var coIcon = L.icon({
+				iconUrl:	'img/kreismenu_diagramm_aussen_co.png',
+				iconAnchor:	[50, 150],
+				iconSize:	[47, 55]
+			});
+			var no2Icon = L.icon({
+				iconUrl:	'img/kreismenu_diagramm_aussen_no2.png',
+				iconAnchor:	[115, 100],
+				iconSize:	[55, 35]
+			});
+			var humIcon = L.icon({
+				iconUrl:	'img/kreismenu_diagramm_aussen_hum.png',
+				iconAnchor:	[140, 50],
+				iconSize:	[50, 45]
+			});
+			var tempIcon = L.icon({
+				iconUrl:	'img/kreismenu_diagramm_aussen_temp.png',
+				iconAnchor:	[140, -5],
+				iconSize:	[50, 50]
+			});
+			bgDiagMarker = new L.Marker([lat, lon], {
+					icon: bgDiagIcon,
+					zIndexOffset: 190
+				}).addTo(map);
+			coMarker = new L.Marker([lat, lon], {
+					icon: coIcon,
+					zIndexOffset: 200
+				}).addTo(map);
+			no2Marker = new L.Marker([lat, lon], {
+					icon: no2Icon,
+					zIndexOffset: 200
+				}).addTo(map);
+			humMarker = new L.Marker([lat, lon], {
+					icon: humIcon,
+					zIndexOffset: 200
+				}).addTo(map);
+			tempMarker = new L.Marker([lat, lon], {
+					icon: tempIcon,
+					zIndexOffset: 200
+				}).addTo(map);
+			
+			diagMenuDisplayed = true;
+			
+			coMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
+			no2Marker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=no2&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
+			humMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=humidity&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
+			tempMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=temperature&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
+		}
+}
+
+function removeDiagMenu(){
+	map.removeLayer(bgDiagMarker);
+	map.removeLayer(coMarker);
+	map.removeLayer(no2Marker);
+	map.removeLayer(humMarker);
+	map.removeLayer(tempMarker);
 }
 
 function centermap(){
