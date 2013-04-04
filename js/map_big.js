@@ -85,15 +85,19 @@ function removeCircleMenu(){
 }
 
 function centermap(){
-	//default values:
-	lat = 51.962944;
-	lon = 7.628694;
-	zoom = 5;
-	
 	//read from cookie:
 	lat = readCookie("x");
+	if (lat == null){
+		lat = 51.962944;
+	}
 	lon = readCookie("y");
+	if (lon == null){
+		lon = 7.628694;
+	}
 	zoom = readCookie("zoom");
+	if (zoom == null){
+		zoom = 5;
+	}
 	
 	center = new L.LatLng(lat, lon);
 	map.setView(center, zoom)
