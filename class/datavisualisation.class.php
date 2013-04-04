@@ -169,12 +169,24 @@
 		
 		private function replaceStatistics() {
 			$statistics = array('current' => $this->sensors, 'mean' => $this->sensors, 'maximum' => $this->sensors, 'minimum' => $this->sensors);
+			foreach ( $this->sensors as $sensor ) {
+				$statistics['maximum'][$sensor] = 0;
+				$statistics['minimum'][$sensor] = null;
+				$statistics['mean'][$sensor] = 0;
+				
+				$size[$sensor] = 0;
+			}
+			
 			foreach ( $this->dataArray as $time => $sensors) {
 				foreach ( $sensors as $sensor => $value ) {
+					if ( isset($this->dataArray[$time][$sensor]) ) {
+						$size[$sensor]++;
+					}
+					
 					if ( $value > $statistics['maximum'][$sensor] ) {
 						$statistics['maximum'][$sensor] = $value;
 					}
-					if ( $value < $statistics['minimum'][$sensor] || $statistics['minimum'][$sensor] == null ) {
+					if ( $statistics['minimum'][$sensor] == null || $value < $statistics['minimum'][$sensor]  ) {
 						$statistics['minimum'][$sensor] = $value;
 					}
 					$statistics['mean'][$sensor] += $value;
@@ -183,10 +195,10 @@
 			
 			$data = $this->dataArray;
 			foreach ( $this->sensors as $sensor ) {
-				$statistics['mean'][$sensor] /= sizeof($this->dataArray);
+				$statistics['mean'][$sensor] /= $size[$sensor];
 				$statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 3);
 				
-				while (! $statistics['current'][$sensor] ) {
+				while (! isset($statistics['current'][$sensor]) ) {
 					$current = array_pop($data);
 					if ( isset($current[$sensor]) ) {
 						$statistics['current'][$sensor] = $current[$sensor];
