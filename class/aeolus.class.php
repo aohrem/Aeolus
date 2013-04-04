@@ -109,6 +109,11 @@
 			switch ( $this->site ) {
 				// home page
 				case '':
+					include('start.inc.php');
+				break;
+				
+				case 'start':
+					include('start.inc.php');
 				break;
 				
 				// table view
