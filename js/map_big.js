@@ -1,4 +1,6 @@
-var map = L.map('map_big').setView([51.962944, 7.628694,], 5);	
+var lat, lon, zoom;
+var map = L.map('map_big');	
+centermap();
 var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed = false;
 
 L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/256/{z}/{x}/{y}.png', {
@@ -14,6 +16,7 @@ function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempVa
 			});
 	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){
+			writeCookie();
 			openCircleMenu(lat, lon, feedID);
 			document.getElementById("eggValueFeedId").innerHTML = title;
 			document.getElementById("eggValueCo").innerHTML = coValue + " ppm";
@@ -81,8 +84,47 @@ function removeCircleMenu(){
 	document.getElementById("eggValue").style.visibility = "hidden";
 }
 
-function centermap(lat, lon, zoom){
-	map.setView([lat, lon], zoom)
+function centermap(){
+	//default values:
+	lat = 51.962944;
+	lon = 7.628694;
+	zoom = 5;
+	
+	//read from cookie:
+	lat = readCookie("x");
+	lon = readCookie("y");
+	zoom = readCookie("zoom");
+	
+	center = new L.LatLng(lat, lon);
+	map.setView(center, zoom)
+}
+
+function readCookie(tag) {
+   var cookie = document.cookie;
+
+   var posTag = cookie.indexOf("; " + tag + "=");
+   if (posTag == -1) {
+      if (cookie.indexOf(tag + "=") == 0) posTag = 0;
+      else return null;
+   }
+
+   var valueStart = cookie.indexOf("=", posTag)+1;
+   var valueEnd = cookie.indexOf(";", posTag+1);
+   if (valueEnd == -1) valueEnd = cookie.length;
+
+   var value = cookie.substring(valueStart, valueEnd);
+   return unescape(value);
+}
+
+function writeCookie(){
+	var x, y, zoom;
+	x = map.getCenter().lat;
+	y = map.getCenter().lng;
+	zoom = map.getZoom();
+	
+	document.cookie = "x=" + escape(x);
+	document.cookie = "y=" + escape(y);
+	document.cookie = "zoom=" + escape(zoom);
 }
 
 map.on('click', removeCircleMenu);

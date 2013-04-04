@@ -17,10 +17,14 @@ function addEgg(lat, lon, feedID){
 }
 
 function openMap(){
-	var center, zoom;
-	center = map.getCenter();
+	var x, y, zoom;
+	x = map.getCenter().lat;
+	y = map.getCenter().lng;
 	zoom = map.getZoom();
-	//Hier muss irgendwie die kartenseite geöffnet, und die Funktion "centerMap" aus map_big aufgerufen werden
+	
+	document.cookie = "x=" + escape(x);
+	document.cookie = "y=" + escape(y);
+	document.cookie = "zoom=" + escape(zoom);
+	
+	location.href = 'index.php?s=map&lang=de';
 }
-
-addEgg(51.955, 7.63, 1234);
