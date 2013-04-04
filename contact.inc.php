@@ -39,14 +39,13 @@
                 
                 $subject = translate('title'). ' '.translate('contact').' '.translate('message_from').' '.clean_string($name);
                 
-                $emailText = translate('name').' '.clean_string($name).'\n';
-                $emailText .= translate('email').' '.clean_string($mail).'\n';
-                $emailText .= translate('message').' '.clean_string($message).'\n';
+                $emailText = translate('name').': '.clean_string($name).'
+'.translate('email').': '.clean_string($mail).'
+'.translate('message').':
+'.clean_string($message);
                 
                 // create email header
-                $header = 'From: '.clean_string($mail).'\r\n'.
-                'Reply-To: '.clean_string($mail).'\r\n'.
-                'X-Mailer: PHP/' . phpversion();
+                $header = 'From: '.clean_string($name).' <'.clean_string($mail).'>';
                 mail($to, $subject, $emailText, $header);
                 
                 $successmessage = '<p><span class="success">'.translate('mail_has_been_send').'</span></p>';
