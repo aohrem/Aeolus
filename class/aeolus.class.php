@@ -102,18 +102,18 @@
         }
         
         private function handleRegisterPopup() {
-			include('register.inc.php');
+			include('include/register.inc.php');
         }
 		
 		private function switchSite() {
 			switch ( $this->site ) {
 				// home page
 				case '':
-					include('start.inc.php');
+					include('include/start.inc.php');
 				break;
 				
 				case 'start':
-					include('start.inc.php');
+					include('include/start.inc.php');
 				break;
 				
 				// table view
@@ -139,17 +139,17 @@
 				
 				// map view
 				case 'map':
-					include('map.inc.php');
+					include('include/map.inc.php');
 				break;
 				
 				// "delete AQE"-page
 				case 'delete':
-					include('delete.inc.php');
+					include('include/delete.inc.php');
 				break;
                 
                 // contact page
                 case 'contact':
-                    include('contact.inc.php');
+                    include('include/contact.inc.php');
                 break;
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-	$db = new Sql();
+    $mySqlConnection = new MySqlConnection();
 	$query = mysql_query('SELECT `feed_id`,`lat`,`lon` FROM `egg`');
 	if (mysql_num_rows($query) == 0) {
 		$this->contentTemplate->cleanCode('Egg');
@@ -13,5 +13,5 @@
 		}
 		$this->contentTemplate->cleanCode('Egg');
 	}
-	$this->contentTemplate->tplReplace('url', $url);
+	//$this->contentTemplate->tplReplace('url', $url);
 ?>

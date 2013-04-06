@@ -1,5 +1,5 @@
 <?php
-class Sql {
+class MySqlConnection {
 	private $server = 'localhost';
     private $user = 'root';
 	private $password = '';
@@ -15,18 +15,6 @@ class Sql {
 			die('Connection to database failed');
 		}
     }
-	
-	public function fetch($query) {
-		return mysql_fetch_object(mysql_query($query));
-	}
-	
-	public function num_rows($query) {
-		return mysql_num_rows(mysql_query($query));
-	}
-	
-	public function query($query) {
-		return mysql_query($query);
-	}
 	
 	public function __destruct() {
 		mysql_close($this->mysql_connection);
