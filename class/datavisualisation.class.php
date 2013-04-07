@@ -13,12 +13,6 @@
         private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
         protected $sensors = array('co', 'no2', 'humidity', 'temperature');
         
-        // constants used to determine parameters for the cosm-API request
-        protected $seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
-        protected $interval = array('6h' => 60, '24h' => 300, '48h' => 600, '1w' => 10800, '1m' => 604800, '3m' => 2678400);
-        protected $cosmTimeFormat = 'Y-m-d\TH:i:s\Z';
-        protected $limit = 1000;
-        
         private $tplErrorMessage = '';
         private $tplHidden = '';
         
@@ -41,7 +35,7 @@
                 
                 $this->applyDataValidation();
                 $this->replaceSensitivity();
-				$this->replaceStatistics();
+                $this->replaceStatistics();
             }
         }
         
@@ -85,17 +79,9 @@
         }
         
         private function getCosmData() {
-            // set parameters for the API request
-            $start = date($this->cosmTimeFormat, time() - $this->seconds[$this->timeframe]);
-            $end = date($this->cosmTimeFormat, time());
-            $values = 'all_values';
-            $interval = $this->interval[$this->timeframe];
-            
-            // cosm-API integration
-            $cosmAPI = new CosmAPI();
-            
-            // fill in the parameters to read the cosm-API
-            $this->dataArray = $cosmAPI->parseFeed($this->feedId, $values, $start, $end, $this->limit, $interval, '');
+            $mysqlConnection = new MySQLConnection();
+            $aqDatabase = new AirQualityDatabase($this->feedId, $this->timeframe);
+            $this->dataArray = $aqDatabase->getValues();
             
             // handle errors if parsing the xml was not successfull
             if ( ! is_array($this->dataArray) ) {
@@ -168,48 +154,53 @@
         }
 		
 		private function replaceStatistics() {
-			$statistics = array('current' => $this->sensors, 'mean' => $this->sensors, 'maximum' => $this->sensors, 'minimum' => $this->sensors);
-			foreach ( $this->sensors as $sensor ) {
-				$statistics['maximum'][$sensor] = 0;
-				$statistics['minimum'][$sensor] = null;
-				$statistics['mean'][$sensor] = 0;
+			if ( sizeof($this->dataArray) > 0 && is_array($this->dataArray) ) {
+                $statistics = array('current' => $this->sensors, 'mean' => $this->sensors, 'maximum' => $this->sensors, 'minimum' => $this->sensors);
+			    foreach ( $this->sensors as $sensor ) {
+				    $statistics['maximum'][$sensor] = 0;
+				    $statistics['minimum'][$sensor] = null;
+				    $statistics['mean'][$sensor] = 0;
 				
-				$size[$sensor] = 0;
-			}
+				    $size[$sensor] = 0;
+			    }
 			
-			foreach ( $this->dataArray as $time => $sensors) {
-				foreach ( $sensors as $sensor => $value ) {
-					if ( isset($this->dataArray[$time][$sensor]) ) {
-						$size[$sensor]++;
-					}
+			    foreach ( $this->dataArray as $time => $sensors) {
+				    foreach ( $sensors as $sensor => $value ) {
+					    if ( intval($this->dataArray[$time][$sensor]) != 0 ) {
+						    $size[$sensor]++;
+					    }
 					
-					if ( $value > $statistics['maximum'][$sensor] ) {
-						$statistics['maximum'][$sensor] = $value;
-					}
-					if ( $statistics['minimum'][$sensor] == null || $value < $statistics['minimum'][$sensor]  ) {
-						$statistics['minimum'][$sensor] = $value;
-					}
-					$statistics['mean'][$sensor] += $value;
-				}
-			}
-			
-			$data = $this->dataArray;
-			foreach ( $this->sensors as $sensor ) {
-				$statistics['mean'][$sensor] /= $size[$sensor];
-				$statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 3);
-				
-				while (! isset($statistics['current'][$sensor]) ) {
-					$current = array_pop($data);
-					if ( isset($current[$sensor]) ) {
-						$statistics['current'][$sensor] = $current[$sensor];
-					}
-				}
-				
-				$this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);
-				$this->contentTemplate->tplReplace($sensor.'_mean', $statistics['mean'][$sensor]);
-				$this->contentTemplate->tplReplace($sensor.'_minimum', $statistics['minimum'][$sensor]);
-				$this->contentTemplate->tplReplace($sensor.'_maximum', $statistics['maximum'][$sensor]);
-			}
+					    if ( $value > $statistics['maximum'][$sensor] ) {
+						    $statistics['maximum'][$sensor] = $value;
+					    }
+					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && intval($value) != 0 ) ) {
+						    $statistics['minimum'][$sensor] = $value;
+					    }
+					    $statistics['mean'][$sensor] += $value;
+				    }
+			    }
+			    
+                $mysqlConnection = new MySQLConnection();
+                $aqDatabase = new AirQualityDatabase($this->feedId, $this->timeframe);
+			    $data = $aqDatabase->getCurrentValues();
+			    foreach ( $this->sensors as $sensor ) {
+				    if ( $size[$sensor] != 0 ) $statistics['mean'][$sensor] /= $size[$sensor];
+				    $statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 3);
+			        $statistics['current'][$sensor] = $data['current_value'][$sensor];
+				    
+				    $this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);
+				    $this->contentTemplate->tplReplace($sensor.'_mean', $statistics['mean'][$sensor]);
+				    $this->contentTemplate->tplReplace($sensor.'_minimum', $statistics['minimum'][$sensor]);
+				    $this->contentTemplate->tplReplace($sensor.'_maximum', $statistics['maximum'][$sensor]);
+                }
+            }
+            
+            foreach ( $this->sensors as $sensor ) {
+                $this->contentTemplate->tplReplace($sensor.'_current', '-');
+                $this->contentTemplate->tplReplace($sensor.'_mean', '-');
+                $this->contentTemplate->tplReplace($sensor.'_minimum', '-');
+                $this->contentTemplate->tplReplace($sensor.'_maximum', '-');
+            }
 		}
         
         private function __destruct() {

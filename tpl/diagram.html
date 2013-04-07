@@ -4,26 +4,26 @@
 <div id="navi_left">
 	<div>
 		<a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
-        <a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
+		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+        <a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
 	</div>
 	<div>
-		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=co&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}"><img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onmouseover="buttonOver('sensor_co', 'co_hover');" onmouseout="buttonOver('sensor_co', 'co');"></a>
-		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=no2&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}"><img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onmouseover="buttonOver('sensor_no2', 'no2_hover');" onmouseout="buttonOver('sensor_no2', 'no2');"></a>
-		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=temperature&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}"><img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onmouseover="buttonOver('sensor_temperature', 'temp_hover');" onmouseout="buttonOver('sensor_temperature', 'temp');"></a>
-		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=humidity&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}"><img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onmouseover="buttonOver('sensor_humidity', 'hum_hover');" onmouseout="buttonOver('sensor_humidity', 'hum');"></a>
+		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=co&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onmouseover="buttonOver('sensor_co', 'co_hover');" onmouseout="buttonOver('sensor_co', 'co');"></a>
+		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=no2&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onmouseover="buttonOver('sensor_no2', 'no2_hover');" onmouseout="buttonOver('sensor_no2', 'no2');"></a>
+		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=temperature&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onmouseover="buttonOver('sensor_temperature', 'temp_hover');" onmouseout="buttonOver('sensor_temperature', 'temp');"></a>
+		<a href="?s=diagram&fid={feedId}&lang={language}&amp;sensor=humidity&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onmouseover="buttonOver('sensor_humidity', 'hum_hover');" onmouseout="buttonOver('sensor_humidity', 'hum');"></a>
 	</div>
 	<div>
-        <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
+        <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}" onclick="loading();"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
 	</div>
 </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[3_month]]</a></div>
+	<div{6h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
+	<div{24h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
+	<div{48h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
+	<div{1w_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
+	<div{1m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
+	<div{3m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
 </div>
 <div id="data_content">
 	<script src='https://www.google.com/jsapi'></script>
@@ -170,7 +170,7 @@
         <div class="details">
             <h4>[[outlier_detection]]</h4>
             {outliers}
-            <form action="index.php" method="get">
+            <form action="index.php" method="get" onsubmit="loading();">
                 <input type="hidden" name="s" value="diagram">
                 <input type="hidden" name="fid" value="{feedId}">
                 <input type="hidden" name="timeframe" value="{time}">
@@ -197,7 +197,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td class="center"><input type="submit" value="[[submit_settings]]" class="form_button outlier"></td>
+                        <td class="center"><input type="submit" value="[[submit_settings]]" class="form_button outlier" onclick="loading();"></td>
                     </tr>
                 </table>
             </form>
@@ -249,7 +249,7 @@
 		</div><br>
         <table>
 	        <tr>
-		        <th>[[value]]</th>
+		        <th>[[value]] ([[{time}]])</th>
 		        <th>[[co]] (ppm)</th>
 		        <th>[[no2]] (ppm)</th>
 		        <th>[[temperature]] (&deg;C)</th>

@@ -42,7 +42,7 @@ class Diagram extends DataVisualisation {
                 'dio_checked' => $css_checked,
                 'interpolateOutliers' => 'false');
             
-            if ( $this->sensitivity != 0 && $this->cosmSuccess ) {
+            if ( $this->sensitivity != 0 && $this->cosmSuccess && is_array($this->outliers) ) {
                 foreach ( $this->outliers as $sensor => $val ) {
                     $i = 0;
                     $outlierTable[$sensor] = '';
@@ -85,7 +85,7 @@ class Diagram extends DataVisualisation {
             // iterate sensors
             foreach ( $this->sensors as $sensor ) {
                 // if there is no data, set it to null
-                if ( ! isset($val[$sensor]) ) { $val[$sensor] = 'null'; }
+                if ( intval($val[$sensor]) == 0 ) { $val[$sensor] = 'null'; }
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);
                 $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);

@@ -93,7 +93,7 @@
 	}
 	
 	$mySqlConnection = new MySqlConnection();
-	$query = mysql_query('SELECT `feed_id`,`lat`,`lon` FROM `egg`');
+	$query = mysql_query('SELECT `feed_id`, `lat`, `lon` FROM `egg`');
 	if (mysql_num_rows($query) == 0) {
 		$this->contentTemplate->cleanCode('Egg');
 	}
@@ -105,16 +105,10 @@
 			$this->contentTemplate->tplReplaceOnce('egg_fid', $row->feed_id);
 			$class = 'noval';
             
-			// check if classification shoud be shown
-			$cosmAPI = new cosmAPI();
-			$start = date('Y-m-d\TH:i:s\Z', time() - 1);
-			$end = date('Y-m-d\TH:i:s\Z', time());
+            $aqDatabase = new AirQualityDatabase($row->feed_id, '6h');
+            $dataArray = $aqDatabase->getCurrentValues();
             
-			if( ! $dataArray = $cosmAPI->parseFeed($row->feed_id, 'current_value', 0, 0, 0, 0, '') ) {
-				print $row->feed_id." cosmAPI nicht gelesen!<br>";
-			}
-			// check if parsing the xml was successfull
-			else if ( is_array($dataArray) ) {
+			if ( is_array($dataArray) && isset($dataArray['current_value']) ) {
 				if ( isset($classify) ) {
 					switch ($classify) {
 						case "co":
@@ -133,6 +127,7 @@
 						break;
 					}
 				}
+                
 				$this->contentTemplate->tplReplaceOnce('egg_coval', $dataArray['current_value']['co']);
 				$this->contentTemplate->tplReplaceOnce('egg_no2val', $dataArray['current_value']['no2']);
 				$this->contentTemplate->tplReplaceOnce('egg_tempval', $dataArray['current_value']['temperature']);

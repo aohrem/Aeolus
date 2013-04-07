@@ -2,132 +2,134 @@
 <h1>{title}[[data_download]]</h1>
 <div id="navi_left">
 	<div>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
+		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
         <a href="#"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="active last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
 	</div>
 	<div>
-        <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
+        <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}" onclick="loading();"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
 	</div>
  </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}">[[3_month]]</a></div>
+	<div{6h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
+	<div{24h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
+	<div{48h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
+	<div{1w_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
+	<div{1m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
+	<div{3m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
 </div>
 <div id="data_content">
-	<div class="details">
-		<h4>[[description]]</h4>
-		<p>{description}</p>
-		<div class="left">
-			<h4>[[pos_and_ele]]</h4>
-			<table class="metadata">
-				<tr>
-					<td>[[location_name]]:</td>
-					<td>{locationName}</td>
-				</tr>
-				<tr>
-					<td>[[latitude]]:</td>
-					<td>{lat}</td>
-				</tr>
-				<tr>
-					<td>[[longitude]]:</td>
-					<td>{lon}</td>
-				</tr>
-				<tr>
-					<td>[[ele]]:</td>
-					<td>{ele}</td>
-				</tr>
-			</table>
-		</div>
-		<h4>[[more_info]]</h4>
-		<table class="metadata">
-			<tr>
-				<td>[[feed_id]]:</td>
-				<td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
-			</tr>
-			<tr>
-				<td>[[website]]:</td>
-				<td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
-			</tr>
-			<tr>
-				<td>[[state]]:</td>
-				<td>{status}</td>
-			</tr>
-			<tr>
-				<td>[[exposure]]:</td>
-				<td>{exposure}</td>
-			</tr>
-		</table>
-        <br>
-	</div><br>
-    <div class="details">
-        <h4>[[raw_sensor_data_from_cosm]]</h4>
-        <table class="download">
-            <tr>
-                <td><a href="{cosm_link_xml}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_xml_button" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');"> <span class="text" id="cosm_xml_text" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');">[[download]] (.xml)</span></a></td>
-                <td><a href="{cosm_link_json}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_json_button" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');"> <span class="text" id="cosm_json_text" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');">[[download]] (.json)</span></a></td>
-                <td><a href="{cosm_link_csv}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_csv_button" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');"> <span class="text" id="cosm_csv_text" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');">[[download]] (.csv)</span></a></td>
-            </tr>
-        </table>
-    </div><br>
-    <script src="js/radio_switch.js"></script>
-    <div class="details">
-        <h4>[[title]] [[sensor_observation_service]]</h4>
-        <table class="download">
-            <tr>
-                <td>
-                    <a href="sos.php?request=getObservation&amp;service=sos&amp;version=2.0.0&amp;responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;&amp;observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&amp;offering=airqualityegg&amp;featureOfInterest=urn:ogc:object:feature:sensor:airqualityegg-{feedId}&amp;eventTime={sostimes}&amp;outlierInterpolation={outlierInterpolation}" target="_blank">
-                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_button" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');"> <span class="text" id="sos_text" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');">getObservation (.xml)</span>
-                    </a>
-                </td>
-                <td>
-                    <a href="sos.php?request=getCapabilities&amp;service=sos" target="_blank">
-                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_gc_button" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');"> <span class="text" id="sos_gc_text" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');">getCapabilities (.xml)</span>
-                    </a>
-                </td>
-                <td>
-                    <a href="sos.php?request=describeSensor&amp;service=sos&amp;version=2.0.0&amp;outputFormat=text/xml;subtype=&quot;sensorML/1.0.1&quot;&amp;procedure=urn:ogc:object:feature:sensor:airqualityegg-{feedId}" target="_blank">
-                        <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_ds_button" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');"> <span class="text" id="sos_ds_text" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');">describeSensor (.xml)</span>
-                    </a>
-                </td>
-            </tr>
-        </table>
-        <p>[[data_interpolation_hint]] [[sos_further_information]]</p>
-        <h4>[[outlier_detection]]</h4>
-        <form action="index.php" method="get">
-            <input type="hidden" name="s" value="download">
-            <input type="hidden" name="fid" value="{feedId}">
-            <input type="hidden" name="timeframe" value="{time}">
-            <table class="outliers">
+    <div{hidden}>
+	    <div class="details">
+		    <h4>[[description]]</h4>
+		    <p>{description}</p>
+		    <div class="left">
+			    <h4>[[pos_and_ele]]</h4>
+			    <table class="metadata">
+				    <tr>
+					    <td>[[location_name]]:</td>
+					    <td>{locationName}</td>
+				    </tr>
+				    <tr>
+					    <td>[[latitude]]:</td>
+					    <td>{lat}</td>
+				    </tr>
+				    <tr>
+					    <td>[[longitude]]:</td>
+					    <td>{lon}</td>
+				    </tr>
+				    <tr>
+					    <td>[[ele]]:</td>
+					    <td>{ele}</td>
+				    </tr>
+			    </table>
+		    </div>
+		    <h4>[[more_info]]</h4>
+		    <table class="metadata">
+			    <tr>
+				    <td>[[feed_id]]:</td>
+				    <td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
+			    </tr>
+			    <tr>
+				    <td>[[website]]:</td>
+				    <td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
+			    </tr>
+			    <tr>
+				    <td>[[state]]:</td>
+				    <td>{status}</td>
+			    </tr>
+			    <tr>
+				    <td>[[exposure]]:</td>
+				    <td>{exposure}</td>
+			    </tr>
+		    </table>
+            <br>
+	    </div><br>
+        <div class="details">
+            <h4>[[raw_sensor_data_from_cosm]]</h4>
+            <table class="download">
                 <tr>
-                    <td>[[sensitivity]]:</td>
-                    <td class="center">
-                        <select name="sensitivity">
-                            <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
-                            <option value="1"{sensitivity_1_selected}>[[low]]</option>
-                            <option value="2"{sensitivity_2_selected}>[[medium]]</option>
-                            <option value="3"{sensitivity_3_selected}>[[high]]</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>[[outlier_interpolation]]:</td>
-                    <td class="center">
-                        <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
-                        <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="center"><input type="submit" value="[[submit_settings]]" class="form_button outlier"></td>
+                    <td><a href="{cosm_link_xml}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_xml_button" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');"> <span class="text" id="cosm_xml_text" onmouseover="downloadOver('cosm_xml');" onmouseout="downloadOut('cosm_xml');">[[download]] (.xml)</span></a></td>
+                    <td><a href="{cosm_link_json}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_json_button" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');"> <span class="text" id="cosm_json_text" onmouseover="downloadOver('cosm_json');" onmouseout="downloadOut('cosm_json');">[[download]] (.json)</span></a></td>
+                    <td><a href="{cosm_link_csv}" target="_blank"><img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="cosm_csv_button" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');"> <span class="text" id="cosm_csv_text" onmouseover="downloadOver('cosm_csv');" onmouseout="downloadOut('cosm_csv');">[[download]] (.csv)</span></a></td>
                 </tr>
             </table>
-            <input type="hidden" name="lang" value="{language}">
-        </form>
+        </div><br>
+        <script src="js/radio_switch.js"></script>
+        <div class="details">
+            <h4>[[title]] [[sensor_observation_service]]</h4>
+            <table class="download">
+                <tr>
+                    <td>
+                        <a href="sos.php?request=getObservation&amp;service=sos&amp;version=2.0.0&amp;responseFormat=text/xml;subtype=&quot;om/1.0.0&quot;&amp;observedProperty=urn:ogc:def:phenomenon:co,urn:ogc:def:phenomenon:no2,urn:ogc:def:phenomenon:temperature,urn:ogc:def:phenomenon:humidity&amp;offering=airqualityegg&amp;featureOfInterest=urn:ogc:object:feature:sensor:airqualityegg-{feedId}&amp;eventTime={sostimes}&amp;outlierInterpolation={outlierInterpolation}" target="_blank">
+                            <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_button" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');"> <span class="text" id="sos_text" onmouseover="downloadOver('sos');" onmouseout="downloadOut('sos');">getObservation (.xml)</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="sos.php?request=getCapabilities&amp;service=sos" target="_blank">
+                            <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_gc_button" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');"> <span class="text" id="sos_gc_text" onmouseover="downloadOver('sos_gc');" onmouseout="downloadOut('sos_gc');">getCapabilities (.xml)</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="sos.php?request=describeSensor&amp;service=sos&amp;version=2.0.0&amp;outputFormat=text/xml;subtype=&quot;sensorML/1.0.1&quot;&amp;procedure=urn:ogc:object:feature:sensor:airqualityegg-{feedId}" target="_blank">
+                            <img src="img/download.png" width="50" height="50" alt="[[raw_data_from_cosm]]" id="sos_ds_button" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');"> <span class="text" id="sos_ds_text" onmouseover="downloadOver('sos_ds');" onmouseout="downloadOut('sos_ds');">describeSensor (.xml)</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+            <p>[[data_interpolation_hint]] [[sos_further_information]]</p>
+            <h4>[[outlier_detection]]</h4>
+            <form action="index.php" method="get" onsubmit="loading();">
+                <input type="hidden" name="s" value="download">
+                <input type="hidden" name="fid" value="{feedId}">
+                <input type="hidden" name="timeframe" value="{time}">
+                <table class="outliers">
+                    <tr>
+                        <td>[[sensitivity]]:</td>
+                        <td class="center">
+                            <select name="sensitivity">
+                                <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
+                                <option value="1"{sensitivity_1_selected}>[[low]]</option>
+                                <option value="2"{sensitivity_2_selected}>[[medium]]</option>
+                                <option value="3"{sensitivity_3_selected}>[[high]]</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>[[outlier_interpolation]]:</td>
+                        <td class="center">
+                            <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
+                            <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center"><input type="submit" value="[[submit_settings]]" class="form_button outlier" onclick="loading();"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="lang" value="{language}">
+            </form>
+        </div>
     </div>
     {errormessage}
 </div>

@@ -1,5 +1,8 @@
 <?php
 class Download extends DataVisualisation {
+    private $seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
+    private $interval = array('6h' => 60, '24h' => 300, '48h' => 600, '1w' => 10800, '1m' => 604800, '3m' => 2678400);
+    private $limit = 1000;
     private $sosTimeFormat = 'Y-m-d\TH:i:s+00';
     
     public function __construct($contentTemplate) {
@@ -32,20 +35,19 @@ class Download extends DataVisualisation {
     
     private function replaceCosmLinks() {
         // set parameters for the API request
-        $start = date($this->cosmTimeFormat, time() - $this->seconds[$this->timeframe]);
-        $end = date($this->cosmTimeFormat, time());
-        $values = 'all_values';
+        $start = time() - $this->seconds[$this->timeframe];
+        $end = time();
         $interval = $this->interval[$this->timeframe];
         
         // cosm-API integration
         $cosmAPI = new CosmAPI();
         
         // fill in the parameters to read the cosm-API
-        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'xml');
+        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, 'xml');
         $this->contentTemplate->tplReplace('cosm_link_xml', htmlentities($cosmAPI->getRequestUrl()));
-        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'json');
+        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, 'json');
         $this->contentTemplate->tplReplace('cosm_link_json', htmlentities($cosmAPI->getRequestUrl()));
-        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, '', 'csv');
+        $cosmAPI->setRequestUrl($this->feedId, $start, $end, $this->limit, $interval, 'csv');
         $this->contentTemplate->tplReplace('cosm_link_csv', htmlentities($cosmAPI->getRequestUrl()));
     }
     

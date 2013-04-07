@@ -11,23 +11,25 @@
         <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
         <script src="js/navi_over.js"></script>
         <script src="js/footer_over.js"></script>
+        <script src="js/loading.js"></script>
         <script src ="http://code.jquery.com/jquery-latest.js"></script>
         <meta charset="utf-8">
     </head>
 	<body>
+        <div id="loading"><div>[[loading]]</div></div>
 		<div id="page">
 			<header>
-				<a href="index.php?lang={language}"><img src="img/header.png" alt="Aeolus Logo" width="285" height="99"></a>
+				<a href="index.php?lang={language}" onclick="loading();"><img src="img/header.png" alt="Aeolus Logo" width="285" height="99"></a>
 				<nav>
 					<ul>
 						<li>
-							<a href="index.php?lang={language}" onmouseover="mouseOver('home');" onmouseout="mouseOut('home');">
+							<a href="index.php?lang={language}" onmouseover="mouseOver('home');" onmouseout="mouseOut('home');" onclick="loading();">
 								<img src="img/home.png" alt="Startseite" width="78" height="78" id="home">
 							</a>
 							<div id="home_over">[[home]]</div>
 						</li>
 						<li>
-							<a href="index.php?s=map&amp;lang={language}" onmouseover="mouseOver('map');" onmouseout="mouseOut('map');">
+							<a href="index.php?s=map&amp;lang={language}" onmouseover="mouseOver('map');" onmouseout="mouseOut('map');" onclick="loading();">
 								<img src="img/map.png" alt="Karte" width="78" height="78" id="map">
 							</a>
 							<div id="map_over">[[map]]</div>
@@ -51,22 +53,22 @@
 			<footer>
                 <table id="footer_left">
                     <tr>
-                        <td><a href="index.php?s=delete&amp;lang={language}">[[delete_aqe]]</a></td>
-                        <td><a href="index.php?s=links&amp;lang={language}">[[useful_links]]</a></td>
+                        <td><a href="index.php?s=delete&amp;lang={language}" onclick="loading();">[[delete_aqe]]</a></td>
+                        <td><a href="index.php?s=links&amp;lang={language}" onclick="loading();">[[useful_links]]</a></td>
                     </tr>
                     <tr>
-                        <td><a href="index.php?s=sos&amp;lang={language}">[[sensor_observation_service]]</a></td>
-                        <td><a href="index.php?s=contact&amp;lang={language}">[[contact]]</a></td>
+                        <td><a href="index.php?s=sos&amp;lang={language}" onclick="loading();">[[sensor_observation_service]]</a></td>
+                        <td><a href="index.php?s=contact&amp;lang={language}" onclick="loading();">[[contact]]</a></td>
                     </tr>
                     <tr>
-                        <td><a href="index.php?s=phenomena&amp;lang={language}">[[measured_phenomena]]</a></td>
-                        <td><a href="index.php?s=impress&amp;lang={language}">[[credits]]</a></td>
+                        <td><a href="index.php?s=phenomena&amp;lang={language}" onclick="loading();">[[measured_phenomena]]</a></td>
+                        <td><a href="index.php?s=impress&amp;lang={language}" onclick="loading();">[[credits]]</a></td>
                     </tr>
                 </table>
                 <div id="footer_right">
-                    <a href="{site}lang=en" onmouseover="mouseOverFooter('english');" onmouseout="mouseOutFooter('english');"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
+                    <a href="{site}lang=en" onmouseover="mouseOverFooter('english');" onmouseout="mouseOutFooter('english');" onclick="loading();"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
 					<div id="english_over"><span>[[view_english]]</span></div>
-                    <a href="{site}lang=de" onmouseover="mouseOverFooter('german');" onmouseout="mouseOutFooter('german');"><img src="img/de.png" width="40" height="26" alt="Deutsch" class="language"></a>
+                    <a href="{site}lang=de" onclick="loading();" onmouseover="mouseOverFooter('german');" onmouseout="mouseOutFooter('german');"><img src="img/de.png" width="40" height="26" alt="Deutsch" class="language"></a>
 					<div id="german_over"><span>[[view_german]]</span></div>
                 </div>
 			</footer>

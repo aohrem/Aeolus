@@ -1,6 +1,6 @@
 <h1>[[contact]]</h1>
 {contact_error}
-<form method="post" action="index.php?s=contact&amp;send=one&amp;lang={language}">
+<form method="post" action="index.php?s=contact&amp;send=one&amp;lang={language}" onsubmit="loading();">
     <table class="form">
         <tr>
             <td>[[name]]:</td>
@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="[[send]]" class="form_button long"></td>
+            <td><input type="submit" value="[[send]]" class="form_button long" onclick="loading();"></td>
         </tr>
     </table>
 </form>

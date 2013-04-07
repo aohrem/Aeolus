@@ -14,16 +14,16 @@
 		<img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
 	</div>
 	<div class="map_buttons" id="co_button">
-		<a href="{url}&amp;classify=co#mapview"><img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button" onmouseover="buttonOver('map_co_button', 'co_hover');" onmouseout="buttonOver('map_co_button', 'co');"></a>
+		<a href="{url}&amp;classify=co#mapview" onclick="loading();"><img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button" onmouseover="buttonOver('map_co_button', 'co_hover');" onmouseout="buttonOver('map_co_button', 'co');"></a>
 	</div>
 	<div class="map_buttons" id="no2_button">
-		<a href="{url}&amp;classify=no2#mapview"><img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button" onmouseover="buttonOver('map_no2_button', 'no2_hover');" onmouseout="buttonOver('map_no2_button', 'no2');"></a>
+		<a href="{url}&amp;classify=no2#mapview" onclick="loading();"><img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button" onmouseover="buttonOver('map_no2_button', 'no2_hover');" onmouseout="buttonOver('map_no2_button', 'no2');"></a>
 	</div>
 	<div class="map_buttons" id="temp_button">
-		<a href="{url}&amp;classify=temperature#mapview"><img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button" onmouseover="buttonOver('map_temp_button', 'temp_hover');" onmouseout="buttonOver('map_temp_button', 'temp');"></a>
+		<a href="{url}&amp;classify=temperature#mapview" onclick="loading();"><img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button" onmouseover="buttonOver('map_temp_button', 'temp_hover');" onmouseout="buttonOver('map_temp_button', 'temp');"></a>
 	</div>
 	<div class="map_buttons" id="hum_button">
-		<a href="{url}&amp;classify=humidity#mapview"><img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button" onmouseover="buttonOver('map_hum_button', 'hum_hover');" onmouseout="buttonOver('map_hum_button', 'hum');"></a>
+		<a href="{url}&amp;classify=humidity#mapview" onclick="loading();"><img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button" onmouseover="buttonOver('map_hum_button', 'hum_hover');" onmouseout="buttonOver('map_hum_button', 'hum');"></a>
 	</div>
 	<div id="legend"{show}>
 		<h1>[[{classify}]]</h1>
@@ -53,7 +53,7 @@
 				<td class="left">[[no_value]]</td>
 			</tr>
 		</table>
-		<a href="{url}#mapview">[[blank_classification_out]]</a>
+		<a href="{url}#mapview" onclick="loading();">[[blank_classification_out]]</a>
 	</div>
 	<div id="eggValue">
         <div id="eggValueFeedId"></div>

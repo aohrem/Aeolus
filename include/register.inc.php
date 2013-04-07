@@ -50,14 +50,15 @@
 				else {
 					if ( isset($_POST['reg_address']) ) { $password = $_POST['password']; } else { $password = sha1($_POST['password']); }
 					
-					$db = new Sql();
-					$num_rows = $db->num_rows('SELECT `feed_id` FROM `aeolus`.`egg` WHERE `feed_id`='.$fid);
+					$db = new MySqlConnection();
+					$num_rows = mysql_num_rows(mysql_query('SELECT `feed_id` FROM `aeolus`.`egg` WHERE `feed_id`='.$fid));
                     
 					if ($num_rows != 0) {
 						$errormessage = '<span class="error">'.translate('aqe_already_registered').'</span>';
 					}
 					else {
-						$db->query('INSERT INTO `aeolus`.`egg` (`feed_id`, `password`, `lat`, `lon`) VALUES ('.$fid.', \''.$password.'\', \''.$coordinates[0].'\', \''.$coordinates[1].'\')');
+						mysql_query('INSERT INTO `aeolus`.`egg` (`feed_id`, `password`, `lat`, `lon`) VALUES ('.$fid.', \''.$password.'\', \''.$coordinates[0].'\', \''.$coordinates[1].'\')');
+                        open('create_egg.php?fid='.$fid);
 						$successmessage = '<span class="success">'.translate('aqe_registered').'</span>';
 					}
 				}

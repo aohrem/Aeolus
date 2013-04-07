@@ -17,7 +17,9 @@ class MySqlConnection {
     }
 	
 	public function __destruct() {
-		mysql_close($this->mysql_connection);
+		if ( is_resource($this->mysql_connection) ) {
+            mysql_close($this->mysql_connection);
+        }
 	}
 }
 ?>

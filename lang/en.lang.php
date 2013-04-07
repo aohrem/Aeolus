@@ -148,6 +148,8 @@
 		'example' => 'Beispiel',
 		'separate_with_comma' => '(mehrere Werte mit Kommata trennen)',
 		'yes' => 'Yes',
-		'no' => 'No'
+		'no' => 'No',
+        'egg_not_found' => 'The Air Quality Egg with the given feed ID is not in our database.',
+        'loading' => 'Loading.'
 	);
 ?>

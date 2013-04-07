@@ -1,7 +1,7 @@
 <h1>[[delete_aqe]]</h1>
 <p>[[delete_aqe_explanation]]</p>
 {del_error}
-<form method="post" action="index.php?s=delete&amp;send=one&amp;lang={language}">
+<form method="post" action="index.php?s=delete&amp;send=one&amp;lang={language}" onsubmit="loading();">
 	<table class="form">
 		<tr>
 			<td>[[feed_id]]:</td>
@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
             <td></td>
-			<td><input type="submit" value="[[delete_my_aqe]]" class="form_button long"></td>
+			<td><input type="submit" value="[[delete_my_aqe]]" class="form_button long" onclick="loading();"></td>
 		</tr>
 	</table>
 </form>

@@ -56,7 +56,7 @@ class Table extends DataVisualisation {
             foreach ( $this->sensors as $sensor ) {
                 
                 // if there is no data, show a "-"
-                if ( ! isset($val[$sensor]) ) { $val[$sensor] = '-'; }
+                if ( intval($val[$sensor]) == 0 ) { $val[$sensor] = '-'; }
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);
                 
                 // mark outliers with a hint box

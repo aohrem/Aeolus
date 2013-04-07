@@ -73,9 +73,9 @@ function openCircleMenu(lat, lon, feedID){
 		
 		menuDisplayed = true;
 		
-		downloadMarker.on('click', function(e){ location.href='index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de';   });
+		downloadMarker.on('click', function (e) { location.href = 'index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; loading();   });
 		diagMarker.on('click', function(e){ openDiagMenu(lat, lon, feedID) });
-		tableMarker.on('click', function(e){ location.href='index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; });
+		tableMarker.on('click', function (e) { location.href = 'index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; loading(); });
 }
 
 function removeCircleMenu(){
@@ -144,10 +144,10 @@ function openDiagMenu(lat, lon, feedID){
 			
 			diagMenuDisplayed = true;
 			
-			coMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
-			no2Marker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=no2&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
-			humMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=humidity&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
-			tempMarker.on('click', function(e){location.href='index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=temperature&timeframe=6h&interpolateoutliers=false&sensitivity=2'; });
+			coMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
+			no2Marker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=no2&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
+			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=humidity&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
+			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=temperature&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
 		}
 }
 

@@ -1,9 +1,10 @@
 <?php
     include('lang/en.lang.php');
-    include('functions.inc.php');
+    include('include/functions.inc.php');
 	include('class/template.class.php');
 	include('class/simplexmlextended.class.php');
-	include('class/cosmapi.class.php');
+	include('class/mysqlconnection.class.php');
+	include('class/airqualitydatabase.class.php');
 	
 	class SOS {
         private $xmlTemplate;
@@ -28,11 +29,7 @@
         
 		private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
 		private $units = array('co' => 'ppm', 'no2' => 'ppm', 'humidity' => '%', 'temperature' => 'degreesCelsius');
-		private $intervals = array(60 => 21600, 120 => 43200, 240 => 86400, 300 => 432000, 900 => 1209600, 3600 => 2678400, 10800 => 7776000, 21600 => 15552000, 86400 => 31536000);
 		private $timeframes = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
-		private $limit = 1000;
-		
-		private $cosmTimeFormat = 'Y-m-d\TH:i:s\Z';
 		private $sosTimeFormat = 'Y-m-d\TH:i:s.000+00:00';
 		
 		private $dataArray;
@@ -48,7 +45,7 @@
             switch ( $this->parameter['request'] ) {
                 case 'getObservation':
                     $this->getGetObservationParameters();
-                    $this->getCosmData();
+                    $this->getData();
                     if ( $this->outlierInterpolation > 0 ) {
                         $this->applyDataValidation();
                     }
@@ -59,7 +56,7 @@
                 break;
                 case 'describeSensor':
                     $this->getDescribeSensorParameters();
-                    $this->getCosmData();
+                    $this->getData();
                     $this->printDescribeSensorXml();
                 break;
             }
@@ -130,8 +127,8 @@
                 }
             }
             else {
-                $this->startTime = date($this->cosmTimeFormat, time() - 21600);
-                $this->endTime = date($this->cosmTimeFormat, time());
+                $this->startTime = time() - 21600;
+                $this->endTime = time();
             }
             
             if ( isset($_GET['outlierInterpolation']) && is_numeric($_GET['outlierInterpolation']) && $_GET['outlierInterpolation'] >= 0 && $_GET['outlierInterpolation'] <= 3 ) {
@@ -139,19 +136,18 @@
             }
 		}
 		
-		private function getCosmData() {
+		private function getData() {
+            $timeframe = $this->determineTimeframe();
             if ( $this->parameter['request'] == 'getObservation' ) {
-                $start = date($this->cosmTimeFormat, $this->startTime);
-                $end = date($this->cosmTimeFormat, $this->endTime);
-                $values = 'all_values';
-                $interval = $this->determineInterval();
-			
-			    $cosmAPI = new CosmAPI();
-                $this->dataArray = $cosmAPI->parseFeed($this->feedId, $values, $start, $end, $this->limit, $interval, '');
-			
+                $mysqlConnection = new MySQLConnection();
+                $aqDatabase = new AirQualityDatabase($this->feedId, $timeframe);
+                $this->dataArray = $aqDatabase->getValuesInTimeframe($this->startTime, $this->endTime);
+                
                 if ( is_array($this->dataArray) ) {
 			        foreach ( $this->metadata as $mdata ) {
-                        unset($this->dataArray[$mdata]);
+                        if ( isset($this->dataArray[$mdata]) ) {
+                            unset($this->dataArray[$mdata]);
+                        }
                     }
                 }
                 else {
@@ -159,19 +155,11 @@
                 }
             }
             else if ( $this->parameter['request'] == 'describeSensor' ) {
-                $cosmAPI = new CosmAPI();
-                $this->dataArray = $cosmAPI->parseFeed($this->feedId, 'current_value', 0, 0, 0, 0, '');
+                $mysqlConnection = new MySQLConnection();
+                $aqDatabase = new AirQualityDatabase($this->feedId, $timeframe);
+                $this->dataArray = $aqDatabase->getCurrentValues();
             }
 		}
-        
-        private function determineInterval() {
-            $duration = $this->endTime - $this->startTime;
-            foreach ( $this->intervals as $interval => $maxRange ) {
-                if ( $duration <= $maxRange ) {
-                    return $interval;
-                }
-            }
-        }
         
         private function determineTimeframe() {
             $duration = $this->endTime - $this->startTime;
@@ -195,7 +183,7 @@
 			$id = 1;
 			foreach ( $this->observedProperty as $sensor ) {
 				foreach ( $this->dataArray as $time => $val ) {
-					if ( isset($val[$sensor]) ) {
+					if ( intval($val[$sensor]) != 0 ) {
 						$this->xmlTemplate->copyCode('observationData');
 						$this->xmlTemplate->tplReplaceOnce('time', date($this->sosTimeFormat, $time));
 						$this->xmlTemplate->tplReplaceOnce('id', $id);

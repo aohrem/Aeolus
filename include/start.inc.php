@@ -1,4 +1,5 @@
 <?php
+    open('update_egg.php?fid=75842');
     $mySqlConnection = new MySqlConnection();
 	$query = mysql_query('SELECT `feed_id`,`lat`,`lon` FROM `egg`');
 	if (mysql_num_rows($query) == 0) {

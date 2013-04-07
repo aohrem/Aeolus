@@ -38,6 +38,12 @@
 		'one_week' => 'eine Woche',
 		'one_month' => 'ein Monat',
 		'3_month' => '3 Monate',
+		'6h' => '6 Stunden',
+		'24h' => '24 Stunden',
+		'48h' => '48 Stunden',
+		'1w' => 'eine Woche',
+		'1m' => 'ein Monat',
+		'3m' => '3 Monate',
 		'date_time' => 'Datum, Uhrzeit',
 		'description' => 'Beschreibung',
 		'pos_and_ele' => 'Position und Lage',
@@ -155,6 +161,8 @@
 		'current' => 'Aktuell',
 		'mean' => 'Durchschnitt',
 		'maximum' => 'Maximum',
-		'minimum' => 'Minimum'
+		'minimum' => 'Minimum',
+        'egg_not_found' => 'Das Air Quality Egg mit der angegebenen Feed ID befindet sich nicht in unserer Datenbank.',
+        'loading' => 'Bitte warten.'
 	);
 ?>
