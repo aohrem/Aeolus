@@ -145,13 +145,13 @@
 					    if ( $outlier ) {
                             // get next predecessor which is not an outlier
 						    $pred = 1;
-						    while ( isset($this->transArray[$i - $pred]) && (( intval($this->dataArray[$this->transArray[$i - $pred]][$sensor]) == 0 ) || ( isset($outliers[$sensor][$this->transArray[$i - $pred]]) && $outliers[$sensor][$this->transArray[$i - $pred]] ) ) ) {
+						    while ( isset($this->transArray[$i - $pred]) && (( floatval($this->dataArray[$this->transArray[$i - $pred]][$sensor]) == 0.0 ) || ( isset($outliers[$sensor][$this->transArray[$i - $pred]]) && $outliers[$sensor][$this->transArray[$i - $pred]] ) ) ) {
 							    $pred++;
 						    }
 						
                             // get next successor which is not an outlier
 						    $succ = 1;
-						    while ( isset($this->transArray[$i + $succ]) && (( intval($this->dataArray[$this->transArray[$i + $succ]][$sensor]) == 0 ) || ( isset($outliers[$sensor][$this->transArray[$i + $succ]]) && $outliers[$sensor][$this->transArray[$i + $succ]] ) ) ) {
+						    while ( isset($this->transArray[$i + $succ]) && (( floatval($this->dataArray[$this->transArray[$i + $succ]][$sensor]) == 0.0 ) || ( isset($outliers[$sensor][$this->transArray[$i + $succ]]) && $outliers[$sensor][$this->transArray[$i + $succ]] ) ) ) {
 							    $succ++;
 						    }
 						
@@ -183,7 +183,7 @@
         // if value at $index is less than (median - factor * inter quartile range) or greater than (median + factor * inter quartile range), it is classified as an outlier
         private function checkValue($index, $median, $iqr, $outliers, $sensor) {
             if ( $iqr == 0 ) { $iqr++; }
-            if ( intval($this->dataArray[$this->transArray[$index]][$sensor]) != 0 ) {
+            if ( floatval($this->dataArray[$this->transArray[$index]][$sensor]) != 0.0 ) {
                 if ( $this->dataArray[$this->transArray[$index]][$sensor] < ($median - $this->factor[$this->sensitivity] * $iqr) ||
                         $this->dataArray[$this->transArray[$index]][$sensor] > ($median + $this->factor[$this->sensitivity] * $iqr) ) {
                     $outliers[$sensor][$this->transArray[$index]] = true;
@@ -207,7 +207,7 @@
                 // check if value is within the given interval
 			    if ( $j >= $start - 1 && $j < $end ) {
                     // if there is a value for the given sensor, save the value in another array
-                    if ( intval($val[$sensor]) != 0 ) {
+                    if ( floatval($val[$sensor]) != 0.0 ) {
 				        $sensorArray[$i] = $val[$sensor];
 						$i++;
                     }
@@ -272,7 +272,7 @@
                 // check if value is within the given interval
 			    if ( $j >= $start - 1 && $j < $end ) {
                     // if there is a value, save it to our new subarray
-                    if ( intval($val[$sensor]) != 0 ) {
+                    if ( floatval($val[$sensor]) != 0.0 ) {
 				        $arrayWindow[$i] = $val[$sensor];
 						$i++;
                     }

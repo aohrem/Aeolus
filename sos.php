@@ -183,7 +183,7 @@
 			$id = 1;
 			foreach ( $this->observedProperty as $sensor ) {
 				foreach ( $this->dataArray as $time => $val ) {
-					if ( intval($val[$sensor]) != 0 ) {
+					if ( floatval($val[$sensor]) != 0.0 ) {
 						$this->xmlTemplate->copyCode('observationData');
 						$this->xmlTemplate->tplReplaceOnce('time', date($this->sosTimeFormat, $time));
 						$this->xmlTemplate->tplReplaceOnce('id', $id);

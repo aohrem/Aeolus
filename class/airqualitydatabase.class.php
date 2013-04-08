@@ -96,8 +96,8 @@ class AirQualityDatabase {
             $dataArray['title'] = $egg->title != '' ? htmlentities($egg->title).' - ' : '';
             $dataArray['description'] = $egg->description != '' ? htmlentities($egg->description) : $GLOBALS['translation']['no_description_available'];
             $dataArray['locationName'] = $egg->location_name != '' ? htmlentities($egg->location_name) : $GLOBALS['translation']['not_available'];
-            $dataArray['lat'] = intval($egg->lat) != 0 ? $egg->lat.'&deg;' : $GLOBALS['translation']['not_available'];
-            $dataArray['lon'] = intval($egg->lon) != 0 ? $egg->lon.'&deg;' : $GLOBALS['translation']['not_available'];
+            $dataArray['lat'] = floatval($egg->lat) != 0.0 ? $egg->lat.'&deg;' : $GLOBALS['translation']['not_available'];
+            $dataArray['lon'] = floatval($egg->lon) != 0.0 ? $egg->lon.'&deg;' : $GLOBALS['translation']['not_available'];
             $dataArray['ele'] = $egg->ele != '' ? htmlentities($egg->ele) : $GLOBALS['translation']['not_available'];
             $dataArray['status'] = $egg->status != '' ? htmlentities($egg->status) : $GLOBALS['translation']['unknown'];
             $dataArray['exposure'] = $egg->exposure != '' ? htmlentities($egg->exposure) : $GLOBALS['translation']['unknown'];

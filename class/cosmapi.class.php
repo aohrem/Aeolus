@@ -106,12 +106,12 @@
 				}
                 
                 // if there is feed meta data fill it into the data array
-                $dataArray['title'] = isset($feedXml->environment->title) ? $feedXml->environment->title : '';
-                $dataArray['description'] = isset($feedXml->environment->description) ? $feedXml->environment->description : '';
-                $dataArray['locationName'] = isset($feedXml->environment->location->name) ? $feedXml->environment->location->name : '';
-                $dataArray['lat'] = isset($feedXml->environment->location->lat) ? $feedXml->environment->location->lat : '';
-                $dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon : '';
-                $dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele : '';
+                $dataArray['title'] = isset($feedXml->environment->title) ? $feedXml->environment->title->__toString() : '';
+                $dataArray['description'] = isset($feedXml->environment->description) ? $feedXml->environment->description->__toString() : '';
+                $dataArray['locationName'] = isset($feedXml->environment->location->name) ? $feedXml->environment->location->name->__toString() : '';
+                $dataArray['lat'] = isset($feedXml->environment->location->lat) ? $feedXml->environment->location->lat->__toString() : '';
+                $dataArray['lon'] = isset($feedXml->environment->location->lon) ? $feedXml->environment->location->lon->__toString() : '';
+                $dataArray['ele'] = isset($feedXml->environment->location->ele) ? $feedXml->environment->location->ele->__toString() : '';
                 $dataArray['status'] = isset($feedXml->environment->status) ? $feedXml->environment->status->__toString() : '';
                 if ( isset($feedXml->environment->location) ) {
                     $dataArray['exposure'] = $feedXml->environment->location->attribute('exposure') != '' ? $feedXml->environment->location->attribute('exposure') : '';

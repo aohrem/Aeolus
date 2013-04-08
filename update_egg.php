@@ -51,7 +51,9 @@
                                 $val[$sensor] = 0;
                             }
                         }
-                        mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
+						if ( floatval($time) != 0.0 ) {
+							mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
+						}
                     }
                 }
             }

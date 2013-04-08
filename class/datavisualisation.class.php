@@ -166,14 +166,14 @@
 			
 			    foreach ( $this->dataArray as $time => $sensors) {
 				    foreach ( $sensors as $sensor => $value ) {
-					    if ( intval($this->dataArray[$time][$sensor]) != 0 ) {
+					    if ( floatval($this->dataArray[$time][$sensor]) != 0.0 ) {
 						    $size[$sensor]++;
 					    }
 					
 					    if ( $value > $statistics['maximum'][$sensor] ) {
 						    $statistics['maximum'][$sensor] = $value;
 					    }
-					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && intval($value) != 0 ) ) {
+					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && floatval($value) != 0.0 ) ) {
 						    $statistics['minimum'][$sensor] = $value;
 					    }
 					    $statistics['mean'][$sensor] += $value;

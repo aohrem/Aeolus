@@ -85,7 +85,7 @@ class Diagram extends DataVisualisation {
             // iterate sensors
             foreach ( $this->sensors as $sensor ) {
                 // if there is no data, set it to null
-                if ( intval($val[$sensor]) == 0 ) { $val[$sensor] = 'null'; }
+                if ( floatval($val[$sensor]) == 0.0 ) { $val[$sensor] = 'null'; }
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);
                 $this->contentTemplate->tplReplaceOnce('lt', date(translate('php_time_format'), $time));
                 $this->contentTemplate->tplReplaceOnce($sensor, $val[$sensor]);
