@@ -40,6 +40,9 @@
 	// delete former input for classify in URL
 	$url_parts = explode('/', $url);
     $url = $url_parts[sizeof($url_parts)-1];
+	if ( ! preg_match('/lanuv=/',$url) ) {
+		$url = $url ."&amp;lanuv={lanuv_url}";
+	}
 	
 	if (isset($_GET['classify'])){
 		$classify = htmlentities(mysql_real_escape_string($_GET['classify']));
@@ -161,22 +164,34 @@
 		$this->contentTemplate->cleanCode('Egg');
 	}
 	
-	// add Lanuv-Symbol to map
-	$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
-	if (mysql_num_rows($query_lanuv) == 0) {
-		$this->contenTemplate->clean_code('Lanuv');
+	if ( isset($_GET['lanuv']) ) {
+		$lanuv = htmlentities($_GET['lanuv']);
+		if ($lanuv == 'true'){
+			$lanuv_url= "false";
+			// add Lanuv-Symbol to map
+			$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
+			if (mysql_num_rows($query_lanuv) == 0) {
+				$this->contenTemplate->clean_code('Lanuv');
+			}
+			else {
+				while ($row = mysql_fetch_object($query_lanuv)) {
+					$this->contentTemplate->copyCode('Lanuv');
+					$this->contentTemplate->tplReplaceOnce('lanuv_lat', $row->lat);
+					$this->contentTemplate->tplReplaceOnce('lanuv_lon', $row->lon);
+					$this->contentTemplate->tplReplaceOnce('lanuv_code', $row->code);
+					/* $this->contentTemplate->tplReplaceOnce('lanuv_city', $row->feed_id);
+					$this->contentTemplate->tplReplaceOnce('lanuv_street', $row->feed_id); */
+				}
+				$this->contentTemplate->cleanCode('Lanuv');
+				
+			}
+			
+		}
 	}
 	else {
-		while ($row = mysql_fetch_object($query_lanuv)) {
- 			$this->contentTemplate->copyCode('Lanuv');
-			$this->contentTemplate->tplReplaceOnce('lanuv_lat', $row->lat);
-			$this->contentTemplate->tplReplaceOnce('lanuv_lon', $row->lon);
-			$this->contentTemplate->tplReplaceOnce('lanuv_code', $row->code);
-			/* $this->contentTemplate->tplReplaceOnce('lanuv_city', $row->feed_id);
-			$this->contentTemplate->tplReplaceOnce('lanuv_street', $row->feed_id); */
-		}
-		$this->contentTemplate->cleanCode('Lanuv');
+		$lanuv_url= "true";
 	}
-	
+	$url = str_replace('{lanuv_url}', $lanuv_url, $url);
+/* 	$this->contentTemplate->tplReplace('lanuv_url', $lanuv_url); */
 	$this->contentTemplate->tplReplace('url', $url);
 ?>
