@@ -103,8 +103,8 @@ function openDiagMenu(lat, lon, feedID){
 			});
 			var coIcon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_co.png',
-				iconAnchor:	[50, 150],
-				iconSize:	[47, 55]
+				iconAnchor:	[57, 150],
+				iconSize:	[57, 50]
 			});
 			var no2Icon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_no2.png',
