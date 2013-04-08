@@ -93,6 +93,8 @@
 	}
 	
 	$mySqlConnection = new MySqlConnection();
+	
+	// include AQEs to map
 	$query = mysql_query('SELECT `feed_id`, `lat`, `lon` FROM `egg`');
 	if (mysql_num_rows($query) == 0) {
 		$this->contentTemplate->cleanCode('Egg');
@@ -128,16 +130,16 @@
 					}
 				}
 				
-				if ( floatval($dataArray['current_value']['co']) == 0.0 ) {
+				if ( ! isset($dataArray['current_value']['co']) ) {
 					$dataArray['current_value']['co'] = 0;
 				}
-				if ( floatval($dataArray['current_value']['no2']) == 0.0 ) {
+				if ( ! isset($dataArray['current_value']['no2']) ) {
 					$dataArray['current_value']['no2'] = 0;
 				}
-				if ( floatval($dataArray['current_value']['temperature']) == 0.0 ) {
+				if ( ! isset($dataArray['current_value']['temperature']) ) {
 					$dataArray['current_value']['temperature'] = 0;
 				}
-				if ( floatval($dataArray['current_value']['humidity']) == 0.0 ) {
+				if ( ! isset($dataArray['current_value']['humidity']) ) {
 					$dataArray['current_value']['humidity'] = 0;
 				}
                 
@@ -158,5 +160,23 @@
 		}
 		$this->contentTemplate->cleanCode('Egg');
 	}
+	
+	// add Lanuv-Symbol to map
+	$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
+	if (mysql_num_rows($query_lanuv) == 0) {
+		$this->contenTemplate->clean_code('Lanuv');
+	}
+	else {
+		while ($row = mysql_fetch_object($query_lanuv)) {
+ 			$this->contentTemplate->copyCode('Lanuv');
+			$this->contentTemplate->tplReplaceOnce('lanuv_lat', $row->lat);
+			$this->contentTemplate->tplReplaceOnce('lanuv_lon', $row->lon);
+			$this->contentTemplate->tplReplaceOnce('lanuv_code', $row->code);
+			/* $this->contentTemplate->tplReplaceOnce('lanuv_city', $row->feed_id);
+			$this->contentTemplate->tplReplaceOnce('lanuv_street', $row->feed_id); */
+		}
+		$this->contentTemplate->cleanCode('Lanuv');
+	}
+	
 	$this->contentTemplate->tplReplace('url', $url);
 ?>

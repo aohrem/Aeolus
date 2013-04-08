@@ -10,9 +10,9 @@ L.tileLayer('http://{s}.tile.cloudmade.com/cc2b230c7e24424eb2d4b2928fceba79/997/
 	maxZoom: 18
 }).addTo(map);
 
-function addEgg(lat, lon, feedID, type, color, sensor, coValue, no2Value, tempValue, humValue, title){
+function addEgg(lat, lon, feedID, color, sensor, coValue, no2Value, tempValue, humValue, title){
 	var eggIcon = L.icon({
-				iconUrl: 	'img/map_eggs/' + type + sensor + '_' + color + '.png',
+				iconUrl: 	'img/map_eggs/eggicon' + sensor + '_' + color + '.png',
 				iconSize:	[33, 35],
 				iconAnchor:	[16.5, 17.5]
 			});
@@ -103,8 +103,8 @@ function openDiagMenu(lat, lon, feedID){
 			});
 			var coIcon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_co.png',
-				iconAnchor:	[57, 150],
-				iconSize:	[57, 50]
+				iconAnchor:	[50, 150],
+				iconSize:	[47, 55]
 			});
 			var no2Icon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_no2.png',
@@ -149,6 +149,25 @@ function openDiagMenu(lat, lon, feedID){
 			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=humidity&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
 			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=temperature&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
 		}
+}
+
+function addLanuv(lat, lon,/*,  city, street,*/ code){
+ 	var lanuvIcon = L.icon({
+				iconUrl: 	'img/lanuv-marker.png',
+				iconSize:	[35, 37],
+				iconAnchor:	[17.5, 26]
+			});
+	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon}, {title: code}).addTo(map);
+	/* eggMarker.on('click', function(e){
+			writeCookie();
+			openCircleMenu(lat, lon, feedID);
+			document.getElementById("eggValueFeedId").innerHTML = title;
+			document.getElementById("eggValueCo").innerHTML = coValue + " ppm";
+			document.getElementById("eggValueNo2").innerHTML = no2Value + " ppm";
+			document.getElementById("eggValueTemp").innerHTML = tempValue + " &deg;C";
+			document.getElementById("eggValueHum").innerHTML = humValue + " %";
+			document.getElementById("eggValue").style.visibility = "visible";
+		}); */
 }
 
 function removeDiagMenu(){
