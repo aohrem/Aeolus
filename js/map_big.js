@@ -207,3 +207,5 @@ function writeCookie(){
 }
 
 map.on('click', removeCircleMenu);
+map.on('moveend', writeCookie);
+map.on('zoomend', writeCookie);
