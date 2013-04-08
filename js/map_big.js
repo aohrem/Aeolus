@@ -1,6 +1,6 @@
 var lat, lon, zoom;
-var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed = false;
-var bgDiagMarker, coMarker, no2Marker, humMarker, tempMarker, diagMenuDisplayed = false;
+var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed, lanuvDisplayed = false;
+var bgDiagMarker, coMarker, no2Marker, humMarker, tempMarker, diagMenuDisplayed  = false;
 
 var map = L.map('map_big', { keyboard: false });
 centermap();
@@ -26,7 +26,8 @@ function addEgg(lat, lon, feedID, color, sensor, coValue, no2Value, tempValue, h
 			document.getElementById("eggValueTemp").innerHTML = tempValue + " &deg;C";
 			document.getElementById("eggValueHum").innerHTML = humValue + " %";
 			document.getElementById("eggValue").style.visibility = "visible";
-		});
+			document.getElementById("lanuvValue").style.visibility = "hidden";
+		});	
 }
 
 function openCircleMenu(lat, lon, feedID){
@@ -151,24 +152,29 @@ function openDiagMenu(lat, lon, feedID){
 		}
 }
 
-function addLanuv(lat, lon,/*,  city, street,*/ code){
+function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone){
  	var lanuvIcon = L.icon({
 				iconUrl: 	'img/lanuv-marker.png',
 				iconSize:	[35, 37],
 				iconAnchor:	[17.5, 26]
 			});
 	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
-	/* eggMarker.on('click', function(e){
+	lanuvMarker.on('click', function(e){
 			writeCookie();
-			openCircleMenu(lat, lon, feedID);
-			document.getElementById("eggValueFeedId").innerHTML = title;
-			document.getElementById("eggValueCo").innerHTML = coValue + " ppm";
-			document.getElementById("eggValueNo2").innerHTML = no2Value + " ppm";
-			document.getElementById("eggValueTemp").innerHTML = tempValue + " &deg;C";
-			document.getElementById("eggValueHum").innerHTML = humValue + " %";
-			document.getElementById("eggValue").style.visibility = "visible";
-		}); */
+			document.getElementById("lanuvValueCity").innerHTML = city;
+			document.getElementById("lanuvValueStreet").innerHTML = street;
+			document.getElementById("lanuvValueTemp").innerHTML = temp;
+			document.getElementById("lanuvValueNo").innerHTML = no;
+			document.getElementById("lanuvValueSo2").innerHTML = so2;
+			document.getElementById("lanuvValuePm10").innerHTML = pm10;
+			document.getElementById("lanuvValueOzone").innerHTML = ozone;
+			document.getElementById("lanuvValueNo2").innerHTML = no2;
+			document.getElementById("lanuvValue").style.visibility = "visible";
+			document.getElementById("eggValue").style.visibility = "hidden";
+		});	
 }
+
+
 
 function removeDiagMenu(){
 	map.removeLayer(bgDiagMarker);

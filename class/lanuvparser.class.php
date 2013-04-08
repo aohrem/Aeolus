@@ -73,18 +73,20 @@ class LanuvParser {
     // returns the the latest measurement
     public function getLastValue($sensorString) {
         // return '-' if station does not provide this sensor or any value at the current time
-        if ( end($this->dataArray[$sensorString]['value']) == '' ) {
-            return '-';
-        }
-        else {
-            return end($this->dataArray[$sensorString]['value']);
-        }
+		//print_r($this->dataArray);
+		
+		if ( ! array_key_exists($sensorString, $this->dataArray)) {
+			return '-';
+		}
+		else {
+			return end($this->dataArray[$sensorString]['value']);
+		}
     }
 
     // returns the timeof latest measurement
     public function updatedOn($sensorString) {
         // return '-' if station does not provide this sensor or any value at the current time
-        if ( end($this->dataArray[$sensorString]['time']) == '' ) {
+        if ( ! array_key_exists($sensorString, $this->dataArray)) {
             return '-';
         }
         else {

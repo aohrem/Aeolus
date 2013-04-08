@@ -79,6 +79,36 @@
             </tr>
 		</table>
 	</div>
+	<div id="lanuvValue">
+        <div id="lanuvValueCity"></div>
+		<div id="lanuvValueStreet"></div>
+		<table>
+			<tr>
+                <td>[[temperature]]:</td>
+                <td><div id="lanuvValueTemp"></div></td>
+            </tr>
+            <tr>
+                <td>[[ozone]]:</td>
+                <td><div id="lanuvValueOzone"></div></td>
+            </tr>
+            <tr>
+                <td>[[no2]]:</td>
+                <td><div id="lanuvValueNo2"></div></td>
+            </tr>
+            <tr>
+                <td>[[nox]]:</td>
+                <td><div id="lanuvValueNo"></div></td>
+            </tr>
+			<tr>
+                <td>[[so2]]:</td>
+                <td><div id="lanuvValueSo2"></div></td>
+            </tr>
+			<tr>
+                <td>[[pm10]]:</td>
+                <td><div id="lanuvValuePm10"></div></td>
+            </tr>
+		</table>
+	</div>
 	<div id="map_big"></div>
 </div>
 <script src="js/map_big.js"></script>
@@ -89,6 +119,6 @@
 </script>
 <script>
 	{+Lanuv}
-	addLanuv({lanuv_lat}, {lanuv_lon}, '{lanuv_code}');
+	addLanuv({lanuv_lat}, '{lanuv_lon}', '{lanuv_code}', '{lanuv_city}', '{lanuv_street}', '{lanuv_temp}', '{lanuv_no2}', '{lanuv_no}', '{lanuv_so2}', '{lanuv_pm10}', '{lanuv_ozone}');
 	{-Lanuv}
 </script>
