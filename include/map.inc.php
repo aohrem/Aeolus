@@ -71,7 +71,7 @@
 			case 'humidity':
 				// TODO: min und max evtl. verfeinern
 				$min = 20;
-				$max = 50;
+				$max = 80;
 				$unit = "%";
 				$classes = classifier(0, $min, $max, 'classes');
 			break;
@@ -126,6 +126,19 @@
 							// to do: evtl. prüfen
 						break;
 					}
+				}
+				
+				if ( ! isset($dataArray['current_value']['co']) ) {
+					$dataArray['current_value']['co'] = 0;
+				}
+				if ( ! isset($dataArray['current_value']['no2']) ) {
+					$dataArray['current_value']['no2'] = 0;
+				}
+				if ( ! isset($dataArray['current_value']['temperature']) ) {
+					$dataArray['current_value']['temperature'] = 0;
+				}
+				if ( ! isset($dataArray['current_value']['humidity']) ) {
+					$dataArray['current_value']['humidity'] = 0;
 				}
                 
 				$this->contentTemplate->tplReplaceOnce('egg_coval', $dataArray['current_value']['co']);
