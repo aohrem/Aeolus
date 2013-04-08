@@ -128,16 +128,16 @@
 					}
 				}
 				
-				if ( ! isset($dataArray['current_value']['co']) ) {
+				if ( floatval($dataArray['current_value']['co']) == 0.0 ) {
 					$dataArray['current_value']['co'] = 0;
 				}
-				if ( ! isset($dataArray['current_value']['no2']) ) {
+				if ( floatval($dataArray['current_value']['no2']) == 0.0 ) {
 					$dataArray['current_value']['no2'] = 0;
 				}
-				if ( ! isset($dataArray['current_value']['temperature']) ) {
+				if ( floatval($dataArray['current_value']['temperature']) == 0.0 ) {
 					$dataArray['current_value']['temperature'] = 0;
 				}
-				if ( ! isset($dataArray['current_value']['humidity']) ) {
+				if ( floatval($dataArray['current_value']['humidity']) == 0.0 ) {
 					$dataArray['current_value']['humidity'] = 0;
 				}
                 

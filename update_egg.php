@@ -1,4 +1,5 @@
 <?php
+if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
     include('class/simplexmlextended.class.php');
     include('class/cosmapi.class.php');
     include('class/mysqlconnection.class.php');
@@ -61,4 +62,5 @@
     }
 
     new UpdateEgg();
+}
 ?>
