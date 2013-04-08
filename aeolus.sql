@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `egg` (
   `ele` varchar(64) NOT NULL,
   `status` varchar(64) NOT NULL,
   `exposure` varchar(64) NOT NULL,
+  `lastupdated` int(15) NOT NULL,
   PRIMARY KEY (`feed_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116227 ;
 
