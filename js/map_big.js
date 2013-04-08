@@ -35,22 +35,22 @@ function openCircleMenu(lat, lon, feedID){
 			menuDisplayed = false;
 		}
 		var bgIcon = L.icon({
-			iconUrl:	'img/kreismenu.png',
+			iconUrl:	'img/kreismenu/kreismenu.png',
 			iconAnchor:	[75, 73],
 			iconSize:	[150, 150]
 		});
 		var downloadIcon = L.icon({
-			iconUrl:	'img/kreismenu_download.png',
+			iconUrl:	'img/kreismenu/kreismenu_download.png',
 			iconAnchor:	[30, -17],
 			iconSize:	[60, 60]
 		});
 		var tableIcon = L.icon({
-			iconUrl:	'img/kreismenu_tabelle.png',
+			iconUrl:	'img/kreismenu/kreismenu_tabelle.png',
 			iconAnchor:	[-25, 73],
 			iconSize:	[50, 90]
 		});
 		var diagIcon = L.icon({
-			iconUrl:	'img/kreismenu_diagramm.png',
+			iconUrl:	'img/kreismenu/kreismenu_diagramm.png',
 			iconAnchor:	[75, 73],
 			iconSize:	[50, 90]
 		});
@@ -97,27 +97,27 @@ function openDiagMenu(lat, lon, feedID){
 		}
 		else{
 			var bgDiagIcon = L.icon({
-				iconUrl:	'img/kreismenu_diagramm_aussen.png',
+				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen.png',
 				iconAnchor:	[150, 150],
 				iconSize:	[147, 223]
 			});
 			var coIcon = L.icon({
-				iconUrl:	'img/kreismenu_diagramm_aussen_co.png',
+				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_co.png',
 				iconAnchor:	[50, 150],
 				iconSize:	[47, 55]
 			});
 			var no2Icon = L.icon({
-				iconUrl:	'img/kreismenu_diagramm_aussen_no2.png',
+				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_no2.png',
 				iconAnchor:	[115, 100],
 				iconSize:	[55, 35]
 			});
-			var humIcon = L.icon({
-				iconUrl:	'img/kreismenu_diagramm_aussen_hum.png',
+			var tempIcon = L.icon({
+				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_temp.png',
 				iconAnchor:	[140, 50],
 				iconSize:	[50, 45]
 			});
-			var tempIcon = L.icon({
-				iconUrl:	'img/kreismenu_diagramm_aussen_temp.png',
+			var humIcon = L.icon({
+				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_hum.png',
 				iconAnchor:	[140, -5],
 				iconSize:	[50, 50]
 			});
