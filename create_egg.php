@@ -20,7 +20,8 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                 
                 $cosmAPI = new CosmAPI();
                 $mySqlConnection = new MySqlConnection();
-                
+				date_default_timezone_set('UTC');
+				
                 mysql_query('CREATE TABLE IF NOT EXISTS `eggdata_'.$this->feedId.'` ( `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `co` double(9,3) NOT NULL, `no2` double(9,3) NOT NULL, `temperature` double(6,2) NOT NULL, `humidity` double(6,3) NOT NULL, PRIMARY KEY (`timestamp`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1');
                 $num_rows = mysql_num_rows(mysql_query('SELECT `timestamp` FROM `eggdata_'.$this->feedId.'`'));
                 
@@ -56,7 +57,7 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                                     }
                                 }
                                 if ( $nullsensors < 4 && floatval($time) != 0.0 ) {
-                                    mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
+                                    mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity`, `lastupdated` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\',  \''.time().'\')');
                                 }
                             }
                         }
