@@ -40,9 +40,6 @@
 	// delete former input for classify in URL
 	$url_parts = explode('/', $url);
     $url = $url_parts[sizeof($url_parts)-1];
-	if ( ! preg_match('/lanuv=/',$url) ) {
-		$url = $url ."&amp;lanuv={lanuv_url}";
-	}
 	
 	if (isset($_GET['classify'])){
 		$classify = htmlentities(mysql_real_escape_string($_GET['classify']));
@@ -166,8 +163,9 @@
 	
 	if ( isset($_GET['lanuv']) ) {
 		$lanuv = htmlentities($_GET['lanuv']);
-		if ($lanuv == 'true'){
-			$lanuv_url= "false";
+		if ($lanuv == 'true') {
+			$lanuv_url_parts = explode("&", $url);
+			$lanuv_url = $lanuv_url_parts[0]."&amp;".$lanuv_url_parts[1]."&amp;lanuv=false";
 			// add Lanuv-Symbol to map
 			$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
 			if (mysql_num_rows($query_lanuv) == 0) {
@@ -183,15 +181,24 @@
 					$this->contentTemplate->tplReplaceOnce('lanuv_street', $row->feed_id); */
 				}
 				$this->contentTemplate->cleanCode('Lanuv');
-				
 			}
-			
 		}
+		else if ($lanuv == 'false') {
+			$lanuv_url_parts = explode("&", $url);
+			$lanuv_url = $lanuv_url_parts[0]."&amp;".$lanuv_url_parts[1]."&amp;lanuv=true";	
+		}
+		else {
+			header("Location:index.php?s=map&lang=".$this->language);
+		}
+		/* $lanuv_url_parts = explode('&amp;', $lanuv_url)[0]; */
+		/* var_dump(explode('&', $url)); */
 	}
 	else {
-		$lanuv_url= "true";
+		$lanuv_url = $url."&amp;lanuv=true";
 	}
-	$url = str_replace('{lanuv_url}', $lanuv_url, $url);
-/* 	$this->contentTemplate->tplReplace('lanuv_url', $lanuv_url); */
+	if ( isset($classify) ) {
+		$lanuv_url .= "&amp;classify=".$classify;
+	}
+	$this->contentTemplate->tplReplace('lanuv_url', $lanuv_url);
 	$this->contentTemplate->tplReplace('url', $url);
 ?>
