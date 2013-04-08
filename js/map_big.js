@@ -16,7 +16,7 @@ function addEgg(lat, lon, feedID, color, sensor, coValue, no2Value, tempValue, h
 				iconSize:	[33, 35],
 				iconAnchor:	[16.5, 17.5]
 			});
-	var eggMarker = L.marker([lat, lon], {icon: eggIcon}, {title: feedID}).addTo(map);
+	var eggMarker = L.marker([lat, lon], {icon: eggIcon, zIndexOffset: 20, title: feedID}).addTo(map);
 	eggMarker.on('click', function(e){
 			writeCookie();
 			openCircleMenu(lat, lon, feedID);
@@ -103,8 +103,8 @@ function openDiagMenu(lat, lon, feedID){
 			});
 			var coIcon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_co.png',
-				iconAnchor:	[50, 150],
-				iconSize:	[47, 55]
+				iconAnchor:	[60, 150],
+				iconSize:	[57, 50]
 			});
 			var no2Icon = L.icon({
 				iconUrl:	'img/kreismenu/kreismenu_diagramm_aussen_no2.png',
@@ -157,7 +157,7 @@ function addLanuv(lat, lon,/*,  city, street,*/ code){
 				iconSize:	[35, 37],
 				iconAnchor:	[17.5, 26]
 			});
-	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon}, {title: code}).addTo(map);
+	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
 	/* eggMarker.on('click', function(e){
 			writeCookie();
 			openCircleMenu(lat, lon, feedID);
