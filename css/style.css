@@ -30,6 +30,11 @@ html, body {
     top: 55%;
 }
 
+.spacer {
+	height: 30px;
+	display:block;
+}
+
 #page {
     width: 950px;
 	margin: 0px auto;
@@ -37,7 +42,6 @@ html, body {
 	-webkit-box-shadow: 0px 0px 15px #AAAAAA;
 	box-shadow: 0px 0px 15px #AAAAAA;
 	position: relative;
-	top: 30px;
 }
 
 header {
