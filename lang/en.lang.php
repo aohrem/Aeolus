@@ -165,7 +165,7 @@
 		'nox' => 'NO',
 		'so2' => 'SO<sub>2</sub>',
 		'pm10' => 'PM<sub>10</sub>',
-		'ozone' => 'Ozone',
+		'ozone' => 'Ozone'
 		'egg_not_found' => 'The Air Quality Egg with the given feed ID is not in our database.',
         'loading' => 'Please wait.'
 	);
