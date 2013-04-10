@@ -167,6 +167,7 @@
 		'pm10' => 'PM<sub>10</sub>',
 		'ozone' => 'Ozon',
 		'egg_not_found' => 'Das Air Quality Egg mit der angegebenen Feed ID befindet sich nicht in unserer Datenbank.',
-        'loading' => 'Bitte warten.'
+        'loading' => 'Bitte warten.',
+		'no_result' => 'Keine &Uuml;bereinstimmung. Bitte pr&auml;zisieren Sie ihre Anfrage!'
 	);
 ?>

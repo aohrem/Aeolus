@@ -74,9 +74,9 @@ function openCircleMenu(lat, lon, feedID){
 		
 		menuDisplayed = true;
 		
-		downloadMarker.on('click', function (e) { location.href = 'index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; loading();   });
+		downloadMarker.on('click', function (e) { location.href = 'index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={language}'; loading(); });
 		diagMarker.on('click', function(e){ openDiagMenu(lat, lon, feedID) });
-		tableMarker.on('click', function (e) { location.href = 'index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang=de'; loading(); });
+		tableMarker.on('click', function (e) { location.href = 'index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={language}'; loading(); });
 }
 
 function removeCircleMenu(){
@@ -145,10 +145,10 @@ function openDiagMenu(lat, lon, feedID){
 			
 			diagMenuDisplayed = true;
 			
-			coMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
-			no2Marker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=no2&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
-			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=humidity&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
-			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=temperature&timeframe=6h&interpolateoutliers=false&sensitivity=2'; loading(); });
+			coMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=co'; loading(); });
+			no2Marker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=no2'; loading(); });
+			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=humidity'; loading(); });
+			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=temperature'; loading(); });
 		}
 }
 
@@ -161,7 +161,7 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
 	lanuvMarker.on('click', function(e){
 	    writeCookie();
-	    //location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2';
+	    //location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2';
 			document.getElementById("lanuvValueCity").innerHTML = city;
 			document.getElementById("lanuvValueStreet").innerHTML = street;
 			document.getElementById("lanuvValueTemp").innerHTML = temp;

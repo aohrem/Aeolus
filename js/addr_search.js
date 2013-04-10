@@ -33,7 +33,7 @@ user to specify his request
 			}).appendTo('#results');
 		} 
 		else {
-			$('<p>', { html: "Keine &Uuml;bereinstimmung. Bitte pr&auml;zisieren Sie ihre Anfrage!" })
+			$('<p>', { html: "[[no_result]]" })
 			.appendTo('#results'); //prompt to asks the user to specify his search
 		}
 		setResultsVisible();

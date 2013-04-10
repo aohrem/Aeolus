@@ -27,5 +27,5 @@ function openMap(){
 	document.cookie = "zoom=" + escape(zoom);
 
 	loading();
-	location.href = 'index.php?s=map&lang=de';
+	location.href = 'index.php?s=map&lang={lang}';
 }
