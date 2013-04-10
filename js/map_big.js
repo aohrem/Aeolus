@@ -1,6 +1,7 @@
 var lat, lon, zoom;
 var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed, lanuvDisplayed = false;
 var bgDiagMarker, coMarker, no2Marker, humMarker, tempMarker, diagMenuDisplayed  = false;
+var lanuvCluster = new L.MarkerClusterGroup({showCoverageOnHover: false});
 
 var map = L.map('map_big', { keyboard: false });
 centermap();
@@ -158,7 +159,9 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 				iconSize:	[35, 37],
 				iconAnchor:	[17.5, 26]
 			});
-	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
+	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code});
+	lanuvCluster.addLayer(lanuvMarker);
+	map.addLayer(lanuvCluster);
 	lanuvMarker.on('click', function(e){
 	    writeCookie();
 	    loading();
