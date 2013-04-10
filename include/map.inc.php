@@ -178,15 +178,6 @@
 					$this->contentTemplate->tplReplaceOnce('lanuv_lat', $row->lat);
 					$this->contentTemplate->tplReplaceOnce('lanuv_lon', $row->lon);
 					$this->contentTemplate->tplReplaceOnce('lanuv_code', $row->code);
-					$dataArray = new LanuvParser($row->code);
-					$this->contentTemplate->tplReplaceOnce('lanuv_city', $row->city);
-					$this->contentTemplate->tplReplaceOnce('lanuv_street', $row->street);
-					$this->contentTemplate->tplReplaceOnce('lanuv_ozone', $dataArray->getLastValue('ozone'));
-					$this->contentTemplate->tplReplaceOnce('lanuv_no', $dataArray->getLastValue('n'));
-					$this->contentTemplate->tplReplaceOnce('lanuv_no2', $dataArray->getLastValue('no2'));
-					$this->contentTemplate->tplReplaceOnce('lanuv_temp', $dataArray->getLastValue('ltem'));
-					$this->contentTemplate->tplReplaceOnce('lanuv_so2', $dataArray->getLastValue("so2"));
-					$this->contentTemplate->tplReplaceOnce('lanuv_pm10', $dataArray->getLastValue('pm10'));
 				}
 				$this->contentTemplate->cleanCode('Lanuv');
 			}
@@ -198,8 +189,6 @@
 		else {
 			header("Location:index.php?s=map&lang=".$this->language);
 		}
-		/* $lanuv_url_parts = explode('&amp;', $lanuv_url)[0]; */
-		/* var_dump(explode('&', $url)); */
 	}
 	else {
 		$lanuv_url = $url."&amp;lanuv=true";
@@ -207,6 +196,26 @@
 	if ( isset($classify) ) {
 		$lanuv_url .= "&amp;classify=".$classify;
 	}
+	
+	if ( isset($_GET['lanuvStation']) ) {
+		$code = $_GET['lanuvStation'];
+		$visible = ' class="visible"';
+		
+		$dataArray = new LanuvParser($code);
+		$lanuvStation = mysql_fetch_object(mysql_query('SELECT `city`, `street` FROM `lanuv` WHERE `code` = \''.$code.'\''));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_city', $lanuvStation->city);
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_street', $lanuvStation->street);
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', $dataArray->getLastValue('ozone'));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_no', $dataArray->getLastValue('n'));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_no2', $dataArray->getLastValue('no2'));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_temp', $dataArray->getLastValue('ltem'));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_so2', $dataArray->getLastValue("so2"));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_pm10', $dataArray->getLastValue('pm10'));
+	}
+	else {
+		$visible = '';
+	}
+	$this->contentTemplate->tplReplace('lanuvVisible', $visible);
 	$this->contentTemplate->tplReplace('lanuv_url', $lanuv_url);
 	$this->contentTemplate->tplReplace('url', $url);
 ?>

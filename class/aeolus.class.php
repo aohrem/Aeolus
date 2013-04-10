@@ -56,12 +56,10 @@
 			$this->url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             $url_parts = explode('/', $this->url);
 			$this->url = str_replace($url_parts[sizeof($url_parts) - 1], '', $this->url);
-            
-            foreach ( $this->languages as $itlang ) {
-                $url = str_replace('&lang='.$itlang, '', $url);
-                $url = str_replace('?lang='.$itlang, '', $url);
-            }
-            
+			
+            $url = str_replace('&amp;lang='.$this->language, '', $url);
+            $url = str_replace('?lang='.$this->language, '', $url);
+			
             if ( strstr($url, '?') ) {
                 $url .= '&amp;';
             }

@@ -161,17 +161,7 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
 	lanuvMarker.on('click', function(e){
 	    writeCookie();
-	    //location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2';
-			document.getElementById("lanuvValueCity").innerHTML = city;
-			document.getElementById("lanuvValueStreet").innerHTML = street;
-			document.getElementById("lanuvValueTemp").innerHTML = temp;
-			document.getElementById("lanuvValueNo").innerHTML = no;
-			document.getElementById("lanuvValueSo2").innerHTML = so2;
-			document.getElementById("lanuvValuePm10").innerHTML = pm10;
-			document.getElementById("lanuvValueOzone").innerHTML = ozone;
-			document.getElementById("lanuvValueNo2").innerHTML = no2;
-			document.getElementById("lanuvValue").style.visibility = "visible";
-			document.getElementById("eggValue").style.visibility = "hidden";
+	    location.href = 'index.php?s=map&lang={lang}&lanuv=true&lanuvStation=' + code;
 		});	
 }
 

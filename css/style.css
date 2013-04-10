@@ -422,6 +422,10 @@ table.register td {
     padding: 10px;
 }
 
+#content #lanuvValue.visible {
+    visibility: visible;
+}
+
 #content #eggValue table, #content #lanuvValue table {
     width: 100%;
 }
