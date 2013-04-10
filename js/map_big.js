@@ -161,6 +161,7 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
 	lanuvMarker.on('click', function(e){
 	    writeCookie();
+	    loading();
 	    location.href = 'index.php?s=map&lang={lang}&lanuv=true&lanuvStation=' + code;
 		});	
 }

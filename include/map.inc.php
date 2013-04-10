@@ -1,5 +1,5 @@
 <?php
-	include '/class/lanuvparser.class.php';
+	include('class/lanuvparser.class.php');
  	function classifier($value, $min, $max, $return) {
 		$deviation = $max - $min;
 		$step = floor($deviation / 3);
@@ -170,7 +170,7 @@
 			// add Lanuv-Symbol to map
 			$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
 			if (mysql_num_rows($query_lanuv) == 0) {
-				$this->contenTemplate->clean_code('Lanuv');
+				$this->contenTemplate->cleanCode('Lanuv');
 			}
 			else {
 				while ($row = mysql_fetch_object($query_lanuv)) {
@@ -187,7 +187,7 @@
 			$lanuv_url = $lanuv_url_parts[0]."&amp;".$lanuv_url_parts[1]."&amp;lanuv=true";	
 		}
 		else {
-			header("Location:index.php?s=map&lang=".$this->language);
+			header("Location: index.php?s=map&lang=".$this->language);
 		}
 	}
 	else {
