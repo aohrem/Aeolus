@@ -160,7 +160,8 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 			});
 	var lanuvMarker = L.marker([lat, lon], {icon: lanuvIcon, zIndexOffset: 10, title: code}).addTo(map);
 	lanuvMarker.on('click', function(e){
-			writeCookie();
+	    writeCookie();
+	    //location.href = 'index.php?s=diagram&fid=' + feedID + '&lang=de&sensor=co&timeframe=6h&interpolateoutliers=false&sensitivity=2';
 			document.getElementById("lanuvValueCity").innerHTML = city;
 			document.getElementById("lanuvValueStreet").innerHTML = street;
 			document.getElementById("lanuvValueTemp").innerHTML = temp;

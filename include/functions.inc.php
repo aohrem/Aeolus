@@ -1,4 +1,26 @@
 <?php
+	function setLanguage($languages) {
+		$language;
+		$standardLanguage = 'en';
+		
+		// get current language
+		if ( isset($_GET['lang']) ) {
+			$language = $_GET['lang'];
+		
+			// check if we have got a correct language abbreviation
+			if ( ! in_array($language, $languages) ) {
+				$language = $standardLanguage;
+			}
+		}
+		else {
+			$language = $standardLanguage;
+		}
+	
+		include('lang/'.$language.'.lang.php');
+		
+		return $language;
+	}
+
     function translate($tag) {
 		if ( isset($GLOBALS['translation'][$tag]) ) {
 			return $GLOBALS['translation'][$tag];

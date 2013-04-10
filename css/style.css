@@ -422,11 +422,11 @@ table.register td {
     padding: 10px;
 }
 
-#content #eggValue, #content #lanuvValue table {
+#content #eggValue table, #content #lanuvValue table {
     width: 100%;
 }
 
-#content #eggValue , #content #lanuvValue table td {
+#content #eggValue table td, #content #lanuvValue table td {
     width: 50%;
     padding: 4px;
 }

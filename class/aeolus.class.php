@@ -8,14 +8,13 @@
 		private $mainTemplate;
 		private $registerTemplate;
 		private $contentTemplate;
-        
-        private $language;
-		private $standardLanguage = 'de';
+		
+		private $language;
 		private $languages = array('en', 'de');
 		
 		public function __construct() {
 			$this->loadTemplate();
-			$this->setLanguage();
+			$this->language = setLanguage($this->languages);
 			$this->readCurrentSite();
             $this->replaceCurrentSite();
             $this->handleRegisterPopup();
@@ -27,34 +26,6 @@
 			include('template.class.php');
 			$this->mainTemplate = new Template();
 			$this->mainTemplate->readTpl('main');
-		}
-		
-		private function setLanguage() {
-			// get current language
-			if ( isset($_GET['lang']) ) {
-				$language = $_GET['lang'];
-				
-				// iterate available languages to check if we have got a correct language abbreviation
-				$langCorrect = false;
-				foreach ( $this->languages as $itlang ) {
-					if ( $language == $itlang ) {
-						$langCorrect = true;
-                        break;
-					}
-				}
-				
-				// set standard language if the given language is not supported
-				if ( ! $langCorrect ) {
-					$language = $this->standardLanguage;
-				}
-			}
-			else {
-				$language = $this->standardLanguage;
-			}
-            
-            $this->language = $language;
-            
-			include('lang/'.$language.'.lang.php');
 		}
 		
 		private function readCurrentSite() {
