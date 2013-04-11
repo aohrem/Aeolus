@@ -167,7 +167,7 @@
 		'pm10' => 'PM<sub>10</sub>',
 		'ozone' => 'Ozone',
 		'egg_not_found' => 'The Air Quality Egg with the given feed ID is not in our database.',
-        'loading' => 'Please wait.',
+        'loading' => 'please wait...',
 		'no_result' => 'No result found. Please specify your request more precisely!'
 	);
 ?>
