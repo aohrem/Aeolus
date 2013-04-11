@@ -169,11 +169,11 @@
 					    if ( floatval($this->dataArray[$time][$sensor]) != 0.0 ) {
 						    $size[$sensor]++;
 					    }
-					
 					    if ( $value > $statistics['maximum'][$sensor] ) {
 						    $statistics['maximum'][$sensor] = $value;
 					    }
-					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && floatval($value) != 0.0 ) ) {
+						
+					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && $value > 0 ) ) {
 						    $statistics['minimum'][$sensor] = $value;
 					    }
 					    $statistics['mean'][$sensor] += $value;
@@ -185,7 +185,7 @@
 			    $data = $aqDatabase->getCurrentValues();
 			    foreach ( $this->sensors as $sensor ) {
 				    if ( $size[$sensor] != 0 ) $statistics['mean'][$sensor] /= $size[$sensor];
-				    $statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 3);
+				    $statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 2);
 			        $statistics['current'][$sensor] = $data['current_value'][$sensor];
 				    
 				    $this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);

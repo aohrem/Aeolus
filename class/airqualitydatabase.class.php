@@ -79,7 +79,7 @@ class AirQualityDatabase {
                 $dataArray = $this->getMetadata($egg);
                 
                 foreach ( $this->sensors as $sensor ) {
-                    $query = mysql_query('SELECT `'.$sensor.'` FROM `eggdata_'.$this->feedId.'` WHERE FLOOR(ABS(`'.$sensor.'`)) != 0.0 ORDER BY `timestamp` DESC LIMIT 1');
+                    $query = mysql_query('SELECT `'.$sensor.'` FROM `eggdata_'.$this->feedId.'` WHERE ABS(`'.$sensor.'`) != 0.0 ORDER BY `timestamp` DESC LIMIT 1');
                     if ( is_resource($query) && $egg = mysql_fetch_array($query) ) {
                         $dataArray['current_value'][$sensor] = $egg[$sensor];
                     }

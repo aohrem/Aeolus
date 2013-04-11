@@ -22,7 +22,7 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                 $mySqlConnection = new MySqlConnection();
 				date_default_timezone_set('UTC');
 				
-                mysql_query('CREATE TABLE IF NOT EXISTS `eggdata_'.$this->feedId.'` ( `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `co` double(9,3) NOT NULL, `no2` double(9,3) NOT NULL, `temperature` double(6,2) NOT NULL, `humidity` double(6,3) NOT NULL, PRIMARY KEY (`timestamp`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1');
+                mysql_query('CREATE TABLE IF NOT EXISTS `eggdata_'.$this->feedId.'` ( `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `co` double(9,2) NOT NULL, `no2` double(9,2) NOT NULL, `temperature` double(6,2) NOT NULL, `humidity` double(6,2) NOT NULL, PRIMARY KEY (`timestamp`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1');
                 $num_rows = mysql_num_rows(mysql_query('SELECT `timestamp` FROM `eggdata_'.$this->feedId.'`'));
                 
                 if ( $num_rows < 1 ) {
