@@ -84,8 +84,16 @@
 		</table>
 	</div>
 	<div id="lanuvValue"{lanuvVisible}>
-        {lanuv_value_city}<br>{lanuv_value_street}
+        <span id="lanuv_headline">{lanuv_value_city}<br>{lanuv_value_street}</span>
 		<table>
+            <tr>
+                <td>[[nox]]:</td>
+                <td>{lanuv_value_no}</td>
+            </tr>
+            <tr>
+                <td>[[no2]]:</td>
+                <td>{lanuv_value_no2}</td>
+            </tr>
 			<tr>
                 <td>[[temperature]]:</td>
                 <td>{lanuv_value_temp}</td>
@@ -93,14 +101,6 @@
             <tr>
                 <td>[[ozone]]:</td>
                 <td>{lanuv_value_ozone}</td>
-            </tr>
-            <tr>
-                <td>[[no2]]:</td>
-                <td>{lanuv_value_no2}</td>
-            </tr>
-            <tr>
-                <td>[[nox]]:</td>
-                <td>{lanuv_value_no}</td>
             </tr>
 			<tr>
                 <td>[[so2]]:</td>
