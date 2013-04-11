@@ -40,9 +40,10 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                         else {
                             if ( ! $metadata ) {
                                 mysql_query('UPDATE `egg` SET `title` = \''.$dataArray['title'].'\', `description` = \''.$dataArray['description'].'\', `location_name` = \''.$dataArray['locationName'].'\', `ele` = \''.$dataArray['ele'].'\', `status` = \''.$dataArray['status'].'\', `exposure` = \''.$dataArray['exposure'].'\', `lastupdated`=\''.time().'\' WHERE `feed_id` = '.$this->feedId);
+								$metadata = true;
                             }
                             
-                            foreach ( $metadata as $mdata ) {
+                            foreach ( $this->metadata as $mdata ) {
                                 if ( isset($dataArray[$mdata]) ) {
                                     unset($dataArray[$mdata]);
                                 }
@@ -57,7 +58,7 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                                     }
                                 }
                                 if ( $nullsensors < 4 && floatval($time) != 0.0 ) {
-                                    mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity`, `lastupdated` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\',  \''.time().'\')');
+                                    mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
                                 }
                             }
                         }

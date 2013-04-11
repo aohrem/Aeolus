@@ -47,12 +47,14 @@ if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
                     }
                     
                     foreach ( $dataArray as $time => $val ) {
-                        foreach ( $this->sensors as $sensor ) {
-                            if ( ! isset($val[$sensor]) ) {
-                                $val[$sensor] = 0;
-                            }
-                        }
-						if ( floatval($time) != 0.0 ) {
+						$nullsensors = 0;
+						foreach ( $this->sensors as $sensor ) {
+							if ( ! isset($val[$sensor]) ) {
+								$val[$sensor] = 0;
+								$nullsensors++;
+							}
+						}
+						if ( $nullsensors < 4 && floatval($time) != 0.0 ) {
 							mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
 						}
                     }
