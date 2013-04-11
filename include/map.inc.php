@@ -204,8 +204,8 @@
 		
 		$dataArray = new LanuvParser($code);
 		$lanuvStation = mysql_fetch_object(mysql_query('SELECT `city`, `street` FROM `lanuv` WHERE `code` = \''.$code.'\''));
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_city', $lanuvStation->city);
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_street', $lanuvStation->street);
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_city', htmlentities($lanuvStation->city));
+		$this->contentTemplate->tplReplaceOnce('lanuv_value_street', htmlentities($lanuvStation->street));
 
 		if ($dataArray->getLastValue('ozone') != '-'){
 			$this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', $dataArray->getLastValue('ozone').' &mu;g/m&sup3;');
