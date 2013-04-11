@@ -59,8 +59,8 @@
 			break;
 			case 'no2':
 				// TODO: min und max anpassen
-				$min = 0.230;
-				$max = 0.270;
+				$min = 0.2;
+				$max = 0.6;
 				$unit = 'ppm';
 				$classes = classifier(0, $min, $max, 'classes');
 			break;
