@@ -59,7 +59,7 @@
 		'search_results' => 'results',
 		'close' => 'close',
 		'register_text' => 'Please enter your cosm-feed ID and a deletion password in order to register your Air Quality Egg.',
-        'enter_address' => 'We were not able to determine you Air Quality Egg\'s position. Please enter an address.',
+        'no_position_found' => 'We were not able to determine you Air Quality Egg\'s position.',
         'address' => 'address',
 		'password' => 'password',
 		'repeat_password' => 'verify password',
