@@ -59,8 +59,8 @@
 			break;
 			case 'no2':
 				// TODO: min und max anpassen
-				$min = 230;
-				$max = 270;
+				$min = 0.230;
+				$max = 0.270;
 				$unit = 'ppm';
 				$classes = classifier(0, $min, $max, 'classes');
 			break;
@@ -206,12 +206,55 @@
 		$lanuvStation = mysql_fetch_object(mysql_query('SELECT `city`, `street` FROM `lanuv` WHERE `code` = \''.$code.'\''));
 		$this->contentTemplate->tplReplaceOnce('lanuv_value_city', $lanuvStation->city);
 		$this->contentTemplate->tplReplaceOnce('lanuv_value_street', $lanuvStation->street);
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', $dataArray->getLastValue('ozone').' &mu;g/m&sup3;');
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_no', $dataArray->getLastValue('n').' &mu;g/m&sup3;');
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_no2', $dataArray->getLastValue('no2').' &mu;g/m&sup3;');
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_temp', $dataArray->getLastValue('ltem').' &deg;C');
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_so2', $dataArray->getLastValue("so2").' &mu;g/m&sup3;');
-		$this->contentTemplate->tplReplaceOnce('lanuv_value_pm10', $dataArray->getLastValue('pm10').' &mu;g/m&sup3;');
+
+		if ($dataArray->getLastValue('ozone') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', $dataArray->getLastValue('ozone').' &mu;g/m&sup3;');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueOzone', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueOzone', ' style="display:none;"');
+		}
+
+		if ($dataArray->getLastValue('n') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_no', $dataArray->getLastValue('n').' &mu;g/m&sup3;');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueNox', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_no', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueNox', ' style="display:none;"');
+		}
+
+		if ($dataArray->getLastValue('no2') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_no2', $dataArray->getLastValue('no2').' &mu;g/m&sup3;');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueNo2', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_no2', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueNo2', ' style="display:none;"');
+		}
+
+		if ($dataArray->getLastValue('ltem') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_temp', $dataArray->getLastValue('ltem').' &deg;C');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueTemp', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_temp', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueTemp', ' style="display:none;"');
+		}
+
+		if ($dataArray->getLastValue('so2') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_so2', $dataArray->getLastValue('so2').' &mu;g/m&sup3;');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueSo2', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_so2', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValueSo2', ' style="display:none;"');
+		}
+
+		if ($dataArray->getLastValue('pm10') != '-'){
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_pm10', $dataArray->getLastValue('pm10').' &mu;g/m&sup3;');
+			$this->contentTemplate->tplReplaceOnce('lanuvValuePm10', '');}
+		else {
+			$this->contentTemplate->tplReplaceOnce('lanuv_value_pm10', '');
+			$this->contentTemplate->tplReplaceOnce('lanuvValuePm10', ' style="display:none;"');
+		}
+
 
 	}
 	else {
