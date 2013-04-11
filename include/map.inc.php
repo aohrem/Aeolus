@@ -41,12 +41,13 @@
 	// delete former input for classify in URL
 	$url_parts = explode('/', $url);
     $url = $url_parts[sizeof($url_parts)-1];
+    $url = str_replace('&', '&amp;', $url);
 	
 	if (isset($_GET['classify'])){
 		$classify = htmlentities(mysql_real_escape_string($_GET['classify']));
 		$this->contentTemplate->tplReplace('show', ' class="show"');
 		$this->contentTemplate->tplReplace('classify', $classify);
-		$url = str_replace('&classify='.$classify, '', $url);
+		$url = str_replace('&amp;classify='.$classify, '', $url);
         
 		switch ( $classify ) {
 			case 'co':
@@ -77,7 +78,7 @@
 				$classes = classifier(0, $min, $max, 'classes');
 			break;
 			default:
-				header("Location:index.php?s=map&lang=".$this->language);
+				header("Location:index.php?s=map&amp;lang=".$this->language);
 			break;
 		}
 		$this->contentTemplate->tplReplace('egg_sensor', '_'.$classify);
@@ -165,7 +166,7 @@
 	if ( isset($_GET['lanuv']) ) {
 		$lanuv = htmlentities($_GET['lanuv']);
 		if ($lanuv == 'true') {
-			$lanuv_url_parts = explode("&", $url);
+			$lanuv_url_parts = explode("&amp;", $url);
 			$lanuv_url = $lanuv_url_parts[0]."&amp;".$lanuv_url_parts[1]."&amp;lanuv=false";
 			// add Lanuv-Symbol to map
 			$query_lanuv = mysql_query("SELECT * FROM `lanuv`");
@@ -183,11 +184,11 @@
 			}
 		}
 		else if ($lanuv == 'false') {
-			$lanuv_url_parts = explode("&", $url);
+			$lanuv_url_parts = explode("&amp;", $url);
 			$lanuv_url = $lanuv_url_parts[0]."&amp;".$lanuv_url_parts[1]."&amp;lanuv=true";	
 		}
 		else {
-			header("Location: index.php?s=map&lang=".$this->language);
+			header("Location: index.php?s=map&amp;lang=".$this->language);
 		}
 	}
 	else {
