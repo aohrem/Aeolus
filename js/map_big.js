@@ -1,5 +1,5 @@
 var lat, lon, zoom;
-var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed, lanuvDisplayed = false;
+var bgMarker, downloadMarker, diagMarker, tableMarker, menuDisplayed = false;
 var bgDiagMarker, coMarker, no2Marker, humMarker, tempMarker, diagMenuDisplayed  = false;
 var lanuvCluster = new L.MarkerClusterGroup({showCoverageOnHover: false});
 
@@ -169,7 +169,9 @@ function addLanuv(lat, lon, code, city, street, temp, no2, no, so2, pm10, ozone)
 		});	
 }
 
-
+function removeLanuvTable(){
+		document.getElementById("lanuvValue").style.visibility = "hidden";
+}
 
 function removeDiagMenu(){
 	map.removeLayer(bgDiagMarker);
@@ -226,6 +228,7 @@ function writeCookie(){
 	document.cookie = "zoom=" + escape(zoom);
 }
 
+map.on('click', removeLanuvTable);
 map.on('click', removeCircleMenu);
 map.on('moveend', writeCookie);
 map.on('zoomend', writeCookie);
