@@ -29,3 +29,4 @@ function openMap(){
 	loading();
 	location.href = 'index.php?s=map&lang={lang}';
 }
+map.on('click', openMap);
