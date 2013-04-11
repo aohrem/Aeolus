@@ -75,9 +75,9 @@ function openCircleMenu(lat, lon, feedID){
 		
 		menuDisplayed = true;
 		
-		downloadMarker.on('click', function (e) { location.href = 'index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={language}'; loading(); });
+		downloadMarker.on('click', function (e) { location.href = 'index.php?s=download&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={lang}'; loading(); });
 		diagMarker.on('click', function(e){ openDiagMenu(lat, lon, feedID) });
-		tableMarker.on('click', function (e) { location.href = 'index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={language}'; loading(); });
+		tableMarker.on('click', function (e) { location.href = 'index.php?s=table&fid=' + feedID + '&timeframe=6h&interpolateoutliers=false&sensitivity=2&lang={lang}'; loading(); });
 }
 
 function removeCircleMenu(){
@@ -146,10 +146,10 @@ function openDiagMenu(lat, lon, feedID){
 			
 			diagMenuDisplayed = true;
 			
-			coMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=co'; loading(); });
-			no2Marker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=no2'; loading(); });
-			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=humidity'; loading(); });
-			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={language}&sensor=temperature'; loading(); });
+			coMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={lang}&sensor=co'; loading(); });
+			no2Marker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={lang}&sensor=no2'; loading(); });
+			humMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={lang}&sensor=humidity'; loading(); });
+			tempMarker.on('click', function (e) { location.href = 'index.php?s=diagram&fid=' + feedID + '&lang={lang}&sensor=temperature'; loading(); });
 		}
 }
 
