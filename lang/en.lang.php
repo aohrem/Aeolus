@@ -168,6 +168,7 @@
 		'ozone' => 'Ozone',
 		'egg_not_found' => 'The Air Quality Egg with the given feed ID is not in our database.',
         'loading' => 'Please wait.',
+		'cancel' => 'Cancel',
 		'carbon_monoxide' => 'Carbon monoxide (CO)',
 		'carbonmonoxide' => 'Carbon monoxide is a color-, odor- and tasteless gas, which forms during incomplete burnings of carbon. It is a respiratory poison and counts as hazardous at loads of more than 100 ppm (parts per million). The Air Quality Eggs\' measured levels of carbon monoxide are indicated in ppm.',
 		'nitrogen_dioxide' => 'Nitrogen dioxide (NO<sub>2</sub>)',

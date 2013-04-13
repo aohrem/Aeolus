@@ -168,6 +168,7 @@
 		'ozone' => 'Ozon',
 		'egg_not_found' => 'Das Air Quality Egg mit der angegebenen Feed ID befindet sich nicht in unserer Datenbank.',
         'loading' => 'Bitte warten.',
+		'cancel' => 'Abbrechen',
 		'carbon_monoxide' => 'Kohlenstoffmonoxid (CO)',
 		'carbonmonoxide' => 'Kohlenstoffmonoxid, auch bekannt als Kohlenmonoxid, ist ein farb-, geruch- und geschmackloses Gas, welches bei der unvollst&auml;ndigen Verbrennung von Kohlenstoff entsteht. Es ist ein Atemgift und gilt bei Belastungen ab 100 ppm (parts per million) als gesundheitsgef&auml;hrdend. Der von den Air Quality Eggs gemessene Kohlenstoffmonoxid-Gehalt wird auf Aeolus in ppm angegeben.',
 		'nitrogen_dioxide' => 'Stickstoffdioxid (NO<sub>2</sub>)',
