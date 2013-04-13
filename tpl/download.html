@@ -99,7 +99,7 @@
             </table>
             <p>[[data_interpolation_hint]] [[sos_further_information]]</p>
             <h4>[[outlier_detection]]</h4>
-            <form action="index.php" method="get" onsubmit="loading();">
+            <form action="index.php#outlier_form" method="get" id="outlier_form" onsubmit="loading();">
                 <input type="hidden" name="s" value="download">
                 <input type="hidden" name="fid" value="{feedId}">
                 <input type="hidden" name="timeframe" value="{time}">
@@ -107,7 +107,7 @@
                     <tr>
                         <td>[[sensitivity]]:</td>
                         <td class="center">
-                            <select name="sensitivity">
+                            <select name="sensitivity" onchange="loading(); this.form.submit();">
                                 <option value="0"{sensitivity_0_selected}>[[no_outlier_detection]]</option>
                                 <option value="1"{sensitivity_1_selected}>[[low]]</option>
                                 <option value="2"{sensitivity_2_selected}>[[medium]]</option>
@@ -118,13 +118,9 @@
                     <tr>
                         <td>[[outlier_interpolation]]:</td>
                         <td class="center">
-                            <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer"><span onclick="radioSwitch('io');" class="pointer"> [[on]]</span>
-                            <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer"><span onclick="radioSwitch('dio');" class="pointer"> [[off]]</span>
+                            <input type="radio" name="interpolateoutliers" id="io" value="true"{io_checked} class="radio pointer" onclick="loading(); document.getElementById('outlier_form').submit();"><span onclick="radioSwitch('io'); loading(); document.getElementById('outlier_form').submit();" class="pointer"> [[on]]</span>
+                            <input type="radio" name="interpolateoutliers" id="dio" value="false"{dio_checked} class="radio pointer" onclick="loading(); document.getElementById('outlier_form').submit();"><span onclick="radioSwitch('io'); loading(); document.getElementById('outlier_form').submit();" class="pointer"> [[off]]</span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="center"><input type="submit" value="[[submit_settings]]" class="form_button outlier" onclick="loading();"></td>
                     </tr>
                 </table>
                 <input type="hidden" name="lang" value="{language}">

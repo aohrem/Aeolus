@@ -185,15 +185,15 @@ function centermap(){
 	//read from cookie:
 	lat = readCookie("x");
 	if (lat == null){
-		lat = 51.962944;
+		lat = 35;
 	}
 	lon = readCookie("y");
 	if (lon == null){
-		lon = 7.628694;
+		lon = -22;
 	}
 	zoom = readCookie("zoom");
 	if (zoom == null){
-		zoom = 5;
+		zoom = 2;
 	}
 	
 	center = new L.LatLng(lat, lon);
