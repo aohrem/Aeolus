@@ -25,12 +25,13 @@ html, body {
     text-align: center;
 }
 
-#loading div {
+#loading div#wait {
     position: relative;
     top: 55%;
 }
 
 #loading div#cancel {
+    position: relative;
 	font-family: Calibri, Arial, Verdana, sans-serif;
     font-size: 14pt;
 	padding: 5px 20px;
@@ -776,6 +777,7 @@ footer {
 
 footer #footer_left {
     float: left;
+    width: 400px;
 }
 
 footer #footer_left td {

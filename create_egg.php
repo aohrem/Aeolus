@@ -1,5 +1,8 @@
 <?php
-if ( $_GET['pass'] == 'faf01b58a34e26f5ed05a4edc5e5c3ee' ) {
+// edit the $password variable to change the password
+$password = 'faf01b58a34e26f5ed05a4edc5e5c3ee';
+
+if ( $_GET['pass'] == $password ) {
     include('class/simplexmlextended.class.php');
     include('class/cosmapi.class.php');
     include('class/mysqlconnection.class.php');

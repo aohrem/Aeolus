@@ -148,7 +148,7 @@
 		'sos_docu_getcapabilities' => 'Gibt eine Beschreibung der angebotenen Features des SOS in standardisiertem XML Format zur&uuml;ck. Liefert weiterhin Informationen &uuml;ber die verwendeten Sensoren und die Vorgehensweise bei der Messung. Folgende Parameter sind vom Aeolus SOS implementiert.',
 		'sos_docu_describesensor' => 'Gibt Metadaten zum bei der Datenerfassung verwendeten Sensor in standardisiertem XML Format zur&uuml;ck. Folgende Parameter sind vom Aeolus SOS implementiert.',
 		'example_request' => 'Beispielaufruf',
-		'sos_docu_example_request' => 'Folgender Aufruf w&uuml;rde die Messdaten der Sensoren CO, NO<sub>2</sub>, Temperatur und Luftfeuchte des Air Quality Eggs mit der Feed ID 97742 vom 02.04.2013 um 07:27 Uhr bis zum 02.04.2013 um 13:27 Uhr ohne Ausrei&szlig;ererkennung zur&uuml;ckgeben.',
+		'sos_docu_example_request' => 'Folgender Aufruf w&uuml;rde die Messdaten der Sensoren CO, NO<sub>2</sub>, Temperatur und Luftfeuchte des Air Quality Eggs mit der Feed ID 75842 vom 11.04.2013 um 11:53 Uhr bis zum 13.04.2013 um 11:53 Uhr ohne Ausrei&szlig;ererkennung zur&uuml;ckgeben.',
 		'additional_links' => 'Weiterf&uuml;hrende Links',
 		'replace_feed_id' => '([feed-id] durch cosm Feed ID des Air Quality Eggs ersetzten.)',
 		'meanings' => 'Bedeutungen',
