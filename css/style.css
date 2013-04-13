@@ -551,10 +551,10 @@ table.register td {
 }
 
 #content .outlier {
-    font-size: 130%;
+    font-size: 90%;
     font-family: 'Times New Roman';
     background-color: #fbe39d;
-    padding: 0px 8px;
+    padding: 0px 6px;
     cursor: default;
     margin-right: 6px;
     margin-bottom: 2px;
@@ -926,7 +926,7 @@ a:hover, a:active {
 }
 
 #data_content table tr td {
-	padding: 0px 13px;
+	padding: 2px 13px;
 	border-bottom: 1px solid #d1d9e0;
     position: relative;
 }

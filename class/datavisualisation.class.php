@@ -19,15 +19,15 @@
         protected $contentTemplate;
         protected $dataArray;
         
-        protected $cosmSuccess = false;
+        protected $dataSuccess = false;
         
         public function __construct($contentTemplate) {
             $this->contentTemplate = $contentTemplate;
             
             if ( $this->checkFeedId() ) {
                 $this->replaceTimeframe();
-                $this->getCosmData();
-                if ( $this->cosmSuccess ) {
+                $this->getData();
+                if ( $this->dataSuccess ) {
                     $this->replaceMetaData();
                 }
                 
@@ -78,7 +78,7 @@
             }
         }
         
-        private function getCosmData() {
+        private function getData() {
             $mysqlConnection = new MySQLConnection();
             $aqDatabase = new AirQualityDatabase($this->feedId, $this->timeframe);
             $this->dataArray = $aqDatabase->getValues();
@@ -92,13 +92,11 @@
                 $this->tplHidden = ' class="hidden"';
                 $this->tplErrorMessage = '<div class="errormessage details">'.translate($errorCode).'</div>';
                 
-                $this->cosmSuccess = false;
+                $this->dataSuccess = false;
             }
             // parsing the xml was successfull
             else {
-                // sort sensor data by timestamp (keys of the data array)
-                ksort($this->dataArray, SORT_NUMERIC);
-                $this->cosmSuccess = true;
+                $this->dataSuccess = true;
             }
         }
         
@@ -113,7 +111,7 @@
         private function applyDataValidation() {
             include('datavalidation.class.php');
             $this->dataValidation = new DataValidation($this->dataArray, $this->sensors, $this->sensitivity, $this->timeframe);
-            if ( $this->cosmSuccess ) {
+            if ( $this->dataSuccess ) {
                 $this->outliers = $this->dataValidation->getOutliers();
             }
         }
@@ -173,7 +171,7 @@
 						    $statistics['maximum'][$sensor] = $value;
 					    }
 						
-					    if ( $statistics['minimum'][$sensor] == null || ( $value < $statistics['minimum'][$sensor] && $value > 0 ) ) {
+					    if ( $statistics['minimum'][$sensor] == null || ( floatval($value) < $statistics['minimum'][$sensor] && floatval($value) != 0.00 ) ) {
 						    $statistics['minimum'][$sensor] = $value;
 					    }
 					    $statistics['mean'][$sensor] += $value;

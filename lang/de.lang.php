@@ -102,7 +102,7 @@
 		'view_german' => 'Diese Seite auf Deutsch betrachten.',
 		'outliers_found' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit diesem roten Ausrufezeichen markiert.',
 		'outliers_interpolated' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert und mit diesem gr&uuml;nen Informationssymbol markiert.',
-        'outliers_found_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte f und mit einem Kreis markiert.',
+        'outliers_found_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte gefunden und mit einem Kreis markiert.',
 		'outliers_interpolated_diagram' => 'Im vorliegenden Datensatz wurden potentielle Ausrei&szlig;erwerte linear interpoliert.',
 		'value_is_interpolated' => 'Bei diesem Wert handelte es sich um einen m&ouml;glichen Ausrei&szlig;er, welcher durch lineare Interpolation entfernt wurde.',
 		'outlier_detection' => 'Ausrei&szlig;ererkennung',

@@ -1,12 +1,7 @@
 <?php
 class AirQualityDatabase {
         private $seconds = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
-        private $mods = array('6h' => 'MOD(MINUTE(timestamp), 1) = 0',
-                              '24h' => 'MOD(MINUTE(timestamp), 5) = 0',
-                              '48h' => 'MOD(MINUTE(timestamp), 10) = 0',
-                              '1w' => 'MINUTE(timestamp) = 0',
-                              '1m' => 'MOD(HOUR(timestamp), 2) = 0 AND MINUTE(timestamp) = 0',
-                              '3m' => 'MOD(HOUR(timestamp), 6) = 0 AND MINUTE(timestamp) = 0');
+        private $mods = array('6h' => 1, '24h' => 5, '48h' => 10, '1w' => 60, '1m' => 120, '3m' => 360);
         private $sensors = array('co', 'no2', 'humidity', 'temperature');
         private $sqlTimeFormat = 'Y-m-d H:i:s';
         private $limit = 1000;
@@ -29,9 +24,9 @@ class AirQualityDatabase {
             if ( is_resource($eggQuery) && mysql_num_rows($eggQuery) == 1 ) {
                 $egg = mysql_fetch_object($eggQuery);
                 $dataArray = $this->getMetadata($egg);
-                
+				
                 // get sensor values from database and save it to the data array
-                $eggQuery = mysql_query('SELECT `timestamp`, `co`, `no2`, `temperature`, `humidity` FROM `eggdata_'.$this->feedId.'` WHERE ( `timestamp` > \''.date($this->sqlTimeFormat, $this->start).'\' AND  `timestamp` < \''.date($this->sqlTimeFormat, $this->end).'\' ) AND ( '.$this->mod.' ) ORDER BY `timestamp`');
+                $eggQuery = mysql_query('SELECT `timestamp`, `co`, `no2`, `temperature`, `humidity` FROM `eggdata_'.$this->feedId.'` e JOIN ( SELECT @i := 0 ) i WHERE ( `timestamp` > \''.date($this->sqlTimeFormat, $this->start).'\' AND  `timestamp` < \''.date($this->sqlTimeFormat, $this->end).'\' ) AND ( MOD( @i := @i +1, '.$this->mod.' ) = 0 ) ORDER BY `timestamp`');
                 if ( is_resource($eggQuery) ) {
                     while ( $row = mysql_fetch_object($eggQuery) ) {
                         foreach ( $this->sensors as $sensor ) {
@@ -55,7 +50,7 @@ class AirQualityDatabase {
                 $dataArray = $this->getMetadata($egg);
                 
                 // get sensor values from database and save it to the data array
-                $eggQuery = mysql_query('SELECT `timestamp`, `co`, `no2`, `temperature`, `humidity` FROM `eggdata_'.$this->feedId.'` WHERE ( `timestamp` > \''.date($this->sqlTimeFormat, $start).'\' AND  `timestamp` < \''.date($this->sqlTimeFormat, $end).'\' ) AND ( '.$this->mod.' ) ORDER BY `timestamp`');
+                $eggQuery = mysql_query('SELECT `timestamp`, `co`, `no2`, `temperature`, `humidity` FROM `eggdata_'.$this->feedId.'` e JOIN ( SELECT @i := 0 ) i WHERE ( `timestamp` > \''.date($this->sqlTimeFormat, $start).'\' AND  `timestamp` < \''.date($this->sqlTimeFormat, $end).'\' ) AND ( MOD( @i := @i +1, '.$this->mod.' ) = 0 ) ORDER BY `timestamp`');
                 if ( is_resource($eggQuery) ) {
                     while ( $row = mysql_fetch_object($eggQuery) ) {
                         foreach ( $this->sensors as $sensor ) {
