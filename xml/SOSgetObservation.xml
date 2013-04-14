@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:om="http://www.opengis.net/om/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<soap12:Header>
-		<wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
-		<wsa:Action>http://www.opengis.net/def/serviceOperation/sos/core/2.0/GetObservationResponse</wsa:Action>
-	</soap12:Header>
-	<soap12:Body>
-		<sos:GetObservationResponse xmlns="http://www.opengis.net/sos/2.0">
+    <soap12:Header>
+        <wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+        <wsa:Action>http://www.opengis.net/def/serviceOperation/sos/core/2.0/GetObservationResponse</wsa:Action>
+    </soap12:Header>
+    <soap12:Body>
+        <sos:GetObservationResponse xmlns="http://www.opengis.net/sos/2.0">
       {+observationData}
-			<observationData>
-				<om:OM_Observation gml:id="o{id}">
-					<om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"/>
-					<om:phenomenonTime>
-						<gml:TimeInstant gml:id="p{id}">
-							<gml:timePosition>{time}</gml:timePosition>
-						</gml:TimeInstant>
-					</om:phenomenonTime>
-					<om:resultTime xlink:href="#p{id}"/>
-					<om:observedProperty>urn:ogc:def:phenomenon:airquality:{sensor}</om:observedProperty>
-					<om:featureOfInterest xlink:href="http://airqualityegg.com/egg/{feedId}">urn:ogc:object:feature:sensor:airqualityegg-{feedId}</om:featureOfInterest>
-					<om:result xsi:type="gml:MeasureType" uom="{unit}">{value}</om:result>
-				</om:OM_Observation>
-			</observationData>
+            <observationData>
+                <om:OM_Observation gml:id="o{id}">
+                    <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"/>
+                    <om:phenomenonTime>
+                        <gml:TimeInstant gml:id="p{id}">
+                            <gml:timePosition>{time}</gml:timePosition>
+                        </gml:TimeInstant>
+                    </om:phenomenonTime>
+                    <om:resultTime xlink:href="#p{id}"/>
+                    <om:observedProperty>urn:ogc:def:phenomenon:airquality:{sensor}</om:observedProperty>
+                    <om:featureOfInterest xlink:href="http://airqualityegg.com/egg/{feedId}">urn:ogc:object:feature:sensor:airqualityegg-{feedId}</om:featureOfInterest>
+                    <om:result xsi:type="gml:MeasureType" uom="{unit}">{value}</om:result>
+                </om:OM_Observation>
+            </observationData>
       {-observationData}
-		</sos:GetObservationResponse>
-	</soap12:Body>
+        </sos:GetObservationResponse>
+    </soap12:Body>
 </soap12:Envelope>

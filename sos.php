@@ -1,12 +1,12 @@
 <?php
     include('lang/en.lang.php');
     include('include/functions.inc.php');
-	include('class/template.class.php');
-	include('class/simplexmlextended.class.php');
-	include('class/mysqlconnection.class.php');
-	include('class/airqualitydatabase.class.php');
-	
-	class SOS {
+    include('class/template.class.php');
+    include('class/simplexmlextended.class.php');
+    include('class/mysqlconnection.class.php');
+    include('class/airqualitydatabase.class.php');
+    
+    class SOS {
         private $xmlTemplate;
         
         private $parameters = array('request' => array('getObservation', 'getCapabilities', 'describeSensor'),
@@ -22,24 +22,24 @@
         private $observedPropertyUrn = 'urn:ogc:def:phenomenon:';
         private $observedProperty;
         
-		private $feedId;
-		private $startTime;
+        private $feedId;
+        private $startTime;
         private $endTime;
         private $outlierInterpolation;
         
-		private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
-		private $units = array('co' => 'ppm', 'no2' => 'ppm', 'humidity' => '%', 'temperature' => 'degreesCelsius');
-		private $timeframes = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
-		private $sosTimeFormat = 'Y-m-d\TH:i:s.000+00:00';
-		
-		private $dataArray;
-	
-		public function __construct() {
+        private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
+        private $units = array('co' => 'ppm', 'no2' => 'ppm', 'humidity' => '%', 'temperature' => 'degreesCelsius');
+        private $timeframes = array('6h' => 21600, '24h' => 86400, '48h' => 172800, '1w' => 604800, '1m' => 2678400, '3m' => 7776000);
+        private $sosTimeFormat = 'Y-m-d\TH:i:s.000+00:00';
+        
+        private $dataArray;
+    
+        public function __construct() {
             header('Content-type: application/xml');
             
             $this->xmlTemplate = new Template();
-			$this->xmlTemplate->setFileExtension('.xml');
-			$this->xmlTemplate->setFolder('xml/');
+            $this->xmlTemplate->setFileExtension('.xml');
+            $this->xmlTemplate->setFolder('xml/');
             
             $this->getParameters($this->parameters);
             switch ( $this->parameter['request'] ) {
@@ -60,9 +60,9 @@
                     $this->printDescribeSensorXml();
                 break;
             }
-		}
-		
-		private function getParameters($parameters) {
+        }
+        
+        private function getParameters($parameters) {
             foreach ( $parameters as $parameter => $supportedValues ) {
                 if ( isset($_GET[$parameter]) ) {
                     $this->parameter[$parameter] = $_GET[$parameter];
@@ -134,9 +134,9 @@
             if ( isset($_GET['outlierInterpolation']) && is_numeric($_GET['outlierInterpolation']) && $_GET['outlierInterpolation'] >= 0 && $_GET['outlierInterpolation'] <= 3 ) {
                 $this->outlierInterpolation = $_GET['outlierInterpolation'];
             }
-		}
-		
-		private function getData() {
+        }
+        
+        private function getData() {
             $timeframe = $this->determineTimeframe();
             if ( $this->parameter['request'] == 'getObservation' ) {
                 $mysqlConnection = new MySQLConnection();
@@ -144,7 +144,7 @@
                 $this->dataArray = $aqDatabase->getValuesInTimeframe($this->startTime, $this->endTime);
                 
                 if ( is_array($this->dataArray) ) {
-			        foreach ( $this->metadata as $mdata ) {
+                    foreach ( $this->metadata as $mdata ) {
                         if ( isset($this->dataArray[$mdata]) ) {
                             unset($this->dataArray[$mdata]);
                         }
@@ -159,7 +159,7 @@
                 $aqDatabase = new AirQualityDatabase($this->feedId, $timeframe);
                 $this->dataArray = $aqDatabase->getCurrentValues();
             }
-		}
+        }
         
         private function determineTimeframe() {
             $duration = $this->endTime - $this->startTime;
@@ -176,34 +176,34 @@
             $outliers = $this->dataValidation->getOutliers();
             $this->dataArray = $this->dataValidation->interpolateOutliers($outliers);
         }
-		
-		private function printObservationXml() {
-			$this->xmlTemplate->readTpl('SOSgetObservation');
-			
-			$id = 1;
-			foreach ( $this->observedProperty as $sensor ) {
-				foreach ( $this->dataArray as $time => $val ) {
-					if ( floatval($val[$sensor]) != 0.0 ) {
-						$this->xmlTemplate->copyCode('observationData');
-						$this->xmlTemplate->tplReplaceOnce('time', date($this->sosTimeFormat, $time));
-						$this->xmlTemplate->tplReplaceOnce('id', $id);
-						$this->xmlTemplate->tplReplaceOnce('id', $id);
-						$this->xmlTemplate->tplReplaceOnce('id', $id);
-						$this->xmlTemplate->tplReplaceOnce('sensor', $sensor);
-						$this->xmlTemplate->tplReplaceOnce('unit', $this->units[$sensor]);
-						$this->xmlTemplate->tplReplaceOnce('value', $val[$sensor]);
-						$id++;
-					}
-				}
-			}
-			$this->xmlTemplate->cleanCode('observationData');
-			$this->xmlTemplate->tplReplace('feedId', $this->feedId);
-			$this->xmlTemplate->printTemplate();
-		}
+        
+        private function printObservationXml() {
+            $this->xmlTemplate->readTpl('SOSgetObservation');
+            
+            $id = 1;
+            foreach ( $this->observedProperty as $sensor ) {
+                foreach ( $this->dataArray as $time => $val ) {
+                    if ( floatval($val[$sensor]) != 0.0 ) {
+                        $this->xmlTemplate->copyCode('observationData');
+                        $this->xmlTemplate->tplReplaceOnce('time', date($this->sosTimeFormat, $time));
+                        $this->xmlTemplate->tplReplaceOnce('id', $id);
+                        $this->xmlTemplate->tplReplaceOnce('id', $id);
+                        $this->xmlTemplate->tplReplaceOnce('id', $id);
+                        $this->xmlTemplate->tplReplaceOnce('sensor', $sensor);
+                        $this->xmlTemplate->tplReplaceOnce('unit', $this->units[$sensor]);
+                        $this->xmlTemplate->tplReplaceOnce('value', $val[$sensor]);
+                        $id++;
+                    }
+                }
+            }
+            $this->xmlTemplate->cleanCode('observationData');
+            $this->xmlTemplate->tplReplace('feedId', $this->feedId);
+            $this->xmlTemplate->printTemplate();
+        }
         
         private function printCapabilitiesXml() {
-			$this->xmlTemplate->readTpl('SOSgetCapabilities');
-			$this->xmlTemplate->printTemplate();
+            $this->xmlTemplate->readTpl('SOSgetCapabilities');
+            $this->xmlTemplate->printTemplate();
         }
         
         private function getDescribeSensorParameters() {
@@ -227,7 +227,7 @@
         }
         
         private function printDescribeSensorXml() {
-			$this->xmlTemplate->readTpl('SOSdescribeSensor');
+            $this->xmlTemplate->readTpl('SOSdescribeSensor');
             $this->xmlTemplate->tplReplace('procedure', 'urn:ogc:object:feature:sensor:airqualityegg-'.$this->feedId);
             
             $this->dataArray['lon'] = str_replace('&deg;', '', $this->dataArray['lon']);
@@ -248,9 +248,9 @@
             
             $this->xmlTemplate->tplReplace('alt_unit', $alt[1]);
             $this->xmlTemplate->tplReplace('alt', $alt[0]);
-			$this->xmlTemplate->printTemplate();
+            $this->xmlTemplate->printTemplate();
         }
-	}
-	
-	new SOS();
+    }
+    
+    new SOS();
 ?>

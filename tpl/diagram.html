@@ -2,166 +2,166 @@
 <script src="js/outlierhints.js"></script>
 <h1>{title}[[diagram_view]]</h1>
 <div id="navi_left">
-	<div>
-		<a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+    <div>
+        <a href="#" class="active"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" class="active" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
+        <a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
         <a href="index.php?s=download&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
-	</div>
-	<div>
-		<a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=co&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onmouseover="buttonOver('sensor_co', 'co_hover');" onmouseout="buttonOver('sensor_co', 'co');"></a>
-		<a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=no2&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onmouseover="buttonOver('sensor_no2', 'no2_hover');" onmouseout="buttonOver('sensor_no2', 'no2');"></a>
-		<a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=temperature&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onmouseover="buttonOver('sensor_temperature', 'temp_hover');" onmouseout="buttonOver('sensor_temperature', 'temp');"></a>
-		<a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=humidity&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onmouseover="buttonOver('sensor_humidity', 'hum_hover');" onmouseout="buttonOver('sensor_humidity', 'hum');"></a>
-	</div>
-	<div>
+    </div>
+    <div>
+        <a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=co&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/co.png" width="50" height="50" alt="[[co]]" id="sensor_co" class="active sensor" onmouseover="buttonOver('sensor_co', 'co_hover');" onmouseout="buttonOver('sensor_co', 'co');"></a>
+        <a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=no2&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/no2.png" width="50" height="50" alt="[[no2]]" id="sensor_no2" class="sensor" onmouseover="buttonOver('sensor_no2', 'no2_hover');" onmouseout="buttonOver('sensor_no2', 'no2');"></a>
+        <a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=temperature&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/temp.png" width="50" height="50" alt="[[temperature]]" id="sensor_temperature" class="sensor" onmouseover="buttonOver('sensor_temperature', 'temp_hover');" onmouseout="buttonOver('sensor_temperature', 'temp');"></a>
+        <a href="?s=diagram&amp;fid={feedId}&amp;lang={language}&amp;sensor=humidity&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}" onclick="loading();"><img src="img/hum.png" width="50" height="50" alt="[[humidity]]" id="sensor_humidity" class="last sensor" onmouseover="buttonOver('sensor_humidity', 'hum_hover');" onmouseout="buttonOver('sensor_humidity', 'hum');"></a>
+    </div>
+    <div>
         <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}" onclick="loading();"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
-	</div>
+    </div>
 </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
+    <div{6h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
+    <div{24h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
+    <div{48h_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
+    <div{1w_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
+    <div{1m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
+    <div{3m_active}><a href="index.php?s=diagram&amp;fid={feedId}&amp;sensor={sensor}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
 </div>
 <div id="data_content">
-	<script src='https://www.google.com/jsapi'></script>
-	<script>
-	    // Load the Visualization API and the piechart package.
-	    google.load('visualization', '1.0', {'packages':['corechart']});
+    <script src='https://www.google.com/jsapi'></script>
+    <script>
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', {'packages':['corechart']});
 
-	    // Set a callback to run when the Google Visualization API is loaded.
-	    google.setOnLoadCallback(drawChart);
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart);
 
-	    var columns;
-	    var selection;
-		
-	    var options = {
-	        height: 400,
-	        chm: 'o,FF0000,1,-1,5,1',
-	        colors: ['#000000'],
-	        legend: {position: 'none'},
-	        backgroundColor: '#E9F2F9',
-	        chartArea:{top: 40, left: 70, width:'85%', height: '70%'},
-	        vAxis: {title: '[[co]] (ppm)'},
-	        hAxis: {title: '[[date_time]]', format: '[[js_time_format]]'},
-	        tooltip: {isHtml: true},
-	        interpolateNulls: true
-	    };
+        var columns;
+        var selection;
+        
+        var options = {
+            height: 400,
+            chm: 'o,FF0000,1,-1,5,1',
+            colors: ['#000000'],
+            legend: {position: 'none'},
+            backgroundColor: '#E9F2F9',
+            chartArea:{top: 40, left: 70, width:'85%', height: '70%'},
+            vAxis: {title: '[[co]] (ppm)'},
+            hAxis: {title: '[[date_time]]', format: '[[js_time_format]]'},
+            tooltip: {isHtml: true},
+            interpolateNulls: true
+        };
 
-	    var chart;
-		{callSensor};
-		
-	    // Callback that creates and populates a data table, 
-	    // instantiates the pie chart, passes in the data and
-	    // draws it.
-	    function drawChart() {		
-	        var dataTable = new google.visualization.DataTable();
-	        dataTable.addColumn('datetime', '[[date_time]]');
+        var chart;
+        {callSensor};
+        
+        // Callback that creates and populates a data table, 
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {        
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('datetime', '[[date_time]]');
 
-	        dataTable.addColumn('number', '[[co]]');
-	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+            dataTable.addColumn('number', '[[co]]');
+            dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', '[[no2]]');
-	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+            dataTable.addColumn('number', '[[no2]]');
+            dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', '[[temperature]]');
-	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+            dataTable.addColumn('number', '[[temperature]]');
+            dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', '[[humidity]]');
-	        dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+            dataTable.addColumn('number', '[[humidity]]');
+            dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-	        dataTable.addColumn('number', 'timestamp');
-			
-	        var outlierText = '<br>[[value_could_be_an_outlier]]';
-	        var noText = '';
-
-	        dataTable.addRows([
-				{+diagramData}
-				[new Date({t}),
-				{co}, '<div class="tooltip"><b>{lt}</b><br>[[co]]: {co} ppm' + {co_outlier_text} + '</div>',
-				{no2}, '<div class="tooltip"><b>{lt}</b><br>[[no2]]: {no2} ppm' + {no2_outlier_text} + '</div>',
-				{temperature}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temperature} &deg;C' + {temperature_outlier_text} + '</div>',
-				{humidity}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {humidity} %' + {humidity_outlier_text} + '</div>',
-				{timestamp}]{,}
-	        {-diagramData}
-	        ]);
-			
-	        var view = new google.visualization.DataView(dataTable);
-	        view.setColumns(columns);
+            dataTable.addColumn('number', 'timestamp');
             
-	        chart = new google.visualization.LineChart(document.getElementById('diagram'));
-	        chart.draw(view, options);
-	        chart.setSelection(selection);
+            var outlierText = '<br>[[value_could_be_an_outlier]]';
+            var noText = '';
 
-	        google.visualization.events.addListener(chart, 'select', selectHandler);
-	    }
+            dataTable.addRows([
+                {+diagramData}
+                [new Date({t}),
+                {co}, '<div class="tooltip"><b>{lt}</b><br>[[co]]: {co} ppm' + {co_outlier_text} + '</div>',
+                {no2}, '<div class="tooltip"><b>{lt}</b><br>[[no2]]: {no2} ppm' + {no2_outlier_text} + '</div>',
+                {temperature}, '<div class="tooltip"><b>{lt}</b><br>[[temperature]]: {temperature} &deg;C' + {temperature_outlier_text} + '</div>',
+                {humidity}, '<div class="tooltip"><b>{lt}</b><br>[[humidity]]: {humidity} %' + {humidity_outlier_text} + '</div>',
+                {timestamp}]{,}
+            {-diagramData}
+            ]);
+            
+            var view = new google.visualization.DataView(dataTable);
+            view.setColumns(columns);
+            
+            chart = new google.visualization.LineChart(document.getElementById('diagram'));
+            chart.draw(view, options);
+            chart.setSelection(selection);
 
-	    function selectHandler(e) {
-	        drawChart();
-	    }
-		
-	    function co() {
-	        columns = [0,1,2];
-	        selection = [{coOutlierTable}];
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+        }
 
-	        options['vAxis'] = {title: '[[co]] (ppm)'};
-	        options['colors'] = ['#000000'];
+        function selectHandler(e) {
+            drawChart();
+        }
+        
+        function co() {
+            columns = [0,1,2];
+            selection = [{coOutlierTable}];
 
-	        document.getElementById('sensor_co').style.borderRight = '10px solid #BCD7ED';
-	        document.getElementById('sensor_no2').style.borderRight = 'none';
-	        document.getElementById('sensor_temperature').style.borderRight = 'none';
-	        document.getElementById('sensor_humidity').style.borderRight = 'none';
-			
-	        drawChart();
-	    }
-		
-	    function no2() {
-	        columns = [0,3,4];
-	        selection = [{no2OutlierTable}];
+            options['vAxis'] = {title: '[[co]] (ppm)'};
+            options['colors'] = ['#000000'];
 
-	        options['vAxis'] = {title: '[[no_2]] (ppm)'};
-	        options['colors'] = ['#A04801'];
-			
-	        document.getElementById('sensor_co').style.borderRight = 'none';
-	        document.getElementById('sensor_no2').style.borderRight = '10px solid #BCD7ED';
-	        document.getElementById('sensor_temperature').style.borderRight = 'none';
-	        document.getElementById('sensor_humidity').style.borderRight = 'none';
+            document.getElementById('sensor_co').style.borderRight = '10px solid #BCD7ED';
+            document.getElementById('sensor_no2').style.borderRight = 'none';
+            document.getElementById('sensor_temperature').style.borderRight = 'none';
+            document.getElementById('sensor_humidity').style.borderRight = 'none';
+            
+            drawChart();
+        }
+        
+        function no2() {
+            columns = [0,3,4];
+            selection = [{no2OutlierTable}];
 
-	        drawChart();
-	    }
-		
-	    function temp() {
-	        columns = [0,5,6];
-	        selection = [{temperatureOutlierTable}];
+            options['vAxis'] = {title: '[[no_2]] (ppm)'};
+            options['colors'] = ['#A04801'];
+            
+            document.getElementById('sensor_co').style.borderRight = 'none';
+            document.getElementById('sensor_no2').style.borderRight = '10px solid #BCD7ED';
+            document.getElementById('sensor_temperature').style.borderRight = 'none';
+            document.getElementById('sensor_humidity').style.borderRight = 'none';
 
-	        options['vAxis'] = {title: '[[temperature]] ([[degrees_celsius]])'};
-	        options['colors'] = ['#D62A1E'];
-			
-	        document.getElementById('sensor_co').style.borderRight = 'none';
-	        document.getElementById('sensor_no2').style.borderRight = 'none';
-	        document.getElementById('sensor_temperature').style.borderRight = '10px solid #BCD7ED';
-	        document.getElementById('sensor_humidity').style.borderRight = 'none';
-			
-	        drawChart();
-	    }
-		
-	    function hum() {
-	        columns = [0,7,8];
-	        selection = [{humidityOutlierTable}];
+            drawChart();
+        }
+        
+        function temp() {
+            columns = [0,5,6];
+            selection = [{temperatureOutlierTable}];
 
-	        options['vAxis'] = {title: '[[humidity]] (%)'};
-	        options['colors'] = ['#7AA1EB'];
-			
-	        document.getElementById('sensor_co').style.borderRight = 'none';
-	        document.getElementById('sensor_no2').style.borderRight = 'none';
-	        document.getElementById('sensor_temperature').style.borderRight = 'none';
-	        document.getElementById('sensor_humidity').style.borderRight = '10px solid #BCD7ED';
-			
-	        drawChart();
-	    }
-	</script>
+            options['vAxis'] = {title: '[[temperature]] ([[degrees_celsius]])'};
+            options['colors'] = ['#D62A1E'];
+            
+            document.getElementById('sensor_co').style.borderRight = 'none';
+            document.getElementById('sensor_no2').style.borderRight = 'none';
+            document.getElementById('sensor_temperature').style.borderRight = '10px solid #BCD7ED';
+            document.getElementById('sensor_humidity').style.borderRight = 'none';
+            
+            drawChart();
+        }
+        
+        function hum() {
+            columns = [0,7,8];
+            selection = [{humidityOutlierTable}];
+
+            options['vAxis'] = {title: '[[humidity]] (%)'};
+            options['colors'] = ['#7AA1EB'];
+            
+            document.getElementById('sensor_co').style.borderRight = 'none';
+            document.getElementById('sensor_no2').style.borderRight = 'none';
+            document.getElementById('sensor_temperature').style.borderRight = 'none';
+            document.getElementById('sensor_humidity').style.borderRight = '10px solid #BCD7ED';
+            
+            drawChart();
+        }
+    </script>
     <div{hidden}>
         <div class="details">
             <div id="diagram"></div>
@@ -198,88 +198,88 @@
                 </table>
             </form><br>
         </div><br>
-		<div class="details">
-			<h4>[[description]]</h4>
-			<p>{description}</p>
-			<div class="left">
-				<h4>[[pos_and_ele]]</h4>
-				<table class="metadata">
-					<tr>
-						<td>[[location_name]]:</td>
-						<td>{locationName}</td>
-					</tr>
-					<tr>
-						<td>[[latitude]]:</td>
-						<td>{lat}</td>
-					</tr>
-					<tr>
-						<td>[[longitude]]:</td>
-						<td>{lon}</td>
-					</tr>
-					<tr>
-						<td>[[ele]]:</td>
-						<td>{ele}</td>
-					</tr>
-				</table>
-			</div>
-			<h4>[[more_info]]</h4>
-			<table class="metadata">
-				<tr>
-					<td>[[feed_id]]:</td>
-					<td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
-				</tr>
-				<tr>
-					<td>[[website]]:</td>
-					<td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
-				</tr>
-				<tr>
-					<td>[[state]]:</td>
-					<td>{status}</td>
-				</tr>
-				<tr>
-					<td>[[exposure]]:</td>
-					<td>{exposure}</td>
-				</tr>
-			</table>
+        <div class="details">
+            <h4>[[description]]</h4>
+            <p>{description}</p>
+            <div class="left">
+                <h4>[[pos_and_ele]]</h4>
+                <table class="metadata">
+                    <tr>
+                        <td>[[location_name]]:</td>
+                        <td>{locationName}</td>
+                    </tr>
+                    <tr>
+                        <td>[[latitude]]:</td>
+                        <td>{lat}</td>
+                    </tr>
+                    <tr>
+                        <td>[[longitude]]:</td>
+                        <td>{lon}</td>
+                    </tr>
+                    <tr>
+                        <td>[[ele]]:</td>
+                        <td>{ele}</td>
+                    </tr>
+                </table>
+            </div>
+            <h4>[[more_info]]</h4>
+            <table class="metadata">
+                <tr>
+                    <td>[[feed_id]]:</td>
+                    <td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
+                </tr>
+                <tr>
+                    <td>[[website]]:</td>
+                    <td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
+                </tr>
+                <tr>
+                    <td>[[state]]:</td>
+                    <td>{status}</td>
+                </tr>
+                <tr>
+                    <td>[[exposure]]:</td>
+                    <td>{exposure}</td>
+                </tr>
+            </table>
             <br>
-		</div><br>
+        </div><br>
         <table>
-	        <tr>
-		        <th>[[value]] ([[{time}]])</th>
-		        <th>[[co]] (ppm)</th>
-		        <th>[[no2]] (ppm)</th>
-		        <th>[[temperature]] (&deg;C)</th>
-		        <th>[[humidity]] (%)</th>
-	        </tr>
+            <tr>
+                <th>[[value]] ([[{time}]])</th>
+                <th>[[co]] (ppm)</th>
+                <th>[[no2]] (ppm)</th>
+                <th>[[temperature]] (&deg;C)</th>
+                <th>[[humidity]] (%)</th>
+            </tr>
             <tr>
                 <td>[[current]]:</td>
-		        <td>{co_current}</td>
-		        <td>{no2_current}</td>
-		        <td>{temperature_current}</td>
-		        <td>{humidity_current}</td>
+                <td>{co_current}</td>
+                <td>{no2_current}</td>
+                <td>{temperature_current}</td>
+                <td>{humidity_current}</td>
             </tr>
             <tr>
                 <td>[[mean]]:</td>
-		        <td>{co_mean}</td>
-		        <td>{no2_mean}</td>
-		        <td>{temperature_mean}</td>
-		        <td>{humidity_mean}</td>
+                <td>{co_mean}</td>
+                <td>{no2_mean}</td>
+                <td>{temperature_mean}</td>
+                <td>{humidity_mean}</td>
             </tr>
             <tr>
                 <td>[[maximum]]:</td>
-		        <td>{co_maximum}</td>
-		        <td>{no2_maximum}</td>
-		        <td>{temperature_maximum}</td>
-		        <td>{humidity_maximum}</td>
+                <td>{co_maximum}</td>
+                <td>{no2_maximum}</td>
+                <td>{temperature_maximum}</td>
+                <td>{humidity_maximum}</td>
             </tr>
             <tr>
                 <td>[[minimum]]:</td>
-		        <td>{co_minimum}</td>
-		        <td>{no2_minimum}</td>
-		        <td>{temperature_minimum}</td>
-		        <td>{humidity_minimum}</td>
+                <td>{co_minimum}</td>
+                <td>{no2_minimum}</td>
+                <td>{temperature_minimum}</td>
+                <td>{humidity_minimum}</td>
             </tr>
         </table>
-	</div>
+    </div>
     {errormessage}
 </div>

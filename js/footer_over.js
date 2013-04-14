@@ -1,7 +1,7 @@
 function mouseOverFooter(element) {
-	document.getElementById(element + '_over').style.visibility = 'visible';
+    document.getElementById(element + '_over').style.visibility = 'visible';
 }
 
 function mouseOutFooter(element) {
-	document.getElementById(element + '_over').style.visibility = 'hidden';
+    document.getElementById(element + '_over').style.visibility = 'hidden';
 }

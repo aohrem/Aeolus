@@ -23,8 +23,8 @@ if ( $_GET['pass'] == $password ) {
                 
                 $cosmAPI = new CosmAPI();
                 $mySqlConnection = new MySqlConnection();
-				date_default_timezone_set('UTC');
-				
+                date_default_timezone_set('UTC');
+                
                 mysql_query('CREATE TABLE IF NOT EXISTS `eggdata_'.$this->feedId.'` ( `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, `co` double(9,2) NOT NULL, `no2` double(9,2) NOT NULL, `temperature` double(6,2) NOT NULL, `humidity` double(6,2) NOT NULL, PRIMARY KEY (`timestamp`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1');
                 $num_rows = mysql_num_rows(mysql_query('SELECT `timestamp` FROM `eggdata_'.$this->feedId.'`'));
                 
@@ -43,7 +43,7 @@ if ( $_GET['pass'] == $password ) {
                         else {
                             if ( ! $metadata ) {
                                 mysql_query('UPDATE `egg` SET `title` = \''.$dataArray['title'].'\', `description` = \''.$dataArray['description'].'\', `location_name` = \''.$dataArray['locationName'].'\', `ele` = \''.$dataArray['ele'].'\', `status` = \''.$dataArray['status'].'\', `exposure` = \''.$dataArray['exposure'].'\', `lastupdated`=\''.time().'\' WHERE `feed_id` = '.$this->feedId);
-								$metadata = true;
+                                $metadata = true;
                             }
                             
                             foreach ( $this->metadata as $mdata ) {

@@ -1,70 +1,70 @@
 <script src="js/button_over.js"></script>
 <h1>{title}[[data_download]]</h1>
 <div id="navi_left">
-	<div>
-		<a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
-		<a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
+    <div>
+        <a href="index.php?s=diagram&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/diagram.png" width="50" height="50" alt="[[diagram_view]]" id="diagram_button" onmouseover="buttonOver('diagram_button', 'diagram_hover');" onmouseout="buttonOver('diagram_button', 'diagram');"></a>
+        <a href="index.php?s=table&amp;fid={feedId}&amp;timeframe={time}&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();"><img src="img/table.png" width="50" height="50" alt="[[table_view]]" id="table_button" onmouseover="buttonOver('table_button', 'table_hover');" onmouseout="buttonOver('table_button', 'table');"></a>
         <a href="#"><img src="img/download.png" width="50" height="50" alt="[[data_download]]" class="active last" id="download_button" onmouseover="buttonOver('download_button', 'download_hover');" onmouseout="buttonOver('download_button', 'download');"></a>
-	</div>
-	<div>
+    </div>
+    <div>
         <a href="index.php?s=map&amp;fid={feedId}&amp;lang={language}" onclick="loading();"><img src="img/map_small.png" width="50" height="50" alt="[[map]]" class="last" id="map_button" onmouseover="buttonOver('map_button', 'map_small_hover');" onmouseout="buttonOver('map_button', 'map_small');"></a>
-	</div>
+    </div>
  </div>
 <div id="time_picker">
-	<div{6h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
-	<div{24h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
-	<div{48h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
-	<div{1w_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
-	<div{1m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
-	<div{3m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
+    <div{6h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=6h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[6_hours]]</a></div>
+    <div{24h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=24h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[24_hours]]</a></div>
+    <div{48h_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=48h&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[48_hours]]</a></div>
+    <div{1w_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1w&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_week]]</a></div>
+    <div{1m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=1m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[one_month]]</a></div>
+    <div{3m_active}><a href="index.php?s=download&amp;fid={feedId}&amp;timeframe=3m&amp;interpolateoutliers={interpolateOutliers}&amp;sensitivity={sensitivity}&amp;lang={language}" onclick="loading();">[[3_month]]</a></div>
 </div>
 <div id="data_content">
     <div{hidden}>
-	    <div class="details">
-		    <h4>[[description]]</h4>
-		    <p>{description}</p>
-		    <div class="left">
-			    <h4>[[pos_and_ele]]</h4>
-			    <table class="metadata">
-				    <tr>
-					    <td>[[location_name]]:</td>
-					    <td>{locationName}</td>
-				    </tr>
-				    <tr>
-					    <td>[[latitude]]:</td>
-					    <td>{lat}</td>
-				    </tr>
-				    <tr>
-					    <td>[[longitude]]:</td>
-					    <td>{lon}</td>
-				    </tr>
-				    <tr>
-					    <td>[[ele]]:</td>
-					    <td>{ele}</td>
-				    </tr>
-			    </table>
-		    </div>
-		    <h4>[[more_info]]</h4>
-		    <table class="metadata">
-			    <tr>
-				    <td>[[feed_id]]:</td>
-				    <td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
-			    </tr>
-			    <tr>
-				    <td>[[website]]:</td>
-				    <td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
-			    </tr>
-			    <tr>
-				    <td>[[state]]:</td>
-				    <td>{status}</td>
-			    </tr>
-			    <tr>
-				    <td>[[exposure]]:</td>
-				    <td>{exposure}</td>
-			    </tr>
-		    </table>
+        <div class="details">
+            <h4>[[description]]</h4>
+            <p>{description}</p>
+            <div class="left">
+                <h4>[[pos_and_ele]]</h4>
+                <table class="metadata">
+                    <tr>
+                        <td>[[location_name]]:</td>
+                        <td>{locationName}</td>
+                    </tr>
+                    <tr>
+                        <td>[[latitude]]:</td>
+                        <td>{lat}</td>
+                    </tr>
+                    <tr>
+                        <td>[[longitude]]:</td>
+                        <td>{lon}</td>
+                    </tr>
+                    <tr>
+                        <td>[[ele]]:</td>
+                        <td>{ele}</td>
+                    </tr>
+                </table>
+            </div>
+            <h4>[[more_info]]</h4>
+            <table class="metadata">
+                <tr>
+                    <td>[[feed_id]]:</td>
+                    <td><a href="https://cosm.com/feeds/{feedId}" target="_blank">{feedId}</a></td>
+                </tr>
+                <tr>
+                    <td>[[website]]:</td>
+                    <td><a href="http://airqualityegg.com/egg/{feedId}" target="_blank">[[aqe]]</a></td>
+                </tr>
+                <tr>
+                    <td>[[state]]:</td>
+                    <td>{status}</td>
+                </tr>
+                <tr>
+                    <td>[[exposure]]:</td>
+                    <td>{exposure}</td>
+                </tr>
+            </table>
             <br>
-	    </div><br>
+        </div><br>
         <div class="details">
             <h4>[[raw_sensor_data_from_cosm]]</h4>
             <table class="download">

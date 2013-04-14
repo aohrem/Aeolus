@@ -50,16 +50,16 @@ if ( $_GET['pass'] == $password ) {
                     }
                     
                     foreach ( $dataArray as $time => $val ) {
-						$nullsensors = 0;
-						foreach ( $this->sensors as $sensor ) {
-							if ( ! isset($val[$sensor]) ) {
-								$val[$sensor] = 0;
-								$nullsensors++;
-							}
-						}
-						if ( $nullsensors < 4 && floatval($time) != 0.0 ) {
-							mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
-						}
+                        $nullsensors = 0;
+                        foreach ( $this->sensors as $sensor ) {
+                            if ( ! isset($val[$sensor]) ) {
+                                $val[$sensor] = 0;
+                                $nullsensors++;
+                            }
+                        }
+                        if ( $nullsensors < 4 && floatval($time) != 0.0 ) {
+                            mysql_query('INSERT INTO `eggdata_'.$this->feedId.'` ( `timestamp`, `co`, `no2`, `temperature`, `humidity` ) VALUES (\''.date('Y-m-d H:i:s', $time).'\',  \''.$val['co'].'\',  \''.$val['no2'].'\',  \''.$val['temperature'].'\',  \''.$val['humidity'].'\')');
+                        }
                     }
                 }
             }

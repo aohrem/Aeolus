@@ -7,64 +7,64 @@
 <!--[if lte IE 8]><link rel="stylesheet" href="css/MarkerCluster.Default.ie.css" /><![endif]-->
 <script src="js/leaflet.markercluster-src.js"></script>
 <div id="mapdiv">
-	<div id="searchbar">
-		<form action="#" method="post" onsubmit="return false;">
-			<input type="text" name="searchtext" value="[[enter_location]]" onFocus="if(this.value=='[[enter_location]]') this.value='';" onBlur="if(this.value=='') this.value='[[enter_location]]';" id="location"><input type="submit" value="[[search]]" class="button" onclick="location_search()">
-		</form>
-	</div>
-	<div id="results_frame">
-		[[search_results]]
-		<div id="results"></div>
-		<img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
-	</div>
-	<div class="map_buttons" id="co_button">
-		<a href="{url}&amp;classify=co" onclick="loading();"><img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button" onmouseover="buttonOver('map_co_button', 'co_hover');" onmouseout="buttonOver('map_co_button', 'co');"></a>
-	</div>
-	<div class="map_buttons" id="no2_button">
-		<a href="{url}&amp;classify=no2" onclick="loading();"><img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button" onmouseover="buttonOver('map_no2_button', 'no2_hover');" onmouseout="buttonOver('map_no2_button', 'no2');"></a>
-	</div>
-	<div class="map_buttons" id="temp_button">
-		<a href="{url}&amp;classify=temperature" onclick="loading();"><img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button" onmouseover="buttonOver('map_temp_button', 'temp_hover');" onmouseout="buttonOver('map_temp_button', 'temp');"></a>
-	</div>
-	<div class="map_buttons" id="hum_button">
-		<a href="{url}&amp;classify=humidity" onclick="loading();"><img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button" onmouseover="buttonOver('map_hum_button', 'hum_hover');" onmouseout="buttonOver('map_hum_button', 'hum');"></a>
-	</div>
-	<div class="map_buttons" id="lanuv_button">
-		<a href="{lanuv_url}" onclick="loading();"><img src="img/lanuv.png" alt="[[lanuv]]" width="50" height="50" id="map_lanuv_button" onmouseover="buttonOver('map_lanuv_button', 'lanuv_hover');" onmouseout="buttonOver('map_lanuv_button', 'lanuv')"></a>
-	</div>
-	<div id="legend"{show}>
-		<h1>[[{classify}]]</h1>
-		<table>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class1.png" alt="{class1_interval}"></td>
-				<td class="left">{class1_interval}</td>
-			</tr>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class2.png" alt="{class2_interval}"></td>
-				<td class="left">{class2_interval}</td>
-			</tr>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class3.png" alt="{class3_interval}"></td>
-				<td class="left">{class3_interval}</td>
-			</tr>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class4.png" alt="{class4_interval}"></td>
-				<td class="left">{class4_interval}</td>
-			</tr>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class5.png" alt="{class5_interval}"></td>
-				<td class="left">{class5_interval}</td>
-			</tr>
-			<tr>
-				<td class="center"><img src="img/map_eggs/eggicon_small_noval.png" alt="[[no_value]]"></td>
-				<td class="left">[[no_value]]</td>
-			</tr>
-		</table>
-		<a href="{url}#mapview" onclick="loading();">[[blank_classification_out]]</a>
-	</div>
-	<div id="eggValue">
+    <div id="searchbar">
+        <form action="#" method="post" onsubmit="return false;">
+            <input type="text" name="searchtext" value="[[enter_location]]" onFocus="if(this.value=='[[enter_location]]') this.value='';" onBlur="if(this.value=='') this.value='[[enter_location]]';" id="location"><input type="submit" value="[[search]]" class="button" onclick="location_search()">
+        </form>
+    </div>
+    <div id="results_frame">
+        [[search_results]]
+        <div id="results"></div>
+        <img src="img/close.png" alt="[[close]]" width="10" height="10" onclick="setResultsHidden()" id="results_close">
+    </div>
+    <div class="map_buttons" id="co_button">
+        <a href="{url}&amp;classify=co" onclick="loading();"><img src="img/co.png" alt="[[co]]" width="50" height="50" id="map_co_button" onmouseover="buttonOver('map_co_button', 'co_hover');" onmouseout="buttonOver('map_co_button', 'co');"></a>
+    </div>
+    <div class="map_buttons" id="no2_button">
+        <a href="{url}&amp;classify=no2" onclick="loading();"><img src="img/no2.png" alt="[[no2]]" width="50" height="50" id="map_no2_button" onmouseover="buttonOver('map_no2_button', 'no2_hover');" onmouseout="buttonOver('map_no2_button', 'no2');"></a>
+    </div>
+    <div class="map_buttons" id="temp_button">
+        <a href="{url}&amp;classify=temperature" onclick="loading();"><img src="img/temp.png" alt="[[temperature]]" width="50" height="50" id="map_temp_button" onmouseover="buttonOver('map_temp_button', 'temp_hover');" onmouseout="buttonOver('map_temp_button', 'temp');"></a>
+    </div>
+    <div class="map_buttons" id="hum_button">
+        <a href="{url}&amp;classify=humidity" onclick="loading();"><img src="img/hum.png" alt="[[humidity]]" width="50" height="50" id="map_hum_button" onmouseover="buttonOver('map_hum_button', 'hum_hover');" onmouseout="buttonOver('map_hum_button', 'hum');"></a>
+    </div>
+    <div class="map_buttons" id="lanuv_button">
+        <a href="{lanuv_url}" onclick="loading();"><img src="img/lanuv.png" alt="[[lanuv]]" width="50" height="50" id="map_lanuv_button" onmouseover="buttonOver('map_lanuv_button', 'lanuv_hover');" onmouseout="buttonOver('map_lanuv_button', 'lanuv')"></a>
+    </div>
+    <div id="legend"{show}>
+        <h1>[[{classify}]]</h1>
+        <table>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class1.png" alt="{class1_interval}"></td>
+                <td class="left">{class1_interval}</td>
+            </tr>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class2.png" alt="{class2_interval}"></td>
+                <td class="left">{class2_interval}</td>
+            </tr>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class3.png" alt="{class3_interval}"></td>
+                <td class="left">{class3_interval}</td>
+            </tr>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class4.png" alt="{class4_interval}"></td>
+                <td class="left">{class4_interval}</td>
+            </tr>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small{egg_sensor}_class5.png" alt="{class5_interval}"></td>
+                <td class="left">{class5_interval}</td>
+            </tr>
+            <tr>
+                <td class="center"><img src="img/map_eggs/eggicon_small_noval.png" alt="[[no_value]]"></td>
+                <td class="left">[[no_value]]</td>
+            </tr>
+        </table>
+        <a href="{url}#mapview" onclick="loading();">[[blank_classification_out]]</a>
+    </div>
+    <div id="eggValue">
         <div id="eggValueFeedId"></div>
-		<table>
+        <table>
             <tr>
                 <td>[[co]]:</td>
                 <td><div id="eggValueCo"></div></td>
@@ -81,11 +81,11 @@
                 <td>[[humidity]]:</td>
                 <td><div id="eggValueHum"></div></td>
             </tr>
-		</table>
-	</div>
-	<div id="lanuvValue"{lanuvVisible}>
+        </table>
+    </div>
+    <div id="lanuvValue"{lanuvVisible}>
         <span id="lanuv_headline">{lanuv_value_city}<br>{lanuv_value_street}</span>
-		<table>
+        <table>
             <tr{lanuvValueNox}>
                 <td>[[nox]]:</td>
                 <td>{lanuv_value_no}</td>
@@ -94,7 +94,7 @@
                 <td>[[no2]]:</td>
                 <td>{lanuv_value_no2}</td>
             </tr>
-			<tr{lanuvValueTemp}>
+            <tr{lanuvValueTemp}>
                 <td>[[temperature]]:</td>
                 <td>{lanuv_value_temp}</td>
             </tr>
@@ -102,26 +102,26 @@
                 <td>[[ozone]]:</td>
                 <td>{lanuv_value_ozone}</td>
             </tr>
-			<tr{lanuvValueSo2}>
+            <tr{lanuvValueSo2}>
                 <td>[[so2]]:</td>
                 <td>{lanuv_value_so2}</td>
             </tr>
-			<tr{lanuvValuePm10}>
+            <tr{lanuvValuePm10}>
                 <td>[[pm10]]:</td>
                 <td>{lanuv_value_pm10}</td>
             </tr>
-		</table>
-	</div>
-	<div id="map_big"></div>
+        </table>
+    </div>
+    <div id="map_big"></div>
 </div>
 <script src="js.php?js=map_big&amp;lang={language}"></script>
 <script>
-	{+Egg}
-	addEgg({egg_lat}, {egg_lon}, {egg_fid}, {egg_color}, '{egg_sensor}', {egg_coval}, {egg_no2val}, {egg_tempval}, {egg_humval}, '{egg_title}');
-	{-Egg}
+    {+Egg}
+    addEgg({egg_lat}, {egg_lon}, {egg_fid}, {egg_color}, '{egg_sensor}', {egg_coval}, {egg_no2val}, {egg_tempval}, {egg_humval}, '{egg_title}');
+    {-Egg}
 </script>
 <script>
-	{+Lanuv}
-	addLanuv({lanuv_lat}, '{lanuv_lon}', '{lanuv_code}', '{lanuv_city}', '{lanuv_street}', '{lanuv_temp}', '{lanuv_no2}', '{lanuv_no}', '{lanuv_so2}', '{lanuv_pm10}', '{lanuv_ozone}');
-	{-Lanuv}
+    {+Lanuv}
+    addLanuv({lanuv_lat}, '{lanuv_lon}', '{lanuv_code}', '{lanuv_city}', '{lanuv_street}', '{lanuv_temp}', '{lanuv_no2}', '{lanuv_no}', '{lanuv_so2}', '{lanuv_pm10}', '{lanuv_ozone}');
+    {-Lanuv}
 </script>

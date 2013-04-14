@@ -1,26 +1,35 @@
 <?php
-	class DataVisualisation {
+    // abstract super class for table view, diagram view and download page
+    abstract class DataVisualisation {
         protected $feedId;
         
+        // supported time frames, default value, if no valid time frame is set and current time frame
         private $timeframes = array('6h', '24h', '48h', '1w', '1m', '3m');
         private $defaultTimeframe = '6h';
         protected $timeframe;
         
+        // containers for the HTTP GET values and the outlier classification array
         protected $dataValidation;
         protected $sensitivity;
         protected $outliers;
         
+        // arrays for meta data and sensor iteration
         private $metadata = array('title', 'description', 'locationName', 'lat', 'lon', 'ele', 'status', 'exposure');
         protected $sensors = array('co', 'no2', 'humidity', 'temperature');
         
+        // containers for template replacements (default value: empty)
         private $tplErrorMessage = '';
         private $tplHidden = '';
         
+        // containers for the content template to work on and the data array
         protected $contentTemplate;
         protected $dataArray;
         
+        // saves boolean value if database queries were successfull or not
         protected $dataSuccess = false;
-        
+    
+    
+        // constructor calls all necessary methods to build the standard template elements on the visualisation sites and to validate the data
         public function __construct($contentTemplate) {
             $this->contentTemplate = $contentTemplate;
             
@@ -79,6 +88,7 @@
         }
         
         private function getData() {
+            // connect to the MySQL database and request all necessary data
             $mysqlConnection = new MySQLConnection();
             $aqDatabase = new AirQualityDatabase($this->feedId, $this->timeframe);
             $this->dataArray = $aqDatabase->getValues();
@@ -89,6 +99,7 @@
                 $this->contentTemplate->cleanCode('tableRow');
                 $this->contentTemplate->tplReplace('title', '');
                 
+                // hide all unnecassary layout elements if there is no data
                 $this->tplHidden = ' class="hidden"';
                 $this->tplErrorMessage = '<div class="errormessage details">'.translate($errorCode).'</div>';
                 
@@ -109,6 +120,7 @@
         }
         
         private function applyDataValidation() {
+            // apply the data validation to the data array using all sensors and the determined sensitivity and time frame
             include('datavalidation.class.php');
             $this->dataValidation = new DataValidation($this->dataArray, $this->sensors, $this->sensitivity, $this->timeframe);
             if ( $this->dataSuccess ) {
@@ -120,16 +132,19 @@
             if ( isset($_GET['sensitivity']) && is_numeric($_GET['sensitivity']) ) {
                 $this->sensitivity = $_GET['sensitivity'];
                 
+                // if sensitivity is outside of the supported value range, set it to the default value
                 if ( $this->sensitivity < 0 || $this->sensitivity > 3 ) {
                     $this->sensitivity = 'default';
                 }
             }
+            // if no sensitivity is set, set it to the default value
             else {
                 $this->sensitivity = 'default';
             }
         }
         
         private function replaceSensitivity() {
+            // get the default sensitivity value from the data validation class if sensitivity is 'default'
             if ( $this->sensitivity == 'default' ) {
                 $this->sensitivity = $this->dataValidation->getDefaultSensitivity();
             }
@@ -145,61 +160,73 @@
                 $this->contentTemplate->tplReplace('sensitivity_'.$i.'_selected', $sel);
             }
             $this->contentTemplate->tplReplace('sensitivity', $this->sensitivity);
-            
-            if ( $this->sensitivity == 0 ) {
-                $this->contentTemplate->tplReplace('outlierState', translate('outlier_state_off'));
-            }
         }
-		
-		private function replaceStatistics() {
-			if ( sizeof($this->dataArray) > 0 && is_array($this->dataArray) ) {
+        
+        // this method computes statistics consisting of current value, mean, maximum and minimum in a certain time frame and puts them into the content template
+        private function replaceStatistics() {
+            if ( sizeof($this->dataArray) > 0 && is_array($this->dataArray) ) {
+                // initialise associative statistics array
                 $statistics = array('current' => $this->sensors, 'mean' => $this->sensors, 'maximum' => $this->sensors, 'minimum' => $this->sensors);
-			    foreach ( $this->sensors as $sensor ) {
-				    $statistics['maximum'][$sensor] = 0;
-				    $statistics['minimum'][$sensor] = null;
-				    $statistics['mean'][$sensor] = 0;
-				
-				    $size[$sensor] = 0;
-			    }
-			
-			    foreach ( $this->dataArray as $time => $sensors) {
-				    foreach ( $sensors as $sensor => $value ) {
-					    if ( floatval($this->dataArray[$time][$sensor]) != 0.0 ) {
-						    $size[$sensor]++;
-					    }
-					    if ( $value > $statistics['maximum'][$sensor] ) {
-						    $statistics['maximum'][$sensor] = $value;
-					    }
-						
-					    if ( $statistics['minimum'][$sensor] == null || ( floatval($value) < $statistics['minimum'][$sensor] && floatval($value) != 0.00 ) ) {
-						    $statistics['minimum'][$sensor] = $value;
-					    }
-					    $statistics['mean'][$sensor] += $value;
-				    }
-			    }
-			    
+                
+                // initialise default values for maximum, minimum, mean and the size of the data array
+                foreach ( $this->sensors as $sensor ) {
+                    $statistics['maximum'][$sensor] = 0;
+                    $statistics['minimum'][$sensor] = null;
+                    $statistics['mean'][$sensor] = 0;
+                
+                    $size[$sensor] = 0;
+                }
+                
+                // iterate the data array ...
+                foreach ( $this->dataArray as $time => $sensors) {
+                    // ... and the sensors
+                    foreach ( $sensors as $sensor => $value ) {
+                        // if there is a value, increment the data array size for this sensor
+                        if ( floatval($this->dataArray[$time][$sensor]) != 0.0 ) {
+                            $size[$sensor]++;
+                        }
+                        
+                        // if value is bigger than current maximum, value is used as the new maximum
+                        if ( $value > $statistics['maximum'][$sensor] ) {
+                            $statistics['maximum'][$sensor] = $value;
+                        }
+                        
+                        // if minimum is initialised as null or the value is less than current minimum, value is used as the new minimum
+                        if ( $statistics['minimum'][$sensor] == null || ( floatval($value) < $statistics['minimum'][$sensor] && floatval($value) != 0.00 ) ) {
+                            $statistics['minimum'][$sensor] = $value;
+                        }
+                        
+                        // cumulate mean value
+                        $statistics['mean'][$sensor] += $value;
+                    }
+                }
+                
+                // connect to the database to get the current value for each sensor
                 $mysqlConnection = new MySQLConnection();
                 $aqDatabase = new AirQualityDatabase($this->feedId, $this->timeframe);
-			    $data = $aqDatabase->getCurrentValues();
-			    foreach ( $this->sensors as $sensor ) {
-				    if ( $size[$sensor] != 0 ) $statistics['mean'][$sensor] /= $size[$sensor];
-				    $statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 2);
-			        $statistics['current'][$sensor] = $data['current_value'][$sensor];
-				    
-				    $this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);
-				    $this->contentTemplate->tplReplace($sensor.'_mean', $statistics['mean'][$sensor]);
-				    $this->contentTemplate->tplReplace($sensor.'_minimum', $statistics['minimum'][$sensor]);
-				    $this->contentTemplate->tplReplace($sensor.'_maximum', $statistics['maximum'][$sensor]);
+                $data = $aqDatabase->getCurrentValues();
+                foreach ( $this->sensors as $sensor ) {
+                    // calculate mean by dividing the cumulated value by the determined data size
+                    if ( $size[$sensor] != 0 ) $statistics['mean'][$sensor] /= $size[$sensor];
+                    $statistics['mean'][$sensor] = round($statistics['mean'][$sensor], 2);
+                    $statistics['current'][$sensor] = $data['current_value'][$sensor];
+                    
+                    // replace values in the content template
+                    $this->contentTemplate->tplReplace($sensor.'_current', $statistics['current'][$sensor]);
+                    $this->contentTemplate->tplReplace($sensor.'_mean', $statistics['mean'][$sensor]);
+                    $this->contentTemplate->tplReplace($sensor.'_minimum', $statistics['minimum'][$sensor]);
+                    $this->contentTemplate->tplReplace($sensor.'_maximum', $statistics['maximum'][$sensor]);
                 }
             }
             
+            // if the was no data found, replace values by -
             foreach ( $this->sensors as $sensor ) {
                 $this->contentTemplate->tplReplace($sensor.'_current', '-');
                 $this->contentTemplate->tplReplace($sensor.'_mean', '-');
                 $this->contentTemplate->tplReplace($sensor.'_minimum', '-');
                 $this->contentTemplate->tplReplace($sensor.'_maximum', '-');
             }
-		}
+        }
         
         private function __destruct() {
             // replace error message in template and hide description and outlier detection boxes if not needed

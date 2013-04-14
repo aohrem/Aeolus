@@ -6,7 +6,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css">
         <!--[if lte IE 8]>
-	        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css">
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css">
         <[endif]-->
         <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
         <script src="js/navi_over.js"></script>
@@ -15,43 +15,43 @@
         <script src ="http://code.jquery.com/jquery-latest.js"></script>
         <meta charset="utf-8">
     </head>
-	<body>
+    <body>
         <div id="loading"><div id="wait">[[loading]]<br><div id="cancel" onclick="cancelLoading();">[[cancel]]</div></div></div>
-		<div class="spacer"></div>
-		<div id="page">
-			<header>
-				<a href="index.php?lang={language}" onclick="loading();"><img src="img/header.png" alt="Aeolus Logo" width="285" height="99"></a>
-				<nav>
-					<ul>
-						<li>
-							<a href="index.php?lang={language}" onmouseover="mouseOver('home');" onmouseout="mouseOut('home');" onclick="loading();">
-								<img src="img/home.png" alt="Startseite" width="78" height="78" id="home">
-							</a>
-							<div id="home_over">[[home]]</div>
-						</li>
-						<li>
-							<a href="index.php?s=map&amp;lang={language}" onmouseover="mouseOver('map');" onmouseout="mouseOut('map');" onclick="loading();">
-								<img src="img/map.png" alt="Karte" width="78" height="78" id="map">
-							</a>
-							<div id="map_over">[[map]]</div>
-						</li>
-						<li>
-							<a href="#" onmouseover="mouseOver('register');" onmouseout="mouseOut('register');" onclick="registerClick()">
-								<img src="img/register.png" alt="Registrierung" width="78" height="78" id="register">
-							</a>
-							<div id="register_over">[[register]]</div>
-							<div id="register_click"{reg_handle}>
-								{register}
-							</div>
-						</li>
-					</ul>
-				</nav>
-			</header>
-			
-			<div id="content">
+        <div class="spacer"></div>
+        <div id="page">
+            <header>
+                <a href="index.php?lang={language}" onclick="loading();"><img src="img/header.png" alt="Aeolus Logo" width="285" height="99"></a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="index.php?lang={language}" onmouseover="mouseOver('home');" onmouseout="mouseOut('home');" onclick="loading();">
+                                <img src="img/home.png" alt="Startseite" width="78" height="78" id="home">
+                            </a>
+                            <div id="home_over">[[home]]</div>
+                        </li>
+                        <li>
+                            <a href="index.php?s=map&amp;lang={language}" onmouseover="mouseOver('map');" onmouseout="mouseOut('map');" onclick="loading();">
+                                <img src="img/map.png" alt="Karte" width="78" height="78" id="map">
+                            </a>
+                            <div id="map_over">[[map]]</div>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="mouseOver('register');" onmouseout="mouseOut('register');" onclick="registerClick()">
+                                <img src="img/register.png" alt="Registrierung" width="78" height="78" id="register">
+                            </a>
+                            <div id="register_over">[[register]]</div>
+                            <div id="register_click"{reg_handle}>
+                                {register}
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <div id="content">
 {content}
-			</div>
-			<footer>
+            </div>
+            <footer>
                 <table id="footer_left">
                     <tr>
                         <td><a href="index.php?s=delete&amp;lang={language}" onclick="loading();">[[delete_aqe]]</a></td>
@@ -68,12 +68,12 @@
                 </table>
                 <div id="footer_right">
                     <a href="{site}lang=en" onmouseover="mouseOverFooter('english');" onmouseout="mouseOutFooter('english');" onclick="loading();"><img src="img/en.png" width="40" height="26" alt="English" class="language"></a><br>
-					<div id="english_over"><span>[[view_english]]</span></div>
+                    <div id="english_over"><span>[[view_english]]</span></div>
                     <a href="{site}lang=de" onclick="loading();" onmouseover="mouseOverFooter('german');" onmouseout="mouseOutFooter('german');"><img src="img/de.png" width="40" height="26" alt="Deutsch" class="language"></a>
-					<div id="german_over"><span>[[view_german]]</span></div>
+                    <div id="german_over"><span>[[view_german]]</span></div>
                 </div>
-			</footer>
-		</div>
-		<div class="spacer"></div>
-	</body>
+            </footer>
+        </div>
+        <div class="spacer"></div>
+    </body>
 </html>
