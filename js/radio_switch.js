@@ -1,3 +1,4 @@
+// switches a radio button
 function radioSwitch(radio) {
     var radioButton = document.getElementById(radio);
 
