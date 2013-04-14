@@ -1,7 +1,9 @@
 <?php
     include('class/lanuvparser.class.php');
     
-    // function classifies a value
+    /* function classifies a value and defines the classes of a series
+		return = class => classification o a value
+		return = classes => definition of classes*/
     function classifier($value, $min, $max, $return) {
         $deviation = $max - $min;
         $step = floor($deviation / 3);
@@ -45,22 +47,26 @@
     $url = $url_parts[sizeof($url_parts)-1];
     $url = str_replace('&', '&amp;', $url);
     
+	// check if variable classification is set
     if (isset($_GET['classify'])){
         $classify = htmlentities(mysql_real_escape_string($_GET['classify']));
+		// uncover legend and define heading of the legend
         $this->contentTemplate->tplReplace('show', ' class="show"');
         $this->contentTemplate->tplReplace('classify', $classify);
+		
+		// remove value of classify for links in the page
         $url = str_replace('&amp;classify='.$classify, '', $url);
         
+		// distinction of cases of the classification
         switch ( $classify ) {
+			// set minimum and maximum for definition of classes and unit of the measurement per sensor
             case 'co':
-                // TODO: min und max anpassen
                 $min = 80;
                 $max = 130;
                 $unit = 'ppm';
                 $classes = classifier(0, $min, $max, 'classes');
             break;
             case 'no2':
-                // TODO: min und max anpassen
                 $min = 0.2;
                 $max = 0.6;
                 $unit = 'ppm';
@@ -73,16 +79,18 @@
                 $classes = classifier(0, $min, $max, 'classes');
             break;
             case 'humidity':
-                // TODO: min und max evtl. verfeinern
                 $min = 20;
                 $max = 80;
                 $unit = '%';
                 $classes = classifier(0, $min, $max, 'classes');
             break;
+			// if there is a wrong value given for classifier the map realoads
             default:
-                header('Location: index.php?s=map&lang='.$this->language);
+                header('Location: index.php?s=map&amp;lang='.$this->language);
             break;
         }
+		
+		// replacing of sensor and classes for the legend
         $this->contentTemplate->tplReplace('egg_sensor', '_'.$classify);
         $this->contentTemplate->tplReplace('class1_interval', $classes['class1']);
         $this->contentTemplate->tplReplace('class2_interval', $classes['class2']);
@@ -92,48 +100,44 @@
         $this->contentTemplate->tplReplace('unit', $unit);
     }
     else {
+		// blend out the legend
         $this->contentTemplate->tplReplace('show', '');
         $this->contentTemplate->tplReplace('egg_sensor', '');
     }
     
+	// build connection
     $mySqlConnection = new MySqlConnection();
+	
+	/* START Egg-handling for the map */
     
-    // include AQEs to map
+    // get AQEs from the database
     $query = mysql_query('SELECT `feed_id`, `lat`, `lon` FROM `egg`');
     if (mysql_num_rows($query) == 0) {
         $this->contentTemplate->cleanCode('Egg');
     }
     else {
+		// handle each AQE individually
         while ($row = mysql_fetch_object($query)) {
-             $this->contentTemplate->copyCode('Egg');
+			// set egg parameters for position in the map
+            $this->contentTemplate->copyCode('Egg');
             $this->contentTemplate->tplReplaceOnce('egg_lat', $row->lat);
             $this->contentTemplate->tplReplaceOnce('egg_lon', $row->lon);
             $this->contentTemplate->tplReplaceOnce('egg_fid', $row->feed_id);
+			
+			// set default for egg value
             $class = 'noval';
             
+			// get current values of the AQE
             $aqDatabase = new AirQualityDatabase($row->feed_id, '6h');
             $dataArray = $aqDatabase->getCurrentValues();
             
             if ( is_array($dataArray) && isset($dataArray['current_value']) ) {
                 if ( isset($classify) ) {
-                    switch ($classify) {
-                        case 'co':
-                            $class = classifier($dataArray['current_value'][$classify], $min, $max, 'class');
-                        break;
-                        case 'no2':
-                            $class = classifier($dataArray['current_value'][$classify], $min, $max, 'class');
-                            // to do: change min and max
-                        break;
-                        case 'temperature':
-                            $class = classifier($dataArray['current_value'][$classify], $min, $max, 'class');
-                        break;
-                        case 'humidity':
-                            $class = classifier($dataArray['current_value'][$classify], $min, $max, 'class');
-                            // to do: evtl. prüfen
-                        break;
-                    }
+					// get class of the AQE
+					$class = classifier($dataArray['current_value'][$classify], $min, $max, 'class');
                 }
                 
+				// set current value to 0 if it is not defined
                 if ( ! isset($dataArray['current_value']['co']) ) {
                     $dataArray['current_value']['co'] = 0;
                 }
@@ -147,6 +151,7 @@
                     $dataArray['current_value']['humidity'] = 0;
                 }
                 
+				// set values for Egg Popup in the upper left corner
                 $this->contentTemplate->tplReplaceOnce('egg_coval', $dataArray['current_value']['co']);
                 $this->contentTemplate->tplReplaceOnce('egg_no2val', $dataArray['current_value']['no2']);
                 $this->contentTemplate->tplReplaceOnce('egg_tempval', $dataArray['current_value']['temperature']);
@@ -154,6 +159,7 @@
                 $this->contentTemplate->tplReplaceOnce('egg_title', mysql_real_escape_string(substr($dataArray['title'], 0, -3)));
             }
             else {
+				// set default values if there is no information of the egg
                 $this->contentTemplate->tplReplaceOnce('egg_coval', 0);
                 $this->contentTemplate->tplReplaceOnce('egg_no2val', 0);
                 $this->contentTemplate->tplReplaceOnce('egg_tempval', 0);
@@ -164,18 +170,23 @@
         }
         $this->contentTemplate->cleanCode('Egg');
     }
+	
+	/* END Egg-handling for the map -- START LANUV-handling for the map */
     
+	// check if LANUV-stations should be shown
     if ( isset($_GET['lanuv']) ) {
         $lanuv = htmlentities($_GET['lanuv']);
         if ($lanuv == 'true') {
+			// build url for LANUV-button if LANUV-stations are shown
             $lanuv_url_parts = explode('&amp;', $url);
             $lanuv_url = $lanuv_url_parts[0].'&amp;'.$lanuv_url_parts[1].'&amp;lanuv=false';
-            // add Lanuv-Symbol to map
+            // get LANUV-stations from database
             $query_lanuv = mysql_query('SELECT * FROM `lanuv`');
             if (mysql_num_rows($query_lanuv) == 0) {
                 $this->contenTemplate->cleanCode('Lanuv');
             }
             else {
+				// set LANUV-station parameters for position in the map
                 while ($row = mysql_fetch_object($query_lanuv)) {
                     $this->contentTemplate->copyCode('Lanuv');
                     $this->contentTemplate->tplReplaceOnce('lanuv_lat', $row->lat);
@@ -186,29 +197,36 @@
             }
         }
         else if ($lanuv == 'false') {
+			// build url for LANUV-button if LANUV-stations are not shown
             $lanuv_url_parts = explode('&amp;', $url);
             $lanuv_url = $lanuv_url_parts[0].'&amp;'.$lanuv_url_parts[1].'&amp;lanuv=true';    
         }
         else {
+			// reload map without LANUV or classification if LANUV-variable is not valid
             header('Location: index.php?s=map&amp;lang='.$this->language);
         }
     }
     else {
+		// build url for LANUV-button if LANUV-button was never klicked before
         $lanuv_url = $url.'&amp;lanuv=true';
     }
     if ( isset($classify) ) {
+		// add classify-variable to LANUV-url to keep actual classification
         $lanuv_url .= '&amp;classify='.$classify;
     }
     
+	// check if LANUV-Popup should be shown in the upper left corner
     if ( isset($_GET['lanuvStation']) ) {
         $code = $_GET['lanuvStation'];
         $visible = ' class="visible"';
-        
+		
+		// parse LANUV-data
         $dataArray = new LanuvParser($code);
         $lanuvStation = mysql_fetch_object(mysql_query('SELECT `city`, `street` FROM `lanuv` WHERE `code` = \''.$code.'\''));
         $this->contentTemplate->tplReplaceOnce('lanuv_value_city', $lanuvStation->city);
         $this->contentTemplate->tplReplaceOnce('lanuv_value_street', $lanuvStation->street);
 
+		// set values for LANUV-Popup
         if ($dataArray->getLastValue('ozone') != '-'){
             $this->contentTemplate->tplReplaceOnce('lanuv_value_ozone', $dataArray->getLastValue('ozone').' &mu;g/m&sup3;');
             $this->contentTemplate->tplReplaceOnce('lanuvValueOzone', '');}
@@ -256,12 +274,13 @@
             $this->contentTemplate->tplReplaceOnce('lanuv_value_pm10', '');
             $this->contentTemplate->tplReplaceOnce('lanuvValuePm10', ' style="display:none;"');
         }
-
-
     }
     else {
         $visible = '';
     }
+	
+	/* END LANUV-handling for the map */
+	
     $this->contentTemplate->tplReplace('lanuvVisible', $visible);
     $this->contentTemplate->tplReplace('lanuv_url', $lanuv_url);
     $this->contentTemplate->tplReplace('url', $url);
