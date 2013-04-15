@@ -86,7 +86,7 @@
             break;
 			// if there is a wrong value given for classifier the map realoads
             default:
-                header('Location: index.php?s=map&amp;lang='.$this->language);
+                header('Location: index.php?s=map&lang='.$this->language);
             break;
         }
 		
