@@ -17,6 +17,8 @@
         'cosm_links_description' => 'Cosm is the platform, API and community which connects devices and applications for the purpose of real-time control and data storage. In the context of the internet of things Cosm offers the neccessary infrastructure in order to maintain and develop internet enabled devices from prototypes to marketability. This way Air Quality Eggs and their sensor data are being hosted on Cosm.',
         'ifgi_links_description' => 'The Institute for Geoinformatics at the University of M&uuml;nster is a world leading research facility in the fields of geoinformatics. Its specific fields of research include spatiotemporal modelling and measuring of environmental factors, spatial intelligence, semantic interoperability, sensor web, geoprocessing and situational interaction.',
         'lanuv_links_description' => 'The agency for conservation and consumerism of Northrhine-Westphalia controls several stations in it\'s state for measuring air quality data which is free to access.',
+		'air_quality_links_description' => 'General information on air quality from The Ministry for Climate Protection, Environment, Agriculture, Nature Conservation and Consumer Protection of the German State of North Rhine-Westphalia.',
+		'air_quality' => 'Air quality',
         'lanuv_nrw' => 'LANUV',
         'air_quality_egg' => 'Air Quality Egg',
         'cosm' => 'Cosm',
