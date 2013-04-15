@@ -458,6 +458,16 @@ table.register td {
     padding: 4px;
 }
 
+#content #lanuvValue a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+#content #lanuvValue a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
 /* ------------------------------------------------------------ */
 
 #content .errormessage {

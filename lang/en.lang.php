@@ -180,6 +180,7 @@
         '_humidity' => 'Humidity',
         'humidity_' => 'Humidity denotes the amount of water vapor in the air in relation to a hypothetical degree of saturation of 100%. Therefore, the Air Quality Eggs\' sensors\' measurements of relative humidity is indicated in percent.',
         'measurementmethod' => 'Measurement methods',
-        'measurement_method' => 'Each Air Quality Egg consists of two components: sensors and base station.<p>In order to obtain meaningful data on air quality it is necessary to place the sensors on the outside. In order to obtain coherent temperature measurements the sensors must not be exposed to direct sunlight at any point. In doing so comparability between data on air quality from different places can be ensured.<p>The sensor data are being transmitted to the base station via radio. The base station is connected to the internet through an ethernet cable and passes the received data on air quality to the cosm platform, where they are being stored.'
+        'measurement_method' => 'Each Air Quality Egg consists of two components: sensors and base station.<p>In order to obtain meaningful data on air quality it is necessary to place the sensors on the outside. In order to obtain coherent temperature measurements the sensors must not be exposed to direct sunlight at any point. In doing so comparability between data on air quality from different places can be ensured.<p>The sensor data are being transmitted to the base station via radio. The base station is connected to the internet through an ethernet cable and passes the received data on air quality to the cosm platform, where they are being stored.',
+        'further_information_lanuv' => 'Further Information for LANUV'
     );
 ?>
