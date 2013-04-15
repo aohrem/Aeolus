@@ -31,7 +31,7 @@
                         }
                         else {
                             $successmessage = '<p><span class="success">'.translate('aqe_delete_data_correct').'</span><br>
-                                                <a href="index.php?s=delete&amp;send=two&amp;fid='.$fid.'" id="del_true_button">'.translate('yes_please').'</a></p>';
+                                                <a href="index.php?s=delete&amp;lang={language}&amp;send=two&amp;fid='.$fid.'" id="del_true_button">'.translate('yes_please').'</a></p>';
                         }
                     }
                 }
